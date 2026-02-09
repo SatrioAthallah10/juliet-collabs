@@ -1,0 +1,46 @@
+CHANGELOG - v1.8.2
+
+
+41 files changed, 1323 insertions(+), 214 deletions(-)
+
+M	android/app/src/main/AndroidManifest.xml
+A	android/app/src/main/res/drawable/ic_notification.png
+M	android/app/src/main/res/values-night/styles.xml
+M	android/app/src/main/res/values/styles.xml
+M	assets/languages/en.json
+M	assets/languages/hi.json
+M	assets/languages/ur.json
+M	ios/Runner.xcodeproj/project.pbxproj
+M	lib/app/app.dart
+M	lib/app/routes.dart
+A	lib/cubits/academics/usersByRoleCubit.dart
+M	lib/cubits/authentication/authCubit.dart
+M	lib/data/models/driverDashboardResponse.dart
+M	lib/data/models/staffPayRoll.dart
+M	lib/data/models/studentDetailsResponse.dart
+M	lib/data/repositories/authRepository.dart
+M	lib/data/repositories/userDetailsRepository.dart
+M	lib/ui/screens/PrivacyPolicyScreen.dart
+M	lib/ui/screens/TermsAndConditionScreen.dart
+M	lib/ui/screens/addNotification/addNotificationScreen.dart
+M	lib/ui/screens/applyLeaveScreen.dart
+M	lib/ui/screens/home/widgets/driverHomeContainer/widgets/driverHolidaysContainer.dart
+M	lib/ui/screens/home/widgets/profileContainer.dart
+M	lib/ui/screens/login/loginScreen.dart
+M	lib/ui/screens/login/widgets/forgotPasswordBottomsheet.dart
+M	lib/ui/screens/manageDiary/studentDiaryScreen.dart
+M	lib/ui/screens/managePayrolls/widgets/staffPayrollDetailsContainer.dart
+M	lib/ui/screens/searchUsersScreen.dart
+A	lib/ui/screens/selectUsersByRoleScreen.dart
+M	lib/ui/screens/teacherAcademics/teacherAddEditLessonScreen.dart
+M	lib/ui/screens/teacherAcademics/teacherAddEditTopicScreen.dart
+M	lib/ui/screens/teacherAcademics/widgets/addStudyMaterialBottomsheet.dart
+M	lib/ui/screens/teacherAcademics/widgets/addedStudyMaterialFileContainer.dart
+M	lib/ui/widgets/calendarGridWidget.dart
+M	lib/ui/widgets/holidayContainer.dart
+M	lib/utils/api.dart
+M	lib/utils/constants.dart
+M	lib/utils/hiveBoxKeys.dart
+M	lib/utils/labelKeys.dart
+M	lib/utils/utils.dart
+M	pubspec.yaml
