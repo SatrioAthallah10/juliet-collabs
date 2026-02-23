@@ -703,7 +703,7 @@
                                                             alt="image">
                                                     </td>
                                                     <td>{{ $school->name }}</td>
-                                                    <td class="text-right">{{ $school->user->full_name }}</td>
+                                                    <td class="text-right">{{ $school->user?->full_name ?? '-' }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

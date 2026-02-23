@@ -42,6 +42,7 @@ use App\Repositories\ExtraSchoolData\ExtraSchoolDataInterface;
 use App\Repositories\FormField\FormFieldsInterface;
 use App\Services\UploadService;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 
 class SchoolController extends Controller
 {
@@ -76,6 +77,24 @@ class SchoolController extends Controller
         $this->formFields = $formFields;
     }
 
+    public function verifyPage($id)
+    {
+        $inquiry = $this->schoolInquiry->builder()->find($id);
+        Log::channel('daily')->info('Registration method HIT');
+        Log::channel('daily')->info('Request Data:', request()->all());
+
+        if (!$inquiry) {
+            abort(404);
+        }
+
+        // ambil package berdasarkan package_id
+        $package = $this->package->findById($inquiry->package_id);
+
+        // set expiry 24 jam dari created_at
+        $expires_at = \Carbon\Carbon::parse($inquiry->created_at)->addHours(24);
+
+        return view('verify', compact('inquiry', 'package', 'expires_at'));
+    }
 
     public function index()
     {
@@ -90,7 +109,8 @@ class SchoolController extends Controller
         $schools = $this->schoolsRepository->builder()->latest()->first();
         try {
             $demoSchool = $this->schoolsRepository->builder()->where('type', 'demo')->withTrashed()->first() !== null ? 1 : 0;
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             $demoSchool = 0;
         }
 
@@ -159,11 +179,12 @@ class SchoolController extends Controller
         if ($isCustom) {
             // Must include a dot + valid domain structure
             $pattern = '/^(?!-)([A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,63}$/';
-        } else {
+        }
+        else {
             // Default prefix — no dots, just alphanumeric/hyphen
             $pattern = '/^(?!-)[A-Za-z0-9-]{1,63}(?<!-)$/';
         }
-        if($domain != null) {
+        if ($domain != null) {
             if (!preg_match($pattern, $domain)) {
                 ResponseService::validationError('Invalid domain format');
             }
@@ -193,7 +214,7 @@ class SchoolController extends Controller
                 'code' => $school_code,
                 'type' => "custom",
                 'domain_type' => $request->domain_type,
-                'installed' => 0,
+                'installed' => 1,
                 'status' => 1
             );
             // Call store function of Schools Repository
@@ -235,11 +256,13 @@ class SchoolController extends Controller
                         if (is_array($fields['data'])) {
                             try {
                                 $data = json_encode($fields['data'], JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $e) {
+                            }
+                            catch (\JsonException $e) {
                                 // Handle JSON encoding error if needed
                                 $data = null;
                             }
-                        } else {
+                        }
+                        else {
 
                             $data = $fields['data'];
                         }
@@ -269,7 +292,7 @@ class SchoolController extends Controller
             $schoolData = $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name]);
 
             // Set initial status as pending
-            $schoolData = $this->schoolsRepository->update($schoolData->id, ['status' => 0]);
+            $schoolData = $this->schoolsRepository->update($schoolData->id, ['status' => 1]);
 
             DB::commit();
 
@@ -285,11 +308,13 @@ class SchoolController extends Controller
 
             ResponseService::successResponse('School creation process has been started. You will receive an email notification once the setup is complete.');
 
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             if (Str::contains($e->getMessage(), ['Failed', 'Mail', 'Mailer', 'MailManager'])) {
                 DB::commit();
                 ResponseService::warningResponse("School Registered successfully. But Email not sent.");
-            } else {
+            }
+            else {
                 DB::rollBack();
                 ResponseService::logErrorResponse($e, "School Controller -> Store method");
                 ResponseService::errorResponse();
@@ -298,32 +323,7 @@ class SchoolController extends Controller
         }
     }
 
-    private function replacePlaceholders($request, $user, $settings, $school_code)
-    {
-        $templateContent = $settings['email_template_school_registration'] ?? '';
-        // Define the placeholders and their replacements
-        $placeholders = [
-            '{school_admin_name}' => $user->full_name,
-            '{code}' => $school_code,
-            '{email}' => $user->email,
-            '{password}' => $user->mobile,
-            '{school_name}' => $request->school_name,
-
-            '{super_admin_name}' => $settings['super_admin_name'] ?? 'Super Admin',
-            '{support_email}' => $settings['mail_username'] ?? '',
-            '{contact}' => $settings['mobile'] ?? '',
-            '{system_name}' => $settings['system_name'] ?? 'eSchool Saas',
-            '{url}' => url('/'),
-            // Add more placeholders as needed
-        ];
-
-        // Replace the placeholders in the template content
-        foreach ($placeholders as $placeholder => $replacement) {
-            $templateContent = str_replace($placeholder, $replacement, $templateContent);
-        }
-
-        return $templateContent;
-    }
+    // replacePlaceholders sudah diganti ke SetupSchoolDatabase::sendRegistrationEmail()
 
     public function show()
     {
@@ -339,40 +339,45 @@ class SchoolController extends Controller
 
         $sql = $this->schoolsRepository->builder()->with('user:id,first_name,last_name,email,image,mobile,email_verified_at,two_factor_enabled', 'extra_school_details.form_field')->with([
             'subscription' => function ($q) use ($today_date) {
-                $q->whereDate('start_date', '<=', $today_date)->whereDate('end_date', '>=', $today_date);
-            }
+            $q->whereDate('start_date', '<=', $today_date)->whereDate('end_date', '>=', $today_date);
+        }
         ])->with('subscription.package')
             //search query
             ->where(function ($query) use ($search) {
-                $query->when($search, function ($query) use ($search) {
+            $query->when($search, function ($query) use ($search) {
                     $query->where(function ($query) use ($search) {
-                        $query->where('name', 'LIKE', "%$search%")
-                            ->orWhere('support_email', 'LIKE', "%$search%")
-                            ->orWhere('support_phone', 'LIKE', "%$search%")
-                            ->orWhere('tagline', 'LIKE', "%$search%")
-                            ->orWhere('address', 'LIKE', "%$search%")
-                            ->orWhere('domain', 'LIKE', "%$search%")
-                            ->orWhere('code', 'LIKE', "%$search%")
-                            ->orWhereHas('user', function ($query) use ($search) {
-                                $query->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", "%$search%");
-                            });
-                    });
-                    $query->where(function ($query) use ($search) {
-                        $query->where('name', 'LIKE', "%$search%")
-                            ->orWhere('support_email', 'LIKE', "%$search%")
-                            ->orWhere('support_phone', 'LIKE', "%$search%")
-                            ->orWhere('tagline', 'LIKE', "%$search%")
-                            ->orWhere('address', 'LIKE', "%$search%")
-                            ->orWhere('domain', 'LIKE', "%$search%")
-                            ->orWhere('code', 'LIKE', "%$search%")
-                            ->orWhereHas('user', function ($query) use ($search) {
-                                $query->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", "%$search%");
-                            });
-                    });
-                });
-            })->when(!empty($showDeleted), function ($query) {
-                $query->onlyTrashed();
-            });
+                            $query->where('name', 'LIKE', "%$search%")
+                                ->orWhere('support_email', 'LIKE', "%$search%")
+                                ->orWhere('support_phone', 'LIKE', "%$search%")
+                                ->orWhere('tagline', 'LIKE', "%$search%")
+                                ->orWhere('address', 'LIKE', "%$search%")
+                                ->orWhere('domain', 'LIKE', "%$search%")
+                                ->orWhere('code', 'LIKE', "%$search%")
+                                ->orWhereHas('user', function ($query) use ($search) {
+                        $query->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", "%$search%");
+                    }
+                    );
+                }
+                );
+                $query->where(function ($query) use ($search) {
+                            $query->where('name', 'LIKE', "%$search%")
+                                ->orWhere('support_email', 'LIKE', "%$search%")
+                                ->orWhere('support_phone', 'LIKE', "%$search%")
+                                ->orWhere('tagline', 'LIKE', "%$search%")
+                                ->orWhere('address', 'LIKE', "%$search%")
+                                ->orWhere('domain', 'LIKE', "%$search%")
+                                ->orWhere('code', 'LIKE', "%$search%")
+                                ->orWhereHas('user', function ($query) use ($search) {
+                        $query->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", "%$search%");
+                    }
+                    );
+                }
+                );
+            }
+            );
+        })->when(!empty($showDeleted), function ($query) {
+            $query->onlyTrashed();
+        });
 
         if ($package_id) {
             $sql->whereHas('subscription', function ($q) use ($package_id, $today_date) {
@@ -404,14 +409,17 @@ class SchoolController extends Controller
                 //Show Restore and Hard Delete Buttons
                 $operate = BootstrapTableService::menuRestoreButton('restore', route('schools.restore', $row->id));
                 $operate .= BootstrapTableService::menuTrashButton('delete', route('schools.trash', $row->id));
-            } else if ($row->installed == 0) {
+            }
+            else if ($row->installed == 0) {
                 $operate = BootstrapTableService::menuDeleteButton('delete', route('schools.destroy', $row->id));
-            } else {
+            }
+            else {
                 $operate = BootstrapTableService::menuButton('change_admin', "#", ['update-admin-data'], ['data-toggle' => "modal", 'data-target' => "#editAdminModal"]);
 
                 if ($row->status == 0) {
                     $operate .= BootstrapTableService::menuButton('activate_school', "#", ["change-school-status"], ['data-id' => $row->id]);
-                } else {
+                }
+                else {
                     $operate .= BootstrapTableService::menuButton('inactive_school', "#", ["change-school-status"], ['data-id' => $row->id]);
                 }
                 $operate .= BootstrapTableService::menuEditButton('edit', route('schools.update', $row->id));
@@ -428,7 +436,8 @@ class SchoolController extends Controller
             if ($row->domain_type == 'default') {
                 $tempRow['school_domain'] = $row->domain;
                 $tempRow['school_url'] = 'https://' . $row->domain . '.' . $baseUrlWithoutScheme;
-            } else {
+            }
+            else {
                 $tempRow['school_domain'] = $row->domain;
                 $tempRow['school_url'] = 'https://' . $row->domain;
             }
@@ -438,7 +447,8 @@ class SchoolController extends Controller
                 if ($package) {
                     $tempRow['active_plan'] = $package->name;
                 }
-            } else {
+            }
+            else {
                 $tempRow['active_plan'] = '-';
             }
 
@@ -447,12 +457,15 @@ class SchoolController extends Controller
                 $data = '';
                 if ($field->form_field->type == 'checkbox') {
                     $data = json_decode($field->data);
-                } else if ($field->form_field->type == 'file') {
+                }
+                else if ($field->form_field->type == 'file') {
                     $data = '<a href="' . Storage::url($field->data) . '" target="_blank">DOC</a>';
-                } else if ($field->form_field->type == 'dropdown') {
+                }
+                else if ($field->form_field->type == 'dropdown') {
                     $data = $field->form_field->default_values;
                     $data = $field->data ?? '';
-                } else {
+                }
+                else {
                     $data = $field->data;
                 }
                 $tempRow[$field->form_field->name] = $data;
@@ -495,7 +508,8 @@ class SchoolController extends Controller
         if ($isCustom) {
             // Must include a dot + valid domain structure
             $pattern = '/^(?!-)([A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,63}$/';
-        } else {
+        }
+        else {
             // Default prefix — no dots, just alphanumeric/hyphen
             $pattern = '/^(?!-)[A-Za-z0-9-]{1,63}(?<!-)$/';
         }
@@ -541,14 +555,15 @@ class SchoolController extends Controller
                                 'data' => $image, // Store the filename or handle upload
                             );
                         }
-                    } else {
+                    }
+                    else {
                         $data = null;
 
                         // Ensure 'data' is properly formatted
                         if (isset($fields['data'])) {
                             $data = is_array($fields['data'])
                                 ? json_encode($fields['data'], JSON_THROW_ON_ERROR) // Convert arrays to JSON
-                                : $fields['data'];
+                                 : $fields['data'];
                         }
 
                         $schoolDataArray[] = array(
@@ -634,7 +649,8 @@ class SchoolController extends Controller
             }
 
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, "School Controller -> Update method");
             ResponseService::errorResponse();
         }
@@ -644,11 +660,12 @@ class SchoolController extends Controller
     {
         ResponseService::noPermissionThenSendJson('schools-delete');
         try {
-            $school = $this->schoolsRepository->update($id, ['status' => 0]);
+            $school = $this->schoolsRepository->update($id, ['status' => 1]);
             User::withTrashed()->where('id', $school->admin_id)->delete();
             $this->schoolsRepository->deleteById($id);
             ResponseService::successResponse('Data Deleted Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, "School Controller -> Delete method");
             ResponseService::errorResponse();
         }
@@ -663,7 +680,8 @@ class SchoolController extends Controller
             User::onlyTrashed()->where('id', $school->admin_id)->restore();
 
             ResponseService::successResponse("Data Restored Successfully");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -678,7 +696,8 @@ class SchoolController extends Controller
             Storage::disk('public')->deleteDirectory($school->id);
             User::where('id', $school->admin_id)->withTrashed()->forceDelete();
             ResponseService::successResponse("Data Deleted Permanently");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, '', 'cannot_delete_because_data_is_associated_with_other_data');
             ResponseService::errorResponse();
         }
@@ -689,7 +708,8 @@ class SchoolController extends Controller
         $adminData = $this->userRepository->getTrashedAdminData($request->email);
         if (!empty($adminData)) {
             $response = ['error' => false, 'data' => $adminData];
-        } else {
+        }
+        else {
             $response = ['error' => true, 'message' => trans('no_data_found')];
         }
         return response()->json($response);
@@ -729,23 +749,9 @@ class SchoolController extends Controller
             // Re-send Email by Super Admin
             if ($request->resend_email) {
                 $settings = $this->cache->getSystemSettings();
-                $users = $this->schoolsRepository->builder()->with("user")->where('id', $request->edit_id)->first();
+                $school = $this->schoolsRepository->builder()->with('user')->where('id', $request->edit_id)->first();
 
-                $email_body = $this->replacePlaceholders($request, $users->user, $settings, $users->code);
-
-                $data = [
-                    'subject' => 'Welcome to ' . $settings['system_name'] ?? 'eSchool Saas',
-                    'email' => $request->edit_admin_email,
-                    'email_body' => $email_body
-                ];
-
-                Mail::send('schools.email', $data, static function ($message) use ($data) {
-                    $message->to($data['email'])->subject($data['subject']);
-                });
-
-                if (!$users->user->hasVerifiedEmail()) {
-                    $users->user->sendEmailVerificationNotification();
-                }
+                SetupSchoolDatabase::sendRegistrationEmail($school, $settings);
 
                 $completedActions[] = 'Email re-sent successfully';
             }
@@ -777,7 +783,8 @@ class SchoolController extends Controller
 
                         DB::connection('school')->table('users')->where('id', $users->user->id)->update(['email_verified_at' => Carbon::now()]);
                     }
-                } else {
+                }
+                else {
                     // Return a response if the school code is missing
                     return response()->json(['message' => 'Unauthenticated'], 400);
                 }
@@ -787,7 +794,7 @@ class SchoolController extends Controller
 
             // Update Two Factor Authentication
             $users = $this->schoolsRepository->builder()->with("user")->where('id', $request->edit_id)->first();
-            if ((int) $request->two_factor_verification != (int) $users->user->two_factor_enabled) {
+            if ((int)$request->two_factor_verification != (int)$users->user->two_factor_enabled) {
                 if ($request->two_factor_verification == "0" || $request->two_factor_verification == null || $request->two_factor_verification == "1") {
                     if ($users->code) {
                         $school = School::on('mysql')->where('code', $users->code)->first();
@@ -809,9 +816,10 @@ class SchoolController extends Controller
 
                             $status = $request->two_factor_verification ? 'enabled' : 'disabled';
                             $completedActions[] = "Two factor authentication {$status} successfully";
-                            // ResponseService::successResponse("Two factor authentication {$status} successfully");
+                        // ResponseService::successResponse("Two factor authentication {$status} successfully");
                         }
-                    } else {
+                    }
+                    else {
                         // Return a response if the school code is missing
                         return response()->json(['message' => 'Unauthenticated'], 400);
                     }
@@ -823,16 +831,19 @@ class SchoolController extends Controller
             // Prepare success message based on completed actions
             if (!empty($completedActions)) {
                 $message = 'Admin data updated successfully. ' . implode('. ', $completedActions) . '.';
-            } else {
+            }
+            else {
                 $message = 'Admin data updated successfully';
             }
 
             ResponseService::successResponse($message);
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             if (Str::contains($e->getMessage(), ['Failed', 'Mail', 'Mailer', 'MailManager'])) {
                 DB::commit();
                 ResponseService::warningResponse("Data Updated successfully. But Email not sent.");
-            } else {
+            }
+            else {
                 DB::rollBack();
                 ResponseService::logErrorResponse($e, "School Controller -> Update Admin method");
                 ResponseService::errorResponse();
@@ -846,7 +857,7 @@ class SchoolController extends Controller
         try {
             DB::beginTransaction();
             $school = $this->schoolsRepository->findById($id);
-            $status = ['status' => $school->status == 0 ? 1 : 0];
+            $status = ['status' => 1];
             $this->schoolsRepository->update($id, $status);
             DB::commit();
             DB::setDefaultConnection('school');
@@ -861,7 +872,8 @@ class SchoolController extends Controller
 
             DB::commit();
             ResponseService::successResponse('Data updated successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, "School Controller -> Change Status");
             ResponseService::errorResponse();
@@ -882,7 +894,8 @@ class SchoolController extends Controller
                 'error' => false,
                 'data' => $parent
             ];
-        } else {
+        }
+        else {
             $response = [
                 'error' => true,
                 'message' => trans('no_data_found')
@@ -893,50 +906,98 @@ class SchoolController extends Controller
 
     public function registration(Request $request)
     {
+        Log::channel('registration')->info('================================================================================');
+        Log::channel('registration')->info('[REGISTRASI] PROSES DIMULAI');
+        Log::channel('registration')->info('[REGISTRASI] Fungsi dipanggil: SchoolController::registration()');
+        Log::channel('registration')->info('[REGISTRASI] Timestamp: ' . now());
+        Log::channel('registration')->info('[REGISTRASI] IP Address: ' . $request->ip());
+        Log::channel('registration')->info('[REGISTRASI] Data Input:', [
+            'school_name' => $request->school_name,
+            'school_email' => $request->school_email,
+            'school_phone' => $request->school_phone,
+            'school_tagline' => $request->school_tagline,
+            'school_address' => $request->school_address,
+            'package_id' => $request->package_id,
+        ]);
+
+        // ─── STEP 1: Validasi Input ───
+        Log::channel('registration')->info('[REGISTRASI][STEP 1] Menjalankan validasi input (Validator::make)...');
         $validator = Validator::make($request->all(), [
             'school_name' => 'required',
             'school_email' => 'required|email|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             'school_phone' => 'required|numeric|digits_between:6,15',
             'school_tagline' => 'required',
-            'school_address' => 'required'
+            'school_address' => 'required',
+            'package_id' => 'required|exists:packages,id'
         ], [
             'school_email.regex' => 'Please enter a valid email (e.g. user@example.com).',
         ]);
 
         if ($validator->fails()) {
+            Log::channel('registration')->warning('[REGISTRASI][STEP 1] Validasi GAGAL: ' . $validator->errors()->first());
             ResponseService::errorResponse($validator->errors()->first());
         }
+        Log::channel('registration')->info('[REGISTRASI][STEP 1] Validasi BERHASIL — semua input valid');
 
+        // ─── STEP 2: reCAPTCHA Check ───
         if (env('RECAPTCHA_SECRET_KEY') ?? '') {
+            Log::channel('registration')->info('[REGISTRASI][STEP 2] Menjalankan verifikasi reCAPTCHA (GeneralFunctionService::reCaptcha)...');
             $validator = Validator::make($request->all(), [
                 'g-recaptcha-response' => 'required',
             ]);
 
             if ($validator->fails()) {
+                Log::channel('registration')->warning('[REGISTRASI][STEP 2] reCAPTCHA response kosong');
                 ResponseService::errorResponse($validator->errors()->first());
             }
 
             $googleCaptcha = app(GeneralFunctionService::class)->reCaptcha($request);
 
             if (!$googleCaptcha) {
+                Log::channel('registration')->warning('[REGISTRASI][STEP 2] reCAPTCHA verifikasi GAGAL');
                 ResponseService::errorResponse(trans('reCAPTCHA verification failed. Please try again.'));
             }
+            Log::channel('registration')->info('[REGISTRASI][STEP 2] reCAPTCHA verifikasi BERHASIL');
+        }
+        else {
+            Log::channel('registration')->info('[REGISTRASI][STEP 2] reCAPTCHA DILEWATI (RECAPTCHA_SECRET_KEY tidak diset)');
         }
 
+        // ─── STEP 3: Cek data existing ───
+        Log::channel('registration')->info('[REGISTRASI][STEP 3] Mengecek data existing di database...');
         $school = $this->schoolsRepository->builder()->where('support_email', $request->school_email)->withTrashed()->first();
         $user = $this->userRepository->builder()->where('email', $request->school_email)->withTrashed()->first();
-
         $schoolInquiry = $this->schoolInquiry->builder()->where('school_email', $request->school_email)->first();
 
-        if ($school || $user || $schoolInquiry) {
-            ResponseService::errorResponse(trans('School or User email already exists'));
-        }
+        Log::channel('registration')->info('[REGISTRASI][STEP 3] Hasil pengecekan:', [
+            'school_exists' => $school ? 'YA (ID: ' . $school->id . ')' : 'TIDAK',
+            'user_exists' => $user ? 'YA (ID: ' . $user->id . ')' : 'TIDAK',
+            'inquiry_exists' => $schoolInquiry ? 'YA (ID: ' . $schoolInquiry->id . ', status: ' . $schoolInquiry->payment_status . ')' : 'TIDAK',
+        ]);
 
         try {
             $settings = $this->cache->getSystemSettings();
 
+            // ==========================================
+            // MODE A: School Inquiry (pembayaran dulu)
+            // ==========================================
             if (isset($settings['school_inquiry']) && ($settings['school_inquiry'] == 1)) {
+                Log::channel('registration')->info('[REGISTRASI][STEP 4] MODE: School Inquiry (school_inquiry=1) — sekolah harus bayar dulu sebelum diaktifkan');
                 DB::beginTransaction();
+                Log::channel('registration')->info('[REGISTRASI][STEP 4] DB::beginTransaction() dipanggil');
+
+                // Ambil package
+                Log::channel('registration')->info('[REGISTRASI][STEP 5] Memanggil Package::findById(' . $request->package_id . ') untuk ambil data paket...');
+                $package = $this->package->findById($request->package_id);
+                $price = $package->charges;
+                $invoiceNumber = 'JT-' . time();
+
+                Log::channel('registration')->info('[REGISTRASI][STEP 5] Data paket:', [
+                    'package_id' => $package->id,
+                    'package_name' => $package->name ?? 'N/A',
+                    'price' => $price,
+                    'invoice_number' => $invoiceNumber,
+                ]);
 
                 $school_data = array(
                     'school_name' => $request->school_name,
@@ -944,29 +1005,47 @@ class SchoolController extends Controller
                     'school_phone' => $request->school_phone,
                     'school_tagline' => $request->school_tagline,
                     'school_address' => $request->school_address,
+                    'package_id' => $request->package_id,
+                    'price' => $price,
+                    'invoice_number' => $invoiceNumber,
+                    'payment_status' => 'pending',
                     'date' => Carbon::now()->format('Y-m-d'),
-                    'status' => 0,
+                    'status' => 1,
                 );
 
-                $schoolData = $this->schoolInquiry->create($school_data);
+                // Buat/update SchoolInquiry
+                Log::channel('registration')->info('[REGISTRASI][STEP 6] Memanggil SchoolInquiry::updateOrCreate() — membuat atau memperbarui data inquiry...');
+                $schoolData = $this->schoolInquiry->builder()->updateOrCreate(['school_email' => $request->school_email], $school_data);
+
+                Log::channel('registration')->info('[REGISTRASI][STEP 6] SchoolInquiry TERCIPTA/TERUPDATE:', [
+                    'inquiry_id' => $schoolData->id,
+                    'school_name' => $schoolData->school_name,
+                    'school_email' => $schoolData->school_email,
+                    'invoice_number' => $invoiceNumber,
+                    'price' => $price,
+                    'payment_status' => 'pending',
+                ]);
+
+                // Remove existing extra details to prevent duplicates
+                $this->extraSchoolData->builder()->where('school_inquiry_id', $schoolData->id)->delete();
 
                 $extraDetails = array();
 
                 if (isset($request->extra_fields) && is_array($request->extra_fields)) {
+                    Log::channel('registration')->info('[REGISTRASI][STEP 7] Memproses extra fields (' . count($request->extra_fields) . ' field)...');
                     foreach ($request->extra_fields as $fields) {
                         $data = null;
 
                         if (isset($fields['data'])) {
-                            // If the data is an array, JSON encode it
                             if (is_array($fields['data'])) {
                                 try {
                                     $data = json_encode($fields['data'], JSON_THROW_ON_ERROR);
-                                } catch (\JsonException $e) {
-                                    // Handle JSON encoding error if needed
+                                }
+                                catch (\JsonException $e) {
                                     $data = null;
                                 }
-                            } else {
-
+                            }
+                            else {
                                 $data = $fields['data'];
                             }
                         }
@@ -976,7 +1055,6 @@ class SchoolController extends Controller
                             $data = $image;
                         }
 
-                        // Now add the data to the array
                         $extraDetails[] = array(
                             'school_inquiry_id' => $schoolData->id,
                             'school_id' => null,
@@ -986,13 +1064,16 @@ class SchoolController extends Controller
                     }
                 }
 
-
                 if (!empty($extraDetails)) {
+                    Log::channel('registration')->info('[REGISTRASI][STEP 7] Menyimpan ' . count($extraDetails) . ' extra detail via createBulk()');
                     $this->extraSchoolData->createBulk($extraDetails);
                 }
 
                 DB::commit();
+                Log::channel('registration')->info('[REGISTRASI][STEP 8] DB::commit() — data inquiry tersimpan ke database');
 
+                // Kirim email notifikasi
+                Log::channel('registration')->info('[REGISTRASI][STEP 9] Mengirim email notifikasi inquiry ke admin...');
                 $email_body = $this->replaceInquiryEmailPlaceholders($request, $settings);
                 $data = [
                     'subject' => '📩 New School Inquiry Received from Website',
@@ -1003,19 +1084,43 @@ class SchoolController extends Controller
                 Mail::send('schools.email', $data, static function ($message) use ($data) {
                     $message->to($data['email'])->subject($data['subject']);
                 });
+                Log::channel('registration')->info('[REGISTRASI][STEP 9] Email notifikasi TERKIRIM ke: ' . $data['email']);
 
-                ResponseService::successResponse(trans('School Inquiry Sent to Admin, wait for Admin Approval to successfully registered.'));
+                Log::channel('registration')->info('[REGISTRASI] ✅ PROSES SELESAI (MODE INQUIRY)');
+                Log::channel('registration')->info('[REGISTRASI] Hasil yang tercipta:', [
+                    'school_inquiry_id' => $schoolData->id,
+                    'invoice_number' => $invoiceNumber,
+                    'payment_status' => 'pending',
+                    'redirect_to' => route('verify.page', $schoolData->id),
+                ]);
+                Log::channel('registration')->info('================================================================================');
 
-            } else {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Registration successful',
+                    'redirect' => route('verify.page', $schoolData->id)
+                ]);
+            }
+            // ==========================================
+            // MODE B: Direct Registration (tanpa inquiry)
+            // ==========================================
+            else {
+                Log::channel('registration')->info('[REGISTRASI][STEP 4] MODE: Direct Registration (school_inquiry=0) — sekolah langsung dibuat tanpa pembayaran');
+
                 if ($settings['email_verified'] == 0) {
+                    Log::channel('registration')->warning('[REGISTRASI] GAGAL: Email belum dikonfigurasi (email_verified=0)');
                     ResponseService::errorResponse(trans('Please contact the super admin to configure the email.'));
                 }
+
                 DB::beginTransaction();
+                Log::channel('registration')->info('[REGISTRASI][STEP 5] DB::beginTransaction() dipanggil');
+
                 $schools = $this->schoolsRepository->builder()->latest()->first();
                 $school_code = date('Y') . (($schools->id ?? 0) + 1);
                 $settings = $this->cache->getSystemSettings();
                 $prefix = $settings['school_code_prefix'] ?? 'SCH';
                 $school_code = $prefix . $school_code;
+
                 $school_data = array(
                     'name' => $request->school_name,
                     'address' => $request->school_address,
@@ -1025,13 +1130,20 @@ class SchoolController extends Controller
                     'logo' => 'no_image_available.jpg',
                     'status' => 1,
                     'code' => $school_code,
-                    'installed' => 0
+                    'installed' => 1
                 );
 
-
-
-                // Call store function of Schools Repository
+                // Buat School
+                Log::channel('registration')->info('[REGISTRASI][STEP 6] Memanggil schoolsRepository::create() — membuat record School baru...');
                 $schoolData = $this->schoolsRepository->create($school_data);
+
+                Log::channel('registration')->info('[REGISTRASI][STEP 6] School TERCIPTA:', [
+                    'school_id' => $schoolData->id,
+                    'name' => $schoolData->name,
+                    'code' => $school_code,
+                    'support_email' => $schoolData->support_email,
+                ]);
+
                 $admin_data = array(
                     'first_name' => 'School',
                     'last_name' => 'Admin',
@@ -1042,34 +1154,41 @@ class SchoolController extends Controller
                     'image' => 'dummy_logo.jpg'
                 );
 
+                // Buat User Admin
+                Log::channel('registration')->info('[REGISTRASI][STEP 7] Memanggil userRepository::create() — membuat user School Admin...');
                 $user = $this->userRepository->create($admin_data);
+
+                Log::channel('registration')->info('[REGISTRASI][STEP 7] User Admin TERCIPTA:', [
+                    'user_id' => $user->id,
+                    'email' => $user->email,
+                    'school_id' => $user->school_id,
+                    'role' => 'School Admin',
+                ]);
 
                 $extraDetails = [];
                 if (isset($request->extra_fields) && is_array($request->extra_fields)) {
+                    Log::channel('registration')->info('[REGISTRASI][STEP 8] Memproses extra fields (' . count($request->extra_fields) . ' field)...');
                     foreach ($request->extra_fields as $fields) {
                         $data = null;
 
                         if (isset($fields['data'])) {
-                            // If the data is an array, JSON encode it
                             if (is_array($fields['data'])) {
                                 try {
                                     $data = json_encode($fields['data'], JSON_THROW_ON_ERROR);
-                                } catch (\JsonException $e) {
-                                    // Handle JSON encoding error if needed
+                                }
+                                catch (\JsonException $e) {
                                     $data = null;
                                 }
-                            } else {
-
+                            }
+                            else {
                                 $data = $fields['data'];
                             }
                         }
 
                         if (isset($fields['data']) && $fields['data'] instanceof UploadedFile) {
-                            // If the data is an uploaded file, store it as the file's path or name
-                            $data = $fields['data']->getClientOriginalName(); // or you can save the file and store its path
+                            $data = $fields['data']->getClientOriginalName();
                         }
 
-                        // Now add the data to the array
                         $extraDetails[] = array(
                             'school_inquiry_id' => null,
                             'school_id' => $schoolData->id,
@@ -1079,8 +1198,8 @@ class SchoolController extends Controller
                     }
                 }
 
-
                 if (!empty($extraDetails)) {
+                    Log::channel('registration')->info('[REGISTRASI][STEP 8] Menyimpan ' . count($extraDetails) . ' extra detail via createBulk()');
                     $this->extraSchoolData->createBulk($extraDetails);
                 }
 
@@ -1088,26 +1207,62 @@ class SchoolController extends Controller
                 $school_name = preg_replace('/[^a-zA-Z0-9]/', '', $school_name);
                 $database_name = 'eschool_saas_' . $schoolData->id . '_' . strtolower(strtok($school_name, " "));
 
-                // Set initial status as pending
-                $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 0]);
+                Log::channel('registration')->info('[REGISTRASI][STEP 9] Memanggil schoolsRepository::update() — set admin_id dan database_name...');
+                $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 1]);
+
+                Log::channel('registration')->info('[REGISTRASI][STEP 9] School terupdate:', [
+                    'school_id' => $schoolData->id,
+                    'admin_id' => $user->id,
+                    'database_name' => $database_name,
+                ]);
 
                 DB::commit();
+                Log::channel('registration')->info('[REGISTRASI][STEP 10] DB::commit() — data tersimpan ke database');
 
-                // Dispatch background jobs for database setup and email sending
-                SetupSchoolDatabase::dispatch(
+                // Dispatch setup database
+                Log::channel('registration')->info('[REGISTRASI][STEP 11] Memanggil SetupSchoolDatabase::dispatchSync() — membuat database sekolah...');
+                Log::channel('registration')->info('[REGISTRASI][STEP 11] Parameter dispatch:', [
+                    'school_id' => $schoolData->id,
+                    'trial_package' => $request->trial_package,
+                ]);
+
+                SetupSchoolDatabase::dispatchSync(
                     $schoolData->id,
                     $request->trial_package,
                     null
                 );
+
+                Log::channel('registration')->info('[REGISTRASI] ✅ PROSES SELESAI (MODE DIRECT)');
+                Log::channel('registration')->info('[REGISTRASI] Hasil yang tercipta:', [
+                    'school_id' => $schoolData->id,
+                    'school_name' => $schoolData->name,
+                    'school_code' => $school_code,
+                    'database_name' => $database_name,
+                    'admin_user_id' => $user->id,
+                    'admin_email' => $user->email,
+                ]);
+                Log::channel('registration')->info('================================================================================');
+
                 ResponseService::successResponse(trans('School creation process has been started. You will receive an email notification once the setup is complete.'));
             }
 
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             if (Str::contains($e->getMessage(), ['Failed', 'Mail', 'Mailer', 'MailManager', 'closed unexpectedly'])) {
                 DB::commit();
+                Log::channel('registration')->warning('[REGISTRASI] ⚠️ SELESAI DENGAN WARNING: Registrasi berhasil tapi email gagal terkirim', [
+                    'error' => $e->getMessage(),
+                ]);
                 ResponseService::warningResponse("School Registration successfully. But Email not sent.");
-            } else {
+            }
+            else {
                 DB::rollBack();
+                Log::channel('registration')->error('[REGISTRASI] ❌ GAGAL TOTAL — DB::rollBack() dipanggil', [
+                    'error' => $e->getMessage(),
+                    'file' => $e->getFile(),
+                    'line' => $e->getLine(),
+                    'trace' => $e->getTraceAsString(),
+                ]);
                 ResponseService::logErrorResponse($e, "School Controller -> Registration method");
                 ResponseService::errorResponse();
             }
@@ -1141,7 +1296,8 @@ class SchoolController extends Controller
             }
 
             ResponseService::successResponse(trans('Email send Successfully'));
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             ResponseService::logErrorResponse($th, "School Controller -> Send mail method");
             ResponseService::errorResponse();
         }
@@ -1178,10 +1334,12 @@ class SchoolController extends Controller
             Mail::send('students.email', $emailBody, static function ($message) use ($emailBody) {
                 $message->to($emailBody['email'])->subject($emailBody['subject']);
             });
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             if (Str::contains($th->getMessage(), ['Failed', 'Mail', 'Mailer', 'MailManager'])) {
                 ResponseService::warningResponse("Data Stored successfully. But Email not sent.");
-            } else {
+            }
+            else {
                 ResponseService::errorResponse(trans('error_occur'));
             }
         }
@@ -1210,6 +1368,7 @@ class SchoolController extends Controller
                 'type' => 'demo',
                 'domain_type' => 'default',
                 'status' => 1,
+                'installed' => 1,
             );
             // Call store function of Schools Repository
             $schoolData = $this->schoolsRepository->create($school_data);
@@ -1222,7 +1381,7 @@ class SchoolController extends Controller
                 'password' => Hash::make('1234567890'),
                 'school_id' => $schoolData->id,
                 'image' => 'dummy_logo.jpg',
-                'email_verified_at' => $schoolData->type == 'demo' ? Carbon::now() : null,
+                'email_verified_at' => $schoolData->type == 'demo' ?Carbon::now() : null,
                 'two_factor_enabled' => 0,
             );
 
@@ -1234,12 +1393,12 @@ class SchoolController extends Controller
             $database_name = 'eschool_saas_' . $schoolData->id . '_' . strtolower(strtok($school_name, " "));
 
             // Update Admin id to School Data and set status as pending
-            $schoolData = $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 0]);
+            $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 1]);
 
             DB::commit();
 
             // Dispatch background job for database setup
-            SetupSchoolDatabase::dispatch(
+            SetupSchoolDatabase::dispatchSync(
                 $schoolData->id,
                 null,
                 null
@@ -1247,11 +1406,13 @@ class SchoolController extends Controller
 
             ResponseService::successResponse(trans('School creation process has been started. You will receive an email notification once the setup is complete.'));
 
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             if (Str::contains($e->getMessage(), ['Failed', 'Mail', 'Mailer', 'MailManager'])) {
                 DB::commit();
                 ResponseService::successResponse(trans('School Registration Successfully. But Email not sent'));
-            } else {
+            }
+            else {
                 DB::rollBack();
                 ResponseService::logErrorResponse($e, "School Controller -> Registration method");
                 ResponseService::errorResponse();
@@ -1275,7 +1436,7 @@ class SchoolController extends Controller
         $prefix = $settings['school_prefix'] ?? 'SCH';
         $extraFields = $this->formFields->defaultModel()->orderBy('rank')->get();
 
-        return view('schools.school_inquiry', compact('baseUrlWithoutScheme', 'school_code', 'prefix', 'extraFields','settings'));
+        return view('schools.school_inquiry', compact('baseUrlWithoutScheme', 'school_code', 'prefix', 'extraFields', 'settings'));
     }
 
     public function schoolInquiryList()
@@ -1338,12 +1499,15 @@ class SchoolController extends Controller
                 $data = '';
                 if ($field->form_field->type == 'checkbox') {
                     $data = json_decode($field->data);
-                } else if ($field->form_field->type == 'file') {
+                }
+                else if ($field->form_field->type == 'file') {
                     $data = '<a href="' . Storage::url($field->data) . '" target="_blank">DOC</a>';
-                } else if ($field->form_field->type == 'dropdown') {
+                }
+                else if ($field->form_field->type == 'dropdown') {
                     $data = $field->form_field->default_values;
                     $data = $field->data ?? '';
-                } else {
+                }
+                else {
                     $data = $field->data;
                 }
                 $tempRow[$field->form_field->name] = $data;
@@ -1377,6 +1541,7 @@ class SchoolController extends Controller
         try {
             $settings = $this->cache->getSystemSettings();
             $schoolService = app(SchoolDataService::class);
+            $inquiry = $this->schoolInquiry->findById($request->edit_id);
 
             if ($settings['email_verified'] == 0) {
                 ResponseService::errorResponse(trans('Kindly first configure the email, then the school will be approved.'));
@@ -1395,6 +1560,7 @@ class SchoolController extends Controller
                     'code' => $school_code,
                     'type' => "custom",
                     'domain_type' => "default",
+                    'installed' => 1,
                 );
                 // Call store function of Schools Repository
                 $schoolData = $this->schoolsRepository->create($school_data);
@@ -1418,7 +1584,7 @@ class SchoolController extends Controller
                 $user = $this->userRepository->create($admin_data);
 
                 // Update Admin id to School Data and set status as pending
-                $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 0]);
+                $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 1]);
 
 
                 $extraFields = $request->extra_fields;
@@ -1442,11 +1608,20 @@ class SchoolController extends Controller
                     $this->extraSchoolData->createBulk($schoolDataArray);
                 }
 
+                if ($inquiry && $inquiry->package_id) {
+                    $this->subscriptionService->createSubscription(
+                        $inquiry->package_id,
+                        $schoolData->id,
+                        null,
+                        1
+                    );
+                }
+
                 DB::commit();
 
-                SetupSchoolDatabase::dispatch(
+                SetupSchoolDatabase::dispatchSync(
                     $schoolData->id,
-                    null,
+                    $inquiry->package_id,
                     $request->school_code_prefix
                 );
 
@@ -1454,7 +1629,8 @@ class SchoolController extends Controller
 
 
                 ResponseService::successResponse('School Registered Successfully');
-            } elseif ($request->status == 2) {
+            }
+            elseif ($request->status == 2) {
 
                 $email_body = $this->replaceEmailPlaceholders($request, $settings);
 
@@ -1473,17 +1649,20 @@ class SchoolController extends Controller
                 $this->schoolInquiry->update($request->edit_id, ['status' => 2]);
 
                 ResponseService::successResponse('Data Updated Successfully');
-            } else {
+            }
+            else {
                 ResponseService::successResponse('Data Updated Successfully');
             }
 
 
 
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             if (Str::contains($e->getMessage(), ['Failed', 'Mail', 'Mailer', 'MailManager'])) {
                 DB::commit();
                 ResponseService::warningResponse("School Registered successfully. But Email not sent.");
-            } else {
+            }
+            else {
                 DB::rollBack();
                 ResponseService::logErrorResponse($e, "School Controller -> Store method");
                 ResponseService::errorResponse();
@@ -1520,7 +1699,8 @@ class SchoolController extends Controller
             $school_inquiry = $this->schoolInquiry->builder()->where('id', $id)->first();
             $school_inquiry->delete();
             ResponseService::successResponse("Data Deleted Successfully.");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::errorResponse();
         }
     }
@@ -1556,9 +1736,11 @@ class SchoolController extends Controller
             if ($value instanceof \Illuminate\Http\UploadedFile) {
                 // Skip UploadedFile objects - they should be handled before queue dispatch
                 continue;
-            } elseif (is_array($value)) {
+            }
+            elseif (is_array($value)) {
                 $sanitized[$key] = $this->sanitizeArrayForQueue($value);
-            } else {
+            }
+            else {
                 $sanitized[$key] = $value;
             }
         }
@@ -1577,9 +1759,11 @@ class SchoolController extends Controller
             if ($value instanceof \Illuminate\Http\UploadedFile) {
                 // Skip UploadedFile objects
                 continue;
-            } elseif (is_array($value)) {
+            }
+            elseif (is_array($value)) {
                 $sanitized[$key] = $this->sanitizeArrayForQueue($value);
-            } else {
+            }
+            else {
                 $sanitized[$key] = $value;
             }
         }

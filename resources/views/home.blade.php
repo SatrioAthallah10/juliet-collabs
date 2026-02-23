@@ -1,938 +1,508 @@
-@extends('layouts.home_page.master')
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Jurnal Lintas Elektronik Terpadu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/home_page/css/style.css') }}" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="shortcut icon" href="assets/vertical-logo.png" type="image/x-icon">
+</head>
+<body>
 
-@section('content')
-    <style>
-        :root {
-            --primary-color:
-                {{ $settings['theme_primary_color'] ?? '#56cc99' }}
-            ;
-            --secondary-color:
-                {{ $settings['theme_secondary_color'] ?? '#215679' }}
-            ;
-            --secondary-color1:
-                {{ $settings['theme_secondary_color_1'] ?? '#38a3a5' }}
-            ;
-            --primary-background-color:
-                {{ $settings['theme_primary_background_color'] ?? '#f2f5f7' }}
-            ;
-            --text--secondary-color:
-                {{ $settings['theme_text_secondary_color'] ?? '#5c788c' }}
-            ;
-
-        }
-    </style>
-    <script src="{{ asset('assets/home_page/js/jquery-1-12-4.min.js') }}"></script>
-
-    <header class="navbar">
+    {{-- ===== NAVBAR ===== --}}
+    <nav class="navbar">
         <div class="container">
-            <div class="navbarWrapper">
-                <div class="navLogoWrapper">
-                    <div class="navLogo">
-                        <a href="{{ url('/') }}">
-                            <img src="{{ $settings['horizontal_logo'] ?? asset('assets/landing_page_images/Logo1.svg') }}"
-                                class="logo" alt="">
-                        </a>
-
-                    </div>
+            <div class="navbar-inner">
+                <div class="brand">
+                    <img src="{{ asset('assets/landing_page_images/Logo.png') }}" width="100px" alt="logo">
                 </div>
-                <div class="menuListWrapper">
-                    <ul class="listItems">
-                        <li>
-                            <a href="#home">{{ __('home') }}</a>
-                        </li>
-                        <li>
-                            <a href="#features">{{ __('features') }}</a>
-                        </li>
-                        <li>
-                            <a href="#about-us">{{ __('about_us') }}</a>
-                        </li>
-                        <li>
-                            <a href="#pricing">{{ __('pricing') }}</a>
-                        </li>
-                        @if (count($faqs))
-                            <li>
-                                <a href="#faq">{{ __('faqs') }}</a>
-                            </li>
-                        @endif
-                        <li>
-                            <a href="#contact-us">{{ __('contact') }}</a>
-                        </li>
-                        @if (count($guidances))
-                            <li>
-                                <div class="dropdown">
-                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{ __('guidance') }}
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        @foreach ($guidances as $key => $guidance)
-                                            <li><a class="dropdown-item" href="{{ $guidance->link }}">{{ $guidance->name }}</a></li>
-                                            @if (count($guidances) > ($key + 1))
-                                                <hr>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </li>
-                        @endif
-                        <li>
-                            <div class="dropdown">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ __('language') }}
-                                </a>
-
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    @foreach ($languages as $key => $language)
-                                        <li><a class="dropdown-item"
-                                                href="{{ url('set-language') . '/' . $language->code }}">{{ $language->name }}</a>
-                                        </li>
-                                        @if (count($languages) > ($key + 1))
-                                            <hr>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </li>
-
-                    </ul>
-                    <div class="hamburg">
-                        <span data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i
-                                class="fa-solid fa-bars"></i></span>
-                    </div>
+                <div class="nav-links">
+                    <a href="#beranda">Beranda</a>
+                    <a href="#about-us">About us</a>
+                    <a href="#fitur">Fitur</a>
+                    <a href="#harga">Harga</a>
+                    <a href="#contact">Contact</a>
                 </div>
-
-                <div class="loginBtnsWrapper">
-                    <button class="commonBtn redirect-login">{{ __('login') }}</button>
-                    <button class="commonBtn" id="trialBtn" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop">{{ __('start_trial') }}</button>
-                    {{-- <a href="{{ url('school/registration') }}" class="commonBtn">{{ __('start_trial') }}</a> --}}
-                </div>
-            </div>
-
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <div class="navLogoWrapper">
-                        <div class="navLogo">
-                            <img src="{{ $settings['horizontal_logo'] ?? asset('assets/landing_page_images/Logo1.svg') }}"
-                                alt="">
-                        </div>
-                    </div>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="listItems">
-                        <li>
-                            <a href="#home">{{ __('home') }}</a>
-                        </li>
-                        <li>
-                            <a href="#features">{{ __('features') }}</a>
-                        </li>
-                        <li>
-                            <a href="#about-us">{{ __('about_us') }}</a>
-                        </li>
-                        <li>
-                            <a href="#pricing">{{ __('pricing') }}</a>
-                        </li>
-                        @if (count($faqs))
-                            <li>
-                                <a href="#faq">{{ __('faqs') }}</a>
-                            </li>
-                        @endif
-                        <li>
-                            <a href="#contact-us">{{ __('contact') }}</a>
-                        </li>
-                        @if (count($guidances))
-                            <li>
-                                <div class="dropdown">
-                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{ __('guidance') }}
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        @foreach ($guidances as $key => $guidance)
-                                            <li><a class="dropdown-item" href="{{ $guidance->link }}">{{ $guidance->name }}</a></li>
-                                            @if (count($guidances) > ($key + 1))
-                                                <hr>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </li>
-                        @endif
-                        <li>
-                            <div class="dropdown">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ __('language') }}
-                                </a>
-
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    @foreach ($languages as $key => $language)
-                                        <li><a class="dropdown-item"
-                                                href="{{ url('set-language') . '/' . $language->code }}">{{ $language->name }}</a>
-                                        </li>
-                                        @if (count($languages) > ($key + 1))
-                                            <hr>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                    {{-- <div class="loginBtnsWrapper"> --}}
-                        <button class="commonBtn redirect-login">{{ __('login') }}</button>
-                        <button class="commonBtn" data-bs-toggle="modal" data-bs-dismiss="offcanvas"
-                            data-bs-target="#staticBackdrop">{{ __('start_trial') }}</button>
-                        {{--
-                    </div> --}}
+                <div class="nav-actions">
+                    <a class="btn-login" href="{{ route('login') }}">Masuk</a>
+                    <a class="btn-login" href="{{ route('register') }}">Daftar</a>
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- navbar ends here  -->
-
-    <div class="main">
-
-        <section class="heroSection" id="home">
-            <div class="linesBg">
-                <div class="colorBg">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12 col-lg-6">
-                                <div class="flex_column_start">
-                                    <span class="commonTitle">{{ $settings['system_name'] ?? 'eSchool SaaS' }}</span>
-                                    <span class="commonDesc">
-                                        {{ $settings['tag_line'] }}
-                                    </span>
-                                    <span class="commonText">
-                                        {{ $settings['hero_description'] }}</span>
-                                    <div class="d-flex">
-                                        <button class="commonBtn" data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop">{{ __('register_your_school') }}</button>
-                                        @if ($isDemoSchool == 1)
-                                            <a href="{{ $demoSchoolUrl ?? url('/') }}" target="_blank"
-                                                class="commonBtn mx-5">{{ __('demo_school') }}</a>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6 heroImgWrapper">
-                                <div class="heroImg">
-                                    <img src="{{ $settings['home_image'] ?? asset('assets/landing_page_images/heroImg.png') }}"
-                                        alt="">
-                                    <div class="topRated card">
-                                        <div>
-                                            <img src="{{ $settings['hero_title_2_image'] ?? asset('assets/landing_page_images/user.png') }}"
-                                                alt="">
-                                        </div>
-                                        @if(!empty($settings['hero_title_2']))
-                                            <div>
-                                                <span>{{ $settings['hero_title_2'] }}</span>
-                                            </div>
-                                        @endif
-                                    </div>
-                                    @if(!empty($settings['hero_title_1']))
-                                        <div class="textWrapper">
-                                            <span>{{ $settings['hero_title_1'] }}</span>
-                                        </div>
-                                    @endif
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            @include('registration_form')
-
-        </section>
-        <!-- heroSection ends here  -->
-
-        <section class="features commonMT container" id="features">
-            <div class="row">
-                <div class="col-12">
-                    <div class="sectionTitle">
-                        <span>{{ __('explore_our_top_features') }}</span>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="row cardWrapper">
-                        @foreach ($features as $key => $feature)
-                            @if ($key < 9)
-                                <div class="col-sm-12 col-md-6 col-lg-4">
-                                    <div class="card">
-                                        <div>
-                                            <img src="{{ asset('assets/landing_page_images/features/') }}/{{ $feature->name }}.svg"
-                                                alt="">
-                                        </div>
-                                        <div><span>{{ __($feature->name) }}</span></div>
-                                    </div>
-                                </div>
-                            @else
-                                <div class="col-sm-12 col-md-6 col-lg-4 default-feature-list" style="display: none">
-                                    <div class="card">
-                                        <div>
-                                            <img src="{{ asset('assets/landing_page_images/features/') }}/{{ $feature->name }}.svg"
-                                                alt="">
-                                        </div>
-                                        <div><span>{{ __($feature->name) }}</span></div>
-                                    </div>
-                                </div>
-                            @endif
-
-                        @endforeach
-                        <div class="col-12">
-                            <button class="commonBtn view-more-feature" value="1">{{ __('view_more_features') }}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- features ends here  -->
-
-        {{-- @if ($settings['display_school_logos'] ?? '1')
-        <section class="swiperSect container commonMT">
-            <div class="row">
-                <div class="col-12">
-                    <div class="commonSlider">
-                        <div class="slider-content owl-carousel">
-                            <!-- Example slide -->
-                            @foreach ($schoolSettings as $school)
-                            @if (Storage::disk('public')->exists($school->getRawOriginal('data')) && $school->data)
-                            <div class="swiperDataWrapper">
-                                <div class="card">
-                                    <img src="{{ $school->data }}" class="normalImg" alt="">
-                                </div>
-                            </div>
-                            @endif
-                            @endforeach
-                            <!-- Add more swiperDataWrapper elements here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        @endif --}}
-        <!-- swiperSect ends here  -->
-        {{-- @if ($settings['display_counters'] ?? '1')
-        <section class="counterSect commonMT container">
-            <div class="">
-                <div class="row counterBG">
-                    <div class="col-4 col-sm-4 col-md-4 col-lg-4">
-                        <div class="card">
-                            <div><span class="numb" data-target="{{ $counter['school'] }}">0</span><span>+</span></div>
-                            <div><span class="text">{{ __('schools') }}</span></div>
-                        </div>
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-4 col-lg-4">
-                        <div class="card">
-                            <div><span class="numb" data-target="{{ $counter['teacher'] }}">0</span><span>+</span></div>
-                            <div><span class="text">{{ __('teachers') }}</span></div>
-                        </div>
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-4 col-lg-4">
-                        <div class="card">
-                            <div><span class="numb" data-target="{{ $counter['student'] }}">0</span><span>+</span></div>
-                            <div><span class="text">{{ __('students') }}</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        @endif --}}
-
-        <!-- School logos section starts here -->
-        @if ($settings['display_school_logos'] ?? '1')
-            <input type="hidden" id="school-count" value="{{ count($allSchools) }}">
-            <section class="container">
-                <div class="col-12">
-                    <div class="sectionTitle">
-                        <span>{{ __('schools') }}</span>
-                    </div>
-                </div>
-                <div class="row py-3">
-                    <div class="owl-carousel owl-theme school-logo-owl-carousel">
-
-                        @foreach ($allSchools as $key => $school)
-                            <div class="item">
-                                <div class="card p-3 d-flex justify-content-center align-items-center">
-                                    <img src="{{ $school->logo }}" style="border-radius: 50%; width: 100px; height: 100px;" alt=""
-                                        onerror="onErrorImage(event)">
-                                    <h6 class="mt-3">{{  Str::limit($school->name, 25, ' ...') }}</h6>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </section>
-        @endif
-        <!-- School logos section ends here -->
-
-        @foreach ($featureSections as $key => $section)
-            @if (($key + 1) % 2 != 0)
-
-                <section class="left-section-{{ $section->id }} commonMT container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="sectionTitle">
-                                <span class="greenText">{{ $section->title }}</span>
-                                <span>
-                                    {{ $section->heading }}
-                                </span>
-
-                            </div>
-                        </div>
-                        <div class="col-12 tabsContainer " style="word-break: break-word;">
-                            <div class="row">
-                                <div class="col-lg-6 tabsMainWrapper" style="word-break: break-all !important;">
-                                    <div class="tabsWrapper">
-                                        <div class="tabs">
-                                            @foreach ($section->feature_section_list as $section_feature)
-                                                <div class="tab tab-{{ $section_feature->id }}-{{ $key }}">
-                                                    <span>{{ $section_feature->feature }}</span>
-                                                    <span>
-                                                        {{ $section_feature->description }}
-                                                    </span>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-lg-6 contentWrapper">
-                                    <div class="content-container">
-                                        @foreach ($section->feature_section_list as $section_feature)
-                                            <div class="content tab-{{ $section_feature->id }}-{{ $key }}">
-                                                <img src="{{ $section_feature->image }}" alt="">
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-            @else
-
-                <section class="right-section-{{ $section->id }} right-feature-section commonMT">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="sectionTitle">
-                                    <span class="greenText">{{ $section->title }}</span>
-                                    <span>
-                                        {{ $section->heading }}
-                                    </span>
-
-                                </div>
-                            </div>
-                            <div class="col-12 tabsContainer">
-                                <div class="row reverseWrapper">
-                                    <div class="col-lg-6 contentWrapper">
-                                        <div class="content-container">
-                                            @foreach ($section->feature_section_list as $section_feature)
-                                                <div class="content tab-{{ $section_feature->id }}-{{ $key }}">
-                                                    <img src="{{ $section_feature->image }}" alt="">
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6 tabsMainWrapper">
-                                        <div class="tabsWrapper">
-                                            <div class="tabs">
-                                                @foreach ($section->feature_section_list as $section_feature)
-                                                    <div class="tab tab-{{ $section_feature->id }}-{{ $key }}">
-                                                        <span>{{ $section_feature->feature }}</span>
-                                                        <span>
-                                                            {{ $section_feature->description }}
-                                                        </span>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </section>
-
-            @endif
-        @endforeach
-
-        <section class="whyBest container commonMT" id="about-us">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="whyBestTextWrapper">
-                        <p>{{ $settings['about_us_title'] }}</p>
-                        <p>{{ $settings['about_us_heading'] }}</p>
-                    </div>
-                    <p class="whyBestPara">
-                        {{ $settings['about_us_description'] }}
+    {{-- ===== HERO SECTION ===== --}}
+    <section class="hero" id="beranda">
+        <div class="hero-bg-right"></div>
+        <div class="hero-bg-left"></div>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <!-- <div class="badge">
+                        <span class="material-symbols-outlined">verified</span>
+                        <span>Dipercaya oleh 500+ Institusi</span>
+                    </div> -->
+                    <h1>
+                        Transformasi Manajemen Sekolah Bersama Juliet                     </h1>
+                    <p class="hero-desc">
+                        Rasakan masa depan pendidikan dengan platform Juliet kami. Sederhanakan absensi, tugas, ujian, dan banyak lagi. Tingkatkan efisiensi dan keterlibatan sekolah Anda.
                     </p>
-
-                    <div class="listWrapper">
-                        @foreach ($about_us_lists as $point)
-                            <span>
-                                <i class="fa-regular fa-circle-check"></i>
-                                {{ $point }}
-                            </span>
-                        @endforeach
+                    <div class="hero-buttons">
+                        <a href="{{ url('register') }}" class="commonBtn">
+                            {{ __('Daftarkan sekolah anda') }}
+                        </a>
                     </div>
                 </div>
-
-                <div class="col-lg-6">
-                    <img src="{{ $settings['about_us_image'] ?? asset('assets/landing_page_images/whyBestImg.png') }}"
-                        alt="">
-                </div>
-            </div>
-        </section>
-        <!-- whyBest ends here  -->
-
-        <section class="pricing" id="pricing">
-            <div class="container commonMT">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="sectionTitle">
-                            <span>{{ __('flexible_pricing_packages') }}</span>
-
+                <div class="hero-image-wrap">
+                    <div class="hero-card">
+                        <img src="assets/landing_page_images/hero.png"
+                             alt="Siswa berkolaborasi di kelas modern"/>
+                        <div class="attendance-badge">
+                            <div class="attendance-icon">
+                                <span class="material-symbols-outlined">check_circle</span>
+                            </div>
+                            <!-- <div>
+                                <p class="attendance-label">Kehadiran Hari Ini</p>
+                                <p class="attendance-value">98,5% Hadir</p>
+                            </div> -->
                         </div>
                     </div>
-                    @if($packages->isNotEmpty())
-                        <div class="col-12 swiperWrapper h-full">
-                            <div class="commonSlider">
-                                <div class="slider-content owl-carousel">
+                    <div class="blob blob-purple"></div>
+                    <div class="blob blob-accent"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                                    @foreach ($packages as $package)
-                                        @if ($package->highlight)
-                                            <div class="swiperDataWrapper flex items-stretch h-full">
-                                                <div class="pricingBox premium flex flex-col justify-between h-full">
-                                                    <div class="startUpWrapper flex flex-col h-full">
-                                                        @if ($package->is_trial == 1)
-                                                            <span class="badge postpaid">{{ __('free') }}</span>
-                                                        @else
-                                                            @if ($package->type == 1)
-                                                                <span class="badge postpaid">{{ __('postpaid') }}</span>
-                                                            @else
-                                                                <span class="badge prepaid">{{ __('prepaid') }}</span>
-                                                            @endif
-                                                        @endif
+    {{-- ===== INSTITUTIONAL INFO SECTION ===== --}}
+    <section class="info-section" id="about-us">
+        <div class="container text-center">
+            <span class="section-label">Mengapa kami yang terbaik?
+</span>
+            <h2>Platform Terintegrasi untuk Pendidikan Formal</h2>
+            <p class="info-desc">
+              Juliet menghadirkan sistem digital terintegrasi yang membantu sekolah mengelola pembelajaran dan manajemen akademik secara lebih efektif dan terstruktur
+            </p>
+        </div>
+    </section>
 
-                                                        <div class="textDiv">
-                                                            <span class="title">{{ __($package->name) }}</span>
-                                                            @if ($package->is_trial == 1)
-                                                                <span>
-                                                                    {{ $settings['student_limit'] ?? 0 }} {{ __('student_limit') }}
-                                                                </span>
-                                                                <span>
-                                                                    {{ $settings['staff_limit'] ?? 0 }} {{ __('staff_limit') }}
-                                                                </span>
-                                                            @elseif($package->type == 0 && $package->is_trial == 0)
-                                                                <span>
-                                                                    {{ number_format($package->no_of_students, 0) }}
-                                                                    {{ __('student_limit') }}
-                                                                </span>
-                                                                <span>
-                                                                    {{ number_format($package->no_of_staffs, 0) }} {{ __('staff_limit') }}
-                                                                </span>
-                                                                <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
-                                                                    {{ number_format($package->charges, 2) }} {{ __('package_amount') }}
-                                                                </span>
-                                                            @elseif($package->type == 1 && $package->is_trial == 0)
-                                                                <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
-                                                                    {{ number_format($package->student_charge, 2) }}
-                                                                    {{ __('per_student_charges') }}
-                                                                </span>
-                                                                <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
-                                                                    {{ number_format($package->staff_charge, 2) }}
-                                                                    {{ __('per_staff_charges') }}
-                                                                </span>
-                                                            @endif
-                                                            <span class="days">{{ $package->days }} {{ __('days') }}</span>
-                                                        </div>
-                                                        <div class="listWrapper">
-                                                            @foreach ($features as $feature)
-                                                                @if (in_array($feature->id, $package->package_feature->pluck('feature_id')->toArray()))
-                                                                    <span>
-                                                                        <img src="{{ asset('assets/landing_page_images/right.svg') }}"
-                                                                            class="rightTickImg" alt="">
-                                                                        {{ __($feature->name) }}
-                                                                    </span>
-                                                                @else
-                                                                    <span class="lineThrough">
-                                                                        <img src="{{ asset('assets/landing_page_images/cross.svg') }}"
-                                                                            class="wrongTickImg" alt="">
-                                                                        {{ __($feature->name) }}
-                                                                    </span>
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                        <button class="pricingBtn" data-bs-toggle="modal"
-                                                            data-bs-target="#staticBackdrop">{{ __('get_started') }}</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @else
-                                            <div class="swiperDataWrapper">
-                                                <div class="pricingBox">
-                                                    <div class="startUpWrapper">
-                                                        @if ($package->is_trial == 1)
-                                                            <span class="badge postpaid">{{ __('free') }}</span>
-                                                        @else
-                                                            @if ($package->type == 1)
-                                                                <span class="badge postpaid">{{ __('postpaid') }}</span>
-                                                            @else
-                                                                <span class="badge prepaid">{{ __('prepaid') }}</span>
-                                                            @endif
-                                                        @endif
-                                                        <div class="textDiv">
-                                                            <span class="title">{{ __($package->name) }}</span>
-                                                            @if ($package->is_trial == 1)
-                                                                <span>
-                                                                    {{ $settings['student_limit'] }} {{ __('student_limit') }}
-                                                                </span>
-                                                                <span>
-                                                                    {{ $settings['staff_limit'] }} {{ __('staff_limit') }}
-                                                                </span>
-                                                            @elseif($package->type == 0 && $package->is_trial == 0)
-                                                                <span>
-                                                                    {{ number_format($package->no_of_students, 0) }}
-                                                                    {{ __('student_limit') }}
-                                                                </span>
-                                                                <span>
-                                                                    {{ number_format($package->no_of_staffs, 0) }} {{ __('staff_limit') }}
-                                                                </span>
-                                                                <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
-                                                                    {{ number_format($package->charges, 2) }} {{ __('package_amount') }}
-                                                                </span>
-                                                            @elseif($package->type == 1 && $package->is_trial == 0)
-                                                                <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
-                                                                    {{ number_format($package->student_charge, 2) }}
-                                                                    {{ __('per_student_charges') }}
-                                                                </span>
-                                                                <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
-                                                                    {{ number_format($package->staff_charge, 2) }}
-                                                                    {{ __('per_staff_charges') }}
-                                                                </span>
-                                                            @endif
-                                                            <span class="days">{{ $package->days }} {{ __('days') }}</span>
-                                                        </div>
-                                                        <div class="listWrapper">
-                                                            @foreach ($features as $feature)
-                                                                @if (in_array($feature->id, $package->package_feature->pluck('feature_id')->toArray()))
-                                                                    <span>
-                                                                        <img src="{{ asset('assets/landing_page_images/right.svg') }}"
-                                                                            class="rightTickImg" alt="">
-                                                                        {{ __($feature->name) }}
-                                                                    </span>
-                                                                @else
-                                                                    <span class="lineThrough">
-                                                                        <img src="{{ asset('assets/landing_page_images/cross.svg') }}"
-                                                                            class="wrongTickImg" alt="">
-                                                                        {{ __($feature->name) }}
-                                                                    </span>
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                        <button class="pricingBtn" data-bs-toggle="modal"
-                                                            data-bs-target="#staticBackdrop">{{ __('get_started') }}</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    @endforeach
+    {{-- ===== FEATURES SECTION ===== --}}
+    <section class="features-section" id="fitur">
+        <div class="container">
+            <div class="section-header">
+                <h2>Alat Akademik Komprehensif</h2>
+                <p>Semua yang dibutuhkan fakultas dan administrasi Anda dalam satu tempat.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card group">
+                    <div class="feature-icon icon-purple">
+                        <span class="material-symbols-outlined">library_books</span>
+                    </div>
+                    <h3>Manajemen Kurikulum</h3>
+                    <p>Repositori terpusat untuk perencanaan silabus, memastikan konsistensi di semua tingkat kelas dan departemen.</p>
+                </div>
+                <div class="feature-card group">
+                    <div class="feature-icon icon-pink">
+                        <span class="material-symbols-outlined">cast_for_education</span>
+                    </div>
+                    <h3>Materi yang Dipimpin Guru</h3>
+                    <p>Berdayakan pendidik untuk mengunggah, mengelola, dan mendistribusikan rencana pelajaran, video, dan bahan bacaan dengan mudah.</p>
+                </div>
+                <div class="feature-card group">
+                    <div class="feature-icon icon-indigo">
+                        <span class="material-symbols-outlined">assignment_turned_in</span>
+                    </div>
+                    <h3>Tugas &amp; Penilaian</h3>
+                    <p>Portal pengumpulan tugas yang efisien untuk siswa dan buku nilai terintegrasi bagi guru dengan alat umpan balik instan.</p>
+                </div>
+                <div class="feature-card group">
+                    <div class="feature-icon icon-blue">
+                        <span class="material-symbols-outlined">fact_check</span>
+                    </div>
+                    <h3>Pelacakan Kehadiran</h3>
+                    <p>Pencatatan kehadiran digital yang secara otomatis memperbarui catatan siswa dan memberi tahu orang tua tentang ketidakhadiran.</p>
+                </div>
+                <div class="feature-card group">
+                    <div class="feature-icon icon-amber">
+                        <span class="material-symbols-outlined">insights</span>
+                    </div>
+                    <h3>Pemantauan Kinerja</h3>
+                    <p>Dasbor analitik canggih bagi kepala sekolah dan kepala departemen untuk melacak kemajuan dan hasil akademik.</p>
+                </div>
+                <div class="feature-card group">
+                    <div class="feature-icon icon-teal">
+                        <span class="material-symbols-outlined">admin_panel_settings</span>
+                    </div>
+                    <h3>Akun Aman</h3>
+                    <p>Kontrol akses berbasis peran dengan keamanan tingkat enterprise untuk melindungi data sensitif siswa dan staf.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ===== TOOLS CHIP CAROUSEL SECTION ===== --}}
+    @php
+        $tools = collect([
+            ['label' => 'Manajemen Siswa',               'icon' => 'groups'],
+            ['label' => 'Manajemen Akademik',             'icon' => 'menu_book'],
+            ['label' => 'Manajemen Slider',               'icon' => 'view_carousel'],
+            ['label' => 'Manajemen Guru',                 'icon' => 'cast_for_education'],
+            ['label' => 'Manajemen Tahun Ajaran',         'icon' => 'calendar_month'],
+            ['label' => 'Manajemen Hari Libur',           'icon' => 'beach_access'],
+            ['label' => 'Manajemen Jadwal Pelajaran',     'icon' => 'schedule'],
+            ['label' => 'Manajemen Absensi',              'icon' => 'fact_check'],
+            ['label' => 'Manajemen Ujian',                'icon' => 'edit_document'],
+            ['label' => 'Manajemen Pelajaran',            'icon' => 'library_books'],
+            ['label' => 'Manajemen Tugas',                'icon' => 'assignment'],
+            ['label' => 'Manajemen Pengumuman',           'icon' => 'campaign'],
+            ['label' => 'Manajemen Staf',                 'icon' => 'badge'],
+            ['label' => 'Manajemen Pengeluaran',          'icon' => 'receipt_long'],
+            ['label' => 'Manajemen Cuti Staf',            'icon' => 'event_busy'],
+            ['label' => 'Manajemen Biaya',                'icon' => 'payments'],
+            ['label' => 'Manajemen Galeri Sekolah',       'icon' => 'photo_library'],
+            ['label' => 'Pembuatan ID Card & Sertifikat', 'icon' => 'id_card'],
+            ['label' => 'Manajemen Website',              'icon' => 'language'],
+            ['label' => 'Modul Chat',                     'icon' => 'chat'],
+            ['label' => 'Modul Transportasi',             'icon' => 'directions_bus'],
+            ['label' => 'Manajemen Absensi Staf',         'icon' => 'how_to_reg'],
+        ]);
+        $track1 = $tools->filter(fn($t, $i) => $i % 2 === 0)->values();
+        $track2 = $tools->filter(fn($t, $i) => $i % 2 !== 0)->values();
+    @endphp
+
+    <section class="tools-carousel-section">
+        <div class="tools-carousel-header">
+            <span class="section-label">Fitur Lengkap</span>
+            <p>{{ count($tools) }} modul pengelolaan sekolah dalam satu platform</p>
+        </div>
+        <div class="tools-track-wrap">
+            <div class="tools-track tools-track--right">
+                @foreach ($track1 as $tool)
+                    <div class="tool-chip"><span class="material-symbols-outlined">{{ $tool['icon'] }}</span>{{ $tool['label'] }}</div>
+                @endforeach
+                @foreach ($track1 as $tool)
+                    <div class="tool-chip" aria-hidden="true"><span class="material-symbols-outlined">{{ $tool['icon'] }}</span>{{ $tool['label'] }}</div>
+                @endforeach
+            </div>
+        </div>
+        <div class="tools-track-wrap">
+            <div class="tools-track tools-track--left">
+                @foreach ($track2 as $tool)
+                    <div class="tool-chip tool-chip--accent"><span class="material-symbols-outlined">{{ $tool['icon'] }}</span>{{ $tool['label'] }}</div>
+                @endforeach
+                @foreach ($track2 as $tool)
+                    <div class="tool-chip tool-chip--accent" aria-hidden="true"><span class="material-symbols-outlined">{{ $tool['icon'] }}</span>{{ $tool['label'] }}</div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    {{-- ===== HOW IT WORKS SECTION ===== --}}
+    <section class="workflow-section" id="cara-kerja">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label-accent">Alur Kerja</span>
+                <h2>Cara Kerja</h2>
+            </div>
+            <div class="workflow-steps">
+                <div class="workflow-line"></div>
+                <div class="step">
+                    <div class="step-icon step-outline"><span class="material-symbols-outlined">edit_note</span><span class="step-number step-number-outline">1</span></div>
+                    <h4>Siapkan Materi</h4><p>Guru mengatur rencana pelajaran dan sumber daya.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon step-outline"><span class="material-symbols-outlined">school</span><span class="step-number step-number-outline">2</span></div>
+                    <h4>Akses Pelajaran</h4><p>Siswa masuk untuk melihat konten dengan aman.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon step-outline"><span class="material-symbols-outlined">upload_file</span><span class="step-number step-number-outline">3</span></div>
+                    <h4>Kumpulkan Tugas</h4><p>Tugas diunggah secara digital.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon step-outline"><span class="material-symbols-outlined">grading</span><span class="step-number step-number-outline">4</span></div>
+                    <h4>Evaluasi</h4><p>Guru menilai dan memberikan umpan balik.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon step-outline"><span class="material-symbols-outlined">bar_chart</span><span class="step-number step-number-outline">5</span></div>
+                    <h4>Catat Kemajuan</h4><p>Sistem memperbarui catatan akademik secara otomatis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ===== PRICING SECTION ===== --}}
+    <section class="pricing-section" id="harga">
+        <div class="container">
+            <div class="section-header">
+                <h2>Paket Institusi yang Fleksibel</h2>
+                <p>Pilih skala penerapan yang sesuai untuk sekolah Anda.</p>
+            </div>
+            <div class="pricing-grid">
+
+                @php
+                    // Map packages to static cards. 
+                    // Try to finding by name first, otherwise fallback to rank order.
+                    // Assuming $packages is ordered by rank ASC.
+                    $silverPackage = $packages->first(function($p) { return stripos($p->name, 'Silver') !== false; }) ?? $packages->get(0);
+                    $goldPackage = $packages->first(function($p) { return stripos($p->name, 'Gold') !== false; }) ?? $packages->get(1);
+                    $platinumPackage = $packages->first(function($p) { return stripos($p->name, 'Platinum') !== false; }) ?? $packages->get(2);
+                @endphp
+
+                {{-- Kiri --}}
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Silver</h3>
+                        <p>Akses LMS selama 30 hari</p>
+                    </div>
+                    <div class="pricing-price">Rp 500.000<span>/30 hari</span></div>
+                    <ul class="pricing-features">
+                        <li><span class="material-symbols-outlined">check</span>Akses semua materi kelas</li>
+                        <li><span class="material-symbols-outlined">check</span>Upload & submit tugas</li>
+                        <li><span class="material-symbols-outlined">check</span>Sistem penilaian otomatis</li>
+                        <li><span class="material-symbols-outlined">check</span>Dukungan email</li>
+                    </ul>
+                    <a href="{{ $silverPackage ? url('register') . '?package=' . $silverPackage->id : '#' }}" class="pricingBtn">
+                        {{ __('get_started') }}
+                    </a>
+                </div>
+
+
+                {{-- Tengah --}}
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Gold</h3>
+                        <p>Akses LMS selama 180 hari</p>
+                    </div>
+                    <div class="pricing-price">Rp 3.000.000<span>/180 hari</span></div>
+                    <ul class="pricing-features">
+                        <li><span class="material-symbols-outlined">check</span>Semua fitur Silver</li>
+                        <li><span class="material-symbols-outlined">check</span>Monitoring progres belajar</li>
+                        <li><span class="material-symbols-outlined">check</span>Rekap nilai & laporan akademik</li>
+                        <li><span class="material-symbols-outlined">check</span>Dukungan prioritas</li>
+                    </ul>
+                    <a href="{{ $goldPackage ? url('register') . '?package=' . $goldPackage->id : '#' }}" class="pricingBtn">
+                        {{ __('get_started') }}
+                    </a>
+                </div>
+
+
+                {{-- Kanan --}}
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Platinum</h3>
+                        <p>Akses LMS selama 365 hari</p>
+                    </div>
+                    <div class="pricing-price">Rp 6.000.000<span>/365 hari</span></div>
+                    <ul class="pricing-features">
+                        <li><span class="material-symbols-outlined">check</span>Semua fitur Gold</li>
+                        <li><span class="material-symbols-outlined">check</span>Analitik performa siswa</li>
+                        <li><span class="material-symbols-outlined">check</span>Export laporan akademik (PDF/Excel)</li>
+                        <li><span class="material-symbols-outlined">check</span>Dukungan teknis dedicated</li>
+                    </ul>
+                    <a href="{{ $platinumPackage ? url('register') . '?package=' . $platinumPackage->id : '#' }}" class="pricingBtn">
+                        {{ __('get_started') }}
+                    </a>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </section>
+
+    {{-- ===== CTA CONTACT SECTION ===== --}}
+    <section class="cta-contact-section" id="contact">
+        <div class="container">
+            <div class="cta-contact-header">
+                <span class="section-label-accent">Hubungi Kami</span>
+                <h2>Siap Mendigitalkan Sekolah Anda?</h2>
+                <p>Kirimkan pesan dan tim kami akan menghubungi Anda dalam 1&times;24 jam.</p>
+            </div>
+            <div class="cta-contact-grid">
+                <div class="cta-info-col">
+                    <a href="mailto:support@juliet.co.id" class="cta-info-card">
+                        <div class="cta-info-icon icon-email"><span class="material-symbols-outlined">email</span></div>
+                        <div class="cta-info-text">
+                            <span class="cta-info-label">Email Kami</span>
+                            <span class="cta-info-value">support@juliet.co.id</span>
+                            <span class="cta-info-action">Klik untuk kirim email <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                    </a>
+                    <a href="tel:+085700609999" class="cta-info-card">
+                        <div class="cta-info-icon icon-phone"><span class="material-symbols-outlined">phone_in_talk</span></div>
+                        <div class="cta-info-text">
+                            <span class="cta-info-label">Telepon Kami</span>
+                            <span class="cta-info-value">+62 857 0060 9999</span>
+                            <span class="cta-info-action">Klik untuk menelepon <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                    </a>
+                    <a href="Jl. Sono Kembang No.4-6, Embong Kaliasin, Kec. Genteng, Surabaya, Jawa Timur 60271" target="_blank" rel="noopener" class="cta-info-card">
+                        <div class="cta-info-icon icon-location"><span class="material-symbols-outlined">location_on</span></div>
+                        <div class="cta-info-text">
+                            <span class="cta-info-label">Kunjungi Kantor</span>
+                            <span class="cta-info-value">Jl. Sono Kembang No.4-6, Embong Kaliasin, Kec. Genteng, Surabaya, Jawa Timur 60271</span>
+                            <span class="cta-info-action">Buka di Google Maps <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                    </a>
+                    <a href="https://wa.me/6285700609999" target="_blank" rel="noopener" class="cta-info-card cta-info-card-wa">
+                        <div class="cta-info-icon icon-wa">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </div>
+                        <div class="cta-info-text">
+                            <span class="cta-info-label">WhatsApp</span>
+                            <span class="cta-info-value">Chat langsung dengan tim</span>
+                            <span class="cta-info-action">Buka WhatsApp <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="cta-form-col">
+                    <div class="cta-form-card">
+                        <div class="cta-form-header">
+                            <h3>Kirim Pesan</h3>
+                            <p>Isi formulir di bawah ini dan kami akan segera merespons.</p>
+                        </div>
+                        <form class="cta-form" id="ctaForm" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="nama">Nama Lengkap <span class="required">*</span></label>
+                                    <div class="input-wrap"><span class="material-symbols-outlined input-icon">person</span><input type="text" id="nama" name="nama" placeholder="Contoh: Budi Santoso" required /></div>
+                                    <span class="field-error">Nama wajib diisi.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="institusi">Nama Institusi <span class="required">*</span></label>
+                                    <div class="input-wrap"><span class="material-symbols-outlined input-icon">school</span><input type="text" id="institusi" name="institusi" placeholder="Contoh: SMA Negeri 1 Jakarta" required /></div>
+                                    <span class="field-error">Institusi wajib diisi.</span>
                                 </div>
                             </div>
-                        </div>
-                    @else
-                        <div class="col-12 text-center">
-                            <span class="text-danger">{{ __('no_packages_available') }}</span>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </section>
-        <!-- pricing ends here  -->
-
-        @if (isset($settings['custom_package_status']) && $settings['custom_package_status'])
-            <section class="customPack container commonMT">
-                <div class="wrapper">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-6">
-                            <div>
-                                <p class="title">{{ __('custom_package') }}</p>
-                                <p class="desc">
-                                    {{ $settings['custom_package_description'] ?? '' }}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6 col-lg-6">
-                            <a href="#contact-us" class="commonBtn text-center">{{ __('get_in_touch') }}</a>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-        @endif
-
-        @if (count($faqs))
-            <section class="faqs commonMT" id="faq">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="sectionTitle">
-                                <span>{{ __('frequently_asked_questions') }}</span>
-
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="accordion" id="accordionExample">
-                                @foreach ($faqs as $faq)
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingOne">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapseOne-{{ $faq->id }}" aria-expanded="true"
-                                                aria-controls="collapseOne-{{ $faq->id }}">
-                                                <span>
-                                                    {{ $faq->title }}
-                                                </span>
-                                            </button>
-                                        </h2>
-                                        <div id="collapseOne-{{ $faq->id }}" class="accordion-collapse collapse"
-                                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <span>
-                                                    {!! nl2br(e($faq->description)) !!}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        @endif
-        <!-- faqs ends here  -->
-
-        <section class="getInTouch commonMT" id="contact-us">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="sectionTitle">
-                            <span class="greenText">{{ __('lets_get_in_touch') }}</span>
-                            <span>{{ __('have_a_question_or_just_want_to_say_hi_Wed_love_to_hear_from_you') }}
-                            </span>
-
-                        </div>
-                        <div class="col-12">
-                            <div class="row wrapper">
-                                <div class="col-lg-6">
-                                    <form action="{{ url('contact') }}" method="post" role="form"
-                                        class="php-email-form mb-5 create-form-with-captcha">
-                                        @csrf
-                                        <div class="card">
-                                            <div>
-                                                <input type="text" required name="name" id="name"
-                                                    placeholder="{{ __('enter_your_name') }}">
-                                            </div>
-                                            <div>
-                                                <input type="email" required name="email" id="email"
-                                                    placeholder="{{ __('enter_your_email') }}">
-                                            </div>
-                                            <div>
-                                                <textarea name="message" required id="message" cols="30" rows="6"
-                                                    placeholder="{{ __('send_your_message') }}"></textarea>
-                                            </div>
-                                            @if (config('services.recaptcha.key') ?? '')
-                                                <div>
-                                                    <div class="g-recaptcha" data-sitekey={{config('services.recaptcha.key')}}>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            <div>
-                                                <input type="submit" class="commonBtn" value="{{ __('send') }}">
-                                            </div>
-                                            <div>
-                                                <img src="{{ asset('assets/landing_page_images/GetInTouchDots.png') }}"
-                                                    class="sideImg dots" alt="">
-                                            </div>
-                                        </div>
-                                    </form>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email <span class="required">*</span></label>
+                                    <div class="input-wrap"><span class="material-symbols-outlined input-icon">email</span><input type="email" id="email" name="email" placeholder="email@sekolah.ac.id" required /></div>
+                                    <span class="field-error">Email tidak valid.</span>
                                 </div>
-                                <div class="col-lg-6 infoBox">
-                                    <div class="infoWrapper">
-                                        <div>
-                                            <span class="icon"><i class="fa-solid fa-phone-volume"></i></span>
-                                        </div>
-                                        <div>
-                                            <span>{{ __('phone') }}</span>
-                                            <span>{{ __('mobile') }} : {{ $settings['mobile'] ?? '' }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="infoWrapper">
-                                        <div>
-                                            <span class="icon"><i class="fa-solid fa-envelope-open-text"></i></span>
-                                        </div>
-                                        <div>
-                                            <span>{{ __('email') }}</span>
-                                            <span>{{ $settings['mail_send_from'] ?? 'example@gmail.com' }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="infoWrapper">
-                                        <div>
-                                            <span class="icon"><i class="fa-solid fa-location-dot"></i></span>
-                                        </div>
-                                        <div>
-                                            <span>{{ __('location') }}</span>
-                                            <span>{{ $settings['address'] ?? '' }}</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img src="{{ asset('assets/landing_page_images/lineCircle.png') }}"
-                                            class="lineCircle sideImg" alt="">
-                                    </div>
+                                <div class="form-group">
+                                    <label for="telepon">Nomor Telepon</label>
+                                    <div class="input-wrap"><span class="material-symbols-outlined input-icon">phone</span><input type="tel" id="telepon" name="telepon" placeholder="+62 8xx xxxx xxxx" /></div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="topik">Topik Pertanyaan</label>
+                                <div class="input-wrap input-wrap-select"><span class="material-symbols-outlined input-icon">category</span>
+                                    <select id="topik" name="topik">
+                                        <option value="">-- Pilih topik --</option>
+                                        <option value="demo">Permintaan Demo</option>
+                                        <option value="harga">Informasi Harga</option>
+                                        <option value="implementasi">Konsultasi Implementasi</option>
+                                        <option value="teknis">Dukungan Teknis</option>
+                                        <option value="lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pesan">Pesan <span class="required">*</span></label>
+                                <div class="input-wrap input-wrap-textarea"><span class="material-symbols-outlined input-icon input-icon-top">chat</span><textarea id="pesan" name="pesan" rows="4" placeholder="Tuliskan pesan atau pertanyaan Anda di sini..." required maxlength="500"></textarea></div>
+                                <div class="char-counter"><span id="charCount">0</span> / 500 karakter</div>
+                                <span class="field-error">Pesan wajib diisi.</span>
+                            </div>
+                            <button type="submit" class="btn-form-submit" id="submitBtn">
+                                <span class="btn-label"><span class="material-symbols-outlined">send</span>Kirim Pesan</span>
+                            </button>
+                        </form>
+                        <div class="form-success" id="formSuccess" hidden>
+                            <div class="success-icon"><span class="material-symbols-outlined">check_circle</span></div>
+                            <h4>Pesan Terkirim!</h4>
+                            <p>Terima kasih, <strong id="successName"></strong>. Tim kami akan menghubungi Anda dalam 1&times;24 jam.</p>
+                            <button class="btn-reset" id="resetForm">Kirim Pesan Lain</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-        </section>
-
-        <section class="ourApp container commonMT">
-            <div class="row">
-                <div class="col-lg-6">
-                    <img src="{{ $settings['download_our_app_image'] ?? asset('assets/landing_page_images/ourApp.png') }}"
-                        class="ourAppImg" alt="">
+    {{-- ===== FOOTER ===== --}}
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="{{ asset('assets/landing_page_images/Logo.png') }}" width="100px" alt="logo">
+                    </div>
+                    <p>Solusi LMS Modern untuk lebih efektif, adaptif dan cerdas</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.791-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                        <a href="#" aria-label="Twitter"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+                        <a href="#" aria-label="LinkedIn"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    </div>
                 </div>
-                <div class="col-lg-6 content">
-                    <div class="text">
-                        <span class="title">{{ __('download_our_app_now') }}</span>
-                        <span>
-                            {{ $settings['download_our_app_description'] ?? '' }}
-                        </span>
-                    </div>
-                    <div class="storeImgs">
-                        <a href="{{ $settings['app_link'] ?? '' }}" target="_blank"> <img
-                                src="{{ asset('assets/landing_page_images/Google play.png') }}" alt=""> </a>
-                        <a href="{{ $settings['ios_app_link'] ?? ''}}" target="_blank"> <img
-                                src="{{ asset('assets/landing_page_images/iOS app Store.png') }}" alt=""> </a>
-                    </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#beranda">Beranda</a></li>
+                        <li><a href="#fitur">Fitur</a></li>
+                        <li><a href="#harga">Harga</a></li>
+                        <!-- <li><a href="#fitur">Fitur</a></li> -->
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Perusahaan</h4>
+                    <ul>
+                        <li><a href="#about-us">Tentang Kami</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li class="contact-item"><span class="material-symbols-outlined">email</span><a href="mailto:support@juliet.co.id">support@juliet.co.id</a></li>
+                        <li class="contact-item"><span class="material-symbols-outlined">phone</span>+6285700609999</li>
+                        <li class="contact-item"><span class="material-symbols-outlined">location_on</span>Jl. Sono Kembang No.4-6, Embong Kaliasin, Kec. Genteng, Surabaya, Jawa Timur 60271</li>
+                    </ul>
                 </div>
             </div>
-        </section>
-    </div>
+            <div class="footer-bottom">
+                <p>© 2026 Juliet.</p>
+                <div class="footer-legal">
+                    <a href="#">Kebijakan Privasi</a>
+                    <a href="#">Syarat Layanan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 
-@endsection
-
-@section('script')
-    <script async src="https://www.google.com/recaptcha/api.js"></script>
-    @foreach ($featureSections as $key => $section)
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const tabs = document.querySelectorAll('.left-section-{{ $section->id }} .tab');
-                const contents = document.querySelectorAll('.left-section-{{ $section->id }} .content');
-
-                function switchTab(event, tabNumber) {
-                    tabs.forEach((tab) => {
-                        tab.classList.remove('active');
-                    });
-
-                    event.target.classList.add('active');
-
-                    contents.forEach((content) => {
-                        content.classList.remove('active');
-                    });
-
-                    contents[tabNumber - 1].classList.add('active');
-                }
-
-                tabs.forEach((tab, index) => {
-                    tab.addEventListener('click', (event) => {
-                        switchTab(event, index + 1);
-                    });
-                });
-
-                setTimeout(() => {
-                    tabs[0].click();
-                }, 1000);
-            });
-
-            document.addEventListener('DOMContentLoaded', () => {
-                const tabs = document.querySelectorAll('.right-section-{{ $section->id }} .tab');
-                const contents = document.querySelectorAll('.right-section-{{ $section->id }} .content');
-
-                function switchTab(event, tabNumber) {
-                    tabs.forEach((tab) => {
-                        tab.classList.remove('active');
-                    });
-
-                    event.target.classList.add('active');
-
-                    contents.forEach((content) => {
-                        content.classList.remove('active');
-                    });
-
-                    contents[tabNumber - 1].classList.add('active');
-                }
-
-                tabs.forEach((tab, index) => {
-                    tab.addEventListener('click', (event) => {
-                        switchTab(event, index + 1);
-                    });
-                });
-
-                setTimeout(() => {
-                    tabs[0].click();
-                }, 1000);
-            });
-        </script>
-    @endforeach
+    {{-- ===== SCRIPTS ===== --}}
     <script>
-        @if (Session::has('success'))
-            $.toast({
-                text: '{{ Session::get('success') }}',
-                showHideTransition: 'slide',
-                icon: 'success',
-                loaderBg: '#f96868',
-                position: 'top-right',
-                bgColor: '#20CFB5'
+        /* ---- Smooth scroll ---- */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (!target) return;
+                e.preventDefault();
+                const navH = document.querySelector('.navbar').offsetHeight;
+                window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - navH - 12, behavior: 'smooth' });
             });
-        @endif
+        });
 
-        @if (Session::has('error'))
-            $.toast({
-                text: '{{ Session::get('error') }}',
-                showHideTransition: 'slide',
-                icon: 'error',
-                loaderBg: '#f2a654',
-                position: 'top-right',
-                bgColor: '#FE7C96'
-            });
-        @endif
-    </script>
-@endsection
+        /* ---- Active nav on scroll ---- */
+        const sections = document.querySelectorAll('section[id], footer[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const onScroll = () => {
+            const navH = document.querySelector('.navbar').offsetHeight;
+            let current = '';
+            sections.forEach(sec => { if (window.pageYOffset >= sec.offsetTop - navH - 32) current = sec.getAttribute('id'); });
+            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + current));
+        };
+        
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+</body>
+</html>

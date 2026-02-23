@@ -72,7 +72,7 @@ final class SchoolQueueService
         array $requestData = []
     ): void {
         // Dispatch database setup job
-        SetupSchoolDatabase::dispatch(
+        SetupSchoolDatabase::dispatchSync(
             $schoolId,
             $packageId,
             $schoolCodePrefix

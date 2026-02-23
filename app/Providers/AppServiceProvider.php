@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+    use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider {
     /**
@@ -11,6 +12,7 @@ class AppServiceProvider extends ServiceProvider {
      *
      * @return void
      */
+
     public function register() {
 //        $this->renderable(function (NotFoundHttpException $e, $request) {
 //            if ($request->is('api/*')) {
@@ -37,6 +39,10 @@ class AppServiceProvider extends ServiceProvider {
         //
         Schema::defaultStringLength(191);
         Schema::useNativeSchemaOperationsIfPossible();
+
+        if(app()->environment('production')) {
+            URL::forceScheme('https');
+        }
 
 //        $this->app['validator']->extend('unique_for_school', function ($attribute, $value, $parameters) {
 //            // Extract and validate the parameters from the rule syntax.

@@ -20,7 +20,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="{{ asset('assets/home_page/css/style.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('assets/home_page/css/style.css') }}" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="assets/home_page/css/style.css">
 
     <title>{{ __('login') }} || {{ config('app.name') }}</title>
 
@@ -32,7 +33,7 @@
                 {{ $systemSettings['theme_primary_color'] ?? '#56cc99' }}
             ;
             --secondary-color:
-                {{ $systemSettings['theme_secondary_color'] ?? '#215679' }}
+                {{ $systemSettings['theme_secondary_color'] ?? '#580470' }}
             ;
             --secondary-color1:
                 {{ $systemSettings['theme_secondary_color_1'] ?? '#38a3a5' }}
@@ -51,7 +52,7 @@
         }
 
         a {
-            color: #007bff !important;
+            color: #a71374 !important;
         }
 
         .form-check .form-check-label input {
@@ -69,7 +70,7 @@
                     <div class="col-xl-6 mx-auto auth-form-light p-4 m-4">
                         @if (env('DEMO_MODE'))
                             <div class="alert alert-info text-center" role="alert">
-                                NOTE : <a target="_blank" href="https://eschool-saas.wrteam.me/login">-- Click Here --</a>
+                                {{-- NOTE : <a target="_blank" href="https://eschool-saas.wrteam.me/login">-- Click Here --</a> --}}
                                 if you cannot login.
                             </div>
                         @endif
@@ -83,7 +84,7 @@
                                         src="{{ $systemSettings['login_page_logo'] ?? $systemSettings['horizontal_logo'] ?? '' }}"
                                         alt="logo">
                                 @else
-                                    <img class="img-fluid w-25" src="{{ url('assets/horizontal-logo.svg') }}" alt="logo">
+                                    <img class="img-fluid w-25" src="{{ url('assets/horizontal-logo.png') }}" alt="logo">
                                 @endif
 
                             </div>
@@ -169,13 +170,11 @@
                                         class="btn btn-block btn-theme btn-lg font-weight-medium auth-form-btn rounded-lg" />
                                 </div>
                                 <div class="my-2 d-flex justify-content-end align-items-center">
-                                    <a class="text-blue" href="#" data-bs-toggle="modal" data-bs-dismiss="offcanvas"
-                                        data-bs-target="#staticBackdrop">
+                                    <a class="text-blue" href="{{ route('register') }}">
                                         {{ __('New user Sign up to manage your school activities seamlessly') }}
                                     </a>
                                 </div>
                             </form>
-                            @include('registration_form')
                             @if (env('DEMO_MODE'))
 
                                 <div class="row mt-3">

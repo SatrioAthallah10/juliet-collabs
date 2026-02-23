@@ -1,60 +1,181 @@
-<!-- Button trigger modal -->
-{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-</button> --}}
-<div class="modal fade formModal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered  modal-xl">
-        <div class="modal-content row">
-            <div class="col-12 rightSide">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ __('registration_form') }}</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="school-registration" action="{{ url('schools/registration') }}" method="post">
-                        @csrf
-                        <div class="schoolFormWrapper">
-                            <div class="headingWrapper">
-                                <span>{{ __('create_school') }}</span>
-                            </div>
-                            <div class="formWrapper">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="inputWrapper">
-                                            <label for="name">{{ __('name') }} <span class="text-danger">*</span></label>
-                                            <input type="text" name="school_name" id="name" placeholder="{{ __('enter_your_school_name') }}" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="inputWrapper">
-                                            <label for="supportEmail">{{ __('email') }} <span class="text-danger">*</span></label>
-                                            <input type="email" name="school_email" id="support-email"
-                                                placeholder="{{ __('enter_your_school_email') }}" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="inputWrapper">
-                                            <label for="supportPhone">{{ __('mobile') }} <span class="text-danger">*</span></label>
-                                            <input type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" name="school_phone" id="supportPhone"
-                                                placeholder="{{ __('enter_your_school_mobile_number') }}" maxlength="15" pattern="[0-9]{6,15}" 
-                                                title="Please enter a valid mobile number (6-15 digits)" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="inputWrapper">
-                                            <label for="address">{{ __('address') }} <span class="text-danger">*</span></label>
-                                            <input type="text" name="school_address" id="address"
-                                                placeholder="{{ __('enter_your_school_address') }}" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="inputWrapper">
-                                            <label for="tagline">{{ __('tagline') }} <span class="text-danger">*</span></label>
-                                            <input type="text" name="school_tagline" id="tagline" placeholder="{{ __('tagline') }}" required>
-                                        </div>
-                                    </div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Juliet || Registration</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="{{ asset('assets/home_page/css/registration-page.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/vertical-logo.png" type="image/x-icon">
+    @if (config('services.recaptcha.key') ?? '')
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @endif
+</head>
+<body>
+
+    {{-- Top Header --}}
+    <header class="reg-top-header">
+        <div class="container">
+            <div class="header-inner">
+                <img src="assets/horizontal-logo.png" alt="logo">
+                <!-- <span class="material-symbols-outlined">close</span> -->
+            </div>
+        </div>
+    </header>
+
+    {{-- Main Content --}}
+    <main class="reg-main">
+        <div class="container">
+            <div class="reg-grid">
+
+                {{-- Sidebar --}}
+                <aside class="reg-sidebar">
+
+                    {{-- Benefits Card --}}
+                    <div class="benefits-card">
+                        <h2>Mengapa bergabung dengan jaringan institusi kami?</h2>
+                        <ul class="benefits-list">
+                            <li class="benefit-item">
+                                <div class="benefit-icon">
+                                    <span class="material-symbols-outlined">security</span>
                                 </div>
+                                <div class="benefit-content">
+                                    <h4>Keamanan Data Terjamin</h4>
+                                    <p>Setiap institusi memiliki sistem terisolasi dan terenkripsi untuk memastikan data siswa dan tenaga pendidik tetap aman dan tidak tercampur.</p>
+                                </div>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">
+                                    <span class="material-symbols-outlined">account_tree</span>
+                                </div>
+                                <div class="benefit-content">
+                                    <h4>Selaras dengan Kurikulum</h4>
+                                    <p>Mudah menyesuaikan kurikulum nasional maupun internal sekolah dengan kerangka pembelajaran terstruktur kami.</p>
+                                </div>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">
+                                    <span class="material-symbols-outlined">support_agent</span>
+                                </div>
+                                <div class="benefit-content">
+                                    <h4>Dukungan Prioritas</h4>
+                                    <p>Tim support khusus siap membantu kebutuhan teknis sekolah dan administrator secara responsif.</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        {{-- Notice Box --}}
+                        <div class="notice-box">
+                            <p class="notice-label">Pemberitahuan</p>
+                            <p class="notice-text">
+                                "Portal ini ditujukan khusus untuk pendaftaran institusi/sekolah. Pendaftaran siswa secara individu harus dilakukan melalui institusi masing-masing."
+                            </p>
+                        </div>
+                    </div>
+
+                    {{-- Image Card --}}
+                    <div class="image-card">
+                        <img src="assets/regis_page.png" alt="Tampilan sekolah modern">
+                        <div class="image-overlay">
+                            <p>Bergabung bersama 500+ sekolah yang telah mempercayai platform kami.</p>
+                        </div>
+                    </div>
+
+                </aside>
+
+                {{-- Form Section --}}
+                <section class="reg-form-section">
+                    <div class="form-card">
+
+                        {{-- Form Header --}}
+                        <div class="form-header">
+                            <h2 class="form-header__title">Pendaftaran Institusi Sekolah</h2>
+                            <p class="form-header__subtitle">Lengkapi formulir di bawah ini untuk memulai digitalisasi sekolah Anda.</p>
+                        </div>
+
+                        {{-- Form --}}
+                        <form class="registration-form" action="{{ url('schools/registration') }}" method="POST">
+                            @csrf
+
+                            {{-- Section Header --}}
+                            <div class="form-section-header">
+                                <div class="section-accent"></div>
+                                <h2>Create School</h2>
+                            </div>
+
+                            {{-- Form Fields --}}
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Name <span class="required">*</span></label>
+                                    <input type="text" name="school_name" placeholder="Enter Your School Name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Email <span class="required">*</span></label>
+                                    <input type="email" name="school_email" placeholder="Enter Your School Email" required>
+                                    <p class="field-note">
+                                        <span class="material-symbols-outlined" style="font-size:16px; vertical-align:middle;">info</span>
+                                        Password akun akan dikirim ke email ini setelah proses pembayaran berhasil.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Mobile <span class="required">*</span></label>
+                                    <input type="tel" name="school_phone" placeholder="Enter Your School Mobile Number"
+                                           maxlength="15" pattern="[0-9]{6,15}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Address <span class="required">*</span></label>
+                                    <input type="text" name="school_address" placeholder="Enter Your School Address" required>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label>Tagline <span class="required">*</span></label>
+                                    <input type="text" name="school_tagline" placeholder="Tagline" required>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label>Package <span class="required">*</span></label>
+                                    <p class="field-note">
+                                        <span class="material-symbols-outlined" style="font-size:16px; vertical-align:middle;">info</span>
+                                        Silahkan pilih paket yang sesuai dengan kebutuhan sekolah Anda.
+
+                                    </p>
+                                <div class="package-grid">
+                                    @foreach($packages as $package)
+                                        <label class="package-card">
+                                            <input type="radio" name="package_id" value="{{ $package->id }}" required {{ request()->get('package') == $package->id ? 'checked' : '' }}>
+                                            <div class="package-card__inner">
+                                                <span class="package-card__badge {{ $package->highlight ? 'popular' : '' }}">{{ $package->name }}</span>
+                                                <p class="package-card__price">
+                                                    
+                                                     @if ($package->is_trial == 1)
+                                                        {{ __('free') }}
+                                                    @else
+                                                        @if ($package->type == 1)
+                                                            Idr {{ number_format($package->student_charge, 0) }} <span>/per student</span>
+                                                        @else
+                                                            Idr {{ number_format($package->charges, 0) }} <span>/{{ $package->days }} Days</span>
+                                                        @endif
+                                                    @endif
+                                                </p>
+                                                <ul class="package-card__features">
+                                                    {{-- Improve: List specific features of package if available --}}
+                                                    <li>{{ $package->days }} Days Validity</li>
+                                                    @if($package->type == 0)
+                                                        <li>{{ $package->no_of_students }} Students Limit</li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                        </label>
+                                    @endforeach
+                                </div>
+                                <br>
                                 @if(isset($extraFields) && count($extraFields))     
                                     <div class="row other-details mt-3">
 
@@ -71,7 +192,7 @@
                                                 {{-- Add lable to all the elements excluding checkbox --}}
                                                 @if($data->type != 'radio' && $data->type != 'checkbox')
                                                     <label>{{$data->name}} @if($data->is_required)
-                                                            <span class="text-danger">*</span>
+                                                            <span class="required">*</span>
                                                         @endif</label>
                                                 @endif
 
@@ -95,7 +216,7 @@
                                                     {{-- Radio Field --}}
                                                 @elseif($data->type == 'radio')
                                                     <label class="d-block">{{$data->name}} @if($data->is_required)
-                                                            <span class="text-danger">*</span>
+                                                            <span class="required">*</span>
                                                         @endif</label>
                                                     <div class="row col-md-12 col-lg-12 col-xl-6 col-sm-12">
                                                         @if(count($data->default_values))
@@ -113,7 +234,7 @@
                                                     {{-- Checkbox Field --}}
                                                 @elseif($data->type == 'checkbox')
                                                     <label class="d-block">{{$data->name}} @if($data->is_required)
-                                                            <span class="text-danger">*</span>
+                                                            <span class="required">*</span>
                                                         @endif</label>
                                                     @if(count($data->default_values))
                                                         <div class="row col-lg-12 col-xl-6 col-md-12 col-sm-12 checkbox-group">
@@ -149,33 +270,176 @@
                                         @endforeach
                                     </div>
                                 @endif
-                            </div>
-                        </div>
-                        <div class="adminFormWrapper schoolFormWrapper">
-                            <div class="formWrapper">
-                                
-                                    @if (config('services.recaptcha.key') ?? '')
-                                        <div class="col-lg-12">
-                                            <div class="g-recaptcha mt-4" data-sitekey={{config('services.recaptcha.key')}}></div>
-                                        </div>    
-                                    @endif
-                                    
-                                    
-                                    <div class="col-12 modalfooter">
-
-                                        <div class="inputWrapper">
-                                            
-                                        </div>
-                                        <div>
-                                            <input type="submit" class="commonBtn" value="{{ __('submit') }}">
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
+                            
+                            {{-- reCAPTCHA --}}
+                            @if (config('services.recaptcha.key') ?? '')
+                                <div class="form-group full-width">
+                                    <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
+                                </div>
+                            @endif
+
+                            {{-- Submit --}}
+                            <div class="form-footer">
+                                <button type="submit" class="submit-btn">
+                                    <span class="material-symbols-outlined">check_circle</span>
+                                    Submit
+                                </button>
+                            </div>
+                            
+
+                        </form>
+
+                    </div>
+                </section>
+
             </div>
         </div>
-    </div>
-</div>
+    </main>
+
+    {{-- Footer --}}
+    <footer class="reg-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="material-symbols-outlined">school</span>
+                    <span>EduCore</span>
+                </div>
+                <nav class="footer-nav">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Global Support</a>
+                    <a href="#">Contact Admin</a>
+                </nav>
+                <p class="footer-copyright">© 2024 EduCore LMS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            'use strict';
+
+            const form = document.querySelector('.registration-form');
+
+            // ── Validation on submit ──
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    const inputs = form.querySelectorAll('input[required], select[required]');
+                    let isValid = true;
+
+                    inputs.forEach(function (input) {
+                        if (!input.value.trim()) {
+                            isValid = false;
+                            input.style.borderColor = '#ef4444';
+                        } else {
+                            input.style.borderColor = '#E5C8E2';
+                        }
+                    });
+                    
+                    if (!isValid) {
+                        return; // Prevent further execution if invalid
+                    }
+
+                    // AJAX Submission
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    const originalBtnText = submitBtn.innerHTML;
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = 'Processing...';
+                    }
+
+                    const formData = new FormData(form);
+
+                    fetch(form.action, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                            'Accept': 'application/json'
+                        },
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = originalBtnText;
+                        }
+
+                        if (data.error) {
+                            alert(data.message);
+                        } else {
+                            if (data.warning) {
+                                alert(data.message); // Show warning
+                            } else if (data.redirect) {
+                                window.location.href = data.redirect; // Redirect immediately
+                            } else {
+                                alert(data.message); // Show success for Direct Registration
+                                form.reset();
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = originalBtnText;
+                        }
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again.');
+                    });
+                });
+
+                // Reset border on input
+                form.querySelectorAll('input, select').forEach(function (input) {
+                    input.addEventListener('input', function () {
+                        this.style.borderColor = '#E5C8E2';
+                    });
+                });
+            }
+
+            // ── Phone: numbers only ──
+            const phoneInput = document.querySelector('input[type="tel"]');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function () {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                });
+            }
+
+            // ── Scroll to top on load ──
+            window.addEventListener('load', function () {
+                window.scrollTo(0, 0);
+            });
+
+            // ── Close button confirmation ──
+            const closeBtn = document.querySelector('.close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const nameInput = form && form.querySelector('input[name="school_name"]');
+                    if (nameInput && nameInput.value) {
+                        if (!confirm('Are you sure you want to leave? Your progress will be lost.')) {
+                            return;
+                        }
+                    }
+                    window.location.href = this.getAttribute('href');
+                });
+            }
+
+        })();
+
+        // ── Package Card Selection ──
+        document.querySelectorAll('.package-card').forEach(function (card) {
+            card.addEventListener('click', function () {
+                document.querySelectorAll('.package-card').forEach(function (c) {
+                    c.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+        });
+    </script>
+
+</body>
+</html>

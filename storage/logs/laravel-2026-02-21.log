@@ -1,0 +1,40 @@
+[2026-02-21 04:43:32] local.INFO: Registration method HIT  
+[2026-02-21 04:43:32] local.INFO: Request Data:  
+[2026-02-21 10:12:57] local.INFO: Registration method HIT  
+[2026-02-21 10:12:57] local.INFO: Request Data:  
+[2026-02-21 16:08:31] local.INFO: Registration method HIT  
+[2026-02-21 16:08:31] local.INFO: Request Data:  
+[2026-02-21 19:28:21] local.INFO: Registration method HIT  
+[2026-02-21 19:28:21] local.INFO: Request Data:  
+[2026-02-21 19:43:05] local.INFO: Detected N+1 Query  
+[2026-02-21 19:43:05] local.INFO: Model: App\Models\Subscription
+Relation: subscription_bill
+Num-Called: 2
+Call-Stack:
+#19 \app\Models\Subscription.php:85
+#24 \app\Traits\DateFormatTrait.php:125
+#28 \vendor\symfony\http-foundation\JsonResponse.php:49
+#29 \vendor\laravel\framework\src\Illuminate\Http\JsonResponse.php:32
+#30 \vendor\laravel\framework\src\Illuminate\Routing\ResponseFactory.php:102
+#31 \app\Http\Controllers\SubscriptionController.php:360
+#32 \vendor\laravel\framework\src\Illuminate\Routing\Controller.php:54
+#33 \vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php:43
+#34 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:259
+#35 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:205
+#36 \vendor\laravel\framework\src\Illuminate\Routing\Router.php:806
+#37 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:144
+#38 \app\Http\Middleware\CheckTwoFactorAuthenticated.php:41
+#39 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#40 \app\Http\Middleware\CheckForMaintenanceMode.php:32
+#41 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#42 \app\Http\Middleware\MustVerifyEmail.php:36
+#43 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#44 \app\Http\Middleware\SwitchDatabase.php:32
+#45 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#46 \app\Http\Middleware\Status.php:42
+#47 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#48 \app\Http\Middleware\CheckSchoolStatus.php:105
+#49 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+  
+[2026-02-21 20:39:15] local.INFO: Registration method HIT  
+[2026-02-21 20:39:15] local.INFO: Request Data:  

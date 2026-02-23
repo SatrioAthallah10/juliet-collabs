@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\SetupSchoolDatabase;
 use App\Models\PaymentConfiguration;
 use App\Models\Students;
 use App\Models\Subscription;
@@ -26,6 +27,10 @@ use Stripe\Checkout\Session as StripeSession;
 use Unicodeveloper\Paystack\Facades\Paystack;
 use Illuminate\Support\Facades\Log;
 use App\Services\ResponseService;
+use App\Models\School;
+use Illuminate\Support\Facades\Hash;
+use App\Models\StaffSupportSchool;
+use App\Models\Staff;
 
 class SubscriptionService
 {
@@ -146,7 +151,7 @@ class SubscriptionService
                     'due_date'        => Carbon::now(),
                     'school_id'       => $subscription->school_id
                 ];
-                if (Auth::user() && !Auth::user()->hasRole('School Admin')) {
+                if (Auth::user() && !Auth::user()->hasRole('Admin')) {
                     $billData = [
                         'user_id' => $subscription->school->admin_id,
                         'amount' => $package->charges,
@@ -908,5 +913,133 @@ class SubscriptionService
             }
         }
         return 0;
+    }
+
+    public function activateSchoolFromInquiry($inquiry)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            /*
+            |--------------------------------------------------------------------------
+            | 1️⃣ Cek apakah school sudah ada
+            |--------------------------------------------------------------------------
+            */
+            $existingSchool = School::where('support_email', $inquiry->school_email)->first();
+            if ($existingSchool) {
+                DB::commit();
+                return $existingSchool;
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | 2️⃣ Buat School (sesuaikan dengan kolom asli tabel schools kamu)
+            |--------------------------------------------------------------------------
+            */
+            $school = School::create([
+                'name'          => $inquiry->school_name,
+                'support_email' => $inquiry->school_email,
+                'support_phone' => $inquiry->school_phone,
+                'status'        => 0,
+                'installed'     => 0,
+                'address'       => $inquiry->school_address ?? null,
+                'tagline'       => $inquiry->school_tagline ?? null,
+            ]);
+
+            // setelah id tersedia
+            $school->update([
+                'code' => 'SCH' . str_pad($school->id, 5, '0', STR_PAD_LEFT)
+            ]);
+
+            // SetupSchoolDatabase::dispatch(
+            //     $school->id,
+            //     $inquiry->package_id,
+            //     $school->code,
+            // );
+
+            /*
+            |--------------------------------------------------------------------------
+            | 3️⃣ Buat Subscription
+            |--------------------------------------------------------------------------
+            */
+            Subscription::create([
+                'school_id' => $school->id,
+                'package_id'=> $inquiry->package_id,
+                'start_date'=> now(),
+                'end_date'  => now()->addMonth(),
+                'status'    => 1
+            ]);
+
+            /*
+            |--------------------------------------------------------------------------
+            | 4️⃣ Buat Admin User (SAMAKAN dengan StaffController)
+            |--------------------------------------------------------------------------
+            */
+            \Log::info('CURRENT DB BEFORE CREATE USER: ' . DB::connection()->getDatabaseName());
+            $admin = User::create([
+                'first_name' => $inquiry->contact_person ?? 'Admin',
+                'last_name'  => '',
+                'mobile'     => $inquiry->school_phone ?? '000000',
+                'email'      => $inquiry->school_email,
+                'password'   => Hash::make($inquiry->school_phone ?? '123456'), // 🔥 samakan dengan UI
+                'school_id'  => $school->id,
+                'status'     => 1,
+                'deleted_at' => null,
+                'two_factor_enabled' => 0,
+                'two_factor_secret' => null,
+                'two_factor_expires_at' => null,
+            ]);
+
+            /*
+            |--------------------------------------------------------------------------
+            | 5️⃣ Assign Role (pastikan role 'Admin' memang ada)
+            |--------------------------------------------------------------------------
+            */
+            $admin->assignRole('Admin');
+
+            /*
+            |--------------------------------------------------------------------------
+            | 6️⃣ Insert ke tabel staffs (WAJIB supaya bisa login staff dashboard)
+            |--------------------------------------------------------------------------
+            */
+            $staff = Staff::create([
+                'user_id'      => $admin->id,
+                'qualification'=> null,
+                'salary'       => 0,
+                'joining_date' => now(),
+            ]);
+
+            /*
+            |--------------------------------------------------------------------------
+            | 7️⃣ Insert ke staff_support_schools (WAJIB untuk multi-school)
+            |--------------------------------------------------------------------------
+            */
+            StaffSupportSchool::updateOrCreate(
+                [
+                    'user_id'   => $admin->id,
+                    'school_id' => $school->id
+                ],
+                []
+            );
+
+            /*
+            |--------------------------------------------------------------------------
+            | 8️⃣ Set admin_id di school
+            |--------------------------------------------------------------------------
+            */
+            $school->update([
+                'admin_id' => $admin->id
+            ]);
+
+            DB::commit();
+
+            return $school;
+
+        } catch (\Throwable $e) {
+
+            DB::rollBack();
+            throw $e;
+        }
     }
 }

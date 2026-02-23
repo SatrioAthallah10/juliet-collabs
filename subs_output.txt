@@ -1,0 +1,5 @@
+School ID: 42
+All Subscriptions:
+ID: 46 | Start: 2026-02-21 | End: 2026-03-22 | Status: Paid | Package Type: 0
+ID: 47 | Start: 2026-02-21 | End: 2026-03-22 | Status: Paid | Package Type: 0
+Active found: 47

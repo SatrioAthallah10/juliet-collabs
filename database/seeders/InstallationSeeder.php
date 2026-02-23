@@ -10,13 +10,15 @@ use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class InstallationSeeder extends Seeder {
+class InstallationSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
 
         /**** Create All the Permission ****/
         $this->createPermissions();
@@ -39,7 +41,8 @@ class InstallationSeeder extends Seeder {
     }
 
 
-    public function createPermissions() {
+    public function createPermissions()
+    {
 
         $permissions = [
             ...self::permission('role'),
@@ -68,14 +71,14 @@ class InstallationSeeder extends Seeder {
             ['name' => 'school-terms-condition'],
             ['name' => 'subscription-bill-payment'],
             ['name' => 'web-settings'],
-            ['name' => 'email-template'],            
+            ['name' => 'email-template'],
             ['name' => 'custom-school-email'],
             ['name' => 'database-backup'],
             ...self::permission('school-custom-field'),
-            
+
             ['name' => 'contact-inquiry-list']
 
-            
+
 
         ];
         $permissions = array_map(static function ($data) {
@@ -86,7 +89,8 @@ class InstallationSeeder extends Seeder {
     }
 
 
-    public function createSuperAdminRole() {
+    public function createSuperAdminRole()
+    {
         $role = Role::withoutGlobalScope('school')->updateOrCreate(['name' => 'Super Admin', 'custom_role' => 0, 'editable' => 0]);
         $superAdminHasAccessTo = [
             'schools-list',
@@ -151,7 +155,7 @@ class InstallationSeeder extends Seeder {
             'subscription-bill-payment',
             'web-settings',
             'custom-school-email',
-            
+
             'database-backup',
 
             'school-custom-field-list',
@@ -172,7 +176,8 @@ class InstallationSeeder extends Seeder {
      * @param array $customPermissions - Prefix will be set Automatically
      * @return string[]
      */
-    public static function permission($prefix, array $customPermissions = []) {
+    public static function permission($prefix, array $customPermissions = [])
+    {
 
         $list = [["name" => $prefix . '-list']];
         $create = [["name" => $prefix . '-create']];
@@ -187,30 +192,31 @@ class InstallationSeeder extends Seeder {
     }
 
     // System Features
-    public function systemFeatures() {
+    public function systemFeatures()
+    {
         $features = [
             ['name' => 'Student Management', 'is_default' => 1, 'status' => 1],
             ['name' => 'Academics Management', 'is_default' => 1, 'status' => 1],
-            ['name' => 'Slider Management', 'is_default' => 0, 'status' => 1],
+            ['name' => 'Slider Management', 'is_default' => 1, 'status' => 1],
             ['name' => 'Teacher Management', 'is_default' => 1, 'status' => 1],
             ['name' => 'Session Year Management', 'is_default' => 1, 'status' => 1],
-            ['name' => 'Holiday Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Timetable Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Attendance Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Exam Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Lesson Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Assignment Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Announcement Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Staff Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Expense Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Staff Leave Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Fees Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'School Gallery Management', 'is_default' => 0, 'status' => 1],
-            ['name' => 'ID Card - Certificate Generation', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Website Management', 'is_default' => 0, 'status' => 1, 'required_vps' => 0],
-            ['name' => 'Chat Module', 'is_default' => 0, 'status' => 1, 'required_vps' => 0],
-            ['name' => 'Transportation Module', 'is_default' => 0, 'status' => 1],
-            ['name' => 'Staff Attendance Management', 'is_default' => 0, 'status' => 1],
+            ['name' => 'Holiday Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Timetable Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Attendance Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Exam Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Lesson Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Assignment Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Announcement Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Staff Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Expense Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Staff Leave Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Fees Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'School Gallery Management', 'is_default' => 1, 'status' => 1],
+            ['name' => 'ID Card - Certificate Generation', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Website Management', 'is_default' => 1, 'status' => 1, 'required_vps' => 0],
+            ['name' => 'Chat Module', 'is_default' => 1, 'status' => 1, 'required_vps' => 0],
+            ['name' => 'Transportation Module', 'is_default' => 1, 'status' => 1],
+            ['name' => 'Staff Attendance Management', 'is_default' => 1, 'status' => 1],
         ];
 
         foreach ($features as $key => $feature) {

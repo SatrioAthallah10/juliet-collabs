@@ -169,6 +169,18 @@ class StudentApiController extends Controller
             // if (!$auth->hasRole('Student')) {
             //     ResponseService::errorResponse('Invalid Login Credentials', null, config('constants.RESPONSE_CODE.INVALID_LOGIN'));
             // }
+            // DEBUGGING LOGS START
+            \Illuminate\Support\Facades\Log::info('Login Debug:', [
+                'user_id' => $auth->id,
+                'school_id' => $auth->school_id,
+                'auth_school_exists' => $auth->school ? 'yes' : 'no',
+                'auth_school_status' => $auth->school ? $auth->school->status : null,
+                'auth_school_connection' => $auth->school ? $auth->school->getConnectionName() : 'N/A',
+                'default_connection' => \Illuminate\Support\Facades\DB::getDefaultConnection(),
+                'explicit_school_status_mysql' => \App\Models\School::on('mysql')->find($auth->school_id)->status ?? 'not found',
+                // 'explicit_school_status_tenant' => \App\Models\School::on('school')->find($auth->school_id)->status ?? 'not found', // careful not to break if table missing
+            ]);
+            // DEBUGGING LOGS END
             // Check school status is activated or not
             if ($auth->school->status == 0) {
                 ResponseService::errorResponse('Your account has been deactivated', null, config('constants.RESPONSE_CODE.INVALID_LOGIN'));

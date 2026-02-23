@@ -1,0 +1,449 @@
+[2026-02-19 10:44:47] local.INFO: ================================================================================  
+[2026-02-19 10:44:47] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-19 10:44:47] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-19 10:44:47] local.INFO: [LOGIN] Timestamp: 2026-02-19 10:44:47  
+[2026-02-19 10:44:47] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-19 10:44:47] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-19 10:44:47] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"satrioathallah38@gmail.com","school_code":"SCH00007","has_password":"YA"} 
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: satrioathallah38@gmail.com)  
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 3] School code: SCH00007  
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00007") — mencari sekolah di database utama...  
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":7,"school_name":"SMA TEST","database_name":"eschool_saas_7_sma-test","status":1} 
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_7_sma-test  
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_7_sma-test  
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "satrioathallah38@gmail.com") — mencari user di database sekolah...  
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":8,"email":"satrioathallah38@gmail.com","first_name":"School","last_name":"Admin"} 
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-19 10:44:47] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":8,"session_user_email":"satrioathallah38@gmail.com","session_school_database_name":"eschool_saas_7_sma-test"} 
+[2026-02-19 10:44:47] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-19 10:44:47] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-19 10:44:47] local.INFO: ================================================================================  
+[2026-02-19 11:35:48] local.INFO: ================================================================================  
+[2026-02-19 11:35:48] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-19 11:35:48] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-19 11:35:48] local.INFO: [LOGIN] Timestamp: 2026-02-19 11:35:48  
+[2026-02-19 11:35:48] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-19 11:35:48] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-19 11:35:48] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"superadmin@gmail.com","school_code":"NULL (login ke database utama)","has_password":"YA"} 
+[2026-02-19 11:35:48] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-19 11:35:48] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-19 11:35:48] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: superadmin@gmail.com)  
+[2026-02-19 11:35:48] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Utama (normal dengan password)  
+[2026-02-19 11:35:48] local.INFO: [LOGIN][STEP 3] Memanggil DB::setDefaultConnection("mysql") — pastikan koneksi ke database utama  
+[2026-02-19 11:35:48] local.INFO: [LOGIN][STEP 4] Memanggil Auth::guard("web")->attempt() — mencoba autentikasi dengan password...  
+[2026-02-19 11:35:49] local.INFO: [LOGIN][STEP 4] Autentikasi BERHASIL  
+[2026-02-19 11:35:49] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (NORMAL) {"user_id":1,"email":"superadmin@gmail.com"} 
+[2026-02-19 11:35:49] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-19 11:35:49] local.INFO: ================================================================================  
+[2026-02-19 13:10:11] local.INFO: ================================================================================  
+[2026-02-19 13:10:11] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-19 13:10:11] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-19 13:10:11] local.INFO: [LOGIN] Timestamp: 2026-02-19 13:10:11  
+[2026-02-19 13:10:11] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-19 13:10:11] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-19 13:10:11] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"qqq@email.com","school_code":"SCH00036","has_password":"YA"} 
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: qqq@email.com)  
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 3] School code: SCH00036  
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00036") — mencari sekolah di database utama...  
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":36,"school_name":"QQQQQQ","database_name":"eschool_saas_36_qqqqqq","status":1} 
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_36_qqqqqq  
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_36_qqqqqq  
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "qqq@email.com") — mencari user di database sekolah...  
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":37,"email":"qqq@email.com","first_name":"School","last_name":"Admin"} 
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-19 13:10:11] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":37,"session_user_email":"qqq@email.com","session_school_database_name":"eschool_saas_36_qqqqqq"} 
+[2026-02-19 13:10:11] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-19 13:10:11] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-19 13:10:11] local.INFO: ================================================================================  
+[2026-02-19 14:18:53] local.INFO: ================================================================================  
+[2026-02-19 14:18:53] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-19 14:18:53] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-19 14:18:53] local.INFO: [LOGIN] Timestamp: 2026-02-19 14:18:53  
+[2026-02-19 14:18:53] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-19 14:18:53] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-19 14:18:53] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"sss@gmail.com","school_code":"SCH00038","has_password":"YA"} 
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: sss@gmail.com)  
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 3] School code: SCH00038  
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00038") — mencari sekolah di database utama...  
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":38,"school_name":"SSSSSS","database_name":"eschool_saas_38_ssssss","status":1} 
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_38_ssssss  
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_38_ssssss  
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "sss@gmail.com") — mencari user di database sekolah...  
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":39,"email":"sss@gmail.com","first_name":"School","last_name":"Admin"} 
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-19 14:18:53] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":39,"session_user_email":"sss@gmail.com","session_school_database_name":"eschool_saas_38_ssssss"} 
+[2026-02-19 14:18:53] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-19 14:18:53] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-19 14:18:53] local.INFO: ================================================================================  
+[2026-02-19 15:24:02] local.INFO: ================================================================================  
+[2026-02-19 15:24:02] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-19 15:24:02] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-19 15:24:02] local.INFO: [LOGIN] Timestamp: 2026-02-19 15:24:02  
+[2026-02-19 15:24:02] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-19 15:24:02] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-19 15:24:02] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"sss@gmail.com","school_code":"SCH00038","has_password":"YA"} 
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: sss@gmail.com)  
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 3] School code: SCH00038  
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00038") — mencari sekolah di database utama...  
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":38,"school_name":"SSSSSS","database_name":"eschool_saas_38_ssssss","status":1} 
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_38_ssssss  
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_38_ssssss  
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "sss@gmail.com") — mencari user di database sekolah...  
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":39,"email":"sss@gmail.com","first_name":"School","last_name":"Admin"} 
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-19 15:24:02] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":39,"session_user_email":"sss@gmail.com","session_school_database_name":"eschool_saas_38_ssssss"} 
+[2026-02-19 15:24:02] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-19 15:24:02] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-19 15:24:02] local.INFO: ================================================================================  
+[2026-02-20 13:50:52] local.INFO: ================================================================================  
+[2026-02-20 13:50:52] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-20 13:50:52] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-20 13:50:52] local.INFO: [LOGIN] Timestamp: 2026-02-20 13:50:52  
+[2026-02-20 13:50:52] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-20 13:50:52] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-20 13:50:52] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"sss@gmail.com","school_code":"SCH00038","has_password":"YA"} 
+[2026-02-20 13:50:52] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-20 13:50:52] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-20 13:50:52] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: sss@gmail.com)  
+[2026-02-20 13:50:52] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-20 13:50:52] local.INFO: [LOGIN][STEP 3] School code: SCH00038  
+[2026-02-20 13:50:52] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00038") — mencari sekolah di database utama...  
+[2026-02-20 13:50:52] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":38,"school_name":"SSSSSS","database_name":"eschool_saas_38_ssssss","status":1} 
+[2026-02-20 13:50:52] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_38_ssssss  
+[2026-02-20 13:50:52] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_38_ssssss  
+[2026-02-20 13:50:52] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "sss@gmail.com") — mencari user di database sekolah...  
+[2026-02-20 13:50:54] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":39,"email":"sss@gmail.com","first_name":"School","last_name":"Admin"} 
+[2026-02-20 13:50:54] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-20 13:50:54] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":39,"session_user_email":"sss@gmail.com","session_school_database_name":"eschool_saas_38_ssssss"} 
+[2026-02-20 13:50:54] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-20 13:50:54] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-20 13:50:54] local.INFO: ================================================================================  
+[2026-02-21 04:49:09] local.INFO: ================================================================================  
+[2026-02-21 04:49:09] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 04:49:09] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 04:49:09] local.INFO: [LOGIN] Timestamp: 2026-02-21 04:49:09  
+[2026-02-21 04:49:09] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 04:49:09] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 04:49:09] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"09po@email.com","school_code":"SCH00039","has_password":"YA"} 
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: 09po@email.com)  
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 3] School code: SCH00039  
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00039") — mencari sekolah di database utama...  
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":39,"school_name":"09po","database_name":"eschool_saas_39_09po","status":1} 
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_39_09po  
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_39_09po  
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "09po@email.com") — mencari user di database sekolah...  
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":40,"email":"09po@email.com","first_name":"School","last_name":"Admin"} 
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-21 04:49:09] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":40,"session_user_email":"09po@email.com","session_school_database_name":"eschool_saas_39_09po"} 
+[2026-02-21 04:49:09] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-21 04:49:09] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-21 04:49:09] local.INFO: ================================================================================  
+[2026-02-21 10:17:51] local.INFO: ================================================================================  
+[2026-02-21 10:17:51] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 10:17:51] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 10:17:51] local.INFO: [LOGIN] Timestamp: 2026-02-21 10:17:51  
+[2026-02-21 10:17:51] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 10:17:51] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 10:17:51] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"platoon@email.com","school_code":"SCH00040","has_password":"YA"} 
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: platoon@email.com)  
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 3] School code: SCH00040  
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00040") — mencari sekolah di database utama...  
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":40,"school_name":"platoon","database_name":"eschool_saas_40_platoon","status":1} 
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_40_platoon  
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_40_platoon  
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "platoon@email.com") — mencari user di database sekolah...  
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":41,"email":"platoon@email.com","first_name":"School","last_name":"Admin"} 
+[2026-02-21 10:17:51] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-21 10:17:52] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":41,"session_user_email":"platoon@email.com","session_school_database_name":"eschool_saas_40_platoon"} 
+[2026-02-21 10:17:52] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-21 10:17:52] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-21 10:17:52] local.INFO: ================================================================================  
+[2026-02-21 10:24:08] local.INFO: ================================================================================  
+[2026-02-21 10:24:08] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 10:24:08] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 10:24:08] local.INFO: [LOGIN] Timestamp: 2026-02-21 10:24:08  
+[2026-02-21 10:24:08] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 10:24:08] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 10:24:08] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"teacher1@platoon.sch.id","school_code":"NULL (login ke database utama)","has_password":"YA"} 
+[2026-02-21 10:24:08] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 10:24:08] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 10:24:08] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: teacher1@platoon.sch.id)  
+[2026-02-21 10:24:08] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Utama (normal dengan password)  
+[2026-02-21 10:24:08] local.INFO: [LOGIN][STEP 3] Memanggil DB::setDefaultConnection("mysql") — pastikan koneksi ke database utama  
+[2026-02-21 10:24:08] local.INFO: [LOGIN][STEP 4] Memanggil Auth::guard("web")->attempt() — mencoba autentikasi dengan password...  
+[2026-02-21 10:24:08] local.WARNING: [LOGIN][STEP 4] Autentikasi GAGAL — credentials tidak cocok  
+[2026-02-21 10:24:08] local.WARNING: [LOGIN] ❌ LOGIN GAGAL {"login_field":"email","value_attempted":"teacher1@platoon.sch.id"} 
+[2026-02-21 10:24:08] local.INFO: ================================================================================  
+[2026-02-21 10:24:27] local.INFO: ================================================================================  
+[2026-02-21 10:24:27] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 10:24:27] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 10:24:28] local.INFO: [LOGIN] Timestamp: 2026-02-21 10:24:27  
+[2026-02-21 10:24:28] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 10:24:28] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 10:24:28] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"teacher1@platoon.sch.id","school_code":"SCH00040","has_password":"YA"} 
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: teacher1@platoon.sch.id)  
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 3] School code: SCH00040  
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00040") — mencari sekolah di database utama...  
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":40,"school_name":"platoon","database_name":"eschool_saas_40_platoon","status":1} 
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_40_platoon  
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_40_platoon  
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "teacher1@platoon.sch.id") — mencari user di database sekolah...  
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":42,"email":"teacher1@platoon.sch.id","first_name":"platoon","last_name":"teacher one"} 
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-21 10:24:28] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":42,"session_user_email":"teacher1@platoon.sch.id","session_school_database_name":"eschool_saas_40_platoon"} 
+[2026-02-21 10:24:28] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-21 10:24:28] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-21 10:24:28] local.INFO: ================================================================================  
+[2026-02-21 10:26:38] local.INFO: ================================================================================  
+[2026-02-21 10:26:38] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 10:26:38] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 10:26:38] local.INFO: [LOGIN] Timestamp: 2026-02-21 10:26:38  
+[2026-02-21 10:26:38] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 10:26:38] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 10:26:38] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"superadmin@gmail.com","school_code":"NULL (login ke database utama)","has_password":"YA"} 
+[2026-02-21 10:26:38] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 10:26:38] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 10:26:38] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: superadmin@gmail.com)  
+[2026-02-21 10:26:38] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Utama (normal dengan password)  
+[2026-02-21 10:26:38] local.INFO: [LOGIN][STEP 3] Memanggil DB::setDefaultConnection("mysql") — pastikan koneksi ke database utama  
+[2026-02-21 10:26:38] local.INFO: [LOGIN][STEP 4] Memanggil Auth::guard("web")->attempt() — mencoba autentikasi dengan password...  
+[2026-02-21 10:26:38] local.INFO: [LOGIN][STEP 4] Autentikasi BERHASIL  
+[2026-02-21 10:26:38] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (NORMAL) {"user_id":1,"email":"superadmin@gmail.com"} 
+[2026-02-21 10:26:38] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-21 10:26:38] local.INFO: ================================================================================  
+[2026-02-21 11:09:51] local.INFO: ================================================================================  
+[2026-02-21 11:09:51] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 11:09:51] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 11:09:51] local.INFO: [LOGIN] Timestamp: 2026-02-21 11:09:51  
+[2026-02-21 11:09:51] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 11:09:51] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 11:09:51] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"teacher1@platoon.sch.id","school_code":"SCH00040","has_password":"YA"} 
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: teacher1@platoon.sch.id)  
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 3] School code: SCH00040  
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00040") — mencari sekolah di database utama...  
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":40,"school_name":"platoon","database_name":"eschool_saas_40_platoon","status":1} 
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_40_platoon  
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_40_platoon  
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "teacher1@platoon.sch.id") — mencari user di database sekolah...  
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":42,"email":"teacher1@platoon.sch.id","first_name":"platoon","last_name":"teacher one"} 
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-21 11:09:51] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":42,"session_user_email":"teacher1@platoon.sch.id","session_school_database_name":"eschool_saas_40_platoon"} 
+[2026-02-21 11:09:51] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-21 11:09:51] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-21 11:09:51] local.INFO: ================================================================================  
+[2026-02-21 11:12:28] local.INFO: ================================================================================  
+[2026-02-21 11:12:28] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 11:12:28] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 11:12:28] local.INFO: [LOGIN] Timestamp: 2026-02-21 11:12:28  
+[2026-02-21 11:12:28] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 11:12:28] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 11:12:28] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"platoon@email.com","school_code":"SCH00040","has_password":"YA"} 
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: platoon@email.com)  
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 3] School code: SCH00040  
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00040") — mencari sekolah di database utama...  
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":40,"school_name":"platoon","database_name":"eschool_saas_40_platoon","status":1} 
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_40_platoon  
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_40_platoon  
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "platoon@email.com") — mencari user di database sekolah...  
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":41,"email":"platoon@email.com","first_name":"School","last_name":"Admin"} 
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-21 11:12:28] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":41,"session_user_email":"platoon@email.com","session_school_database_name":"eschool_saas_40_platoon"} 
+[2026-02-21 11:12:28] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-21 11:12:28] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-21 11:12:28] local.INFO: ================================================================================  
+[2026-02-21 14:45:51] local.INFO: ================================================================================  
+[2026-02-21 14:45:51] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 14:45:51] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 14:45:51] local.INFO: [LOGIN] Timestamp: 2026-02-21 14:45:51  
+[2026-02-21 14:45:51] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 14:45:51] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 14:45:51] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"superadmin@gmail.com","school_code":"NULL (login ke database utama)","has_password":"YA"} 
+[2026-02-21 14:45:51] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 14:45:51] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 14:45:51] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: superadmin@gmail.com)  
+[2026-02-21 14:45:51] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Utama (normal dengan password)  
+[2026-02-21 14:45:51] local.INFO: [LOGIN][STEP 3] Memanggil DB::setDefaultConnection("mysql") — pastikan koneksi ke database utama  
+[2026-02-21 14:45:51] local.INFO: [LOGIN][STEP 4] Memanggil Auth::guard("web")->attempt() — mencoba autentikasi dengan password...  
+[2026-02-21 14:45:51] local.INFO: [LOGIN][STEP 4] Autentikasi BERHASIL  
+[2026-02-21 14:45:51] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (NORMAL) {"user_id":1,"email":"superadmin@gmail.com"} 
+[2026-02-21 14:45:51] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-21 14:45:51] local.INFO: ================================================================================  
+[2026-02-21 15:27:50] local.INFO: ================================================================================  
+[2026-02-21 15:27:50] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 15:27:50] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 15:27:50] local.INFO: [LOGIN] Timestamp: 2026-02-21 15:27:50  
+[2026-02-21 15:27:50] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 15:27:50] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 15:27:50] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"superadmin@gmail.com","school_code":"NULL (login ke database utama)","has_password":"YA"} 
+[2026-02-21 15:27:50] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 15:27:50] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 15:27:50] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: superadmin@gmail.com)  
+[2026-02-21 15:27:50] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Utama (normal dengan password)  
+[2026-02-21 15:27:50] local.INFO: [LOGIN][STEP 3] Memanggil DB::setDefaultConnection("mysql") — pastikan koneksi ke database utama  
+[2026-02-21 15:27:51] local.INFO: [LOGIN][STEP 4] Memanggil Auth::guard("web")->attempt() — mencoba autentikasi dengan password...  
+[2026-02-21 15:27:51] local.INFO: [LOGIN][STEP 4] Autentikasi BERHASIL  
+[2026-02-21 15:27:51] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (NORMAL) {"user_id":1,"email":"superadmin@gmail.com"} 
+[2026-02-21 15:27:51] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-21 15:27:51] local.INFO: ================================================================================  
+[2026-02-21 15:32:18] local.INFO: ================================================================================  
+[2026-02-21 15:32:18] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 15:32:18] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 15:32:18] local.INFO: [LOGIN] Timestamp: 2026-02-21 15:32:18  
+[2026-02-21 15:32:18] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 15:32:18] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 15:32:18] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"platoon@email.com","school_code":"SCH00040","has_password":"YA"} 
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: platoon@email.com)  
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 3] School code: SCH00040  
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00040") — mencari sekolah di database utama...  
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":40,"school_name":"platoon","database_name":"eschool_saas_40_platoon","status":1} 
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_40_platoon  
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_40_platoon  
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "platoon@email.com") — mencari user di database sekolah...  
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":41,"email":"platoon@email.com","first_name":"School","last_name":"Admin"} 
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-21 15:32:18] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":41,"session_user_email":"platoon@email.com","session_school_database_name":"eschool_saas_40_platoon"} 
+[2026-02-21 15:32:18] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-21 15:32:18] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-21 15:32:18] local.INFO: ================================================================================  
+[2026-02-21 16:12:12] local.INFO: ================================================================================  
+[2026-02-21 16:12:12] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 16:12:12] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 16:12:12] local.INFO: [LOGIN] Timestamp: 2026-02-21 16:12:12  
+[2026-02-21 16:12:12] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 16:12:12] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 16:12:12] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"tatata@email.com","school_code":"SCH00041","has_password":"YA"} 
+[2026-02-21 16:12:12] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 16:12:12] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 16:12:12] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: tatata@email.com)  
+[2026-02-21 16:12:12] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-21 16:12:12] local.INFO: [LOGIN][STEP 3] School code: SCH00041  
+[2026-02-21 16:12:12] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00041") — mencari sekolah di database utama...  
+[2026-02-21 16:12:13] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":41,"school_name":"TATATA","database_name":"eschool_saas_41_tatata","status":1} 
+[2026-02-21 16:12:13] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_41_tatata  
+[2026-02-21 16:12:13] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_41_tatata  
+[2026-02-21 16:12:13] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "tatata@email.com") — mencari user di database sekolah...  
+[2026-02-21 16:12:13] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":42,"email":"tatata@email.com","first_name":"School","last_name":"Admin"} 
+[2026-02-21 16:12:13] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-21 16:12:13] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":42,"session_user_email":"tatata@email.com","session_school_database_name":"eschool_saas_41_tatata"} 
+[2026-02-21 16:12:13] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-21 16:12:13] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-21 16:12:13] local.INFO: ================================================================================  
+[2026-02-21 19:41:21] local.INFO: ================================================================================  
+[2026-02-21 19:41:21] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-21 19:41:21] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-21 19:41:21] local.INFO: [LOGIN] Timestamp: 2026-02-21 19:41:21  
+[2026-02-21 19:41:21] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-21 19:41:21] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-21 19:41:21] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"brbr@email.com","school_code":"SCH00042","has_password":"YA"} 
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: brbr@email.com)  
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 3] School code: SCH00042  
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00042") — mencari sekolah di database utama...  
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":42,"school_name":"BRUBRU","database_name":"eschool_saas_42_brubru","status":1} 
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_42_brubru  
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_42_brubru  
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "brbr@email.com") — mencari user di database sekolah...  
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":43,"email":"brbr@email.com","first_name":"School","last_name":"Admin"} 
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-21 19:41:21] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":43,"session_user_email":"brbr@email.com","session_school_database_name":"eschool_saas_42_brubru"} 
+[2026-02-21 19:41:21] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-21 19:41:21] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-21 19:41:21] local.INFO: ================================================================================  
+[2026-02-23 08:56:03] local.INFO: ================================================================================  
+[2026-02-23 08:56:03] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-23 08:56:03] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-23 08:56:03] local.INFO: [LOGIN] Timestamp: 2026-02-23 08:56:03  
+[2026-02-23 08:56:03] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-23 08:56:03] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-23 08:56:03] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"fitur@email.com","school_code":"SCH00044","has_password":"YA"} 
+[2026-02-23 08:56:03] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-23 08:56:03] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-23 08:56:03] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: fitur@email.com)  
+[2026-02-23 08:56:03] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-23 08:56:03] local.INFO: [LOGIN][STEP 3] School code: SCH00044  
+[2026-02-23 08:56:03] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00044") — mencari sekolah di database utama...  
+[2026-02-23 08:56:04] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":44,"school_name":"test fitur all unlocked","database_name":"eschool_saas_44_test-fitur-all-unlocked","status":1} 
+[2026-02-23 08:56:04] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_44_test-fitur-all-unlocked  
+[2026-02-23 08:56:04] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_44_test-fitur-all-unlocked  
+[2026-02-23 08:56:04] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "fitur@email.com") — mencari user di database sekolah...  
+[2026-02-23 08:56:04] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":45,"email":"fitur@email.com","first_name":"School","last_name":"Admin"} 
+[2026-02-23 08:56:04] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-23 08:56:04] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":45,"session_user_email":"fitur@email.com","session_school_database_name":"eschool_saas_44_test-fitur-all-unlocked"} 
+[2026-02-23 08:56:04] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-23 08:56:04] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-23 08:56:04] local.INFO: ================================================================================  
+[2026-02-23 09:59:34] local.INFO: ================================================================================  
+[2026-02-23 09:59:34] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-23 09:59:34] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-23 09:59:34] local.INFO: [LOGIN] Timestamp: 2026-02-23 09:59:34  
+[2026-02-23 09:59:34] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-23 09:59:34] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-23 09:59:34] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"fitur@email.com","school_code":"SCH00042","has_password":"YA"} 
+[2026-02-23 09:59:34] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-23 09:59:34] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-23 09:59:34] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: fitur@email.com)  
+[2026-02-23 09:59:34] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-23 09:59:34] local.INFO: [LOGIN][STEP 3] School code: SCH00042  
+[2026-02-23 09:59:34] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00042") — mencari sekolah di database utama...  
+[2026-02-23 09:59:34] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":42,"school_name":"BRUBRU","database_name":"eschool_saas_42_brubru","status":1} 
+[2026-02-23 09:59:34] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_42_brubru  
+[2026-02-23 09:59:34] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_42_brubru  
+[2026-02-23 09:59:34] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "fitur@email.com") — mencari user di database sekolah...  
+[2026-02-23 09:59:36] local.WARNING: [LOGIN][STEP 6] User TIDAK DITEMUKAN di database sekolah  
+[2026-02-23 09:59:36] local.INFO: [LOGIN] Mengembalikan koneksi ke database utama (mysql)  
+[2026-02-23 09:59:36] local.INFO: ================================================================================  
+[2026-02-23 10:00:03] local.INFO: ================================================================================  
+[2026-02-23 10:00:03] local.INFO: [LOGIN] PROSES DIMULAI  
+[2026-02-23 10:00:03] local.INFO: [LOGIN] Fungsi dipanggil: LoginController::login()  
+[2026-02-23 10:00:03] local.INFO: [LOGIN] Timestamp: 2026-02-23 10:00:03  
+[2026-02-23 10:00:03] local.INFO: [LOGIN] IP Address: 127.0.0.1  
+[2026-02-23 10:00:03] local.INFO: [LOGIN] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0  
+[2026-02-23 10:00:03] local.INFO: [LOGIN] Data Input: {"email_or_mobile":"fitur@email.com","school_code":"SCH00044","has_password":"YA"} 
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 1] Menjalankan validasi input...  
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 1] Validasi BERHASIL  
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 2] Memanggil username() — Login field terdeteksi: email (value: fitur@email.com)  
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 3] MODE: Login ke Database Sekolah (bypass password)  
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 3] School code: SCH00044  
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "SCH00044") — mencari sekolah di database utama...  
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 4] Sekolah DITEMUKAN: {"school_id":44,"school_name":"test fitur all unlocked","database_name":"eschool_saas_44_test-fitur-all-unlocked","status":1} 
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 5] Memanggil Config::set() dan DB::purge("school") — beralih ke database sekolah: eschool_saas_44_test-fitur-all-unlocked  
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 5] Database aktif sekarang: eschool_saas_44_test-fitur-all-unlocked  
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 6] Memanggil User::on("school")->where("email", "fitur@email.com") — mencari user di database sekolah...  
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 6] User DITEMUKAN: {"user_id":45,"email":"fitur@email.com","first_name":"School","last_name":"Admin"} 
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 7] Memanggil Auth::guard("web")->login($user) — bypass password login...  
+[2026-02-23 10:00:03] local.INFO: [LOGIN][STEP 7] Session TERCIPTA: {"session_user_id":45,"session_user_email":"fitur@email.com","session_school_database_name":"eschool_saas_44_test-fitur-all-unlocked"} 
+[2026-02-23 10:00:03] local.INFO: [LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)  
+[2026-02-23 10:00:03] local.INFO: [LOGIN] Redirect ke: /dashboard  
+[2026-02-23 10:00:03] local.INFO: ================================================================================  

@@ -45,16 +45,17 @@ class SubjectController extends Controller
 
         $sql = $this->subject->builder()->with('medium')
             ->where(function ($query) use ($search) {
-                $query->when($search, function ($q) use ($search) {
+            $query->when($search, function ($q) use ($search) {
                     $q->where('id', 'LIKE', "%$search%")
                         ->orwhere('name', 'LIKE', "%$search%")
                         ->orwhere('code', 'LIKE', "%$search%")
                         ->orwhere('type', 'LIKE', "%$search%")->Owner();
-                });
+                }
+                );
             })
             ->when(!empty($showDeleted), function ($q) {
-                $q->onlyTrashed()->Owner();
-            });
+            $q->onlyTrashed()->Owner();
+        });
         if (!empty($_GET['medium_id'])) {
             $sql = $sql->where('medium_id', $_GET['medium_id']);
         }
@@ -77,7 +78,8 @@ class SubjectController extends Controller
                 //Show Restore and Hard Delete Buttons
                 $operate = BootstrapTableService::restoreButton(route('subjects.restore', $row->id));
                 $operate .= BootstrapTableService::trashButton(route('subjects.trash', $row->id));
-            } else {
+            }
+            else {
                 //Show Edit and Soft Delete Buttons
                 $operate = BootstrapTableService::editButton(route('subjects.update', $row->id));
                 $operate .= BootstrapTableService::deleteButton(route('subjects.destroy', $row->id));
@@ -128,7 +130,8 @@ class SubjectController extends Controller
         try {
             $this->subject->create($request->all());
             ResponseService::successResponse('Data Stored Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -138,8 +141,8 @@ class SubjectController extends Controller
     {
         ResponseService::noPermissionThenSendJson('subject-edit');
         $supportedImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/svg'];
-        $fileMimeType = $request->file('image')->getMimeType();
-        if (!in_array($fileMimeType, $supportedImageTypes)) {
+        $fileMimeType = $request->file('image') ? $request->file('image')->getMimeType() : null;
+        if ($fileMimeType && !in_array($fileMimeType, $supportedImageTypes)) {
             ResponseService::errorResponse('The image must be a file of type: jpg, jpeg, png, svg.');
         }
         $validator = Validator::make($request->all(), [
@@ -164,7 +167,8 @@ class SubjectController extends Controller
         try {
             $this->subject->update($id, $request->all());
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -176,7 +180,8 @@ class SubjectController extends Controller
         try {
             $this->subject->deleteById($id);
             ResponseService::successResponse('Data Deleted Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -188,7 +193,8 @@ class SubjectController extends Controller
         try {
             $this->subject->findOnlyTrashedById($id)->restore();
             ResponseService::successResponse("Data Restored Successfully");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -200,7 +206,8 @@ class SubjectController extends Controller
         try {
             $this->subject->findOnlyTrashedById($id)->forceDelete();
             ResponseService::successResponse("Data Deleted Permanently");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, "Subject Controller -> Trash Method", 'cannot_delete_because_data_is_associated_with_other_data');
             ResponseService::errorResponse();
         }

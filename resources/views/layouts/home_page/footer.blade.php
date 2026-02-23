@@ -11,7 +11,7 @@
                     </div>
                     <div>
                         <span class="commonDesc">
-                            {{ $settings['short_description'] ?? '' }}
+                           Juliet - School Management System
                         </span>
                     </div>
                 </div>
