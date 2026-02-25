@@ -45,17 +45,17 @@ jobs:
 
     - name: 🔍 Network Diagnostic (Connection Test)
       run: |
-        echo "Testing connection to '${{ secrets.FTP_SERVER }}'..."
+        echo "Testing connection to '72.62.241.53'..."
         echo "Checking Port 22 (SFTP/SSH)..."
-        nc -zv -w 10 ${{ secrets.FTP_SERVER }} 22 || echo "PORT 22 IS BLOCKED/CLOSED"
+        nc -zv -w 10 72.62.241.53 22 || echo "PORT 22 IS BLOCKED/CLOSED"
         echo "=== End Diagnostic ==="
 
     - name: 🚀 SFTP-Deploy-Action (SFTP)
       uses: wlixcc/SFTP-Deploy-Action@v1.2.5
       with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
+        server: 72.62.241.53
+        username: deploy
+        password: jul!etB3j0Amiinnn
         port: 22
         local_path: './'
         remote_path: ${{ secrets.DEPLOY_PATH_PROD }}
@@ -125,17 +125,17 @@ jobs:
 
     - name: 🔍 Network Diagnostic (Connection Test)
       run: |
-        echo "Testing connection to '${{ secrets.FTP_SERVER }}'..."
+        echo "Testing connection to '72.62.241.53'..."
         echo "Checking Port 22 (SFTP/SSH)..."
-        nc -zv -w 10 ${{ secrets.FTP_SERVER }} 22 || echo "PORT 22 IS BLOCKED/CLOSED"
+        nc -zv -w 10 72.62.241.53 22 || echo "PORT 22 IS BLOCKED/CLOSED"
         echo "=== End Diagnostic ==="
 
     - name: 🚀 SFTP-Deploy-Action (SFTP)
       uses: wlixcc/SFTP-Deploy-Action@v1.2.5
       with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME_DEV }}
-        password: ${{ secrets.FTP_PASSWORD_DEV }}
+        server: 72.62.241.53
+        username: deploy
+        password: jul!etB3j0Amiinnn
         port: 22
         local_path: './'
         remote_path: ${{ secrets.DEPLOY_PATH_DEV }}
