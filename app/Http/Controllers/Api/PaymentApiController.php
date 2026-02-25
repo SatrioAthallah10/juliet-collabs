@@ -808,6 +808,25 @@ class PaymentApiController extends Controller
 
 
 
+    /**
+     * Lightweight endpoint for frontend polling.
+     * Returns payment_status for a given inquiry ID.
+     * Used by verify.blade.php to detect when webhook has updated payment.
+     */
+    public function checkPaymentStatus($id)
+    {
+        $inquiry = SchoolInquiry::find($id);
+
+        if (!$inquiry) {
+            return response()->json(['status' => 'not_found'], 404);
+        }
+
+        return response()->json([
+            'status' => $inquiry->payment_status,
+            'invoice_number' => $inquiry->invoice_number,
+        ]);
+    }
+
     public function success(Request $request)
     {
         Log::channel('payment')->info('[PAYMENT SUCCESS] Fungsi dipanggil: PaymentApiController::success()');

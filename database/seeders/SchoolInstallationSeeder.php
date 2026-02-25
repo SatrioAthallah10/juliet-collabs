@@ -17,13 +17,13 @@ class SchoolInstallationSeeder extends Seeder
 
     private SchoolDataService $schoolService;
 
-    public function __construct(SchoolDataService $schoolService) {
+    public function __construct(SchoolDataService $schoolService)
+    {
         $this->schoolService = $schoolService;
     }
 
     public function run(): void
     {
-        //
         $schools = School::on('mysql')->withTrashed()->get();
         foreach ($schools as $key => $school) {
             Config::set('database.connections.school.database', $school->database_name);
@@ -35,6 +35,6 @@ class SchoolInstallationSeeder extends Seeder
             $this->schoolService->createSchoolAdminRole($school);
             $this->schoolService->createTeacherRole($school);
         }
-        
+
     }
 }

@@ -1,0 +1,4196 @@
+﻿
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[242,1]
+,"time_ms":4.39} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[242,1]
+,"time_ms":4.39} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[243,1]
+,"time_ms":4.78} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[243,1]
+,"time_ms":4.78} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[244,1]
+,"time_ms":4.6} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[244,1]
+,"time_ms":4.6} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[245,1]
+,"time_ms":5.45} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[245,1]
+,"time_ms":5.45} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[246,1]
+,"time_ms":5.73} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[246,1]
+,"time_ms":5.73} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[247,1]
+,"time_ms":6.57} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[247,1]
+,"time_ms":6.57} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[248,1]
+,"time_ms":7.23} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[248,1]
+,"time_ms":7.23} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[249,1]
+,"time_ms":9.88} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[249,1]
+,"time_ms":9.88} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[250,1]
+,"time_ms":9.0} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[250,1]
+,"time_ms":9.0} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[251,1]
+,"time_ms":8.01} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[251,1]
+,"time_ms":8.01} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[252,1]
+,"time_ms":8.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[252,1]
+,"time_ms":8.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[253,1]
+,"time_ms":7.43} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[253,1]
+,"time_ms":7.43} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[254,1]
+,"time_ms":7.03} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[254,1]
+,"time_ms":7.03} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[255,1]
+,"time_ms":7.49} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[255,1]
+,"time_ms":7.49} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[256,1]
+,"time_ms":8.67} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[256,1]
+,"time_ms":8.67} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[257,1]
+,"time_ms":10.21} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[257,1]
+,"time_ms":10.21} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[258,1]
+,"time_ms":7.18} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[258,1]
+,"time_ms":7.18} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[259,1]
+,"time_ms":4.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[259,1]
+,"time_ms":4.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[260,1]
+,"time_ms":5.21} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[260,1]
+,"time_ms":5.21} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[261,1]
+,"time_ms":5.66} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[261,1]
+,"time_ms":5.66} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[262,1]
+,"time_ms":5.08} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[262,1]
+,"time_ms":5.08} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[263,1]
+,"time_ms":6.25} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[263,1]
+,"time_ms":6.25} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[264,1]
+,"time_ms":5.23} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[264,1]
+,"time_ms":5.23} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[265,1]
+,"time_ms":6.53} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[265,1]
+,"time_ms":6.53} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[266,1]
+,"time_ms":7.93} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[266,1]
+,"time_ms":7.93} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[267,1]
+,"time_ms":8.71} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[267,1]
+,"time_ms":8.71} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[268,1]
+,"time_ms":9.66} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[268,1]
+,"time_ms":9.66} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[269,1]
+,"time_ms":7.49} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[269,1]
+,"time_ms":7.49} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[270,1]
+,"time_ms":6.85} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[270,1]
+,"time_ms":6.85} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[271,1]
+,"time_ms":7.7} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[271,1]
+,"time_ms":7.7} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[272,1]
+,"time_ms":7.18} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[272,1]
+,"time_ms":7.18} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`permissions`.*, `role
+_has_permissions`.`rol
+e_id` as 
+`pivot_role_id`, `role
+_has_permissions`.`per
+mission_id` as 
+`pivot_permission_id` 
+from `permissions` 
+inner join `role_has_p
+ermissions` on 
+`permissions`.`id` = `
+role_has_permissions`.
+`permission_id` where 
+`role_has_permissions`
+.`role_id` in (1)","bi
+ndings":[],"time_ms":8
+.87} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`permissions`.*, `role
+_has_permissions`.`rol
+e_id` as 
+`pivot_role_id`, `role
+_has_permissions`.`per
+mission_id` as 
+`pivot_permission_id` 
+from `permissions` 
+inner join `role_has_p
+ermissions` on 
+`permissions`.`id` = `
+role_has_permissions`.
+`permission_id` where 
+`role_has_permissions`
+.`role_id` in (1)","bi
+ndings":[],"time_ms":8
+.87} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`users` where `id` = 
+? and 
+`users`.`deleted_at` 
+is null limit 1","bind
+ings":[3],"time_ms":1.
+08} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`users` where `id` = 
+? and 
+`users`.`deleted_at` 
+is null limit 1","bind
+ings":[3],"time_ms":1.
+08} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where `name` 
+= ? and `guard_name` 
+= ? limit 1","bindings
+":["School Admin","web
+"],"time_ms":1.26} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where `name` 
+= ? and `guard_name` 
+= ? limit 1","bindings
+":["School Admin","web
+"],"time_ms":1.26} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`model_has_roles` 
+where `model_has_roles
+`.`model_id` = ? and 
+`model_type` = ?","bin
+dings":[3,"App\\Models
+\\User"],"time_ms":0.5
+7} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`model_has_roles` 
+where `model_has_roles
+`.`model_id` = ? and 
+`model_type` = ?","bin
+dings":[3,"App\\Models
+\\User"],"time_ms":0.5
+7} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`roles`.*, `model_has_
+roles`.`model_id` as 
+`pivot_model_id`, `mod
+el_has_roles`.`role_id
+` as `pivot_role_id`, 
+`model_has_roles`.`mod
+el_type` as 
+`pivot_model_type` 
+from `roles` inner 
+join 
+`model_has_roles` on 
+`roles`.`id` = `model_
+has_roles`.`role_id` 
+where `model_has_roles
+`.`model_id` in (3) 
+and `model_has_roles`.
+`model_type` = ?","bin
+dings":["App\\Models\\
+User"],"time_ms":0.52}
+ 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`roles`.*, `model_has_
+roles`.`model_id` as 
+`pivot_model_id`, `mod
+el_has_roles`.`role_id
+` as `pivot_role_id`, 
+`model_has_roles`.`mod
+el_type` as 
+`pivot_model_type` 
+from `roles` inner 
+join 
+`model_has_roles` on 
+`roles`.`id` = `model_
+has_roles`.`role_id` 
+where `model_has_roles
+`.`model_id` in (3) 
+and `model_has_roles`.
+`model_type` = ?","bin
+dings":["App\\Models\\
+User"],"time_ms":0.52}
+ 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where (`name` 
+= ? and `school_id` = 
+? and `custom_role` = 
+? and `editable` = ?) 
+limit 1","bindings":["
+Guardian",2,0,0],"time
+_ms":0.93} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where (`name` 
+= ? and `school_id` = 
+? and `custom_role` = 
+? and `editable` = ?) 
+limit 1","bindings":["
+Guardian",2,0,0],"time
+_ms":0.93} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where (`name` 
+= ? and `school_id` = 
+? and `custom_role` = 
+? and `editable` = ?) 
+limit 1","bindings":["
+Student",2,0,0],"time_
+ms":0.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where (`name` 
+= ? and `school_id` = 
+? and `custom_role` = 
+? and `editable` = ?) 
+limit 1","bindings":["
+Student",2,0,0],"time_
+ms":0.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where (`name` 
+= ? and `school_id` = 
+? and `custom_role` = 
+? and `editable` = ?) 
+limit 1","bindings":["
+Teacher",2,0,1],"time_
+ms":0.4} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where (`name` 
+= ? and `school_id` = 
+? and `custom_role` = 
+? and `editable` = ?) 
+limit 1","bindings":["
+Teacher",2,0,1],"time_
+ms":0.4} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"delete from `r
+ole_has_permissions` 
+where `role_has_permis
+sions`.`role_id` = ?",
+"bindings":[4],"time_m
+s":3.43} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"delete from `r
+ole_has_permissions` 
+where `role_has_permis
+sions`.`role_id` = ?",
+"bindings":[4],"time_m
+s":3.43} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`permissions`","bindin
+gs":[],"time_ms":0.9} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`permissions`","bindin
+gs":[],"time_ms":0.9} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`roles`.*, `role_has_p
+ermissions`.`permissio
+n_id` as `pivot_permis
+sion_id`, `role_has_pe
+rmissions`.`role_id` 
+as `pivot_role_id` 
+from `roles` inner 
+join `role_has_permiss
+ions` on `roles`.`id` 
+= `role_has_permission
+s`.`role_id` where `ro
+le_has_permissions`.`p
+ermission_id` in (1, 
+2, 3, 4, 5, 6, 7, 8, 
+9, 10, 11, 12, 13, 
+14, 15, 16, 17, 18, 
+19, 20, 21, 22, 23, 
+24, 25, 26, 27, 28, 
+29, 30, 31, 32, 33, 
+34, 35, 36, 37, 38, 
+39, 40, 41, 42, 43, 
+44, 45, 46, 47, 48, 
+49, 50, 51, 52, 53, 
+54, 55, 56, 57, 58, 
+59, 60, 61, 62, 63, 
+64, 65, 66, 67, 68, 
+69, 70, 71, 72, 73, 
+74, 75, 76, 77, 78, 
+79, 80, 81, 82, 83, 
+84, 85, 86, 87, 88, 
+89, 90, 91, 92, 93, 
+94, 95, 96, 97, 98, 
+99, 100, 101, 102, 
+103, 104, 105, 106, 
+107, 108, 109, 110, 
+111, 112, 113, 114, 
+115, 116, 117, 118, 
+119, 120, 121, 122, 
+123, 124, 125, 126, 
+127, 128, 129, 130, 
+131, 132, 133, 134, 
+135, 136, 137, 138, 
+139, 140, 141, 142, 
+143, 144, 145, 146, 
+147, 148, 149, 150, 
+151, 152, 153, 154, 
+155, 156, 157, 158, 
+159, 160, 161, 162, 
+163, 164, 165, 166, 
+167, 168, 169, 170, 
+171, 172, 173, 174, 
+175, 176, 177, 178, 
+179, 180, 181, 182, 
+183, 184, 185, 186, 
+187, 188, 189, 190, 
+191, 192, 193, 194, 
+195, 196, 197, 198, 
+199, 200, 201, 202, 
+203, 204, 205, 206, 
+207, 208, 209, 210, 
+211, 212, 213, 214, 
+215, 216, 217, 218, 
+219, 220, 221, 222, 
+223, 224, 225, 226, 
+227, 228, 229, 230, 
+231, 232, 233, 234, 
+235, 236, 237, 238, 
+239, 240, 241, 242, 
+243, 244, 245, 246, 
+247, 248, 249, 250, 
+251, 252, 253, 254, 
+255, 256, 257, 258, 
+259, 260, 261, 262, 
+263, 264, 265, 266, 
+267, 268, 269, 270, 
+271, 272, 273, 274)","
+bindings":[],"time_ms"
+:6.14} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`roles`.*, `role_has_p
+ermissions`.`permissio
+n_id` as `pivot_permis
+sion_id`, `role_has_pe
+rmissions`.`role_id` 
+as `pivot_role_id` 
+from `roles` inner 
+join `role_has_permiss
+ions` on `roles`.`id` 
+= `role_has_permission
+s`.`role_id` where `ro
+le_has_permissions`.`p
+ermission_id` in (1, 
+2, 3, 4, 5, 6, 7, 8, 
+9, 10, 11, 12, 13, 
+14, 15, 16, 17, 18, 
+19, 20, 21, 22, 23, 
+24, 25, 26, 27, 28, 
+29, 30, 31, 32, 33, 
+34, 35, 36, 37, 38, 
+39, 40, 41, 42, 43, 
+44, 45, 46, 47, 48, 
+49, 50, 51, 52, 53, 
+54, 55, 56, 57, 58, 
+59, 60, 61, 62, 63, 
+64, 65, 66, 67, 68, 
+69, 70, 71, 72, 73, 
+74, 75, 76, 77, 78, 
+79, 80, 81, 82, 83, 
+84, 85, 86, 87, 88, 
+89, 90, 91, 92, 93, 
+94, 95, 96, 97, 98, 
+99, 100, 101, 102, 
+103, 104, 105, 106, 
+107, 108, 109, 110, 
+111, 112, 113, 114, 
+115, 116, 117, 118, 
+119, 120, 121, 122, 
+123, 124, 125, 126, 
+127, 128, 129, 130, 
+131, 132, 133, 134, 
+135, 136, 137, 138, 
+139, 140, 141, 142, 
+143, 144, 145, 146, 
+147, 148, 149, 150, 
+151, 152, 153, 154, 
+155, 156, 157, 158, 
+159, 160, 161, 162, 
+163, 164, 165, 166, 
+167, 168, 169, 170, 
+171, 172, 173, 174, 
+175, 176, 177, 178, 
+179, 180, 181, 182, 
+183, 184, 185, 186, 
+187, 188, 189, 190, 
+191, 192, 193, 194, 
+195, 196, 197, 198, 
+199, 200, 201, 202, 
+203, 204, 205, 206, 
+207, 208, 209, 210, 
+211, 212, 213, 214, 
+215, 216, 217, 218, 
+219, 220, 221, 222, 
+223, 224, 225, 226, 
+227, 228, 229, 230, 
+231, 232, 233, 234, 
+235, 236, 237, 238, 
+239, 240, 241, 242, 
+243, 244, 245, 246, 
+247, 248, 249, 250, 
+251, 252, 253, 254, 
+255, 256, 257, 258, 
+259, 260, 261, 262, 
+263, 264, 265, 266, 
+267, 268, 269, 270, 
+271, 272, 273, 274)","
+bindings":[],"time_ms"
+:6.14} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`role_has_permissions`
+ where `role_has_permi
+ssions`.`role_id` = ?"
+,"bindings":[4],"time_
+ms":4.06} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`role_has_permissions`
+ where `role_has_permi
+ssions`.`role_id` = ?"
+,"bindings":[4],"time_
+ms":4.06} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[37,4],
+"time_ms":9.65} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[37,4],
+"time_ms":9.65} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[41,4],
+"time_ms":7.83} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[41,4],
+"time_ms":7.83} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[49,4],
+"time_ms":9.31} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[49,4],
+"time_ms":9.31} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[53,4],
+"time_ms":9.12} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[53,4],
+"time_ms":9.12} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[54,4],
+"time_ms":4.11} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[54,4],
+"time_ms":4.11} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[55,4],
+"time_ms":5.67} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[55,4],
+"time_ms":5.67} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[56,4],
+"time_ms":5.4} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[56,4],
+"time_ms":5.4} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[106,4]
+,"time_ms":3.32} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[106,4]
+,"time_ms":3.32} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[105,4]
+,"time_ms":5.28} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[105,4]
+,"time_ms":5.28} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[107,4]
+,"time_ms":5.56} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[107,4]
+,"time_ms":5.56} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[108,4]
+,"time_ms":5.67} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[108,4]
+,"time_ms":5.67} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[109,4]
+,"time_ms":6.77} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[109,4]
+,"time_ms":6.77} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[69,4],
+"time_ms":8.36} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[69,4],
+"time_ms":8.36} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[70,4],
+"time_ms":7.41} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[70,4],
+"time_ms":7.41} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[71,4],
+"time_ms":4.66} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[71,4],
+"time_ms":4.66} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[72,4],
+"time_ms":6.4} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[72,4],
+"time_ms":6.4} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[73,4],
+"time_ms":14.47} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[73,4],
+"time_ms":14.47} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[74,4],
+"time_ms":8.18} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[74,4],
+"time_ms":8.18} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[75,4],
+"time_ms":6.68} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[75,4],
+"time_ms":6.68} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[76,4],
+"time_ms":6.46} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[76,4],
+"time_ms":6.46} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[17,4],
+"time_ms":4.69} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[17,4],
+"time_ms":4.69} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[139,4]
+,"time_ms":5.63} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[139,4]
+,"time_ms":5.63} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[138,4]
+,"time_ms":6.77} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[138,4]
+,"time_ms":6.77} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[140,4]
+,"time_ms":4.42} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[140,4]
+,"time_ms":4.42} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[141,4]
+,"time_ms":4.85} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[141,4]
+,"time_ms":4.85} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[143,4]
+,"time_ms":5.1} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[143,4]
+,"time_ms":5.1} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[142,4]
+,"time_ms":5.18} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[142,4]
+,"time_ms":5.18} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[144,4]
+,"time_ms":6.31} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[144,4]
+,"time_ms":6.31} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[145,4]
+,"time_ms":5.68} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[145,4]
+,"time_ms":5.68} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[146,4]
+,"time_ms":4.42} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[146,4]
+,"time_ms":4.42} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[183,4]
+,"time_ms":5.68} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[183,4]
+,"time_ms":5.68} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[184,4]
+,"time_ms":5.31} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[184,4]
+,"time_ms":5.31} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[185,4]
+,"time_ms":4.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[185,4]
+,"time_ms":4.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[186,4]
+,"time_ms":3.91} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[186,4]
+,"time_ms":3.91} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[45,4],
+"time_ms":4.24} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[45,4],
+"time_ms":4.24} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[237,4]
+,"time_ms":3.96} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[237,4]
+,"time_ms":3.96} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[238,4]
+,"time_ms":8.68} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[238,4]
+,"time_ms":8.68} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[239,4]
+,"time_ms":11.58} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[239,4]
+,"time_ms":11.58} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[240,4]
+,"time_ms":12.89} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[240,4]
+,"time_ms":12.89} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`permissions`.*, `role
+_has_permissions`.`rol
+e_id` as 
+`pivot_role_id`, `role
+_has_permissions`.`per
+mission_id` as 
+`pivot_permission_id` 
+from `permissions` 
+inner join `role_has_p
+ermissions` on 
+`permissions`.`id` = `
+role_has_permissions`.
+`permission_id` where 
+`role_has_permissions`
+.`role_id` in (4)","bi
+ndings":[],"time_ms":7
+.41} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`permissions`.*, `role
+_has_permissions`.`rol
+e_id` as 
+`pivot_role_id`, `role
+_has_permissions`.`per
+mission_id` as 
+`pivot_permission_id` 
+from `permissions` 
+inner join `role_has_p
+ermissions` on 
+`permissions`.`id` = `
+role_has_permissions`.
+`permission_id` where 
+`role_has_permissions`
+.`role_id` in (4)","bi
+ndings":[],"time_ms":7
+.41} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where (`name` 
+= ? and `school_id` = 
+? and `custom_role` = 
+? and `editable` = ?) 
+limit 1","bindings":["
+Driver",2,0,0],"time_m
+s":1.64} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where (`name` 
+= ? and `school_id` = 
+? and `custom_role` = 
+? and `editable` = ?) 
+limit 1","bindings":["
+Driver",2,0,0],"time_m
+s":1.64} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"delete from `r
+ole_has_permissions` 
+where `role_has_permis
+sions`.`role_id` = ?",
+"bindings":[5],"time_m
+s":8.5} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"delete from `r
+ole_has_permissions` 
+where `role_has_permis
+sions`.`role_id` = ?",
+"bindings":[5],"time_m
+s":8.5} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`permissions`","bindin
+gs":[],"time_ms":3.61}
+ 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`permissions`","bindin
+gs":[],"time_ms":3.61}
+ 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`roles`.*, `role_has_p
+ermissions`.`permissio
+n_id` as `pivot_permis
+sion_id`, `role_has_pe
+rmissions`.`role_id` 
+as `pivot_role_id` 
+from `roles` inner 
+join `role_has_permiss
+ions` on `roles`.`id` 
+= `role_has_permission
+s`.`role_id` where `ro
+le_has_permissions`.`p
+ermission_id` in (1, 
+2, 3, 4, 5, 6, 7, 8, 
+9, 10, 11, 12, 13, 
+14, 15, 16, 17, 18, 
+19, 20, 21, 22, 23, 
+24, 25, 26, 27, 28, 
+29, 30, 31, 32, 33, 
+34, 35, 36, 37, 38, 
+39, 40, 41, 42, 43, 
+44, 45, 46, 47, 48, 
+49, 50, 51, 52, 53, 
+54, 55, 56, 57, 58, 
+59, 60, 61, 62, 63, 
+64, 65, 66, 67, 68, 
+69, 70, 71, 72, 73, 
+74, 75, 76, 77, 78, 
+79, 80, 81, 82, 83, 
+84, 85, 86, 87, 88, 
+89, 90, 91, 92, 93, 
+94, 95, 96, 97, 98, 
+99, 100, 101, 102, 
+103, 104, 105, 106, 
+107, 108, 109, 110, 
+111, 112, 113, 114, 
+115, 116, 117, 118, 
+119, 120, 121, 122, 
+123, 124, 125, 126, 
+127, 128, 129, 130, 
+131, 132, 133, 134, 
+135, 136, 137, 138, 
+139, 140, 141, 142, 
+143, 144, 145, 146, 
+147, 148, 149, 150, 
+151, 152, 153, 154, 
+155, 156, 157, 158, 
+159, 160, 161, 162, 
+163, 164, 165, 166, 
+167, 168, 169, 170, 
+171, 172, 173, 174, 
+175, 176, 177, 178, 
+179, 180, 181, 182, 
+183, 184, 185, 186, 
+187, 188, 189, 190, 
+191, 192, 193, 194, 
+195, 196, 197, 198, 
+199, 200, 201, 202, 
+203, 204, 205, 206, 
+207, 208, 209, 210, 
+211, 212, 213, 214, 
+215, 216, 217, 218, 
+219, 220, 221, 222, 
+223, 224, 225, 226, 
+227, 228, 229, 230, 
+231, 232, 233, 234, 
+235, 236, 237, 238, 
+239, 240, 241, 242, 
+243, 244, 245, 246, 
+247, 248, 249, 250, 
+251, 252, 253, 254, 
+255, 256, 257, 258, 
+259, 260, 261, 262, 
+263, 264, 265, 266, 
+267, 268, 269, 270, 
+271, 272, 273, 274)","
+bindings":[],"time_ms"
+:5.15} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`roles`.*, `role_has_p
+ermissions`.`permissio
+n_id` as `pivot_permis
+sion_id`, `role_has_pe
+rmissions`.`role_id` 
+as `pivot_role_id` 
+from `roles` inner 
+join `role_has_permiss
+ions` on `roles`.`id` 
+= `role_has_permission
+s`.`role_id` where `ro
+le_has_permissions`.`p
+ermission_id` in (1, 
+2, 3, 4, 5, 6, 7, 8, 
+9, 10, 11, 12, 13, 
+14, 15, 16, 17, 18, 
+19, 20, 21, 22, 23, 
+24, 25, 26, 27, 28, 
+29, 30, 31, 32, 33, 
+34, 35, 36, 37, 38, 
+39, 40, 41, 42, 43, 
+44, 45, 46, 47, 48, 
+49, 50, 51, 52, 53, 
+54, 55, 56, 57, 58, 
+59, 60, 61, 62, 63, 
+64, 65, 66, 67, 68, 
+69, 70, 71, 72, 73, 
+74, 75, 76, 77, 78, 
+79, 80, 81, 82, 83, 
+84, 85, 86, 87, 88, 
+89, 90, 91, 92, 93, 
+94, 95, 96, 97, 98, 
+99, 100, 101, 102, 
+103, 104, 105, 106, 
+107, 108, 109, 110, 
+111, 112, 113, 114, 
+115, 116, 117, 118, 
+119, 120, 121, 122, 
+123, 124, 125, 126, 
+127, 128, 129, 130, 
+131, 132, 133, 134, 
+135, 136, 137, 138, 
+139, 140, 141, 142, 
+143, 144, 145, 146, 
+147, 148, 149, 150, 
+151, 152, 153, 154, 
+155, 156, 157, 158, 
+159, 160, 161, 162, 
+163, 164, 165, 166, 
+167, 168, 169, 170, 
+171, 172, 173, 174, 
+175, 176, 177, 178, 
+179, 180, 181, 182, 
+183, 184, 185, 186, 
+187, 188, 189, 190, 
+191, 192, 193, 194, 
+195, 196, 197, 198, 
+199, 200, 201, 202, 
+203, 204, 205, 206, 
+207, 208, 209, 210, 
+211, 212, 213, 214, 
+215, 216, 217, 218, 
+219, 220, 221, 222, 
+223, 224, 225, 226, 
+227, 228, 229, 230, 
+231, 232, 233, 234, 
+235, 236, 237, 238, 
+239, 240, 241, 242, 
+243, 244, 245, 246, 
+247, 248, 249, 250, 
+251, 252, 253, 254, 
+255, 256, 257, 258, 
+259, 260, 261, 262, 
+263, 264, 265, 266, 
+267, 268, 269, 270, 
+271, 272, 273, 274)","
+bindings":[],"time_ms"
+:5.15} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`role_has_permissions`
+ where `role_has_permi
+ssions`.`role_id` = ?"
+,"bindings":[5],"time_
+ms":2.48} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`role_has_permissions`
+ where `role_has_permi
+ssions`.`role_id` = ?"
+,"bindings":[5],"time_
+ms":2.48} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[183,5]
+,"time_ms":8.2} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[183,5]
+,"time_ms":8.2} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[184,5]
+,"time_ms":7.22} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[184,5]
+,"time_ms":7.22} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[185,5]
+,"time_ms":6.27} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[185,5]
+,"time_ms":6.27} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[186,5]
+,"time_ms":6.4} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[186,5]
+,"time_ms":6.4} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`permissions`.*, `role
+_has_permissions`.`rol
+e_id` as 
+`pivot_role_id`, `role
+_has_permissions`.`per
+mission_id` as 
+`pivot_permission_id` 
+from `permissions` 
+inner join `role_has_p
+ermissions` on 
+`permissions`.`id` = `
+role_has_permissions`.
+`permission_id` where 
+`role_has_permissions`
+.`role_id` in (5)","bi
+ndings":[],"time_ms":1
+.9} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`permissions`.*, `role
+_has_permissions`.`rol
+e_id` as 
+`pivot_role_id`, `role
+_has_permissions`.`per
+mission_id` as 
+`pivot_permission_id` 
+from `permissions` 
+inner join `role_has_p
+ermissions` on 
+`permissions`.`id` = `
+role_has_permissions`.
+`permission_id` where 
+`role_has_permissions`
+.`role_id` in (5)","bi
+ndings":[],"time_ms":1
+.9} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where (`name` 
+= ? and `school_id` = 
+? and `custom_role` = 
+? and `editable` = ?) 
+limit 1","bindings":["
+Helper",2,0,0],"time_m
+s":1.91} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`roles` where (`name` 
+= ? and `school_id` = 
+? and `custom_role` = 
+? and `editable` = ?) 
+limit 1","bindings":["
+Helper",2,0,0],"time_m
+s":1.91} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"delete from `r
+ole_has_permissions` 
+where `role_has_permis
+sions`.`role_id` = ?",
+"bindings":[6],"time_m
+s":6.29} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"delete from `r
+ole_has_permissions` 
+where `role_has_permis
+sions`.`role_id` = ?",
+"bindings":[6],"time_m
+s":6.29} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`permissions`","bindin
+gs":[],"time_ms":2.9} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`permissions`","bindin
+gs":[],"time_ms":2.9} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`roles`.*, `role_has_p
+ermissions`.`permissio
+n_id` as `pivot_permis
+sion_id`, `role_has_pe
+rmissions`.`role_id` 
+as `pivot_role_id` 
+from `roles` inner 
+join `role_has_permiss
+ions` on `roles`.`id` 
+= `role_has_permission
+s`.`role_id` where `ro
+le_has_permissions`.`p
+ermission_id` in (1, 
+2, 3, 4, 5, 6, 7, 8, 
+9, 10, 11, 12, 13, 
+14, 15, 16, 17, 18, 
+19, 20, 21, 22, 23, 
+24, 25, 26, 27, 28, 
+29, 30, 31, 32, 33, 
+34, 35, 36, 37, 38, 
+39, 40, 41, 42, 43, 
+44, 45, 46, 47, 48, 
+49, 50, 51, 52, 53, 
+54, 55, 56, 57, 58, 
+59, 60, 61, 62, 63, 
+64, 65, 66, 67, 68, 
+69, 70, 71, 72, 73, 
+74, 75, 76, 77, 78, 
+79, 80, 81, 82, 83, 
+84, 85, 86, 87, 88, 
+89, 90, 91, 92, 93, 
+94, 95, 96, 97, 98, 
+99, 100, 101, 102, 
+103, 104, 105, 106, 
+107, 108, 109, 110, 
+111, 112, 113, 114, 
+115, 116, 117, 118, 
+119, 120, 121, 122, 
+123, 124, 125, 126, 
+127, 128, 129, 130, 
+131, 132, 133, 134, 
+135, 136, 137, 138, 
+139, 140, 141, 142, 
+143, 144, 145, 146, 
+147, 148, 149, 150, 
+151, 152, 153, 154, 
+155, 156, 157, 158, 
+159, 160, 161, 162, 
+163, 164, 165, 166, 
+167, 168, 169, 170, 
+171, 172, 173, 174, 
+175, 176, 177, 178, 
+179, 180, 181, 182, 
+183, 184, 185, 186, 
+187, 188, 189, 190, 
+191, 192, 193, 194, 
+195, 196, 197, 198, 
+199, 200, 201, 202, 
+203, 204, 205, 206, 
+207, 208, 209, 210, 
+211, 212, 213, 214, 
+215, 216, 217, 218, 
+219, 220, 221, 222, 
+223, 224, 225, 226, 
+227, 228, 229, 230, 
+231, 232, 233, 234, 
+235, 236, 237, 238, 
+239, 240, 241, 242, 
+243, 244, 245, 246, 
+247, 248, 249, 250, 
+251, 252, 253, 254, 
+255, 256, 257, 258, 
+259, 260, 261, 262, 
+263, 264, 265, 266, 
+267, 268, 269, 270, 
+271, 272, 273, 274)","
+bindings":[],"time_ms"
+:3.2} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`roles`.*, `role_has_p
+ermissions`.`permissio
+n_id` as `pivot_permis
+sion_id`, `role_has_pe
+rmissions`.`role_id` 
+as `pivot_role_id` 
+from `roles` inner 
+join `role_has_permiss
+ions` on `roles`.`id` 
+= `role_has_permission
+s`.`role_id` where `ro
+le_has_permissions`.`p
+ermission_id` in (1, 
+2, 3, 4, 5, 6, 7, 8, 
+9, 10, 11, 12, 13, 
+14, 15, 16, 17, 18, 
+19, 20, 21, 22, 23, 
+24, 25, 26, 27, 28, 
+29, 30, 31, 32, 33, 
+34, 35, 36, 37, 38, 
+39, 40, 41, 42, 43, 
+44, 45, 46, 47, 48, 
+49, 50, 51, 52, 53, 
+54, 55, 56, 57, 58, 
+59, 60, 61, 62, 63, 
+64, 65, 66, 67, 68, 
+69, 70, 71, 72, 73, 
+74, 75, 76, 77, 78, 
+79, 80, 81, 82, 83, 
+84, 85, 86, 87, 88, 
+89, 90, 91, 92, 93, 
+94, 95, 96, 97, 98, 
+99, 100, 101, 102, 
+103, 104, 105, 106, 
+107, 108, 109, 110, 
+111, 112, 113, 114, 
+115, 116, 117, 118, 
+119, 120, 121, 122, 
+123, 124, 125, 126, 
+127, 128, 129, 130, 
+131, 132, 133, 134, 
+135, 136, 137, 138, 
+139, 140, 141, 142, 
+143, 144, 145, 146, 
+147, 148, 149, 150, 
+151, 152, 153, 154, 
+155, 156, 157, 158, 
+159, 160, 161, 162, 
+163, 164, 165, 166, 
+167, 168, 169, 170, 
+171, 172, 173, 174, 
+175, 176, 177, 178, 
+179, 180, 181, 182, 
+183, 184, 185, 186, 
+187, 188, 189, 190, 
+191, 192, 193, 194, 
+195, 196, 197, 198, 
+199, 200, 201, 202, 
+203, 204, 205, 206, 
+207, 208, 209, 210, 
+211, 212, 213, 214, 
+215, 216, 217, 218, 
+219, 220, 221, 222, 
+223, 224, 225, 226, 
+227, 228, 229, 230, 
+231, 232, 233, 234, 
+235, 236, 237, 238, 
+239, 240, 241, 242, 
+243, 244, 245, 246, 
+247, 248, 249, 250, 
+251, 252, 253, 254, 
+255, 256, 257, 258, 
+259, 260, 261, 262, 
+263, 264, 265, 266, 
+267, 268, 269, 270, 
+271, 272, 273, 274)","
+bindings":[],"time_ms"
+:3.2} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`role_has_permissions`
+ where `role_has_permi
+ssions`.`role_id` = ?"
+,"bindings":[6],"time_
+ms":0.68} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`role_has_permissions`
+ where `role_has_permi
+ssions`.`role_id` = ?"
+,"bindings":[6],"time_
+ms":0.68} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[183,6]
+,"time_ms":4.8} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[183,6]
+,"time_ms":4.8} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[184,6]
+,"time_ms":5.89} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[184,6]
+,"time_ms":5.89} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[185,6]
+,"time_ms":5.58} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[185,6]
+,"time_ms":5.58} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[186,6]
+,"time_ms":4.43} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `r
+ole_has_permissions` 
+(`permission_id`, 
+`role_id`) values (?, 
+?)","bindings":[186,6]
+,"time_ms":4.43} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`permissions`.*, `role
+_has_permissions`.`rol
+e_id` as 
+`pivot_role_id`, `role
+_has_permissions`.`per
+mission_id` as 
+`pivot_permission_id` 
+from `permissions` 
+inner join `role_has_p
+ermissions` on 
+`permissions`.`id` = `
+role_has_permissions`.
+`permission_id` where 
+`role_has_permissions`
+.`role_id` in (6)","bi
+ndings":[],"time_ms":2
+.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`permissions`.*, `role
+_has_permissions`.`rol
+e_id` as 
+`pivot_role_id`, `role
+_has_permissions`.`per
+mission_id` as 
+`pivot_permission_id` 
+from `permissions` 
+inner join `role_has_p
+ermissions` on 
+`permissions`.`id` = `
+role_has_permissions`.
+`permission_id` where 
+`role_has_permissions`
+.`role_id` in (6)","bi
+ndings":[],"time_ms":2
+.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`session_years` where 
+(`name` = ? and 
+`school_id` = ?) and `
+session_years`.`delete
+d_at` is null limit 1"
+,"bindings":["2026",2]
+,"time_ms":5.03} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`session_years` where 
+(`name` = ? and 
+`school_id` = ?) and `
+session_years`.`delete
+d_at` is null limit 1"
+,"bindings":["2026",2]
+,"time_ms":5.03} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into 
+`school_settings` 
+(`data`, `name`, 
+`school_id`, `type`) 
+values (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?) on 
+duplicate key update 
+`data` = 
+values(`data`), 
+`type` = values(`type`
+)","bindings":["pleydu
+gh","school_name",2,"s
+tring","pdl@email.com"
+,"school_email",2,"str
+ing","090909","school_
+phone",2,"number","pse
+","school_tagline",2,"
+string","pse","school_
+address",2,"string",1,
+"session_year",2,"numb
+er","","horizontal_log
+o",2,"file","","vertic
+al_logo",2,"file","09:
+00:00","timetable_star
+t_time",2,"time","18:0
+0:00","timetable_end_t
+ime",2,"time","01:00:0
+0","timetable_duration
+",2,"time","1","auto_r
+enewal_plan",2,"intege
+r","INR","currency_cod
+e",2,"string","₹","cur
+rency_symbol",2,"strin
+g","d-m-Y","date_forma
+t",2,"string","h:i A",
+"time_format",2,"strin
+g","","domain",2,"stri
+ng","&lt;p&gt;Dear {fu
+ll_name},&lt;/p&gt; 
+&lt;p&gt;Welcome to {s
+chool_name}!&lt;/p&gt;
+ &lt;p&gt;We are 
+excited to have you 
+join our team. Below 
+are your registration 
+details to access the 
+{school_name}:&lt;/p&g
+t; &lt;hr&gt; &lt;p&gt
+;&lt;strong&gt;Your 
+Registration Details:&
+lt;/strong&gt;&lt;/p&g
+t; &lt;ul&gt; &lt;li&g
+t;&lt;strong&gt;Regist
+ration 
+URL:&lt;/strong&gt; 
+{url}&lt;/li&gt; &lt;l
+i&gt;&lt;strong&gt;Cod
+e:&lt;/strong&gt; 
+{code}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;Em
+ail:&lt;/strong&gt; 
+{email}&lt;/li&gt; &lt
+;li&gt;&lt;strong&gt;P
+assword:&lt;/strong&gt
+; 
+{password}&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;hr&gt; &lt;p&gt;&l
+t;strong&gt;Steps to 
+Complete Your Registra
+tion:&lt;/strong&gt;&l
+t;/p&gt; &lt;ol&gt; 
+&lt;li&gt;Click on 
+the registration URL 
+provided 
+above.&lt;/li&gt; 
+&lt;li&gt;Enter your 
+email and 
+password.&lt;/li&gt; 
+&lt;li&gt;Follow the 
+on-screen 
+instructions to set 
+up your 
+profile.&lt;/li&gt; 
+&lt;/ol&gt; &lt;p&gt;&
+lt;strong&gt;Important
+:&lt;/strong&gt;&lt;/p
+&gt; &lt;ul&gt; 
+&lt;li&gt;For 
+security reasons, 
+please change your 
+password upon your 
+first 
+login.&lt;/li&gt; 
+&lt;li&gt;If you have 
+any questions or need 
+assistance during the 
+registration process, 
+please contact our 
+support team at 
+{support_email} or 
+call {support_contact}
+.&lt;/li&gt; 
+&lt;/ul&gt; &lt;p&gt;&
+lt;strong&gt;App 
+Download Links:&lt;/st
+rong&gt;&lt;/p&gt; 
+&lt;ul&gt; &lt;li&gt;&
+lt;strong&gt;Android:&
+lt;/strong&gt; {androi
+d_app}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;iO
+S:&lt;/strong&gt; 
+{ios_app}&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;p&gt;We look 
+forward to a 
+successful academic 
+year with you on our 
+team. Thank you for 
+your commitment to 
+excellence in 
+education.&lt;/p&gt; 
+&lt;p&gt;Best 
+regards,&lt;/p&gt; &lt
+;p&gt;{school_name}&lt
+;br&gt;{support_email}
+&lt;br&gt;{support_con
+tact}&lt;br&gt;{url}&l
+t;/p&gt;","email-templ
+ate-staff",2,"text","&
+lt;p&gt;Dear {parent_n
+ame},&lt;/p&gt; 
+&lt;p&gt;We are 
+delighted to welcome 
+{child_name} to {schoo
+l_name}!&lt;/p&gt; 
+&lt;p&gt;As part of 
+our registration 
+process, we have 
+created accounts for 
+both you and your 
+child in our 
+{school_name}. Below 
+are the registration 
+details you will need 
+to access the system, 
+along with links to 
+download our mobile 
+app for your convenien
+ce.&lt;/p&gt; 
+&lt;hr&gt; &lt;p&gt;&l
+t;strong&gt;Student 
+Credential Details:&lt
+;/strong&gt;&lt;/p&gt;
+ &lt;ul&gt; &lt;li&gt;
+&lt;strong&gt;Name:&lt
+;/strong&gt; {child_na
+me}&lt;/li&gt; &lt;li&
+gt;&lt;strong&gt;Admis
+sion No.: &lt;/strong&
+gt;{admission_no}&lt;/
+li&gt; &lt;li&gt;&lt;s
+trong&gt;Code:&lt;/str
+ong&gt; 
+{code}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;GR
+ No.:&lt;/strong&gt; 
+{grno}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;Pa
+ssword:&lt;/strong&gt;
+ {child_password}&lt;/
+li&gt; &lt;/ul&gt; 
+&lt;hr&gt; &lt;p&gt;&l
+t;strong&gt;Parent 
+Credential Details:&lt
+;/strong&gt;&lt;/p&gt;
+ &lt;ul&gt; &lt;li&gt;
+&lt;strong&gt;Name:&lt
+;/strong&gt; {parent_n
+ame}&lt;/li&gt; &lt;li
+&gt;&lt;strong&gt;Code
+:&lt;/strong&gt; 
+{code}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;Em
+ail:&lt;/strong&gt; 
+{email}&lt;/li&gt; &lt
+;li&gt;&lt;strong&gt;P
+assword:&lt;/strong&gt
+; 
+{password}&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;hr&gt; &lt;p&gt;&l
+t;strong&gt;App 
+Download Links:&lt;/st
+rong&gt;&lt;/p&gt; 
+&lt;ul&gt; &lt;li&gt;&
+lt;strong&gt;Android:&
+lt;/strong&gt; {androi
+d_app}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;iO
+S:&lt;/strong&gt; 
+{ios_app}&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;hr&gt; &lt;p&gt;&l
+t;strong&gt;Steps to 
+Complete the Registrat
+ion:&lt;/strong&gt;&lt
+;/p&gt; &lt;ol&gt; 
+&lt;li&gt;Download 
+the school management 
+app using the links 
+above for easier 
+access on your mobile 
+devices.&lt;/li&gt; 
+&lt;li&gt;Enter the 
+email and password 
+for either the 
+student or parent 
+account.&lt;/li&gt; 
+&lt;li&gt;Follow the 
+on-screen 
+instructions to 
+complete the profile 
+setup.&lt;/li&gt; 
+&lt;/ol&gt; &lt;p&gt;&
+lt;strong&gt;Important
+:&lt;/strong&gt;&lt;/p
+&gt; &lt;ul&gt; 
+&lt;li&gt;For 
+security reasons, 
+please ensure that 
+both the student and 
+parent passwords are 
+changed upon first 
+login.&lt;/li&gt; 
+&lt;li&gt;If you 
+encounter any issues 
+during the 
+registration process, 
+please do not 
+hesitate to contact 
+our support team at 
+{support_email} or 
+call {support_contact}
+.&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;p&gt;We look 
+forward to an 
+enriching educational 
+experience for 
+{child_name} at 
+{school_name}. Thank 
+you for entrusting us 
+with your 
+child&#039;s 
+education.&lt;/p&gt; 
+&lt;p&gt;Best 
+regards,&lt;/p&gt; &lt
+;p&gt;{school_name}&lt
+;br&gt;{support_email}
+&lt;/p&gt;","email-tem
+plate-parent",2,"text"
+,"&lt;p&gt;Dear {child
+_name},&lt;/p&gt; 
+&lt;p&gt;We regret to 
+inform you that your 
+application for 
+admission to 
+{school_name} has 
+been rejected. After 
+a thorough review, it 
+was found that your 
+application did not 
+meet certain criteria 
+required for 
+enrollment. Please 
+note that this 
+decision was made 
+based on valid 
+reasons, 
+Unfortunately, all 
+available seats for 
+the requested grade 
+have already been 
+filled.&lt;/p&gt; 
+&lt;p&gt;We encourage 
+you to reach out to 
+the admissions office 
+if you have any 
+questions or require 
+further clarification.
+&lt;/p&gt; 
+&lt;p&gt;Thank you 
+for your interest in 
+our school.&lt;/p&gt; 
+&lt;p&gt;Sincerely,&lt
+;br&gt;{school_name}&l
+t;/p&gt; 
+&lt;p&gt;Admissions Te
+am&lt;/p&gt;","email-t
+emplate-application-re
+ject",2,"text"],"time_
+ms":3.9} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into 
+`school_settings` 
+(`data`, `name`, 
+`school_id`, `type`) 
+values (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?) on 
+duplicate key update 
+`data` = 
+values(`data`), 
+`type` = values(`type`
+)","bindings":["pleydu
+gh","school_name",2,"s
+tring","pdl@email.com"
+,"school_email",2,"str
+ing","090909","school_
+phone",2,"number","pse
+","school_tagline",2,"
+string","pse","school_
+address",2,"string",1,
+"session_year",2,"numb
+er","","horizontal_log
+o",2,"file","","vertic
+al_logo",2,"file","09:
+00:00","timetable_star
+t_time",2,"time","18:0
+0:00","timetable_end_t
+ime",2,"time","01:00:0
+0","timetable_duration
+",2,"time","1","auto_r
+enewal_plan",2,"intege
+r","INR","currency_cod
+e",2,"string","₹","cur
+rency_symbol",2,"strin
+g","d-m-Y","date_forma
+t",2,"string","h:i A",
+"time_format",2,"strin
+g","","domain",2,"stri
+ng","&lt;p&gt;Dear {fu
+ll_name},&lt;/p&gt; 
+&lt;p&gt;Welcome to {s
+chool_name}!&lt;/p&gt;
+ &lt;p&gt;We are 
+excited to have you 
+join our team. Below 
+are your registration 
+details to access the 
+{school_name}:&lt;/p&g
+t; &lt;hr&gt; &lt;p&gt
+;&lt;strong&gt;Your 
+Registration Details:&
+lt;/strong&gt;&lt;/p&g
+t; &lt;ul&gt; &lt;li&g
+t;&lt;strong&gt;Regist
+ration 
+URL:&lt;/strong&gt; 
+{url}&lt;/li&gt; &lt;l
+i&gt;&lt;strong&gt;Cod
+e:&lt;/strong&gt; 
+{code}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;Em
+ail:&lt;/strong&gt; 
+{email}&lt;/li&gt; &lt
+;li&gt;&lt;strong&gt;P
+assword:&lt;/strong&gt
+; 
+{password}&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;hr&gt; &lt;p&gt;&l
+t;strong&gt;Steps to 
+Complete Your Registra
+tion:&lt;/strong&gt;&l
+t;/p&gt; &lt;ol&gt; 
+&lt;li&gt;Click on 
+the registration URL 
+provided 
+above.&lt;/li&gt; 
+&lt;li&gt;Enter your 
+email and 
+password.&lt;/li&gt; 
+&lt;li&gt;Follow the 
+on-screen 
+instructions to set 
+up your 
+profile.&lt;/li&gt; 
+&lt;/ol&gt; &lt;p&gt;&
+lt;strong&gt;Important
+:&lt;/strong&gt;&lt;/p
+&gt; &lt;ul&gt; 
+&lt;li&gt;For 
+security reasons, 
+please change your 
+password upon your 
+first 
+login.&lt;/li&gt; 
+&lt;li&gt;If you have 
+any questions or need 
+assistance during the 
+registration process, 
+please contact our 
+support team at 
+{support_email} or 
+call {support_contact}
+.&lt;/li&gt; 
+&lt;/ul&gt; &lt;p&gt;&
+lt;strong&gt;App 
+Download Links:&lt;/st
+rong&gt;&lt;/p&gt; 
+&lt;ul&gt; &lt;li&gt;&
+lt;strong&gt;Android:&
+lt;/strong&gt; {androi
+d_app}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;iO
+S:&lt;/strong&gt; 
+{ios_app}&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;p&gt;We look 
+forward to a 
+successful academic 
+year with you on our 
+team. Thank you for 
+your commitment to 
+excellence in 
+education.&lt;/p&gt; 
+&lt;p&gt;Best 
+regards,&lt;/p&gt; &lt
+;p&gt;{school_name}&lt
+;br&gt;{support_email}
+&lt;br&gt;{support_con
+tact}&lt;br&gt;{url}&l
+t;/p&gt;","email-templ
+ate-staff",2,"text","&
+lt;p&gt;Dear {parent_n
+ame},&lt;/p&gt; 
+&lt;p&gt;We are 
+delighted to welcome 
+{child_name} to {schoo
+l_name}!&lt;/p&gt; 
+&lt;p&gt;As part of 
+our registration 
+process, we have 
+created accounts for 
+both you and your 
+child in our 
+{school_name}. Below 
+are the registration 
+details you will need 
+to access the system, 
+along with links to 
+download our mobile 
+app for your convenien
+ce.&lt;/p&gt; 
+&lt;hr&gt; &lt;p&gt;&l
+t;strong&gt;Student 
+Credential Details:&lt
+;/strong&gt;&lt;/p&gt;
+ &lt;ul&gt; &lt;li&gt;
+&lt;strong&gt;Name:&lt
+;/strong&gt; {child_na
+me}&lt;/li&gt; &lt;li&
+gt;&lt;strong&gt;Admis
+sion No.: &lt;/strong&
+gt;{admission_no}&lt;/
+li&gt; &lt;li&gt;&lt;s
+trong&gt;Code:&lt;/str
+ong&gt; 
+{code}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;GR
+ No.:&lt;/strong&gt; 
+{grno}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;Pa
+ssword:&lt;/strong&gt;
+ {child_password}&lt;/
+li&gt; &lt;/ul&gt; 
+&lt;hr&gt; &lt;p&gt;&l
+t;strong&gt;Parent 
+Credential Details:&lt
+;/strong&gt;&lt;/p&gt;
+ &lt;ul&gt; &lt;li&gt;
+&lt;strong&gt;Name:&lt
+;/strong&gt; {parent_n
+ame}&lt;/li&gt; &lt;li
+&gt;&lt;strong&gt;Code
+:&lt;/strong&gt; 
+{code}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;Em
+ail:&lt;/strong&gt; 
+{email}&lt;/li&gt; &lt
+;li&gt;&lt;strong&gt;P
+assword:&lt;/strong&gt
+; 
+{password}&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;hr&gt; &lt;p&gt;&l
+t;strong&gt;App 
+Download Links:&lt;/st
+rong&gt;&lt;/p&gt; 
+&lt;ul&gt; &lt;li&gt;&
+lt;strong&gt;Android:&
+lt;/strong&gt; {androi
+d_app}&lt;/li&gt; &lt;
+li&gt;&lt;strong&gt;iO
+S:&lt;/strong&gt; 
+{ios_app}&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;hr&gt; &lt;p&gt;&l
+t;strong&gt;Steps to 
+Complete the Registrat
+ion:&lt;/strong&gt;&lt
+;/p&gt; &lt;ol&gt; 
+&lt;li&gt;Download 
+the school management 
+app using the links 
+above for easier 
+access on your mobile 
+devices.&lt;/li&gt; 
+&lt;li&gt;Enter the 
+email and password 
+for either the 
+student or parent 
+account.&lt;/li&gt; 
+&lt;li&gt;Follow the 
+on-screen 
+instructions to 
+complete the profile 
+setup.&lt;/li&gt; 
+&lt;/ol&gt; &lt;p&gt;&
+lt;strong&gt;Important
+:&lt;/strong&gt;&lt;/p
+&gt; &lt;ul&gt; 
+&lt;li&gt;For 
+security reasons, 
+please ensure that 
+both the student and 
+parent passwords are 
+changed upon first 
+login.&lt;/li&gt; 
+&lt;li&gt;If you 
+encounter any issues 
+during the 
+registration process, 
+please do not 
+hesitate to contact 
+our support team at 
+{support_email} or 
+call {support_contact}
+.&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;p&gt;We look 
+forward to an 
+enriching educational 
+experience for 
+{child_name} at 
+{school_name}. Thank 
+you for entrusting us 
+with your 
+child&#039;s 
+education.&lt;/p&gt; 
+&lt;p&gt;Best 
+regards,&lt;/p&gt; &lt
+;p&gt;{school_name}&lt
+;br&gt;{support_email}
+&lt;/p&gt;","email-tem
+plate-parent",2,"text"
+,"&lt;p&gt;Dear {child
+_name},&lt;/p&gt; 
+&lt;p&gt;We regret to 
+inform you that your 
+application for 
+admission to 
+{school_name} has 
+been rejected. After 
+a thorough review, it 
+was found that your 
+application did not 
+meet certain criteria 
+required for 
+enrollment. Please 
+note that this 
+decision was made 
+based on valid 
+reasons, 
+Unfortunately, all 
+available seats for 
+the requested grade 
+have already been 
+filled.&lt;/p&gt; 
+&lt;p&gt;We encourage 
+you to reach out to 
+the admissions office 
+if you have any 
+questions or require 
+further clarification.
+&lt;/p&gt; 
+&lt;p&gt;Thank you 
+for your interest in 
+our school.&lt;/p&gt; 
+&lt;p&gt;Sincerely,&lt
+;br&gt;{school_name}&l
+t;/p&gt; 
+&lt;p&gt;Admissions Te
+am&lt;/p&gt;","email-t
+emplate-application-re
+ject",2,"text"],"time_
+ms":3.9} 
+> [2026-02-24 
+11:22:03] local.INFO: 
+[SetupSchoolDatabase][
+SchoolID: 2] Creating 
+subscription 
+{"package_id":1} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`packages` where `id` 
+= ? and `packages`.`de
+leted_at` is null 
+limit 1","bindings":[1
+],"time_ms":1.03} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`packages` where `id` 
+= ? and `packages`.`de
+leted_at` is null 
+limit 1","bindings":[1
+],"time_ms":1.03} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`package_features` 
+where `package_feature
+s`.`package_id` in (1)
+","bindings":[],"time_
+ms":0.76} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`package_features` 
+where `package_feature
+s`.`package_id` in (1)
+","bindings":[],"time_
+ms":0.76} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into 
+`subscriptions` 
+(`package_id`, 
+`name`, 
+`student_charge`, 
+`staff_charge`, 
+`start_date`, 
+`end_date`, 
+`package_type`, 
+`no_of_students`, 
+`no_of_staffs`, 
+`billing_cycle`, 
+`school_id`, 
+`charges`, 
+`updated_at`, 
+`created_at`) values 
+(?, ?, ?, ?, ?, ?, ?, 
+?, ?, ?, ?, ?, ?, ?)",
+"bindings":[1,"Paket S
+ilver",0.0,0.0,"2026-0
+2-24","2026-03-25",0,9
+999,9999,30,2,500000.0
+,"2026-02-24 
+11:22:03","2026-02-24 
+11:22:03"],"time_ms":5
+.06} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into 
+`subscriptions` 
+(`package_id`, 
+`name`, 
+`student_charge`, 
+`staff_charge`, 
+`start_date`, 
+`end_date`, 
+`package_type`, 
+`no_of_students`, 
+`no_of_staffs`, 
+`billing_cycle`, 
+`school_id`, 
+`charges`, 
+`updated_at`, 
+`created_at`) values 
+(?, ?, ?, ?, ?, ?, ?, 
+?, ?, ?, ?, ?, ?, ?)",
+"bindings":[1,"Paket S
+ilver",0.0,0.0,"2026-0
+2-24","2026-03-25",0,9
+999,9999,30,2,500000.0
+,"2026-02-24 
+11:22:03","2026-02-24 
+11:22:03"],"time_ms":5
+.06} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`subscriptions` where 
+`id` = ? limit 1","bin
+dings":[2],"time_ms":1
+.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`subscriptions` where 
+`id` = ? limit 1","bin
+dings":[2],"time_ms":1
+.44} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `s
+ubscription_features` 
+(`created_at`, 
+`feature_id`, 
+`subscription_id`, 
+`updated_at`) values 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?) on 
+duplicate key update 
+`subscription_id` = va
+lues(`subscription_id`
+), `feature_id` = 
+values(`feature_id`), 
+`updated_at` = values(
+`updated_at`)","bindin
+gs":["2026-02-24 11:22
+:03",1,2,"2026-02-24 
+11:22:03","2026-02-24 
+11:22:03",2,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",3,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",4,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",5,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",6,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",7,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",8,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",9,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",10,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",11,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",12,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",13,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",14,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",15,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",16,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",17,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",18,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",19,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",20,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",21,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",22,2,"2026-0
+2-24 11:22:03"],"time_
+ms":6.87} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `s
+ubscription_features` 
+(`created_at`, 
+`feature_id`, 
+`subscription_id`, 
+`updated_at`) values 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?), (?, ?, 
+?, ?), (?, ?, ?, ?), 
+(?, ?, ?, ?) on 
+duplicate key update 
+`subscription_id` = va
+lues(`subscription_id`
+), `feature_id` = 
+values(`feature_id`), 
+`updated_at` = values(
+`updated_at`)","bindin
+gs":["2026-02-24 11:22
+:03",1,2,"2026-02-24 
+11:22:03","2026-02-24 
+11:22:03",2,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",3,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",4,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",5,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",6,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",7,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",8,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",9,2,"2026-02
+-24 
+11:22:03","2026-02-24 
+11:22:03",10,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",11,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",12,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",13,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",14,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",15,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",16,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",17,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",18,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",19,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",20,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",21,2,"2026-0
+2-24 
+11:22:03","2026-02-24 
+11:22:03",22,2,"2026-0
+2-24 11:22:03"],"time_
+ms":6.87} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`roles`.*, `model_has_
+roles`.`model_id` as 
+`pivot_model_id`, `mod
+el_has_roles`.`role_id
+` as `pivot_role_id`, 
+`model_has_roles`.`mod
+el_type` as 
+`pivot_model_type` 
+from `roles` inner 
+join 
+`model_has_roles` on 
+`roles`.`id` = `model_
+has_roles`.`role_id` 
+where `model_has_roles
+`.`model_id` in (3) 
+and `model_has_roles`.
+`model_type` = ?","bin
+dings":["App\\Models\\
+User"],"time_ms":0.74}
+ 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select 
+`roles`.*, `model_has_
+roles`.`model_id` as 
+`pivot_model_id`, `mod
+el_has_roles`.`role_id
+` as `pivot_role_id`, 
+`model_has_roles`.`mod
+el_type` as 
+`pivot_model_type` 
+from `roles` inner 
+join 
+`model_has_roles` on 
+`roles`.`id` = `model_
+has_roles`.`role_id` 
+where `model_has_roles
+`.`model_id` in (3) 
+and `model_has_roles`.
+`model_type` = ?","bin
+dings":["App\\Models\\
+User"],"time_ms":0.74}
+ 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`schools` where 
+`schools`.`id` = ? 
+limit 1","bindings":[2
+],"time_ms":0.75} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`schools` where 
+`schools`.`id` = ? 
+limit 1","bindings":[2
+],"time_ms":0.75} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `p
+ayment_transactions` 
+(`user_id`, `amount`, 
+`payment_gateway`, 
+`school_id`, 
+`payment_status`, 
+`updated_at`, 
+`created_at`) values 
+(?, ?, ?, ?, ?, ?, ?)"
+,"bindings":[3,500000.
+0,"Cash",2,"succeed","
+2026-02-24 
+11:22:03","2026-02-24 
+11:22:03"],"time_ms":4
+.14} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into `p
+ayment_transactions` 
+(`user_id`, `amount`, 
+`payment_gateway`, 
+`school_id`, 
+`payment_status`, 
+`updated_at`, 
+`created_at`) values 
+(?, ?, ?, ?, ?, ?, ?)"
+,"bindings":[3,500000.
+0,"Cash",2,"succeed","
+2026-02-24 
+11:22:03","2026-02-24 
+11:22:03"],"time_ms":4
+.14} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`payment_transactions`
+ where `id` = ? limit 
+1","bindings":[2],"tim
+e_ms":1.14} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`payment_transactions`
+ where `id` = ? limit 
+1","bindings":[2],"tim
+e_ms":1.14} 
+> [2026-02-24 
+11:22:03] 
+local.ERROR: 
+SetupSchoolDatabase 
+FAILED {"school_id":2,
+"error":"SQLSTATE[2300
+0]: Integrity 
+constraint violation: 
+1452 Cannot add or 
+update a child row: a 
+foreign key 
+constraint fails (`lar
+avel`.`subscription_bi
+lls`, CONSTRAINT `subs
+cription_bills_payment
+_transaction_id_foreig
+n` FOREIGN KEY (`payme
+nt_transaction_id`) 
+REFERENCES `payment_tr
+ansactions` (`id`) ON 
+DELETE CASCA 
+(Connection: mysql, 
+SQL: insert into 
+`subscription_bills` 
+(`amount`, 
+`created_at`, 
+`due_date`, `payment_t
+ransaction_id`, 
+`school_id`, 
+`subscription_id`, 
+`total_staff`, 
+`total_student`, 
+`updated_at`) values 
+(500000, 2026-02-24 
+11:22:03, 2026-02-24 
+11:22:03, 2, 2, 2, 
+9999, 9999, 
+2026-02-24 11:22:03) 
+on duplicate key 
+update `amount` = 
+values(`amount`), 
+`total_student` = valu
+es(`total_student`), 
+`total_staff` = values
+(`total_staff`), 
+`due_date` = 
+values(`due_date`), 
+`updated_at` = values(
+`updated_at`))","trace
+":"#0 C:\\Users\\satri
+\\Downloads\\eSchool-S
+aas-V1.8.2\\PHP_Code\\
+vendor\\laravel\\frame
+work\\src\\Illuminate\
+\Database\\Connection.
+php(783): Illuminate\\
+Database\\Connection->
+runQueryCallback('inse
+rt into `su...', 
+Array, 
+Object(Closure))
+  #1 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Database\\Connection.p
+hp(600): Illuminate\\D
+atabase\\Connection->r
+un('insert into 
+`su...', Array, 
+Object(Closure))
+  #2 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Database\\Query\\Build
+er.php(3687): Illumina
+te\\Database\\Connecti
+on->affectingStatement
+('insert into 
+`su...', Array)
+  #3 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Database\\Eloquent\\Bu
+ilder.php(1086): Illum
+inate\\Database\\Query
+\\Builder->upsert(Arra
+y, Array, Array)
+  #4 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Support\\Traits\\Forwa
+rdsCalls.php(23): Illu
+minate\\Database\\Eloq
+uent\\Builder->upsert(
+Array, Array, Array)
+  #5 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Database\\Eloquent\\Mo
+del.php(2335): Illumin
+ate\\Database\\Eloquen
+t\\Model->forwardCallT
+o(Object(Illuminate\\D
+atabase\\Eloquent\\Bui
+lder), 'upsert', 
+Array)
+  #6 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Database\\Eloquent\\Mo
+del.php(2347): Illumin
+ate\\Database\\Eloquen
+t\\Model->__call('upse
+rt', Array)
+  #7 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\a
+pp\\Services\\Subscrip
+tionService.php(167): 
+Illuminate\\Database\\
+Eloquent\\Model::__cal
+lStatic('upsert', 
+Array)
+  #8 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\a
+pp\\Jobs\\SetupSchoolD
+atabase.php(115): App\
+\Services\\Subscriptio
+nService->createSubscr
+iption(1, 2, NULL, 1)
+  #9 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Container\\BoundMethod
+.php(36): App\\Jobs\\S
+etupSchoolDatabase->ha
+ndle(Object(App\\Servi
+ces\\SchoolDataService
+), Object(App\\Service
+s\\SubscriptionService
+), Object(App\\Service
+s\\CachingService), Ob
+ject(App\\Repositories
+\\SystemSetting\\Syste
+mSettingRepository))
+  #10 C:\\Users\\satri
+\\Downloads\\eSchool-S
+aas-V1.8.2\\PHP_Code\\
+vendor\\laravel\\frame
+work\\src\\Illuminate\
+\Container\\Util.php(4
+1): Illuminate\\Contai
+ner\\BoundMethod::Illu
+minate\\Container\\{cl
+osure}()
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `id` = ? 
+limit 1 for update","b
+indings":[2],"time_ms"
+:0.57} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `id` = ? 
+limit 1 for update","b
+indings":[2],"time_ms"
+:0.57} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"delete from 
+`jobs` where `id` = ?"
+,"bindings":[2],"time_
+ms":0.42} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"delete from 
+`jobs` where `id` = ?"
+,"bindings":[2],"time_
+ms":0.42} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into 
+`jobs` (`queue`, 
+`attempts`, 
+`reserved_at`, 
+`available_at`, 
+`created_at`, 
+`payload`) values (?, 
+?, ?, ?, ?, ?)","bindi
+ngs":["default",2,null
+,1771907043,1771906923
+,"{\"uuid\":\"f99fea80
+-aa16-49fc-89c8-b975fc
+0b9e20\",\"displayName
+\":\"App\\\\Jobs\\\\Se
+tupSchoolDatabase\",\"
+job\":\"Illuminate\\\\
+Queue\\\\CallQueuedHan
+dler@call\",\"maxTries
+\":3,\"maxExceptions\"
+:null,\"failOnTimeout\
+":false,\"backoff\":\"
+120\",\"timeout\":600,
+\"retryUntil\":null,\"
+data\":{\"commandName\
+":\"App\\\\Jobs\\\\Set
+upSchoolDatabase\",\"c
+ommand\":\"O:28:\\\"Ap
+p\\\\Jobs\\\\SetupScho
+olDatabase\\\":3:{s:38
+:\\\"\\u0000App\\\\Job
+s\\\\SetupSchoolDataba
+se\\u0000schoolId\\\";
+i:2;s:39:\\\"\\u0000Ap
+p\\\\Jobs\\\\SetupScho
+olDatabase\\u0000packa
+geId\\\";i:1;s:46:\\\"
+\\u0000App\\\\Jobs\\\\
+SetupSchoolDatabase\\u
+0000schoolCodePrefix\\
+\";s:8:\\\"SCH00002\\\
+";}\"}}"],"time_ms":0.
+32} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"insert into 
+`jobs` (`queue`, 
+`attempts`, 
+`reserved_at`, 
+`available_at`, 
+`created_at`, 
+`payload`) values (?, 
+?, ?, ?, ?, ?)","bindi
+ngs":["default",2,null
+,1771907043,1771906923
+,"{\"uuid\":\"f99fea80
+-aa16-49fc-89c8-b975fc
+0b9e20\",\"displayName
+\":\"App\\\\Jobs\\\\Se
+tupSchoolDatabase\",\"
+job\":\"Illuminate\\\\
+Queue\\\\CallQueuedHan
+dler@call\",\"maxTries
+\":3,\"maxExceptions\"
+:null,\"failOnTimeout\
+":false,\"backoff\":\"
+120\",\"timeout\":600,
+\"retryUntil\":null,\"
+data\":{\"commandName\
+":\"App\\\\Jobs\\\\Set
+upSchoolDatabase\",\"c
+ommand\":\"O:28:\\\"Ap
+p\\\\Jobs\\\\SetupScho
+olDatabase\\\":3:{s:38
+:\\\"\\u0000App\\\\Job
+s\\\\SetupSchoolDataba
+se\\u0000schoolId\\\";
+i:2;s:39:\\\"\\u0000Ap
+p\\\\Jobs\\\\SetupScho
+olDatabase\\u0000packa
+geId\\\";i:1;s:46:\\\"
+\\u0000App\\\\Jobs\\\\
+SetupSchoolDatabase\\u
+0000schoolCodePrefix\\
+\";s:8:\\\"SCH00002\\\
+";}\"}}"],"time_ms":0.
+32} 
+> [2026-02-24 
+11:22:03] 
+local.ERROR: 
+SQLSTATE[23000]: 
+Integrity constraint 
+violation: 1452 
+Cannot add or update 
+a child row: a 
+foreign key 
+constraint fails (`lar
+avel`.`subscription_bi
+lls`, CONSTRAINT `subs
+cription_bills_payment
+_transaction_id_foreig
+n` FOREIGN KEY (`payme
+nt_transaction_id`) 
+REFERENCES `payment_tr
+ansactions` (`id`) ON 
+DELETE CASCA 
+(Connection: mysql, 
+SQL: insert into 
+`subscription_bills` 
+(`amount`, 
+`created_at`, 
+`due_date`, `payment_t
+ransaction_id`, 
+`school_id`, 
+`subscription_id`, 
+`total_staff`, 
+`total_student`, 
+`updated_at`) values 
+(500000, 2026-02-24 
+11:22:03, 2026-02-24 
+11:22:03, 2, 2, 2, 
+9999, 9999, 
+2026-02-24 11:22:03) 
+on duplicate key 
+update `amount` = 
+values(`amount`), 
+`total_student` = valu
+es(`total_student`), 
+`total_staff` = values
+(`total_staff`), 
+`due_date` = 
+values(`due_date`), 
+`updated_at` = 
+values(`updated_at`)) 
+{"userId":3,"exception
+":"[object] (Illuminat
+e\\Database\\QueryExce
+ption(code: 23000): 
+SQLSTATE[23000]: 
+Integrity constraint 
+violation: 1452 
+Cannot add or update 
+a child row: a 
+foreign key 
+constraint fails (`lar
+avel`.`subscription_bi
+lls`, CONSTRAINT `subs
+cription_bills_payment
+_transaction_id_foreig
+n` FOREIGN KEY (`payme
+nt_transaction_id`) 
+REFERENCES `payment_tr
+ansactions` (`id`) ON 
+DELETE CASCA 
+(Connection: mysql, 
+SQL: insert into 
+`subscription_bills` 
+(`amount`, 
+`created_at`, 
+`due_date`, `payment_t
+ransaction_id`, 
+`school_id`, 
+`subscription_id`, 
+`total_staff`, 
+`total_student`, 
+`updated_at`) values 
+(500000, 2026-02-24 
+11:22:03, 2026-02-24 
+11:22:03, 2, 2, 2, 
+9999, 9999, 
+2026-02-24 11:22:03) 
+on duplicate key 
+update `amount` = 
+values(`amount`), 
+`total_student` = valu
+es(`total_student`), 
+`total_staff` = values
+(`total_staff`), 
+`due_date` = 
+values(`due_date`), 
+`updated_at` = 
+values(`updated_at`)) 
+at C:\\Users\\satri\\D
+ownloads\\eSchool-Saas
+-V1.8.2\\PHP_Code\\ven
+dor\\laravel\\framewor
+k\\src\\Illuminate\\Da
+tabase\\Connection.php
+:829)
+  [stacktrace]
+  #0 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Database\\Connection.p
+hp(783): Illuminate\\D
+atabase\\Connection->r
+unQueryCallback('inser
+t into `su...', 
+Array, 
+Object(Closure))
+  #1 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Database\\Connection.p
+hp(600): Illuminate\\D
+atabase\\Connection->r
+un('insert into 
+`su...', Array, 
+Object(Closure))
+  #2 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Database\\Query\\Build
+er.php(3687): Illumina
+te\\Database\\Connecti
+on->affectingStatement
+('insert into 
+`su...', Array)
+  #3 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Database\\Eloquent\\Bu
+ilder.php(1086): Illum
+inate\\Database\\Query
+\\Builder->upsert(Arra
+y, Array, Array)
+  #4 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Support\\Traits\\Forwa
+rdsCalls.php(23): Illu
+minate\\Database\\Eloq
+uent\\Builder->upsert(
+Array, Array, Array)
+  #5 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Database\\Eloquent\\Mo
+del.php(2335): Illumin
+ate\\Database\\Eloquen
+t\\Model->forwardCallT
+o(Object(Illuminate\\D
+atabase\\Eloquent\\Bui
+lder), 'upsert', 
+Array)
+  #6 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\v
+endor\\laravel\\framew
+ork\\src\\Illuminate\\
+Database\\Eloquent\\Mo
+del.php(2347): Illumin
+ate\\Database\\Eloquen
+t\\Model->__call('upse
+rt', Array)
+  #7 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\a
+pp\\Services\\Subscrip
+tionService.php(167): 
+Illuminate\\Database\\
+Eloquent\\Model::__cal
+lStatic('upsert', 
+Array)
+  #8 C:\\Users\\satri\
+\Downloads\\eSchool-Sa
+as-V1.8.2\\PHP_Code\\a
+pp\\Jobs\\SetupSchoolD
+atabase.php(115): App\
+\Services\\Subscriptio
+nService->createSubscr
+iption(1, 2, NULL, 1)
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190692
+3,1771906833],"time_ms
+":0.69} 
+> [2026-02-24 
+11:22:03] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190692
+3,1771906833],"time_ms
+":0.69} 
+  [2026-02-24 
+11:22:06] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190692
+6,1771906836],"time_ms
+":0.5} 
+  [2026-02-24 
+11:22:06] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190692
+6,1771906836],"time_ms
+":0.5} 
+  [2026-02-24 
+11:22:09] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190692
+9,1771906839],"time_ms
+":3.49} 
+  [2026-02-24 
+11:22:09] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190692
+9,1771906839],"time_ms
+":3.49} 
+  [2026-02-24 
+11:22:12] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190693
+2,1771906842],"time_ms
+":1.69} 
+  [2026-02-24 
+11:22:12] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190693
+2,1771906842],"time_ms
+":1.69} 
+  [2026-02-24 
+11:22:15] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190693
+5,1771906845],"time_ms
+":3.43} 
+  [2026-02-24 
+11:22:15] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190693
+5,1771906845],"time_ms
+":3.43} 
+  [2026-02-24 
+11:22:18] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190693
+8,1771906848],"time_ms
+":2.87} 
+  [2026-02-24 
+11:22:18] 
+local.DEBUG: [SQL] 
+{"sql":"select * from 
+`jobs` where `queue` 
+= ? and 
+((`reserved_at` is 
+null and 
+`available_at` <= ?) 
+or (`reserved_at` <= 
+?)) order by `id` asc 
+limit 1 FOR UPDATE 
+SKIP LOCKED","bindings
+":["default",177190693
+8,1771906848],"time_ms
+":2.87} 
+
+

@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-class Status {
+class Status
+{
     /**
      * Handle an incoming request.
      *
@@ -19,7 +20,8 @@ class Status {
      * @param Closure(Request): (Response|RedirectResponse) $next
      * @return Response|RedirectResponse
      */
-    public function handle(Request $request, Closure $next) {
+    public function handle(Request $request, Closure $next)
+    {
 
         $school_database_name = Session::get('school_database_name');
         if ($school_database_name) {
@@ -34,10 +36,10 @@ class Status {
                 $request->session()->regenerate();
                 return redirect()->route('login')->withErrors(trans('your_account_has_been_deactivated_please_contact_admin'));
             }
-            
+
         }
 
-        
+
 
         return $next($request);
     }

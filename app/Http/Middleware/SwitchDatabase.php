@@ -31,8 +31,9 @@ class SwitchDatabase
             if (Auth::user()) {
                 return $next($request);
             }
-            return redirect()->back()->with('error','Invalid credential.');
-        } else {
+            return redirect()->back()->with('error', 'Invalid credential.');
+        }
+        else {
             DB::purge('school');
             DB::connection('mysql')->reconnect();
             DB::setDefaultConnection('mysql');

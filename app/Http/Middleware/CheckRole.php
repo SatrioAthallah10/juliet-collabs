@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-class CheckRole {
+class CheckRole
+{
     /**
      * Handle an incoming request.
      *
@@ -19,7 +20,8 @@ class CheckRole {
      * @param Closure(Request): (Response|RedirectResponse) $next
      * @return Response|RedirectResponse
      */
-    public function handle(Request $request, Closure $next) {
+    public function handle(Request $request, Closure $next)
+    {
         $school_database_name = Session::get('school_database_name');
         if ($school_database_name) {
             DB::setDefaultConnection('school');
@@ -27,14 +29,14 @@ class CheckRole {
             DB::purge('school');
             DB::connection('school')->reconnect();
             DB::setDefaultConnection('school');
-        } else {
+        }
+        else {
             DB::purge('school');
             DB::connection('mysql')->reconnect();
             DB::setDefaultConnection('mysql');
         }
 
         if (Auth::user()) {
-
             return $next($request);
         }
         return response()->view('auth.login');

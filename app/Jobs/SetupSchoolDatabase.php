@@ -357,7 +357,7 @@ final class SetupSchoolDatabase implements ShouldQueue
             '{school_admin_name}' => $user->full_name ?? '',
             '{code}' => $schoolCode ?? '',
             '{email}' => $user->email ?? '',
-            '{password}' => $user->mobile ?? '', // Assuming mobile is used as initial password?
+            '{password}' => '(Password yang Anda buat saat pendaftaran)',
             '{school_name}' => $school->name ?? '',
             '{super_admin_name}' => $settings['super_admin_name'] ?? 'Super Admin',
             '{support_email}' => $settings['mail_username'] ?? '',

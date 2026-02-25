@@ -121,6 +121,7 @@ Route::get('set-language/{lang}', [LanguageController::class , 'set_language']);
 
 Route::get('payment/verify/{id}', [\App\Http\Controllers\Api\PaymentApiController::class , 'verify'])->name('payment.verify');
 Route::post('payment/process', [\App\Http\Controllers\Api\PaymentApiController::class , 'process'])->name('payment.process');
+Route::get('payment/check-status/{id}', [\App\Http\Controllers\Api\PaymentApiController::class , 'checkPaymentStatus'])->name('payment.check-status');
 
 Route::post('password/reset', [ResetPasswordController::class , 'reset'])->name('password.update');
 
@@ -1304,3 +1305,13 @@ Route::match (['get', 'post'], '/registration/cancel/{id}', function ($id) {
 
     return redirect('/')->with('success', 'Registrasi berhasil dibatalkan. Semua data telah dihapus.');
 })->name('registration.cancel');
+
+Route::get('kebijakan-privasi', function () {
+    return view('privacy_police');
+})->name('kebijakan-privasi');
+Route::get('syarat-layanan', function () {
+    return view('terms_conditions');
+})->name('syarat-layanan');
+Route::get('about-us', function () {
+    return view('about-us');
+})->name('about-us');

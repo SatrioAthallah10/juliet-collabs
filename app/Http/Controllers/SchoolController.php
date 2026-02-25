@@ -926,6 +926,7 @@ class SchoolController extends Controller
             'school_name' => 'required',
             'school_email' => 'required|email|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             'school_phone' => 'required|numeric|digits_between:6,15',
+            'school_password' => 'required|min:8',
             'school_tagline' => 'required',
             'school_address' => 'required',
             'package_id' => 'required|exists:packages,id'
@@ -1003,6 +1004,7 @@ class SchoolController extends Controller
                     'school_name' => $request->school_name,
                     'school_email' => $request->school_email,
                     'school_phone' => $request->school_phone,
+                    'school_password' => Hash::make($request->school_password),
                     'school_tagline' => $request->school_tagline,
                     'school_address' => $request->school_address,
                     'package_id' => $request->package_id,
@@ -1149,7 +1151,7 @@ class SchoolController extends Controller
                     'last_name' => 'Admin',
                     'mobile' => $request->school_phone,
                     'email' => $request->school_email,
-                    'password' => Hash::make($request->school_phone),
+                    'password' => Hash::make($request->school_password),
                     'school_id' => $schoolData->id,
                     'image' => 'dummy_logo.jpg'
                 );
@@ -1575,7 +1577,7 @@ class SchoolController extends Controller
                     'last_name' => 'Admin',
                     'mobile' => $request->school_support_phone,
                     'email' => $request->school_support_email,
-                    'password' => Hash::make($request->school_support_phone),
+                    'password' => $inquiry->school_password ?? Hash::make($request->school_support_phone),
                     'school_id' => $schoolData->id,
                 );
 

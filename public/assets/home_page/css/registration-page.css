@@ -19,7 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    color: #0f172a;
+    /* color: #0f172a; */
 }
 
 .container {
@@ -51,11 +51,33 @@ body {
 .header-inner h1 {
     font-size: 1.125rem;
     font-weight: 700;
-    color: #0f172a;
+    color: #19294d;
 }
 
 .header-inner img {
     width: 100px
+}
+
+.header-login-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.5rem;
+    background: linear-gradient(135deg, #5C0269, #7E0A6F);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(92, 2, 105, 0.3);
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+
+.header-login-btn:hover {
+    background: linear-gradient(135deg, #4A0254, #5C0269);
+    box-shadow: 0 12px 32px rgba(92, 2, 105, 0.4);
+    transform: translateY(-2px);
 }
 
 .close-btn {
@@ -240,7 +262,7 @@ body {
 
 /* Form Header */
 .form-header {
-    background: linear-gradient(180deg, #bf24aa 0%,#a0168e,#4A0254 100%);
+    background: linear-gradient(180deg, #bf24aa 0%, #a0168e, #4A0254 100%);
     padding: 2rem;
     border-bottom: 1px solid #e2e8f0;
     text-align: center;
@@ -330,6 +352,7 @@ body {
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="tel"],
+.form-group input[type="password"],
 .form-group select {
     width: 100%;
     padding: 0.75rem 1rem;
@@ -367,6 +390,35 @@ body {
 /* Select Wrapper */
 .select-wrapper {
     position: relative;
+}
+
+/* Password Wrapper */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 2.75rem;
+    /* Space for the icon */
+    box-sizing: border-box;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    cursor: pointer;
+    color: #94a3b8;
+    user-select: none;
+    font-size: 1.25rem;
+    transition: color 0.2s ease;
+}
+
+.toggle-password:hover {
+    color: #5C0269;
 }
 
 .select-wrapper select {
@@ -425,6 +477,36 @@ body {
     font-size: 1.25rem;
 }
 
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.875rem 2.5rem;
+    background: #fdfafd;
+    color: #374151;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    border: 1.5px solid #E5C8E2;
+    border-radius: 0.875rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #f3e8f1;
+    border-color: #5C0269;
+    transform: translateY(-2px);
+}
+
+.back-btn:active {
+    transform: translateY(0);
+}
+
+.back-btn .material-symbols-outlined {
+    font-size: 1.25rem;
+}
 
 /* ══════════════════════════════════════════════════════════
    PACKAGE GRID

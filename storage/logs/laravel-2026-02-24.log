@@ -1,0 +1,274 @@
+[2026-02-24 09:11:03] local.INFO: Detected N+1 Query  
+[2026-02-24 09:11:03] local.INFO: Model: App\Models\Subscription
+Relation: subscription_bill
+Num-Called: 5
+Call-Stack:
+#19 \app\Models\Subscription.php:85
+#24 \app\Traits\DateFormatTrait.php:125
+#25 \vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:919
+#28 \vendor\laravel\framework\src\Illuminate\Collections\Collection.php:778
+#30 \vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:919
+#33 \app\Traits\DateFormatTrait.php:125
+#34 \app\Http\Controllers\SchoolController.php:430
+#35 \vendor\laravel\framework\src\Illuminate\Routing\Controller.php:54
+#36 \vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php:43
+#37 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:259
+#38 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:205
+#39 \vendor\laravel\framework\src\Illuminate\Routing\Router.php:806
+#40 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:144
+#41 \app\Http\Middleware\CheckTwoFactorAuthenticated.php:41
+#42 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#43 \app\Http\Middleware\CheckForMaintenanceMode.php:32
+#44 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#45 \app\Http\Middleware\MustVerifyEmail.php:36
+#46 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#47 \app\Http\Middleware\SwitchDatabase.php:41
+#48 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#49 \app\Http\Middleware\Status.php:42
+  
+[2026-02-24 09:11:03] local.INFO: Model: App\Models\School
+Relation: App\Models\Subscription
+Num-Called: 5
+Call-Stack:
+#14 \vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:23
+#15 \vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:52
+#17 \app\Http\Controllers\SchoolController.php:446
+#18 \vendor\laravel\framework\src\Illuminate\Routing\Controller.php:54
+#19 \vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php:43
+#20 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:259
+#21 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:205
+#22 \vendor\laravel\framework\src\Illuminate\Routing\Router.php:806
+#23 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:144
+#24 \app\Http\Middleware\CheckTwoFactorAuthenticated.php:41
+#25 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#26 \app\Http\Middleware\CheckForMaintenanceMode.php:32
+#27 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#28 \app\Http\Middleware\MustVerifyEmail.php:36
+#29 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#30 \app\Http\Middleware\SwitchDatabase.php:41
+#31 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#32 \app\Http\Middleware\Status.php:42
+#33 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#34 \app\Http\Middleware\CheckSchoolStatus.php:105
+#35 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#36 \app\Http\Middleware\CheckRole.php:38
+#37 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#38 \app\Http\Middleware\WizardSettings.php:84
+#39 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#40 \app\Http\Middleware\LanguageManager.php:61
+#41 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#42 \app\Http\Middleware\DemoMiddleware.php:68
+#43 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#44 \vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php:50
+#45 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#46 \vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken.php:78
+#47 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#48 \vendor\laravel\framework\src\Illuminate\View\Middleware\ShareErrorsFromSession.php:49
+#49 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+  
+[2026-02-24 09:11:11] local.INFO: Detected N+1 Query  
+[2026-02-24 09:11:11] local.INFO: Model: App\Models\Subscription
+Relation: subscription_bill
+Num-Called: 4
+Call-Stack:
+#19 \app\Models\Subscription.php:85
+#24 \app\Traits\DateFormatTrait.php:125
+#25 \vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:919
+#28 \vendor\laravel\framework\src\Illuminate\Collections\Collection.php:778
+#30 \vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:919
+#33 \app\Traits\DateFormatTrait.php:125
+#34 \app\Http\Controllers\SchoolController.php:430
+#35 \vendor\laravel\framework\src\Illuminate\Routing\Controller.php:54
+#36 \vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php:43
+#37 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:259
+#38 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:205
+#39 \vendor\laravel\framework\src\Illuminate\Routing\Router.php:806
+#40 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:144
+#41 \app\Http\Middleware\CheckTwoFactorAuthenticated.php:41
+#42 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#43 \app\Http\Middleware\CheckForMaintenanceMode.php:32
+#44 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#45 \app\Http\Middleware\MustVerifyEmail.php:36
+#46 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#47 \app\Http\Middleware\SwitchDatabase.php:41
+#48 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#49 \app\Http\Middleware\Status.php:42
+  
+[2026-02-24 09:11:11] local.INFO: Model: App\Models\School
+Relation: App\Models\Subscription
+Num-Called: 4
+Call-Stack:
+#14 \vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:23
+#15 \vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:52
+#17 \app\Http\Controllers\SchoolController.php:446
+#18 \vendor\laravel\framework\src\Illuminate\Routing\Controller.php:54
+#19 \vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php:43
+#20 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:259
+#21 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:205
+#22 \vendor\laravel\framework\src\Illuminate\Routing\Router.php:806
+#23 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:144
+#24 \app\Http\Middleware\CheckTwoFactorAuthenticated.php:41
+#25 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#26 \app\Http\Middleware\CheckForMaintenanceMode.php:32
+#27 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#28 \app\Http\Middleware\MustVerifyEmail.php:36
+#29 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#30 \app\Http\Middleware\SwitchDatabase.php:41
+#31 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#32 \app\Http\Middleware\Status.php:42
+#33 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#34 \app\Http\Middleware\CheckSchoolStatus.php:105
+#35 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#36 \app\Http\Middleware\CheckRole.php:38
+#37 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#38 \app\Http\Middleware\WizardSettings.php:84
+#39 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#40 \app\Http\Middleware\LanguageManager.php:61
+#41 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#42 \app\Http\Middleware\DemoMiddleware.php:68
+#43 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#44 \vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php:50
+#45 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#46 \vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken.php:78
+#47 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#48 \vendor\laravel\framework\src\Illuminate\View\Middleware\ShareErrorsFromSession.php:49
+#49 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+  
+[2026-02-24 09:11:17] local.INFO: Detected N+1 Query  
+[2026-02-24 09:11:17] local.INFO: Model: App\Models\Subscription
+Relation: subscription_bill
+Num-Called: 3
+Call-Stack:
+#19 \app\Models\Subscription.php:85
+#24 \app\Traits\DateFormatTrait.php:125
+#25 \vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:919
+#28 \vendor\laravel\framework\src\Illuminate\Collections\Collection.php:778
+#30 \vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:919
+#33 \app\Traits\DateFormatTrait.php:125
+#34 \app\Http\Controllers\SchoolController.php:430
+#35 \vendor\laravel\framework\src\Illuminate\Routing\Controller.php:54
+#36 \vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php:43
+#37 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:259
+#38 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:205
+#39 \vendor\laravel\framework\src\Illuminate\Routing\Router.php:806
+#40 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:144
+#41 \app\Http\Middleware\CheckTwoFactorAuthenticated.php:41
+#42 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#43 \app\Http\Middleware\CheckForMaintenanceMode.php:32
+#44 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#45 \app\Http\Middleware\MustVerifyEmail.php:36
+#46 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#47 \app\Http\Middleware\SwitchDatabase.php:41
+#48 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#49 \app\Http\Middleware\Status.php:42
+  
+[2026-02-24 09:11:17] local.INFO: Model: App\Models\School
+Relation: App\Models\Subscription
+Num-Called: 3
+Call-Stack:
+#14 \vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:23
+#15 \vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:52
+#17 \app\Http\Controllers\SchoolController.php:446
+#18 \vendor\laravel\framework\src\Illuminate\Routing\Controller.php:54
+#19 \vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php:43
+#20 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:259
+#21 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:205
+#22 \vendor\laravel\framework\src\Illuminate\Routing\Router.php:806
+#23 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:144
+#24 \app\Http\Middleware\CheckTwoFactorAuthenticated.php:41
+#25 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#26 \app\Http\Middleware\CheckForMaintenanceMode.php:32
+#27 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#28 \app\Http\Middleware\MustVerifyEmail.php:36
+#29 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#30 \app\Http\Middleware\SwitchDatabase.php:41
+#31 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#32 \app\Http\Middleware\Status.php:42
+#33 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#34 \app\Http\Middleware\CheckSchoolStatus.php:105
+#35 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#36 \app\Http\Middleware\CheckRole.php:38
+#37 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#38 \app\Http\Middleware\WizardSettings.php:84
+#39 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#40 \app\Http\Middleware\LanguageManager.php:61
+#41 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#42 \app\Http\Middleware\DemoMiddleware.php:68
+#43 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#44 \vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php:50
+#45 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#46 \vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken.php:78
+#47 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#48 \vendor\laravel\framework\src\Illuminate\View\Middleware\ShareErrorsFromSession.php:49
+#49 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+  
+[2026-02-24 09:11:22] local.INFO: Detected N+1 Query  
+[2026-02-24 09:11:22] local.INFO: Model: App\Models\Subscription
+Relation: subscription_bill
+Num-Called: 2
+Call-Stack:
+#19 \app\Models\Subscription.php:85
+#24 \app\Traits\DateFormatTrait.php:125
+#25 \vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:919
+#28 \vendor\laravel\framework\src\Illuminate\Collections\Collection.php:778
+#30 \vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:919
+#33 \app\Traits\DateFormatTrait.php:125
+#34 \app\Http\Controllers\SchoolController.php:430
+#35 \vendor\laravel\framework\src\Illuminate\Routing\Controller.php:54
+#36 \vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php:43
+#37 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:259
+#38 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:205
+#39 \vendor\laravel\framework\src\Illuminate\Routing\Router.php:806
+#40 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:144
+#41 \app\Http\Middleware\CheckTwoFactorAuthenticated.php:41
+#42 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#43 \app\Http\Middleware\CheckForMaintenanceMode.php:32
+#44 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#45 \app\Http\Middleware\MustVerifyEmail.php:36
+#46 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#47 \app\Http\Middleware\SwitchDatabase.php:41
+#48 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#49 \app\Http\Middleware\Status.php:42
+  
+[2026-02-24 09:11:22] local.INFO: Model: App\Models\School
+Relation: App\Models\Subscription
+Num-Called: 2
+Call-Stack:
+#14 \vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:23
+#15 \vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:52
+#17 \app\Http\Controllers\SchoolController.php:446
+#18 \vendor\laravel\framework\src\Illuminate\Routing\Controller.php:54
+#19 \vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php:43
+#20 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:259
+#21 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:205
+#22 \vendor\laravel\framework\src\Illuminate\Routing\Router.php:806
+#23 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:144
+#24 \app\Http\Middleware\CheckTwoFactorAuthenticated.php:41
+#25 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#26 \app\Http\Middleware\CheckForMaintenanceMode.php:32
+#27 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#28 \app\Http\Middleware\MustVerifyEmail.php:36
+#29 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#30 \app\Http\Middleware\SwitchDatabase.php:41
+#31 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#32 \app\Http\Middleware\Status.php:42
+#33 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#34 \app\Http\Middleware\CheckSchoolStatus.php:105
+#35 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#36 \app\Http\Middleware\CheckRole.php:38
+#37 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#38 \app\Http\Middleware\WizardSettings.php:84
+#39 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#40 \app\Http\Middleware\LanguageManager.php:61
+#41 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#42 \app\Http\Middleware\DemoMiddleware.php:68
+#43 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#44 \vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php:50
+#45 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#46 \vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken.php:78
+#47 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#48 \vendor\laravel\framework\src\Illuminate\View\Middleware\ShareErrorsFromSession.php:49
+#49 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+  
+[2026-02-24 11:13:45] local.INFO: Registration method HIT  
+[2026-02-24 11:13:45] local.INFO: Request Data:  

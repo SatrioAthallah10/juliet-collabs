@@ -30,14 +30,14 @@ class InstallationSeeder extends Seeder
 
         //Change system version here
         Language::updateOrCreate(['id' => 1], ['name' => 'English', 'code' => 'en', 'file' => 'en.json', 'status' => 1, 'is_rtl' => 0]);
+        $this->command->call('migrate:school');
+        $this->call(SchoolInstallationSeeder::class);
 
-        Artisan::call('migrate:school');
-        Artisan::call('db:seed --class=SchoolInstallationSeeder');
         //clear cache
-        Artisan::call('view:clear');
-        Artisan::call('route:clear');
-        Artisan::call('config:clear');
-        Artisan::call('cache:clear');
+        $this->command->call('view:clear');
+        $this->command->call('route:clear');
+        $this->command->call('config:clear');
+        $this->command->call('cache:clear');
     }
 
 

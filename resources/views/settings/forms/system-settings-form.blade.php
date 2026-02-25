@@ -189,12 +189,12 @@
             <div class="d-flex">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        {!! Form::radio('school_inquiry', '1', false, ['class' => 'default' , ($settings['school_inquiry'] == 1) ? "checked" : "" ]) !!}{{ __('enable') }}
+                        {!! Form::radio('school_inquiry', '1', false, ['class' => 'default' , (($settings['school_inquiry'] ?? null) == 1) ? "checked" : "" ]) !!}{{ __('enable') }}
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        {!! Form::radio('school_inquiry', '0', false, ['class' => 'custom', ($settings['school_inquiry'] ==  0) ? "checked" : "" ]) !!}{{ __('disable') }}
+                        {!! Form::radio('school_inquiry', '0', false, ['class' => 'custom', (($settings['school_inquiry'] ?? null) ==  0) ? "checked" : "" ]) !!}{{ __('disable') }}
                     </label>
                 </div>
             </div>
