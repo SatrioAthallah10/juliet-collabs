@@ -32,6 +32,15 @@ jobs:
         echo "=== Directory Structure before upload ==="
         ls -la
 
+    - name: 🔍 Network Diagnostic (Connection Test)
+      run: |
+        echo "Testing connection to '${{ secrets.FTP_SERVER }}'..."
+        echo "Checking Port 21 (FTP)..."
+        nc -zv -w 10 ${{ secrets.FTP_SERVER }} 21 || echo "PORT 21 IS BLOCKED/CLOSED"
+        echo "Checking Port 22 (SFTP/SSH)..."
+        nc -zv -w 10 ${{ secrets.FTP_SERVER }} 22 || echo "PORT 22 IS BLOCKED/CLOSED"
+        echo "=== End Diagnostic ==="
+
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
@@ -40,10 +49,10 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: ${{ secrets.DEPLOY_PATH_PROD }}
-        # Reverted back to standard ftp, as ftps over port 21 was causing a 'Timeout (control socket)' handshake failure
-        protocol: ftp
-        port: 21
-        # Increased timeout to 60000ms (60 seconds) to prevent connectivity dropouts
+        # Switched to 'sftp' on Port 22 - This is much more reliable than standard FTP/FTPS
+        protocol: sftp
+        port: 22
+        # Increased timeout to 60000ms (60 seconds)
         timeout: 60000
         exclude: |
           **/.phpunit.cache
@@ -99,6 +108,15 @@ jobs:
         echo "=== Directory Structure before upload ==="
         ls -la
 
+    - name: 🔍 Network Diagnostic (Connection Test)
+      run: |
+        echo "Testing connection to '${{ secrets.FTP_SERVER }}'..."
+        echo "Checking Port 21 (FTP)..."
+        nc -zv -w 10 ${{ secrets.FTP_SERVER }} 21 || echo "PORT 21 IS BLOCKED/CLOSED"
+        echo "Checking Port 22 (SFTP/SSH)..."
+        nc -zv -w 10 ${{ secrets.FTP_SERVER }} 22 || echo "PORT 22 IS BLOCKED/CLOSED"
+        echo "=== End Diagnostic ==="
+
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
@@ -107,10 +125,10 @@ jobs:
         username: ${{ secrets.FTP_USERNAME_DEV }}
         password: ${{ secrets.FTP_PASSWORD_DEV }}
         server-dir: ${{ secrets.DEPLOY_PATH_DEV }}
-        # Reverted back to standard ftp, as ftps over port 21 was causing a 'Timeout (control socket)' handshake failure
-        protocol: ftp
-        port: 21
-        # Increased timeout to 60000ms (60 seconds) to prevent connectivity dropouts
+        # Switched to 'sftp' on Port 22
+        protocol: sftp
+        port: 22
+        # Increased timeout to 60000ms (60 seconds)
         timeout: 60000
         exclude: |
           **/.phpunit.cache
