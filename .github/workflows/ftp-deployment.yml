@@ -40,12 +40,10 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: ${{ secrets.DEPLOY_PATH_PROD }}
-        # Changed from 'ftp' to 'ftps' - cPanel environments usually prefer or require explicit FTPS
-        protocol: ftps
+        # Reverted back to standard ftp, as ftps over port 21 was causing a 'Timeout (control socket)' handshake failure
+        protocol: ftp
         port: 21
-        # Bypass strict SSL certificate checks (common for cPanel auto-generated SSLs)
-        security: loose
-        # Increased timeout to 60000ms (60 seconds) to prevent 'Timeout (control socket)' error on slow connections
+        # Increased timeout to 60000ms (60 seconds) to prevent connectivity dropouts
         timeout: 60000
         exclude: |
           **/.phpunit.cache
@@ -109,10 +107,10 @@ jobs:
         username: ${{ secrets.FTP_USERNAME_DEV }}
         password: ${{ secrets.FTP_PASSWORD_DEV }}
         server-dir: ${{ secrets.DEPLOY_PATH_DEV }}
-        # Changed from 'ftp' to 'ftps'
-        protocol: ftps
+        # Reverted back to standard ftp, as ftps over port 21 was causing a 'Timeout (control socket)' handshake failure
+        protocol: ftp
         port: 21
-        security: loose
+        # Increased timeout to 60000ms (60 seconds) to prevent connectivity dropouts
         timeout: 60000
         exclude: |
           **/.phpunit.cache
