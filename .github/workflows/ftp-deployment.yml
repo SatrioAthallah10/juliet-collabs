@@ -1,18 +1,28 @@
-name: Publish Website to CPanel
+name: Publish Website to VPS (aaPanel)
 on:
   push:
     branches:
       - main
       - development
 jobs:
-  FTP-Deploy-Production:
-    name: Deploy to Production
+  Deploy-Production:
+    name: Deploy to Production (VPS)
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
     - uses: actions/checkout@v2.1.0
       with:
         fetch-depth: 2 
+
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: 📦 Install Dependencies & Build Assets
+      run: |
+        npm install
+        npm run prod
 
     - name: 📋 Pre-Deployment Environment Logging
       run: |
@@ -31,12 +41,11 @@ jobs:
         echo ""
         echo "=== Directory Structure before upload ==="
         ls -la
+        ls -la public/
 
     - name: 🔍 Network Diagnostic (Connection Test)
       run: |
         echo "Testing connection to '${{ secrets.FTP_SERVER }}'..."
-        echo "Checking Port 21 (FTP)..."
-        nc -zv -w 10 ${{ secrets.FTP_SERVER }} 21 || echo "PORT 21 IS BLOCKED/CLOSED"
         echo "Checking Port 22 (SFTP/SSH)..."
         nc -zv -w 10 ${{ secrets.FTP_SERVER }} 22 || echo "PORT 22 IS BLOCKED/CLOSED"
         echo "=== End Diagnostic ==="
@@ -73,18 +82,27 @@ jobs:
     - name: ✅ Post-Deployment Logging
       if: always()
       run: |
-        echo "=== Deployment Step Status ==="
+        echo "=== Deployment Job Status ==="
         echo "Result: ${{ job.status }}"
-        echo "Notice: For incredibly detailed FTP transfer logs showing every single file being uploaded or skipped, please enable ACTIONS_STEP_DEBUG in your repository secrets."
 
-  FTP-Deploy-Development:
-    name: Deploy to Development
+  Deploy-Development:
+    name: Deploy to Development (VPS)
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/development'
     steps:
     - uses: actions/checkout@v2.1.0
       with:
         fetch-depth: 2 
+
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: 📦 Install Dependencies & Build Assets
+      run: |
+        npm install
+        npm run prod
 
     - name: 📋 Pre-Deployment Environment Logging
       run: |
@@ -103,12 +121,11 @@ jobs:
         echo ""
         echo "=== Directory Structure before upload ==="
         ls -la
+        ls -la public/
 
     - name: 🔍 Network Diagnostic (Connection Test)
       run: |
         echo "Testing connection to '${{ secrets.FTP_SERVER }}'..."
-        echo "Checking Port 21 (FTP)..."
-        nc -zv -w 10 ${{ secrets.FTP_SERVER }} 21 || echo "PORT 21 IS BLOCKED/CLOSED"
         echo "Checking Port 22 (SFTP/SSH)..."
         nc -zv -w 10 ${{ secrets.FTP_SERVER }} 22 || echo "PORT 22 IS BLOCKED/CLOSED"
         echo "=== End Diagnostic ==="
@@ -145,9 +162,8 @@ jobs:
     - name: ✅ Post-Deployment Logging
       if: always()
       run: |
-        echo "=== Deployment Step Status ==="
+        echo "=== Deployment Job Status ==="
         echo "Result: ${{ job.status }}"
-        echo "Notice: For incredibly detailed FTP transfer logs showing every single file being uploaded or skipped, please enable ACTIONS_STEP_DEBUG in your repository secrets."
 
     # - name: Setup SSH Key
     #   run: |
