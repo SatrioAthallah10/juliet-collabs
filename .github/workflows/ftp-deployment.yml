@@ -35,12 +35,18 @@ jobs:
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
+        # IMPORTANT: 'server' should just be the domain/IP without 'ftp://' prefix (e.g. 'ftp.yourdomain.com')
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: ${{ secrets.DEPLOY_PATH_PROD }}
-        protocol: ftp
+        # Changed from 'ftp' to 'ftps' - cPanel environments usually prefer or require explicit FTPS
+        protocol: ftps
         port: 21
+        # Bypass strict SSL certificate checks (common for cPanel auto-generated SSLs)
+        security: loose
+        # Increased timeout to 60000ms (60 seconds) to prevent 'Timeout (control socket)' error on slow connections
+        timeout: 60000
         exclude: |
           **/.phpunit.cache
           **/node_modules/**
@@ -98,12 +104,16 @@ jobs:
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
+        # IMPORTANT: 'server' should just be the domain/IP without 'ftp://' prefix (e.g. 'ftp.yourdomain.com')
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME_DEV }}
         password: ${{ secrets.FTP_PASSWORD_DEV }}
         server-dir: ${{ secrets.DEPLOY_PATH_DEV }}
-        protocol: ftp
+        # Changed from 'ftp' to 'ftps'
+        protocol: ftps
         port: 21
+        security: loose
+        timeout: 60000
         exclude: |
           **/.phpunit.cache
           **/node_modules/**
