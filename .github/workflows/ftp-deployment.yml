@@ -1,0 +1,177 @@
+name: Publish Website to CPanel
+on:
+  push:
+    branches:
+      - main
+      - development
+jobs:
+  FTP-Deploy-Production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v2.1.0
+      with:
+        fetch-depth: 2 
+
+    - name: 📋 Pre-Deployment Environment Logging
+      run: |
+        echo "=== Deployment Triggered ==="
+        echo "Event: ${{ github.event_name }}"
+        echo "Branch/Ref: ${{ github.ref }}"
+        echo "Commit SHA: ${{ github.sha }}"
+        echo "Actor: ${{ github.actor }}"
+        echo "Workspace: ${{ github.workspace }}"
+        echo ""
+        echo "=== System Info ==="
+        php -v
+        composer -V
+        node -v
+        npm -v
+        echo ""
+        echo "=== Directory Structure before upload ==="
+        ls -la
+
+    - name: FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: ${{ secrets.DEPLOY_PATH_PROD }}
+        protocol: ftp
+        port: 21
+        exclude: |
+          **/.phpunit.cache
+          **/node_modules/**
+          **/public/hot
+          **/public/storage/**
+          **/storage/*.key
+          **/vendor/**
+          .env
+          .env.backup
+          .env.production
+          .phpunit.result.cache
+          docker-compose.override.yml
+          Homestead.json
+          Homestead.yaml
+          npm-debug.log
+          yarn-error.log
+          **/.fleet/**
+          **/.idea/**
+          **/.vscode/**
+
+    - name: ✅ Post-Deployment Logging
+      if: always()
+      run: |
+        echo "=== Deployment Step Status ==="
+        echo "Result: ${{ job.status }}"
+        echo "Notice: For incredibly detailed FTP transfer logs showing every single file being uploaded or skipped, please enable ACTIONS_STEP_DEBUG in your repository secrets."
+
+  FTP-Deploy-Development:
+    name: Deploy to Development
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/development'
+    steps:
+    - uses: actions/checkout@v2.1.0
+      with:
+        fetch-depth: 2 
+
+    - name: 📋 Pre-Deployment Environment Logging
+      run: |
+        echo "=== Deployment Triggered ==="
+        echo "Event: ${{ github.event_name }}"
+        echo "Branch/Ref: ${{ github.ref }}"
+        echo "Commit SHA: ${{ github.sha }}"
+        echo "Actor: ${{ github.actor }}"
+        echo "Workspace: ${{ github.workspace }}"
+        echo ""
+        echo "=== System Info ==="
+        php -v
+        composer -V
+        node -v
+        npm -v
+        echo ""
+        echo "=== Directory Structure before upload ==="
+        ls -la
+
+    - name: FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME_DEV }}
+        password: ${{ secrets.FTP_PASSWORD_DEV }}
+        server-dir: ${{ secrets.DEPLOY_PATH_DEV }}
+        protocol: ftp
+        port: 21
+        exclude: |
+          **/.phpunit.cache
+          **/node_modules/**
+          **/public/hot
+          **/public/storage/**
+          **/storage/*.key
+          **/vendor/**
+          .env
+          .env.backup
+          .env.production
+          .phpunit.result.cache
+          docker-compose.override.yml
+          Homestead.json
+          Homestead.yaml
+          npm-debug.log
+          yarn-error.log
+          **/.fleet/**
+          **/.idea/**
+          **/.vscode/**
+
+    - name: ✅ Post-Deployment Logging
+      if: always()
+      run: |
+        echo "=== Deployment Step Status ==="
+        echo "Result: ${{ job.status }}"
+        echo "Notice: For incredibly detailed FTP transfer logs showing every single file being uploaded or skipped, please enable ACTIONS_STEP_DEBUG in your repository secrets."
+
+    # - name: Setup SSH Key
+    #   run: |
+    #     mkdir -p ~/.ssh
+    #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+    #     chmod 600 ~/.ssh/id_rsa
+    #     ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+    # # Laravel commands for main (production)
+    # - name: SSH Commands - Production
+    #   if: github.ref == 'refs/heads/main'
+    #   run: |
+    #     ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << EOF
+    #       cd ${{ secrets.DEPLOY_PATH_PROD }}
+    #       php artisan down || true
+    #       composer install --no-interaction --prefer-dist --optimize-autoloader
+    #       composer dump-autoload --optimize
+    #       php artisan migrate --force
+    #       php artisan config:clear
+    #       php artisan cache:clear
+    #       php artisan optimize:clear
+    #       php artisan config:cache
+    #       php artisan route:cache
+    #       php artisan view:cache
+    #       php artisan up
+    #     EOF
+
+    # # Laravel commands for development
+    # - name: SSH Commands - Development
+    #   if: github.ref == 'refs/heads/development'
+    #   run: |
+    #     ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << EOF
+    #       cd ${{ secrets.DEPLOY_PATH_DEV }}
+    #       php artisan down || true
+    #       composer install --no-interaction --prefer-dist --optimize-autoloader
+    #       composer dump-autoload --optimize
+    #       php artisan migrate --force
+    #       php artisan config:clear
+    #       php artisan cache:clear
+    #       php artisan optimize:clear
+    #       php artisan config:cache
+    #       php artisan route:cache
+    #       php artisan view:cache
+    #       php artisan up
+    #     EOF
