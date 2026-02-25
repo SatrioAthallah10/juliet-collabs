@@ -41,38 +41,34 @@ jobs:
         nc -zv -w 10 ${{ secrets.FTP_SERVER }} 22 || echo "PORT 22 IS BLOCKED/CLOSED"
         echo "=== End Diagnostic ==="
 
-    - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+    - name: 🚀 SFTP-Deploy-Action (SFTP)
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.5
       with:
-        # IMPORTANT: 'server' should just be the domain/IP without 'ftp://' prefix (e.g. 'ftp.yourdomain.com')
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: ${{ secrets.DEPLOY_PATH_PROD }}
-        # Switched to 'sftp' on Port 22 - This is much more reliable than standard FTP/FTPS
-        protocol: sftp
         port: 22
-        # Increased timeout to 60000ms (60 seconds)
-        timeout: 60000
-        exclude: |
-          **/.phpunit.cache
-          **/node_modules/**
-          **/public/hot
-          **/public/storage/**
-          **/storage/*.key
-          **/vendor/**
-          .env
-          .env.backup
-          .env.production
-          .phpunit.result.cache
-          docker-compose.override.yml
-          Homestead.json
-          Homestead.yaml
-          npm-debug.log
-          yarn-error.log
-          **/.fleet/**
-          **/.idea/**
-          **/.vscode/**
+        local_path: './'
+        remote_path: ${{ secrets.DEPLOY_PATH_PROD }}
+        sftp_only: true
+        rsyncArgs: >
+          --exclude=.phpunit.cache
+          --exclude=node_modules
+          --exclude=public/hot
+          --exclude=public/storage
+          --exclude=storage/*.key
+          --exclude=vendor
+          --exclude=.env
+          --exclude=.env.*
+          --exclude=.phpunit.result.cache
+          --exclude=docker-compose.override.yml
+          --exclude=Homestead.json
+          --exclude=Homestead.yaml
+          --exclude=npm-debug.log
+          --exclude=yarn-error.log
+          --exclude=.fleet
+          --exclude=.idea
+          --exclude=.vscode
 
     - name: ✅ Post-Deployment Logging
       if: always()
@@ -117,38 +113,34 @@ jobs:
         nc -zv -w 10 ${{ secrets.FTP_SERVER }} 22 || echo "PORT 22 IS BLOCKED/CLOSED"
         echo "=== End Diagnostic ==="
 
-    - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+    - name: 🚀 SFTP-Deploy-Action (SFTP)
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.5
       with:
-        # IMPORTANT: 'server' should just be the domain/IP without 'ftp://' prefix (e.g. 'ftp.yourdomain.com')
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME_DEV }}
         password: ${{ secrets.FTP_PASSWORD_DEV }}
-        server-dir: ${{ secrets.DEPLOY_PATH_DEV }}
-        # Switched to 'sftp' on Port 22
-        protocol: sftp
         port: 22
-        # Increased timeout to 60000ms (60 seconds)
-        timeout: 60000
-        exclude: |
-          **/.phpunit.cache
-          **/node_modules/**
-          **/public/hot
-          **/public/storage/**
-          **/storage/*.key
-          **/vendor/**
-          .env
-          .env.backup
-          .env.production
-          .phpunit.result.cache
-          docker-compose.override.yml
-          Homestead.json
-          Homestead.yaml
-          npm-debug.log
-          yarn-error.log
-          **/.fleet/**
-          **/.idea/**
-          **/.vscode/**
+        local_path: './'
+        remote_path: ${{ secrets.DEPLOY_PATH_DEV }}
+        sftp_only: true
+        rsyncArgs: >
+          --exclude=.phpunit.cache
+          --exclude=node_modules
+          --exclude=public/hot
+          --exclude=public/storage
+          --exclude=storage/*.key
+          --exclude=vendor
+          --exclude=.env
+          --exclude=.env.*
+          --exclude=.phpunit.result.cache
+          --exclude=docker-compose.override.yml
+          --exclude=Homestead.json
+          --exclude=Homestead.yaml
+          --exclude=npm-debug.log
+          --exclude=yarn-error.log
+          --exclude=.fleet
+          --exclude=.idea
+          --exclude=.vscode
 
     - name: ✅ Post-Deployment Logging
       if: always()
