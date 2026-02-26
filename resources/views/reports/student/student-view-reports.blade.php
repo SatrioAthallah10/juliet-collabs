@@ -87,11 +87,13 @@
                                 {{ __('Fees') }}
                             </a>
                         </li>
+                        {{-- [TRANSPORTATION_MODULE_DISABLED]
                         <li class="nav-item">
                             <a class="nav-link" id="transportation-tab" data-toggle="tab" href="#transportation" role="tab">
                                 {{ __('transportation') }}
                             </a>
                         </li>
+                        --}}
                     </ul>
                     <div class="tab-content border-0 px-0" id="studentTabContent">
                         <div class="tab-pane fade show active py-3" id="profile" role="tabpanel">
@@ -164,9 +166,11 @@
                         <div class="tab-pane fade py-3" id="fees" role="tabpanel">
                             @include('reports.student.fees-report-tab', ['studentFees' => $studentFees])
                         </div>
+                        {{-- [TRANSPORTATION_MODULE_DISABLED]
                         <div class="tab-pane fade py-3" id="transportation" role="tabpanel">
                             @include('reports.student.transportation-report-tab', ['transportation' => $transportation])
                         </div>
+                        --}}
                     </div>
                 </div>
             </div>

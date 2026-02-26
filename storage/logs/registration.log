@@ -803,3 +803,49 @@
 [2026-02-25 12:28:24] local.INFO: [REGISTRASI] ✅ PROSES SELESAI (MODE INQUIRY)  
 [2026-02-25 12:28:24] local.INFO: [REGISTRASI] Hasil yang tercipta: {"school_inquiry_id":7,"invoice_number":"JT-1771997295","payment_status":"pending","redirect_to":"http://127.0.0.1:8000/verify/7"} 
 [2026-02-25 12:28:24] local.INFO: ================================================================================  
+[2026-02-26 09:19:52] local.INFO: ================================================================================  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI] PROSES DIMULAI  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI] Fungsi dipanggil: SchoolController::registration()  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI] Timestamp: 2026-02-26 09:19:52  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI] IP Address: 127.0.0.1  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI] Data Input: {"school_name":"uji coba tes struk pembayaran","school_email":"email@email.com","school_phone":"999999","school_tagline":"pole position","school_address":"Jl. Teluk Betung I/8","package_id":"3"} 
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 1] Menjalankan validasi input (Validator::make)...  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 1] Validasi BERHASIL — semua input valid  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 2] reCAPTCHA DILEWATI (RECAPTCHA_SECRET_KEY tidak diset)  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 3] Mengecek data existing di database...  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 3] Hasil pengecekan: {"school_exists":"TIDAK","user_exists":"TIDAK","inquiry_exists":"TIDAK"} 
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 4] MODE: School Inquiry (school_inquiry=1) — sekolah harus bayar dulu sebelum diaktifkan  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 5] Memanggil Package::findById(3) untuk ambil data paket...  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 5] Data paket: {"package_id":3,"package_name":"Paket Platinum","price":6000000.0,"invoice_number":"JT-1772072392"} 
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 6] Memanggil SchoolInquiry::updateOrCreate() — membuat atau memperbarui data inquiry...  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 6] SchoolInquiry TERCIPTA/TERUPDATE: {"inquiry_id":8,"school_name":"uji coba tes struk pembayaran","school_email":"email@email.com","invoice_number":"JT-1772072392","price":6000000.0,"payment_status":"pending"} 
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 8] DB::commit() — data inquiry tersimpan ke database  
+[2026-02-26 09:19:52] local.INFO: [REGISTRASI][STEP 9] Mengirim email notifikasi inquiry ke admin...  
+[2026-02-26 09:20:01] local.INFO: [REGISTRASI][STEP 9] Email notifikasi TERKIRIM ke: noreply@crestwoodacademy.com  
+[2026-02-26 09:20:01] local.INFO: [REGISTRASI] ✅ PROSES SELESAI (MODE INQUIRY)  
+[2026-02-26 09:20:01] local.INFO: [REGISTRASI] Hasil yang tercipta: {"school_inquiry_id":8,"invoice_number":"JT-1772072392","payment_status":"pending","redirect_to":"http://127.0.0.1:8000/verify/8"} 
+[2026-02-26 09:20:01] local.INFO: ================================================================================  
+[2026-02-26 11:04:25] local.INFO: ================================================================================  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI] PROSES DIMULAI  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI] Fungsi dipanggil: SchoolController::registration()  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI] Timestamp: 2026-02-26 11:04:25  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI] IP Address: 127.0.0.1  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI] Data Input: {"school_name":"uji coba tes struk pembayaran dengan improvements","school_email":"email2@email.com","school_phone":"08176785407","school_tagline":"pole position 1","school_address":"polisi","package_id":"2"} 
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 1] Menjalankan validasi input (Validator::make)...  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 1] Validasi BERHASIL — semua input valid  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 2] reCAPTCHA DILEWATI (RECAPTCHA_SECRET_KEY tidak diset)  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 3] Mengecek data existing di database...  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 3] Hasil pengecekan: {"school_exists":"TIDAK","user_exists":"TIDAK","inquiry_exists":"TIDAK"} 
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 4] MODE: School Inquiry (school_inquiry=1) — sekolah harus bayar dulu sebelum diaktifkan  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 5] Memanggil Package::findById(2) untuk ambil data paket...  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 5] Data paket: {"package_id":2,"package_name":"Paket Gold","price":3000000.0,"invoice_number":"JT-1772078665"} 
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 6] Memanggil SchoolInquiry::updateOrCreate() — membuat atau memperbarui data inquiry...  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 6] SchoolInquiry TERCIPTA/TERUPDATE: {"inquiry_id":9,"school_name":"uji coba tes struk pembayaran dengan improvements","school_email":"email2@email.com","invoice_number":"JT-1772078665","price":3000000.0,"payment_status":"pending"} 
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 8] DB::commit() — data inquiry tersimpan ke database  
+[2026-02-26 11:04:25] local.INFO: [REGISTRASI][STEP 9] Mengirim email notifikasi inquiry ke admin...  
+[2026-02-26 11:04:32] local.INFO: [REGISTRASI][STEP 9] Email notifikasi TERKIRIM ke: noreply@crestwoodacademy.com  
+[2026-02-26 11:04:32] local.INFO: [REGISTRASI] ✅ PROSES SELESAI (MODE INQUIRY)  
+[2026-02-26 11:04:32] local.INFO: [REGISTRASI] Hasil yang tercipta: {"school_inquiry_id":9,"invoice_number":"JT-1772078665","payment_status":"pending","redirect_to":"http://127.0.0.1:8000/verify/9"} 
+[2026-02-26 11:04:32] local.INFO: ================================================================================  

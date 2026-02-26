@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\ParentApiController;
 use App\Http\Controllers\Api\StaffApiController;
 use App\Http\Controllers\Api\StudentApiController;
 use App\Http\Controllers\Api\TeacherApiController;
-use App\Http\Controllers\Api\TrasportationApiController;
+// [TRANSPORTATION_MODULE_DISABLED] use App\Http\Controllers\Api\TrasportationApiController;
 use App\Http\Controllers\SubscriptionWebhookController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PaymentApiController;
@@ -369,51 +369,31 @@ Route::group(['middleware' => ['APISwitchDatabase', ]], static function () {
 
     Route::get('student-details', [ApiController::class , 'getStudentDetails']);
 
-    Route::get('pickup-points', [TrasportationApiController::class , 'pickupPoints']);
-
-    Route::get('transportation-fees', [TrasportationApiController::class , 'transportation_fees']);
-
-    Route::get('transportation-shifts', [TrasportationApiController::class , 'transportation_shifts']);
-
-    Route::post('transportation/live-route', [TrasportationApiController::class , 'pickupPointsTrack']);
-
-    Route::post('transport/dashboard', [TrasportationApiController::class , 'getTransportationData']);
-
-    Route::post('transport/plans/current', [TrasportationApiController::class , 'getTransoprtationCurrentPlan']);
-
-    Route::post('transport/routes/stops', [TrasportationApiController::class , 'getTransoprtationRouteForUser']);
-
-    Route::post('transport/attendance/user-list', [TrasportationApiController::class , 'getTransoprtationAttendanceUsers']);
-
-    Route::post('transport/attendance/create', [TrasportationApiController::class , 'getTransoprtationAttendanceStore']);
-
-    Route::post('transport/requests', [TrasportationApiController::class , 'getTransportationRequests']);
-
-    Route::post('transportation-requests', [TrasportationApiController::class , 'transportation_requests']);
-
-    Route::post('transportation-payments', [TrasportationApiController::class , 'transportation_payments']);
-
-    Route::post('create-transportation-expense', [TrasportationApiController::class , 'transportation_expense_create']);
-
-    Route::get('get-transportation-expense', [TrasportationApiController::class , 'transportation_expense_get']);
-
-    Route::get('transport/expense/categories/list', [TrasportationApiController::class , 'getTransportationExpenseCategory']);
-
-    Route::get('driver-helpr/dashboard', [TrasportationApiController::class , 'getDriverHelperDashboard']);
-
-    Route::get('driver-helpr/get-vehicle-details', [TrasportationApiController::class , 'getVehicleDetails']);
-
-    Route::get('driver-helpr/get-trips', [TrasportationApiController::class , 'getDriverHelperTrips']);
-
-    Route::post('driver-helpr/trip/start-end', [TrasportationApiController::class , 'tripStartEnd']);
-
-    Route::post('get-vehicle-assignment-status', [TrasportationApiController::class , 'getvehicleAssignmentstatus']);
-
-    Route::post('transport/user/attendance-list', [TrasportationApiController::class , 'getTransportationAteendaceRecordForUser']);
-
-    Route::get('transport/trip-reports', [TrasportationApiController::class , 'getTripReports']);
-
-    Route::post('transport/store-trip-reports', [TrasportationApiController::class , 'storeTripReport']);
+    // [TRANSPORTATION_MODULE_DISABLED] All transportation API routes
+    // Route::get('pickup-points', [TrasportationApiController::class , 'pickupPoints']);
+    // Route::get('transportation-fees', [TrasportationApiController::class , 'transportation_fees']);
+    // Route::get('transportation-shifts', [TrasportationApiController::class , 'transportation_shifts']);
+    // Route::post('transportation/live-route', [TrasportationApiController::class , 'pickupPointsTrack']);
+    // Route::post('transport/dashboard', [TrasportationApiController::class , 'getTransportationData']);
+    // Route::post('transport/plans/current', [TrasportationApiController::class , 'getTransoprtationCurrentPlan']);
+    // Route::post('transport/routes/stops', [TrasportationApiController::class , 'getTransoprtationRouteForUser']);
+    // Route::post('transport/attendance/user-list', [TrasportationApiController::class , 'getTransoprtationAttendanceUsers']);
+    // Route::post('transport/attendance/create', [TrasportationApiController::class , 'getTransoprtationAttendanceStore']);
+    // Route::post('transport/requests', [TrasportationApiController::class , 'getTransportationRequests']);
+    // Route::post('transportation-requests', [TrasportationApiController::class , 'transportation_requests']);
+    // Route::post('transportation-payments', [TrasportationApiController::class , 'transportation_payments']);
+    // Route::post('create-transportation-expense', [TrasportationApiController::class , 'transportation_expense_create']);
+    // Route::get('get-transportation-expense', [TrasportationApiController::class , 'transportation_expense_get']);
+    // Route::get('transport/expense/categories/list', [TrasportationApiController::class , 'getTransportationExpenseCategory']);
+    // Route::get('driver-helpr/dashboard', [TrasportationApiController::class , 'getDriverHelperDashboard']);
+    // Route::get('driver-helpr/get-vehicle-details', [TrasportationApiController::class , 'getVehicleDetails']);
+    // Route::get('driver-helpr/get-trips', [TrasportationApiController::class , 'getDriverHelperTrips']);
+    // Route::post('driver-helpr/trip/start-end', [TrasportationApiController::class , 'tripStartEnd']);
+    // Route::post('get-vehicle-assignment-status', [TrasportationApiController::class , 'getvehicleAssignmentstatus']);
+    // Route::post('transport/user/attendance-list', [TrasportationApiController::class , 'getTransportationAteendaceRecordForUser']);
+    // Route::get('transport/trip-reports', [TrasportationApiController::class , 'getTripReports']);
+    // Route::post('transport/store-trip-reports', [TrasportationApiController::class , 'storeTripReport']);
+    // [END TRANSPORTATION_MODULE_DISABLED]
 
     Route::get('diaries', [ApiController::class , 'getStudentDiaries']);
 });

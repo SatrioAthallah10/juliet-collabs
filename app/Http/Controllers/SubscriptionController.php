@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AddonSubscription;
+use App\Models\DokuPaymentReceipt;
 use App\Models\Package;
 use App\Models\PaymentConfiguration;
 use App\Models\PaymentTransaction;
@@ -99,11 +100,13 @@ class SubscriptionController extends Controller
 
         if (isset($current_plan) && count($current_plan->get())) {
             $packages = $this->package->builder()->with('package_feature.feature')->where('status', 1)->orderBy('rank', 'ASC')->where('is_trial', 0)->get();
-        } else {
+        }
+        else {
             $subscription = $this->subscription->builder()->get();
             if (count($subscription)) {
                 $packages = $this->package->builder()->with('package_feature.feature')->where('status', 1)->orderBy('rank', 'ASC')->where('is_trial', 0)->get();
-            } else {
+            }
+            else {
                 $packages = $this->package->builder()->with('package_feature.feature')->where('status', 1)->orderBy('rank', 'ASC')->get();
             }
         }
@@ -132,12 +135,15 @@ class SubscriptionController extends Controller
         try {
             if ($request->payment_method == 'stripe') {
                 return $this->subscriptionService->stripe_payment(null, $request->package_id, $request->type, null, null);
-            } else if ($request->payment_method == 'paystack') {
+            }
+            else if ($request->payment_method == 'paystack') {
                 return $this->subscriptionService->paystack_payment(null, $request->package_id, $request->type, null, null);
-            } else if ($request->payment_method == 'flutterwave') {
+            }
+            else if ($request->payment_method == 'flutterwave') {
                 return $this->subscriptionService->flutterwave_payment(null, $request->package_id, $request->type, null, null);
             }
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             return redirect()->back()->with('error', trans('server_not_responding'));
         }
     }
@@ -174,7 +180,8 @@ class SubscriptionController extends Controller
                         'package_id' => $package_id,
                         'plan' => 'Trial'
                     ];
-                } else {
+                }
+                else {
                     $data = [
                         'package_id' => $package_id,
                         'plan' => 'Regular'
@@ -194,7 +201,8 @@ class SubscriptionController extends Controller
             if ($type == 0) {
                 if (isset($isCurrentPlan)) {
                     $isCurrentPlan = $isCurrentPlan;
-                } else {
+                }
+                else {
                     $isCurrentPlan = 1;
                 }
                 $response = [
@@ -204,14 +212,16 @@ class SubscriptionController extends Controller
                     'url' => url('subscriptions/prepaid/package') . '/' . $package_id . '/0/' . $isCurrentPlan
                 ];
                 return response()->json($response);
-            } else { // Postpaid plans
+            }
+            else { // Postpaid plans
 
                 $subscription = $this->subscriptionService->createSubscription($package_id, null, null, 1);
             }
             DB::commit();
 
             ResponseService::successResponse(trans('Package Subscription Successfully'));
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, 'Subscription Controller -> Plan method');
             ResponseService::errorResponse();
@@ -235,14 +245,17 @@ class SubscriptionController extends Controller
             }
             if ($paymentConfiguration->payment_method == 'Stripe') {
                 return $this->subscriptionService->stripe_payment(null, $package_id, $type, null, $isCurrentPlan);
-            } else if ($paymentConfiguration->payment_method == 'Paystack') {
+            }
+            else if ($paymentConfiguration->payment_method == 'Paystack') {
                 return $this->subscriptionService->paystack_payment(null, $package_id, $type, null, $isCurrentPlan);
-            } else if ($paymentConfiguration->payment_method == 'Flutterwave') {
+            }
+            else if ($paymentConfiguration->payment_method == 'Flutterwave') {
                 return $this->subscriptionService->flutterwave_payment(null, $package_id, $type, null, $isCurrentPlan);
             }
 
 
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             DB::rollBack();
             ResponseService::logErrorResponse($th, 'Subscription Controller -> Prepaid Plan method');
             ResponseService::errorResponse();
@@ -264,18 +277,19 @@ class SubscriptionController extends Controller
         $paymentConfiguration = PaymentConfiguration::where('school_id', null)->first();
         if ($paymentConfiguration) {
             $currency = $paymentConfiguration->currency_code;
-        } else {
+        }
+        else {
             $currency = $settings['currency_code'];
         }
 
         $sql = $this->subscriptionBill->builder()->with('transaction', 'subscription.addons.feature')
             ->with([
-                'subscription.addons' => function ($q) {
-                    $q->withTrashed()->with('transaction');
-                }
-            ])
+            'subscription.addons' => function ($q) {
+            $q->withTrashed()->with('transaction');
+        }
+        ])
             ->where(function ($query) use ($search) {
-                $query->when($search, function ($q) use ($search) {
+            $query->when($search, function ($q) use ($search) {
                     $q->where('id', 'LIKE', "%$search%")
                         ->orwhere('description', 'LIKE', "%$search%")
                         ->orwhere('amount', 'LIKE', "%$search%")
@@ -283,11 +297,13 @@ class SubscriptionController extends Controller
                         ->orwhere('total_staff', 'LIKE', "%$search%")
                         ->orwhere('due_date', 'LIKE', "%$search%")
                         ->orWhereHas('subscription', function ($q) use ($search) {
-                            $q->where('name', 'LIKE', "%$search%");
-                        })
-                        ->Owner();
-                });
-            });
+                    $q->where('name', 'LIKE', "%$search%");
+                }
+                )
+                    ->Owner();
+            }
+            );
+        });
 
         $total = $sql->count();
         if ($offset >= $total && $total > 0) {
@@ -325,7 +341,8 @@ class SubscriptionController extends Controller
             if ($row->subscription->package_type == 1) {
                 $end_date_formatted = Carbon::parse($end_date_format)->addDay();
                 $tempRow['date'] = format_date($end_date_formatted);
-            } else {
+            }
+            else {
                 $created_at_format = date('Y-m-d', strtotime($row->subscription->end_date));
                 $tempRow['date'] = format_date($created_at_format);
             }
@@ -393,11 +410,13 @@ class SubscriptionController extends Controller
 
                     $staffs = $this->staff->builder()->whereHas('user', function ($q) use ($active_package) {
                         $q->where(function ($q) use ($active_package) {
-                            $q->withTrashed()->whereBetween('deleted_at', [$active_package->start_date, $active_package->end_date])
-                                ->orWhereNull('deleted_at');
-                        })->Owner();
-                    })->count();
-                } else {
+                                $q->withTrashed()->whereBetween('deleted_at', [$active_package->start_date, $active_package->end_date])
+                                    ->orWhereNull('deleted_at');
+                            }
+                            )->Owner();
+                        })->count();
+                }
+                else {
                     $students = $this->user->builder()->where('status', 1)->role('Student')->where('school_id', $active_package->school_id)->count();
 
                     $staffs = $this->staff->builder()->whereHas('user', function ($q) use ($active_package) {
@@ -418,7 +437,8 @@ class SubscriptionController extends Controller
             DB::setDefaultConnection('school');
 
             return view('subscription.subscription', compact('active_package', 'upcoming_package', 'data', 'school_settings', 'system_settings', 'features', 'paymentConfiguration'));
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, 'Subscription Controller -> History method');
             ResponseService::errorResponse();
         }
@@ -442,7 +462,8 @@ class SubscriptionController extends Controller
                 $this->addonSubscription->builder()->where('start_date', $subscription->start_date)->where('end_date', $subscription->end_date)->delete();
                 // Remove subscription
                 $this->subscription->deleteById($id);
-            } else {
+            }
+            else {
 
                 $data[] = [
                     'name' => 'auto_renewal_plan',
@@ -454,7 +475,8 @@ class SubscriptionController extends Controller
             $this->cache->removeSchoolCache(config('constants.CACHE.SCHOOL.SETTINGS'));
 
             ResponseService::successResponse('Your upcoming plan has been canceled successfully');
-        } catch (\Throwable $e) {
+        }
+        catch (\Throwable $e) {
             ResponseService::logErrorResponse($e, 'Subscription Controller -> Cancel Upcoming method');
             ResponseService::errorResponse();
         }
@@ -501,7 +523,8 @@ class SubscriptionController extends Controller
                         'end_date' => $subscription->end_date,
                         'subscription_id' => $subscription->id
                     ];
-                } else {
+                }
+                else {
                     $this->addonSubscription->update($current_addon->id, ['status' => 0]);
                 }
             }
@@ -517,7 +540,8 @@ class SubscriptionController extends Controller
 
             DB::commit();
             ResponseService::successResponse($message);
-        } catch (\Throwable $e) {
+        }
+        catch (\Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, 'Subscription Controller -> Confirm Upcoming Plan method');
             ResponseService::errorResponse();
@@ -556,9 +580,11 @@ class SubscriptionController extends Controller
         if ($type != -1) {
             if ($type == 1) {
                 $subscription = $this->subscriptionService->createSubscription($package_id, NULL, $subscription_id);
-            } elseif ($type == 0 && $isCurrentPlan == 1) {
+            }
+            elseif ($type == 0 && $isCurrentPlan == 1) {
                 $subscription = $this->subscriptionService->createSubscription($package_id, null, null, 1);
-            } else {
+            }
+            else {
                 $subscription = $this->subscriptionService->createSubscription($package_id);
             }
 
@@ -576,7 +602,8 @@ class SubscriptionController extends Controller
             if ($subscription->package_type == 1) {
                 // Postpaid
                 $this->subscriptionService->createSubscriptionBill($subscription, 1);
-            } else {
+            }
+            else {
                 // Prepaid
                 $subscription_bill[] = [
                     'subscription_id' => $subscription->id,
@@ -593,7 +620,8 @@ class SubscriptionController extends Controller
 
             $id = $subscription->subscription_bill->id;
 
-        } else {
+        }
+        else {
             if ($subscriptionBill_id != -1) {
                 $id = $subscriptionBill_id;
             }
@@ -617,15 +645,15 @@ class SubscriptionController extends Controller
         $subscriptionBill = $this->subscriptionBill->update($id, ['payment_transaction_id' => $paymentTransaction->id]);
         $stripe = new StripeClient($stripe_secret_key);
         $stripeData = $stripe->customers->create(
-            [
-                'metadata' => [
-                    'amount' => $paymentTransaction->amount,
-                    'transaction_id' => $paymentTransaction->id,
-                    'order_id' => $paymentTransaction->order_id,
-                    'payment_id' => $paymentTransaction->payment_id,
-                    'payment_status' => $paymentTransaction->payment_status,
-                ]
+        [
+            'metadata' => [
+                'amount' => $paymentTransaction->amount,
+                'transaction_id' => $paymentTransaction->id,
+                'order_id' => $paymentTransaction->order_id,
+                'payment_id' => $paymentTransaction->payment_id,
+                'payment_status' => $paymentTransaction->payment_status,
             ]
+        ]
         );
 
         $this->cache->removeSchoolCache(config('constants.CACHE.SCHOOL.FEATURES'), $subscriptionBill->school_id);
@@ -654,8 +682,8 @@ class SubscriptionController extends Controller
         DB::setDefaultConnection('mysql');
         $subscriptionBill = SubscriptionBill::with('subscription.addons.transaction', 'transaction', 'school')->with([
             'subscription.addons' => function ($q) {
-                $q->withTrashed()->with('feature');
-            }
+            $q->withTrashed()->with('feature');
+        }
         ])->find($id);
 
         $settings = app(CachingService::class)->getSystemSettings()->toArray();
@@ -673,7 +701,8 @@ class SubscriptionController extends Controller
         $currency = '';
         if ($paymentConfiguration) {
             $currency = $paymentConfiguration->currency_code;
-        } else {
+        }
+        else {
             $currency = $settings['currency_code'];
         }
 
@@ -708,16 +737,16 @@ class SubscriptionController extends Controller
 
         $over_due = $this->subscription->builder()->with('subscription_bill.transaction')
             ->whereHas('package', function ($q) {
-                $q->where('is_trial', 0);
-            })->get()->where('status', 'Over Due')->count();
+            $q->where('is_trial', 0);
+        })->get()->where('status', 'Over Due')->count();
         $unpaid = $this->subscription->builder()->with('subscription_bill.transaction')
             ->whereHas('package', function ($q) {
-                $q->where('is_trial', 0);
-            })->get()->whereIn('status', ['Failed', 'Pending', 'Unpaid'])->count();
+            $q->where('is_trial', 0);
+        })->get()->whereIn('status', ['Failed', 'Pending', 'Unpaid'])->count();
         $paid = $this->subscription->builder()->with('subscription_bill.transaction')
             ->whereHas('package', function ($q) {
-                $q->where('is_trial', 0);
-            })->get()->where('status', 'Paid')->count();
+            $q->where('is_trial', 0);
+        })->get()->where('status', 'Paid')->count();
         $data = [
             'registration' => $school->count(),
             'active' => $school->where('status', 1)->count(),
@@ -742,13 +771,15 @@ class SubscriptionController extends Controller
         $sql = $this->subscription->builder()->with('subscription_bill.transaction', 'school')->has('school')
             //search query
             ->when($search, function ($query) use ($search) {
-                $query->where(function ($query) use ($search) {
+            $query->where(function ($query) use ($search) {
                     $query->orwhere('name', 'LIKE', "%$search%")
                         ->orwhereHas('school', function ($q) use ($search) {
-                            $q->where('name', 'LIKE', "%$search%");
-                        });
-                });
-            });
+                    $q->where('name', 'LIKE', "%$search%");
+                }
+                );
+            }
+            );
+        });
 
         $total = $sql->count();
 
@@ -759,11 +790,13 @@ class SubscriptionController extends Controller
             $res = $res->whereIn('status', ['Over Due', 'Failed', 'Pending', 'Unpaid']);
             $total = count($res);
             $res = $res;
-        } else {
+        }
+        else {
             if ($request->status == 'Not Generated') {
                 $res = $res->where('status', 'Not Generated');
                 $total = count($res);
-            } else if ($request->status != 0) {
+            }
+            else if ($request->status != 0) {
                 $res = $res->where('status', $request->status);
                 $total = count($res);
             }
@@ -773,7 +806,7 @@ class SubscriptionController extends Controller
             $offset = $lastPage;
         }
         $res = $res->skip($offset)->take($limit);
-        $res = (object) $res;
+        $res = (object)$res;
 
         $bulkData = array();
         $bulkData['total'] = $total;
@@ -878,12 +911,13 @@ class SubscriptionController extends Controller
                 $this->subscription->update($upcoming_package->id, ['start_date' => Carbon::parse($end_date)->addDay()->format('Y-m-d'), 'school_id' => $request->school_id, 'end_date' => $upcoming_package_end_date]);
             }
 
-            $this->subscription->update((int) $request->id, ['end_date' => $end_date, 'school_id' => $request->school_id]);
+            $this->subscription->update((int)$request->id, ['end_date' => $end_date, 'school_id' => $request->school_id]);
 
             $this->cache->removeSchoolCache(config('constants.CACHE.SCHOOL.FEATURES'), $request->school_id);
             DB::commit();
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -902,7 +936,8 @@ class SubscriptionController extends Controller
             $this->subscriptionBill->update($request->id, ['due_date' => $due_date, 'school_id' => $request->school_id]);
             DB::commit();
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -923,11 +958,11 @@ class SubscriptionController extends Controller
 
             // Check previous pending bills
             $subscriptionBill = $this->subscriptionService->subscriptionPendingBill();
-                        
+
             if ($subscriptionBill) {
                 ResponseService::errorResponse('Kindly settle any outstanding payments from before');
             }
-            
+
             if ($type == 0) {
                 $paymentConfiguration = PaymentConfiguration::where('school_id', null)->where('status', 1)->first();
                 if (!$paymentConfiguration) {
@@ -978,7 +1013,8 @@ class SubscriptionController extends Controller
                     'url' => url('subscriptions/prepaid/package') . '/' . $id . '/' . $type . '/' . $isCurrentPlan
                 ];
                 ResponseService::successResponse('Data Fetched Successfully', $response);
-            } else {
+            }
+            else {
                 $this->subscriptionService->createSubscription($id, null, null, 1);
                 $response = [
                     'error' => false,
@@ -990,7 +1026,8 @@ class SubscriptionController extends Controller
 
 
             ResponseService::successResponse('Data Updated Successfully', $response);
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -1051,7 +1088,8 @@ class SubscriptionController extends Controller
             $this->cache->removeSchoolCache(config('constants.CACHE.SCHOOL.FEATURES'), $new_subscription->school_id);
             DB::commit();
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -1082,7 +1120,8 @@ class SubscriptionController extends Controller
             $this->cache->removeSchoolCache(config('constants.CACHE.SCHOOL.SETTINGS'), $subscription->school_id);
             DB::commit();
             ResponseService::successResponse('Auto-renewal successfully canceled');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, 'Subscription Controller -> Destroy method');
             ResponseService::errorResponse();
@@ -1145,7 +1184,8 @@ class SubscriptionController extends Controller
                     }
 
                     AddonSubscription::upsert($addons_data, ['school_id', 'feature_id', 'end_date'], ['price', 'start_date', 'status', 'subscription_id']);
-                } else {
+                }
+                else {
                     // Already set plan, update charges in subscription table
 
                     $update_subscription = $this->subscriptionService->createSubscription($check_subscription->package_id, $check_subscription->school_id, $check_subscription->id, 1);
@@ -1175,7 +1215,8 @@ class SubscriptionController extends Controller
 
             DB::commit();
             ResponseService::successResponse('bill generated successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, 'Subscription Controller -> Generate bill method');
             ResponseService::errorResponse();
@@ -1198,11 +1239,11 @@ class SubscriptionController extends Controller
 
         $sql = $this->subscriptionBill->builder()
             ->with([
-                'school:id,name,logo',
-                'transaction',
-                'addons',
-                'subscription.addons'
-            ])
+            'school:id,name,logo',
+            'transaction',
+            'addons',
+            'subscription.addons'
+        ])
             ->has('transaction')
             ->where('amount', '>', 0);
 
@@ -1211,13 +1252,15 @@ class SubscriptionController extends Controller
             $sql->where(function ($q) use ($search) {
                 $q->where('amount', 'LIKE', "%$search%")
                     ->orWhereHas('transaction', function ($q) use ($search) {
-                        $q->where('order_id', 'LIKE', "%$search%")
-                            ->orwhere('payment_id', 'LIKE', "%$search%")
-                            ->orWhere('payment_gateway', 'LIKE', "%$search%");
-                    })->orWhereHas('school', function ($q) use ($search) {
+                    $q->where('order_id', 'LIKE', "%$search%")
+                        ->orwhere('payment_id', 'LIKE', "%$search%")
+                        ->orWhere('payment_gateway', 'LIKE', "%$search%");
+                }
+                )->orWhereHas('school', function ($q) use ($search) {
                         $q->where('name', 'LIKE', "%$search%");
-                    });
-            });
+                    }
+                    );
+                });
         }
 
         $currency = '';
@@ -1227,7 +1270,8 @@ class SubscriptionController extends Controller
 
         if ($paymentConfiguration) {
             $currency = $paymentConfiguration->currency_code;
-        } else {
+        }
+        else {
             $currency = $settings['currency_code'];
         }
 
@@ -1252,7 +1296,8 @@ class SubscriptionController extends Controller
             $tempRow = $row->toArray();
             if (in_array($row->transaction->payment_gateway, ['Cash', 'Cheque'])) {
                 $amount = number_format($row->amount, 2);
-            } else {
+            }
+            else {
                 $amount = $this->subscriptionService->checkMinimumAmount(strtoupper($currency), number_format($row->amount, 2));
             }
 
@@ -1331,7 +1376,8 @@ class SubscriptionController extends Controller
 
             if ($subscriptionBill->transaction) {
                 $paymentTransaction = $this->paymentTransaction->update($subscriptionBill->payment_transaction_id, $billData);
-            } else {
+            }
+            else {
                 $paymentTransaction = $this->paymentTransaction->create($billData);
             }
 
@@ -1339,7 +1385,8 @@ class SubscriptionController extends Controller
 
             DB::commit();
             ResponseService::successResponse('Data Stored Successfully');
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             DB::rollBack();
             ResponseService::logErrorResponse($th);
             ResponseService::errorResponse();
@@ -1365,7 +1412,8 @@ class SubscriptionController extends Controller
 
             DB::commit();
             ResponseService::successResponse('Data Deleted Successfully');
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             DB::rollBack();
             ResponseService::logErrorResponse($th);
             ResponseService::errorResponse();
@@ -1407,9 +1455,11 @@ class SubscriptionController extends Controller
 
             if ($paymentConfiguration->payment_method == 'Stripe') {
                 return $this->subscriptionService->stripe_payment(null, $package_id, $type, $subscription_id);
-            } else if ($paymentConfiguration->payment_method == 'Paystack') {
+            }
+            else if ($paymentConfiguration->payment_method == 'Paystack') {
                 return $this->subscriptionService->paystack_payment(null, $package_id, $type, $subscription_id);
-            } else if ($paymentConfiguration->payment_method == 'Flutterwave') {
+            }
+            else if ($paymentConfiguration->payment_method == 'Flutterwave') {
                 return $this->subscriptionService->flutterwave_payment(null, $package_id, $type, $subscription_id);
             }
 
@@ -1417,7 +1467,8 @@ class SubscriptionController extends Controller
             // return $subscription = $this->prepaid_plan($package_id, $type, $subscription_id);
 
             return redirect()->route('dashboard')->with('error', trans('server_not_responding'));
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->route('dashboard')->with('error', trans('server_not_responding'));
             ResponseService::logErrorResponse($th);
@@ -1431,10 +1482,10 @@ class SubscriptionController extends Controller
             $paymentTransaction = $this->paymentTransaction->builder()->has('subscription_bill')
                 ->where('payment_status', "succeed")
                 ->select(
-                    DB::raw('MONTH(created_at) as month'),
-                    DB::raw('YEAR(created_at) as year'),
-                    DB::raw('SUM(amount) as total_amount')
-                )
+                DB::raw('MONTH(created_at) as month'),
+                DB::raw('YEAR(created_at) as year'),
+                DB::raw('SUM(amount) as total_amount')
+            )
                 ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('MONTH(created_at)'))
                 ->whereYear('created_at', $year)
                 ->get();
@@ -1456,7 +1507,8 @@ class SubscriptionController extends Controller
             }
 
             ResponseService::successResponse('Data Fetched Successfully', $months);
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             ResponseService::logErrorResponse($th);
             ResponseService::errorResponse();
         }
@@ -1468,7 +1520,8 @@ class SubscriptionController extends Controller
             $subscriptionBill = $this->subscriptionBill->findById($id);
             $subscriptionBill->delete();
             ResponseService::successResponse('Data deleted successfully');
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             ResponseService::logErrorResponse($th);
             ResponseService::errorResponse();
         }
@@ -1588,9 +1641,88 @@ class SubscriptionController extends Controller
             return redirect()->back()->with('success', trans('the_payment_has_been_completed_successfully'));
 
 
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             return $th;
         }
+    }
+
+    // ─── DOKU Payment Receipts ─────────────────────────────────────
+
+    public function doku_receipts()
+    {
+        ResponseService::noAnyRoleThenRedirect(['Super Admin', 'School Admin']);
+        return view('subscription.doku_receipts');
+    }
+
+    public function doku_receipt_list(Request $request)
+    {
+        ResponseService::noAnyRoleThenRedirect(['Super Admin', 'School Admin']);
+        $offset = request('offset', 0);
+        $limit = request('limit', 10);
+        $sort = request('sort', 'id');
+        $order = request('order', 'DESC');
+
+        $sql = DokuPaymentReceipt::owner()->with('school:id,name,logo');
+
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $sql->where(function ($q) use ($search) {
+                $q->where('invoice_number', 'LIKE', "%$search%")
+                    ->orWhere('school_name', 'LIKE', "%$search%")
+                    ->orWhere('school_email', 'LIKE', "%$search%")
+                    ->orWhere('package_name', 'LIKE', "%$search%")
+                    ->orWhere('amount', 'LIKE', "%$search%");
+            });
+        }
+
+        if (!empty($request->payment_status)) {
+            $sql->where('payment_status', $request->payment_status);
+        }
+
+        $total = $sql->count();
+        if ($offset >= $total && $total > 0) {
+            $lastPage = floor(($total - 1) / $limit) * $limit;
+            $offset = $lastPage;
+        }
+        $sql->orderBy($sort, $order)->skip($offset)->take($limit);
+        $res = $sql->get();
+
+        $bulkData = array();
+        $bulkData['total'] = $total;
+        $rows = array();
+        $no = 1;
+        foreach ($res as $row) {
+            $tempRow = $row->toArray();
+            $tempRow['no'] = $no++;
+            $tempRow['date'] = $row->payment_date ? $row->payment_date->format('Y-m-d H:i:s') : $row->created_at;
+            $tempRow['amount'] = number_format($row->amount, 2);
+            $tempRow['operate'] = '<a href="' . url('subscriptions/doku-receipts/pdf/' . $row->id) . '" target="_blank" class="btn btn-xs btn-gradient-info" title="Download PDF"><i class="fa fa-file-pdf-o"></i> PDF</a>';
+            $rows[] = $tempRow;
+        }
+        $bulkData['rows'] = $rows;
+        return response()->json($bulkData);
+    }
+
+    public function doku_receipt_pdf($id)
+    {
+        ResponseService::noAnyRoleThenRedirect(['Super Admin', 'School Admin']);
+        $receipt = DokuPaymentReceipt::owner()->findOrFail($id);
+
+        $settings = app(CachingService::class)->getSystemSettings()->toArray();
+        $settings['horizontal_logo'] = basename($settings['horizontal_logo'] ?? '');
+
+        $paymentConfiguration = PaymentConfiguration::where('school_id', null)->first();
+        $currency = '';
+        if ($paymentConfiguration) {
+            $currency = $paymentConfiguration->currency_code;
+        }
+        else {
+            $currency = $settings['currency_code'] ?? 'IDR';
+        }
+
+        $pdf = Pdf::loadView('subscription.doku_receipt_pdf', compact('receipt', 'settings', 'currency'));
+        return $pdf->stream('DOKU-Receipt-' . $receipt->invoice_number . '.pdf');
     }
 
 }

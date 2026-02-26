@@ -9,14 +9,15 @@ use App\Services\SubscriptionService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\SchoolInquiry;
+use App\Models\DokuPaymentReceipt;
 use App\Jobs\SetupSchoolDatabase;
 use Illuminate\Support\Str;
 use App\Models\School;
+use App\Models\Package;
 use App\Models\User;
 use App\Models\Role;
 
 use Illuminate\Support\Facades\Hash;
-use App\Models\Package;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
@@ -367,12 +368,42 @@ class PaymentApiController extends Controller
             Log::channel('webhook')->info('[DOKU WEBHOOK][STEP 5] Memanggil inquiry->update() — mengubah payment_status ke "success"...');
             $inquiry->update([
                 'payment_status' => 'success',
-                'payment_date' => now(),
             ]);
             Log::channel('webhook')->info('[DOKU WEBHOOK][STEP 5] Payment status TERUPDATE:', [
                 'inquiry_id' => $inquiry->id,
                 'new_payment_status' => 'success',
                 'payment_date' => now()->toDateTimeString(),
+            ]);
+
+            // ─── STEP 5b: Create DOKU Payment Receipt ───
+            Log::channel('webhook')->info('[DOKU WEBHOOK][STEP 5b] Creating DokuPaymentReceipt record...');
+            $dokuTransactionId = $payload['transaction']['id']
+                ?? $payload['transaction_id']
+                ?? null;
+
+            $packageName = null;
+            if ($inquiry->package_id) {
+                $pkg = Package::find($inquiry->package_id);
+                $packageName = $pkg ? $pkg->name : null;
+            }
+
+            $receipt = DokuPaymentReceipt::create([
+                'school_inquiry_id' => $inquiry->id,
+                'school_id' => null, // Will be updated after school creation
+                'invoice_number' => $invoiceNumber,
+                'amount' => $inquiry->price,
+                'payment_status' => 'success',
+                'payment_gateway' => 'DOKU',
+                'payment_date' => now(),
+                'doku_transaction_id' => $dokuTransactionId,
+                'raw_payload' => $payload,
+                'package_name' => $packageName,
+                'school_name' => $inquiry->school_name,
+                'school_email' => $inquiry->school_email,
+            ]);
+            Log::channel('webhook')->info('[DOKU WEBHOOK][STEP 5b] DokuPaymentReceipt TERCIPTA:', [
+                'receipt_id' => $receipt->id,
+                'invoice_number' => $invoiceNumber,
             ]);
 
             // ─── STEP 6: Buat school ───
@@ -413,6 +444,10 @@ class PaymentApiController extends Controller
                 'code' => $school->code,
                 'database_name' => $school->database_name,
             ]);
+
+            // Update receipt with actual school_id
+            $receipt->update(['school_id' => $school->id]);
+            Log::channel('webhook')->info('[DOKU WEBHOOK][STEP 6b] DokuPaymentReceipt school_id TERUPDATE ke: ' . $school->id);
 
             // ─── STEP 7: Buat admin user ───
             Log::channel('webhook')->info('[DOKU WEBHOOK][STEP 7] Memanggil User::where("email", "' . $inquiry->school_email . '") — cek apakah admin sudah ada...');
@@ -470,6 +505,7 @@ class PaymentApiController extends Controller
                 $school->id,
                 $inquiry->package_id,
                 $school->code,
+                null // Password was already hashed at inquiry time
             );
 
             Log::channel('webhook')->info('[DOKU WEBHOOK] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan');
@@ -661,6 +697,7 @@ class PaymentApiController extends Controller
                 $school->id,
                 $inquiry->package_id,
                 $school->code,
+                null // Password was already hashed at inquiry time
             );
 
             Log::channel('payment')->info('[ACTIVATE] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan');

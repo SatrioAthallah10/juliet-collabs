@@ -1231,7 +1231,8 @@ class SchoolController extends Controller
                 SetupSchoolDatabase::dispatchSync(
                     $schoolData->id,
                     $request->trial_package,
-                    null
+                    null,
+                    $request->school_password
                 );
 
                 Log::channel('registration')->info('[REGISTRASI] ✅ PROSES SELESAI (MODE DIRECT)');
@@ -1624,7 +1625,8 @@ class SchoolController extends Controller
                 SetupSchoolDatabase::dispatchSync(
                     $schoolData->id,
                     $inquiry->package_id,
-                    $request->school_code_prefix
+                    $request->school_code_prefix,
+                    null // Password was already hashed at inquiry time
                 );
 
                 $this->schoolInquiry->builder()->where('id', $request->edit_id)->delete();

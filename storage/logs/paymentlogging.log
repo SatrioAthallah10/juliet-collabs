@@ -442,3 +442,93 @@
 [2026-02-25 12:29:06] local.INFO: [VERIFY] Expiry: 2026-02-26 12:28:15  
 [2026-02-25 12:29:06] local.INFO: [VERIFY] ✅ PROSES SELESAI — menampilkan view verify.blade.php  
 [2026-02-25 12:29:06] local.INFO: ================================================================================  
+[2026-02-26 09:20:13] local.INFO: ================================================================================  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS] PROSES DIMULAI  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS] Fungsi dipanggil: PaymentApiController::process()  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS] Timestamp: 2026-02-26 09:20:13  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS] Data Input: {"inquiry_id":"8","amount":"6000000.00"} 
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 1] Menjalankan validasi input...  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 1] Validasi BERHASIL  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 2] Memanggil SchoolInquiry::find(8)...  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 2] Inquiry ditemukan: {"inquiry_id":8,"school_name":"uji coba tes struk pembayaran","school_email":"email@email.com","current_payment_status":"pending","price":"6000000.00"} 
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 3] Menggunakan invoice number YANG SUDAH ADA: JT-1772072392  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 4] Menyiapkan konfigurasi DOKU...  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 4] DOKU Config: {"client_id":"BRN-0233-1...","secret_key_exists":"YA","doku_url":"https://sandbox.doku.com"} 
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 5] Membuat request body DOKU Checkout V1...  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 5] Request Body: {"request_id":"1a4f37ed-f630-4824-b697-f95abdc19e0b","request_timestamp":"2026-02-26T02:20:13Z","request_target":"/checkout/v1/payment","order_amount":6000000,"invoice_number":"JT-1772072392","callback_url":"http://127.0.0.1:8000/payment/verify/8","customer_name":"uji coba tes struk pembayaran","customer_email":"email@email.com"} 
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 6] Memanggil hash("sha256") dan hash_hmac("sha256") — generate signature DOKU...  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 6] Signature berhasil di-generate  
+[2026-02-26 09:20:13] local.INFO: [PAYMENT PROCESS][STEP 7] Memanggil Http::post() — mengirim request ke DOKU API: https://sandbox.doku.com/checkout/v1/payment  
+[2026-02-26 09:20:15] local.INFO: [PAYMENT PROCESS][STEP 7] DOKU Response: {"http_status":200,"successful":"YA"} 
+[2026-02-26 09:20:15] local.INFO: [PAYMENT PROCESS] ✅ PROSES SELESAI — payment URL berhasil didapat  
+[2026-02-26 09:20:15] local.INFO: [PAYMENT PROCESS] Hasil yang tercipta: {"payment_url":"https://staging.doku.com/checkout-link-v2/21bfc1ad88d244c781d98017c619a57220262026092016940","invoice_number":"JT-1772072392"} 
+[2026-02-26 09:20:15] local.INFO: ================================================================================  
+[2026-02-26 09:20:43] local.INFO: ================================================================================  
+[2026-02-26 09:20:43] local.INFO: [VERIFY] PROSES DIMULAI  
+[2026-02-26 09:20:43] local.INFO: [VERIFY] Fungsi dipanggil: PaymentApiController::verify()  
+[2026-02-26 09:20:43] local.INFO: [VERIFY] Parameter: inquiry_id = 8  
+[2026-02-26 09:20:43] local.INFO: [VERIFY] Inquiry DITEMUKAN: {"inquiry_id":8,"school_name":"uji coba tes struk pembayaran","school_email":"email@email.com","invoice_number":"JT-1772072392","payment_status":"pending","price":"6000000.00"} 
+[2026-02-26 09:20:43] local.INFO: [VERIFY] Package: {"package_id":3,"package_name":"Paket Platinum","charges":6000000.0} 
+[2026-02-26 09:20:43] local.INFO: [VERIFY] Expiry: 2026-02-27 09:19:52  
+[2026-02-26 09:20:43] local.INFO: [VERIFY] ✅ PROSES SELESAI — menampilkan view verify.blade.php  
+[2026-02-26 09:20:43] local.INFO: ================================================================================  
+[2026-02-26 09:21:09] local.INFO: ================================================================================  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS] PROSES DIMULAI  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS] Fungsi dipanggil: PaymentApiController::process()  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS] Timestamp: 2026-02-26 09:21:09  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS] Data Input: {"inquiry_id":"8","amount":"6000000.00"} 
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 1] Menjalankan validasi input...  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 1] Validasi BERHASIL  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 2] Memanggil SchoolInquiry::find(8)...  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 2] Inquiry ditemukan: {"inquiry_id":8,"school_name":"uji coba tes struk pembayaran","school_email":"email@email.com","current_payment_status":"pending","price":"6000000.00"} 
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 3] Menggunakan invoice number YANG SUDAH ADA: JT-1772072392  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 4] Menyiapkan konfigurasi DOKU...  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 4] DOKU Config: {"client_id":"BRN-0233-1...","secret_key_exists":"YA","doku_url":"https://sandbox.doku.com"} 
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 5] Membuat request body DOKU Checkout V1...  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 5] Request Body: {"request_id":"165c0a21-8b03-4de2-b774-f5c80b8dfc53","request_timestamp":"2026-02-26T02:21:09Z","request_target":"/checkout/v1/payment","order_amount":6000000,"invoice_number":"JT-1772072392","callback_url":"http://127.0.0.1:8000/payment/verify/8","customer_name":"uji coba tes struk pembayaran","customer_email":"email@email.com"} 
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 6] Memanggil hash("sha256") dan hash_hmac("sha256") — generate signature DOKU...  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 6] Signature berhasil di-generate  
+[2026-02-26 09:21:09] local.INFO: [PAYMENT PROCESS][STEP 7] Memanggil Http::post() — mengirim request ke DOKU API: https://sandbox.doku.com/checkout/v1/payment  
+[2026-02-26 09:21:10] local.INFO: [PAYMENT PROCESS][STEP 7] DOKU Response: {"http_status":200,"successful":"YA"} 
+[2026-02-26 09:21:10] local.INFO: [PAYMENT PROCESS] ✅ PROSES SELESAI — payment URL berhasil didapat  
+[2026-02-26 09:21:10] local.INFO: [PAYMENT PROCESS] Hasil yang tercipta: {"payment_url":"https://staging.doku.com/checkout-link-v2/7091498e3dad4463baf6dfe259a05c4420262126092111894","invoice_number":"JT-1772072392"} 
+[2026-02-26 09:21:10] local.INFO: ================================================================================  
+[2026-02-26 09:38:58] local.INFO: ================================================================================  
+[2026-02-26 09:38:58] local.INFO: [VERIFY] PROSES DIMULAI  
+[2026-02-26 09:38:58] local.INFO: [VERIFY] Fungsi dipanggil: PaymentApiController::verify()  
+[2026-02-26 09:38:58] local.INFO: [VERIFY] Parameter: inquiry_id = 8  
+[2026-02-26 09:38:58] local.INFO: [VERIFY] Inquiry DITEMUKAN: {"inquiry_id":8,"school_name":"uji coba tes struk pembayaran","school_email":"email@email.com","invoice_number":"JT-1772072392","payment_status":"success","price":"6000000.00"} 
+[2026-02-26 09:38:58] local.INFO: [VERIFY] Package: {"package_id":3,"package_name":"Paket Platinum","charges":6000000.0} 
+[2026-02-26 09:38:58] local.INFO: [VERIFY] Expiry: 2026-02-27 09:19:52  
+[2026-02-26 09:38:58] local.INFO: [VERIFY] ✅ PROSES SELESAI — menampilkan view verify.blade.php  
+[2026-02-26 09:38:58] local.INFO: ================================================================================  
+[2026-02-26 11:04:44] local.INFO: ================================================================================  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS] PROSES DIMULAI  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS] Fungsi dipanggil: PaymentApiController::process()  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS] Timestamp: 2026-02-26 11:04:44  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS] Data Input: {"inquiry_id":"9","amount":"3000000.00"} 
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 1] Menjalankan validasi input...  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 1] Validasi BERHASIL  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 2] Memanggil SchoolInquiry::find(9)...  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 2] Inquiry ditemukan: {"inquiry_id":9,"school_name":"uji coba tes struk pembayaran dengan improvements","school_email":"email2@email.com","current_payment_status":"pending","price":"3000000.00"} 
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 3] Menggunakan invoice number YANG SUDAH ADA: JT-1772078665  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 4] Menyiapkan konfigurasi DOKU...  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 4] DOKU Config: {"client_id":"BRN-0233-1...","secret_key_exists":"YA","doku_url":"https://sandbox.doku.com"} 
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 5] Membuat request body DOKU Checkout V1...  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 5] Request Body: {"request_id":"ee00ff69-6ef9-439e-8a44-9afbc92f579c","request_timestamp":"2026-02-26T04:04:44Z","request_target":"/checkout/v1/payment","order_amount":3000000,"invoice_number":"JT-1772078665","callback_url":"http://127.0.0.1:8000/payment/verify/9","customer_name":"uji coba tes struk pembayaran dengan improvements","customer_email":"email2@email.com"} 
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 6] Memanggil hash("sha256") dan hash_hmac("sha256") — generate signature DOKU...  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 6] Signature berhasil di-generate  
+[2026-02-26 11:04:44] local.INFO: [PAYMENT PROCESS][STEP 7] Memanggil Http::post() — mengirim request ke DOKU API: https://sandbox.doku.com/checkout/v1/payment  
+[2026-02-26 11:04:46] local.INFO: [PAYMENT PROCESS][STEP 7] DOKU Response: {"http_status":200,"successful":"YA"} 
+[2026-02-26 11:04:46] local.INFO: [PAYMENT PROCESS] ✅ PROSES SELESAI — payment URL berhasil didapat  
+[2026-02-26 11:04:46] local.INFO: [PAYMENT PROCESS] Hasil yang tercipta: {"payment_url":"https://staging.doku.com/checkout-link-v2/d3de1fe880ec4f9197e70ef6a1e41d8220260426110447664","invoice_number":"JT-1772078665"} 
+[2026-02-26 11:04:46] local.INFO: ================================================================================  
+[2026-02-26 11:05:29] local.INFO: ================================================================================  
+[2026-02-26 11:05:29] local.INFO: [VERIFY] PROSES DIMULAI  
+[2026-02-26 11:05:29] local.INFO: [VERIFY] Fungsi dipanggil: PaymentApiController::verify()  
+[2026-02-26 11:05:29] local.INFO: [VERIFY] Parameter: inquiry_id = 9  
+[2026-02-26 11:05:29] local.INFO: [VERIFY] Inquiry DITEMUKAN: {"inquiry_id":9,"school_name":"uji coba tes struk pembayaran dengan improvements","school_email":"email2@email.com","invoice_number":"JT-1772078665","payment_status":"success","price":"3000000.00"} 
+[2026-02-26 11:05:29] local.INFO: [VERIFY] Package: {"package_id":2,"package_name":"Paket Gold","charges":3000000.0} 
+[2026-02-26 11:05:29] local.INFO: [VERIFY] Expiry: 2026-02-27 11:04:25  
+[2026-02-26 11:05:29] local.INFO: [VERIFY] ✅ PROSES SELESAI — menampilkan view verify.blade.php  
+[2026-02-26 11:05:29] local.INFO: ================================================================================  

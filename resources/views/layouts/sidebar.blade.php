@@ -1676,9 +1676,10 @@
         @endif
 
         {{-- ============================================ --}}
-        {{-- TRANSPORTATION MODULE GROUP --}}
+        {{-- [TRANSPORTATION_MODULE_DISABLED] --}}
+        {{-- TRANSPORTATION MODULE GROUP - DISABLED --}}
         {{-- ============================================ --}}
-
+        {{--
         @canany(['route-list', 'pickup-points-list', 'vehicles-list', 'RouteVehicle-list', 'driver-helper-list',
             'transportationRequests-list', 'transportationexpense-list'])
             <li class="nav-item">
@@ -1690,8 +1691,6 @@
                 </a>
                 <div class="collapse" id="transportation-menu">
                     <ul class="nav flex-column sub-menu">
-
-
                         @can('vehicles-list')
                             <li class="nav-item">
                                 <a href="{{ route('vehicles.index') }}" class="nav-link" data-access="@hasFeatureAccess('Transportation Module')">
@@ -1757,6 +1756,8 @@
                 </div>
             </li>
         @endrole
+        --}}
+        {{-- [END TRANSPORTATION_MODULE_DISABLED] --}}
 
 
         {{-- ============================================ --}}
@@ -2053,7 +2054,7 @@
         {{-- Certificate & ID Card GROUP --}}
         {{-- ============================================ --}}
 
-        @role('School Admin')
+        @hasanyrole(['School Admin', 'Super Admin'])
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#subscription-menu" aria-expanded="false"
                     aria-controls="subscription-menu">
@@ -2082,11 +2083,17 @@
                                 <span class="menu-title">{{ __('addons') }}</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('subscriptions/doku-receipts') }}">
+                                <i class="fa fa-file-text-o menu-icon"></i>
+                                <span class="menu-title">{{ __('Doku Receipts') }}</span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
             </li>
-        @endrole
+        @endhasanyrole
 
         {{-- Email Schools (Super Admin) --}}
         @canany(['custom-school-email'])
