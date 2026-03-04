@@ -1,0 +1,41 @@
+[2026-02-23 08:51:33] local.INFO: Registration method HIT  
+[2026-02-23 08:51:33] local.INFO: Request Data:  
+[2026-02-23 09:01:00] local.INFO: Detected N+1 Query  
+[2026-02-23 09:01:00] local.INFO: Model: Spatie\Permission\Models\Permission
+Relation: Spatie\Permission\Models\Role
+Num-Called: 2
+Call-Stack:
+#17 \vendor\spatie\laravel-permission\src\PermissionRegistrar.php:266
+#18 \vendor\spatie\laravel-permission\src\PermissionRegistrar.php:304
+#19 \vendor\spatie\laravel-permission\src\PermissionRegistrar.php:174
+#20 \vendor\laravel\framework\src\Illuminate\Cache\Repository.php:396
+#21 \vendor\spatie\laravel-permission\src\PermissionRegistrar.php:173
+#22 \vendor\spatie\laravel-permission\src\PermissionRegistrar.php:199
+#23 \vendor\spatie\laravel-permission\src\Models\Permission.php:145
+#24 \vendor\spatie\laravel-permission\src\Models\Permission.php:155
+#25 \vendor\spatie\laravel-permission\src\Models\Permission.php:112
+#26 \vendor\spatie\laravel-permission\src\Traits\HasPermissions.php:445
+#27 \vendor\spatie\laravel-permission\src\Traits\HasPermissions.php:349
+#28 \vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:791
+#29 \vendor\spatie\laravel-permission\src\Traits\HasPermissions.php:344
+#30 \vendor\spatie\laravel-permission\src\Traits\HasPermissions.php:371
+#31 \vendor\spatie\laravel-permission\src\Traits\HasPermissions.php:409
+#32 \app\Http\Controllers\RoleController.php:138
+#33 \vendor\laravel\framework\src\Illuminate\Routing\Controller.php:54
+#34 \vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php:43
+#35 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:259
+#36 \vendor\laravel\framework\src\Illuminate\Routing\Route.php:205
+#37 \vendor\laravel\framework\src\Illuminate\Routing\Router.php:806
+#38 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:144
+#39 \vendor\spatie\laravel-permission\src\Middlewares\PermissionMiddleware.php:24
+#40 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#41 \vendor\spatie\laravel-permission\src\Middlewares\PermissionMiddleware.php:24
+#42 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#43 \app\Http\Middleware\CheckTwoFactorAuthenticated.php:41
+#44 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#45 \app\Http\Middleware\CheckForMaintenanceMode.php:32
+#46 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#47 \app\Http\Middleware\MustVerifyEmail.php:36
+#48 \vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php:183
+#49 \app\Http\Middleware\SwitchDatabase.php:32
+  
