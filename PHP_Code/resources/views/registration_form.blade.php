@@ -54,6 +54,34 @@
                                             <input type="text" name="school_tagline" id="tagline" placeholder="{{ __('tagline') }}" required>
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div class="inputWrapper">
+                                            <label for="package">{{ __('package') }} <span class="text-danger">*</span></label>
+                                            {{-- <input type="text" name="package_name" id="package" placeholder="{{ __('package') }}" required> --}}
+                                            <select 
+                                                name="package_id" 
+                                                id="package_id" 
+                                                class="form-control"
+                                                {{ (isset($packages) && $packages->count()) ? 'required' : 'disabled' }}
+                                            >
+
+                                                @if(isset($packages) && $packages->count())
+                                                    <option value="" disabled selected>Select Package</option>
+
+                                                    @foreach($packages as $package)
+                                                        <option value="{{ $package->id }}">
+                                                            {{ $package->name }}
+                                                        </option>
+                                                    @endforeach
+
+                                                @else
+                                                    <option value="">Package belum tersedia</option>
+                                                @endif
+
+                                            </select>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 @if(isset($extraFields) && count($extraFields))     
                                     <div class="row other-details mt-3">
@@ -179,3 +207,40 @@
         </div>
     </div>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.querySelector(".school-registration");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault(); // stop submit normal
+
+        let formData = new FormData(form);
+
+        fetch(form.action, {
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(response => {
+
+            console.log("SERVER RESPONSE:", response);
+
+            if (response.status) {
+                window.location.href = response.redirect;
+            } else {
+                alert(response.message ?? "Registration failed");
+            }
+
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Something went wrong");
+        });
+    });
+
+});
+</script>

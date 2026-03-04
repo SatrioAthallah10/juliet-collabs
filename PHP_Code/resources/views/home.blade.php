@@ -29,7 +29,7 @@
                 <div class="navLogoWrapper">
                     <div class="navLogo">
                         <a href="{{ url('/') }}">
-                            <img src="{{ $settings['horizontal_logo'] ?? asset('assets/landing_page_images/Logo1.svg') }}"
+                            <img src="{{ $settings['horizontal_logo'] ?? asset('assets/landing_page_images/Logo1.png') }}"
                                 class="logo" alt="">
                         </a>
 
@@ -57,7 +57,7 @@
                         <li>
                             <a href="#contact-us">{{ __('contact') }}</a>
                         </li>
-                        @if (count($guidances))
+                        {{-- @if (count($guidances))
                             <li>
                                 <div class="dropdown">
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -93,7 +93,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
 
                     </ul>
                     <div class="hamburg">
@@ -103,9 +103,11 @@
                 </div>
 
                 <div class="loginBtnsWrapper">
-                    <button class="commonBtn redirect-login">{{ __('login') }}</button>
-                    <button class="commonBtn" id="trialBtn" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop">{{ __('start_trial') }}</button>
+                   <button class="commonBtn redirect-login" onclick="window.location.href='{{ route('login') }}'">
+                        {{ __('Masuk') }}
+                    </button>
+                    {{-- <button class="commonBtn" id="trialBtn" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">{{ __('start_trial') }}</button> --}}
                     {{-- <a href="{{ url('school/registration') }}" class="commonBtn">{{ __('start_trial') }}</a> --}}
                 </div>
             </div>
@@ -114,7 +116,7 @@
                 <div class="offcanvas-header">
                     <div class="navLogoWrapper">
                         <div class="navLogo">
-                            <img src="{{ $settings['horizontal_logo'] ?? asset('assets/landing_page_images/Logo1.svg') }}"
+                            <img src="{{ $settings['horizontal_logo'] ?? asset('assets/landing_page_images/Logo1.png') }}"
                                 alt="">
                         </div>
                     </div>
@@ -143,7 +145,7 @@
                         <li>
                             <a href="#contact-us">{{ __('contact') }}</a>
                         </li>
-                        @if (count($guidances))
+                        {{-- @if (count($guidances))
                             <li>
                                 <div class="dropdown">
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -179,14 +181,15 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
 
                     </ul>
 
                     {{-- <div class="loginBtnsWrapper"> --}}
-                        <button class="commonBtn redirect-login">{{ __('login') }}</button>
-                        <button class="commonBtn" data-bs-toggle="modal" data-bs-dismiss="offcanvas"
-                            data-bs-target="#staticBackdrop">{{ __('start_trial') }}</button>
+                    <button class="commonBtn redirect-login" onclick="window.location.href='{{ route('login') }}'">
+                        {{ __('Masuk') }}
+                    </button>                        {{-- <button class="commonBtn" data-bs-toggle="modal" data-bs-dismiss="offcanvas"
+                            data-bs-target="#staticBackdrop">{{ __('start_trial') }}</button> --}}
                         {{--
                     </div> --}}
                 </div>
@@ -205,27 +208,32 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-6">
                                 <div class="flex_column_start">
-                                    <span class="commonTitle">{{ $settings['system_name'] ?? 'eSchool SaaS' }}</span>
+                                    <span class="commonTitle">Juliet - The Next Gen Education</span>
                                     <span class="commonDesc">
-                                        {{ $settings['tag_line'] }}
+                                        {{-- {{ $settings['tag_line'] }} --}}
+                                        Transformasi Manajemen Sekolah Bersama Juliet
                                     </span>
                                     <span class="commonText">
-                                        {{ $settings['hero_description'] }}</span>
+                                        {{-- {{ $settings['hero_description'] }}</span> --}}
+                                        Rasakan masa depan pendidikan dengan platform Juliet kami. Sederhanakan absensi, tugas, ujian, dan banyak lagi. Tingkatkan efisiensi dan keterlibatan sekolah Anda.
                                     <div class="d-flex">
+                                        {{-- <a href="#pricing" class="commonBtn">
+                                            {{ __('Daftarkan sekolah anda') }}
+                                        </a> --}}
+
                                         <button class="commonBtn" data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop">{{ __('register_your_school') }}</button>
-                                        @if ($isDemoSchool == 1)
-                                            <a href="{{ $demoSchoolUrl ?? url('/') }}" target="_blank"
-                                                class="commonBtn mx-5">{{ __('demo_school') }}</a>
-                                        @endif
+                                            data-bs-target="#staticBackdrop">
+                                            {{ __('Daftarkan sekolah anda') }}
+                                        </button>
+                                
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12 col-lg-6 heroImgWrapper">
                                 <div class="heroImg">
-                                    <img src="{{ $settings['home_image'] ?? asset('assets/landing_page_images/heroImg.png') }}"
+                                    <img src="assets/landing_page_images/heroImg.png"
                                         alt="">
-                                    <div class="topRated card">
+                                    {{-- <div class="topRated card">
                                         <div>
                                             <img src="{{ $settings['hero_title_2_image'] ?? asset('assets/landing_page_images/user.png') }}"
                                                 alt="">
@@ -240,7 +248,7 @@
                                         <div class="textWrapper">
                                             <span>{{ $settings['hero_title_1'] }}</span>
                                         </div>
-                                    @endif
+                                    @endif --}}
 
                                 </div>
                             </div>
@@ -254,46 +262,82 @@
         </section>
         <!-- heroSection ends here  -->
 
-        <section class="features commonMT container" id="features">
-            <div class="row">
-                <div class="col-12">
-                    <div class="sectionTitle">
-                        <span>{{ __('explore_our_top_features') }}</span>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="row cardWrapper">
-                        @foreach ($features as $key => $feature)
-                            @if ($key < 9)
-                                <div class="col-sm-12 col-md-6 col-lg-4">
-                                    <div class="card">
-                                        <div>
-                                            <img src="{{ asset('assets/landing_page_images/features/') }}/{{ $feature->name }}.svg"
-                                                alt="">
-                                        </div>
-                                        <div><span>{{ __($feature->name) }}</span></div>
-                                    </div>
+       <section class="features commonMT container" id="features">
+    @php
+        // TRANSLASI LANGSUNG - Tidak pakai Laravel translation
+        $featureTranslations = [
+            'Student Management' => 'Manajemen Siswa',
+            'Academics Management' => 'Manajemen Akademik',
+            'Slider Management' => 'Manajemen Slider',
+            'Teacher Management' => 'Manajemen Guru',
+            'Session Year Management' => 'Manajemen Tahun Ajaran',
+            'Holiday Management' => 'Manajemen Hari Libur',
+            'Timetable Management' => 'Manajemen Jadwal Pelajaran',
+            'Attendance Management' => 'Manajemen Absensi',
+            'Exam Management' => 'Manajemen Ujian',
+            'Lesson Management' => 'Manajemen Pelajaran',
+            'Assignment Management' => 'Manajemen Tugas',
+            'Announcement Management' => 'Manajemen Pengumuman',
+            'Staff Management' => 'Manajemen Staf',
+            'Expense Management' => 'Manajemen Pengeluaran',
+            'Staff Leave Management' => 'Manajemen Cuti Staf',
+            'Fees Management' => 'Manajemen Biaya',
+            'School Gallery Management' => 'Manajemen Galeri Sekolah',
+            'ID Card - Certificate Generation' => 'Pembuatan ID Card & Sertifikat',
+            'Website Management' => 'Manajemen Website',
+            'Chat Module' => 'Modul Chat',
+            'Transportation Module' => 'Modul Transportasi',
+            'Staff Attendance Management' => 'Manajemen Absensi Staf',
+        ];
+    @endphp
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="sectionTitle">
+                <span>Fitur unggulan kami</span>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row cardWrapper">
+                @foreach ($features as $key => $feature)
+                    @php
+                        // Bersihkan nama fitur (trim spasi)
+                        $featureName = trim($feature->name);
+                        // Ambil translasi Indonesia, kalau ga ada pakai English
+                        $displayName = $featureTranslations[$featureName] ?? $featureName;
+                    @endphp
+                    
+                    @if ($key < 9)
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card">
+                                <div>
+                                    <img src="{{ asset('assets/landing_page_images/features/') }}/{{ $feature->name }}.svg"
+                                        alt="{{ $displayName }}">
                                 </div>
-                            @else
-                                <div class="col-sm-12 col-md-6 col-lg-4 default-feature-list" style="display: none">
-                                    <div class="card">
-                                        <div>
-                                            <img src="{{ asset('assets/landing_page_images/features/') }}/{{ $feature->name }}.svg"
-                                                alt="">
-                                        </div>
-                                        <div><span>{{ __($feature->name) }}</span></div>
-                                    </div>
-                                </div>
-                            @endif
-
-                        @endforeach
-                        <div class="col-12">
-                            <button class="commonBtn view-more-feature" value="1">{{ __('view_more_features') }}</button>
+                                <div><span>{{ $displayName }}</span></div>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col-sm-12 col-md-6 col-lg-4 default-feature-list" style="display: none">
+                            <div class="card">
+                                <div>
+                                    <img src="{{ asset('assets/landing_page_images/features/') }}/{{ $feature->name }}.svg"
+                                        alt="{{ $displayName }}">
+                                </div>
+                                <div><span>{{ $displayName }}</span></div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+                
+                <div class="col-12">
+                    <button class="commonBtn view-more-feature" value="1">Lihat fitur lainnya</button>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+<!-- features ends here  -->
         <!-- features ends here  -->
 
         {{-- @if ($settings['display_school_logos'] ?? '1')
@@ -353,7 +397,7 @@
             <section class="container">
                 <div class="col-12">
                     <div class="sectionTitle">
-                        <span>{{ __('schools') }}</span>
+                        <span>{{ __('Sekolah') }}</span>
                     </div>
                 </div>
                 <div class="row py-3">
@@ -476,25 +520,29 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="whyBestTextWrapper">
-                        <p>{{ $settings['about_us_title'] }}</p>
-                        <p>{{ $settings['about_us_heading'] }}</p>
+                        {{-- <p>{{ $settings['about_us_title'] }}</p> --}}
+                        <p>
+                            {{-- {{ $settings['about_us_heading'] }} --}}
+                            Mengapa kami yang terbaik?
+                        </p>
                     </div>
                     <p class="whyBestPara">
-                        {{ $settings['about_us_description'] }}
+                        {{-- {{ $settings['about_us_description'] }} --}}
+                        Juliet menghadirkan sistem digital terintegrasi yang membantu sekolah mengelola pembelajaran dan manajemen akademik secara lebih efektif dan terstruktur.
                     </p>
 
                     <div class="listWrapper">
-                        @foreach ($about_us_lists as $point)
+                        {{-- @foreach ($about_us_lists as $point)
                             <span>
                                 <i class="fa-regular fa-circle-check"></i>
                                 {{ $point }}
                             </span>
-                        @endforeach
+                        @endforeach --}}
                     </div>
                 </div>
 
                 <div class="col-lg-6">
-                    <img src="{{ $settings['about_us_image'] ?? asset('assets/landing_page_images/whyBestImg.png') }}"
+                    <img src="assets/landing_page_images/whyBestImg.png"
                         alt="">
                 </div>
             </div>
@@ -506,7 +554,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="sectionTitle">
-                            <span>{{ __('flexible_pricing_packages') }}</span>
+                            <span>{{ __('Paket Harga Fleksibel') }}</span>
 
                         </div>
                     </div>
@@ -548,17 +596,20 @@
                                                                     {{ number_format($package->no_of_staffs, 0) }} {{ __('staff_limit') }}
                                                                 </span>
                                                                 <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
+                                                                    {{-- {{ $settings['currency_symbol'] ??  }} --}}
+                                                                    Idr
                                                                     {{ number_format($package->charges, 2) }} {{ __('package_amount') }}
                                                                 </span>
                                                             @elseif($package->type == 1 && $package->is_trial == 0)
                                                                 <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
+                                                                    {{-- {{ $settings['currency_symbol'] ?? '$' }} --}}
+                                                                    Idr
                                                                     {{ number_format($package->student_charge, 2) }}
                                                                     {{ __('per_student_charges') }}
                                                                 </span>
                                                                 <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
+                                                                    Idr
+                                                                    {{-- {{ $settings['currency_symbol'] ?? '$' }} --}}
                                                                     {{ number_format($package->staff_charge, 2) }}
                                                                     {{ __('per_staff_charges') }}
                                                                 </span>
@@ -582,8 +633,14 @@
                                                                 @endif
                                                             @endforeach
                                                         </div>
-                                                        <button class="pricingBtn" data-bs-toggle="modal"
-                                                            data-bs-target="#staticBackdrop">{{ __('get_started') }}</button>
+                                                        <button 
+                                                            class="pricingBtn" 
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#staticBackdrop"
+                                                            data-package-id="{{ $package->id }}"
+                                                            data-package-name="{{ $package->name }}">
+                                                            {{ __('get_started') }}
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -618,17 +675,20 @@
                                                                     {{ number_format($package->no_of_staffs, 0) }} {{ __('staff_limit') }}
                                                                 </span>
                                                                 <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
+                                                                    {{-- {{ $settings['currency_symbol'] ?? '$' }} --}}
+                                                                    Idr
                                                                     {{ number_format($package->charges, 2) }} {{ __('package_amount') }}
                                                                 </span>
                                                             @elseif($package->type == 1 && $package->is_trial == 0)
                                                                 <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
+                                                                    Idr
+                                                                    {{-- {{ $settings['currency_symbol'] ?? '$' }} --}}
                                                                     {{ number_format($package->student_charge, 2) }}
                                                                     {{ __('per_student_charges') }}
                                                                 </span>
                                                                 <span>
-                                                                    {{ $settings['currency_symbol'] ?? '$' }}
+                                                                    Idr
+                                                                    {{-- {{ $settings['currency_symbol'] ?? '$' }} --}}
                                                                     {{ number_format($package->staff_charge, 2) }}
                                                                     {{ __('per_staff_charges') }}
                                                                 </span>
@@ -652,8 +712,14 @@
                                                                 @endif
                                                             @endforeach
                                                         </div>
-                                                        <button class="pricingBtn" data-bs-toggle="modal"
-                                                            data-bs-target="#staticBackdrop">{{ __('get_started') }}</button>
+                                                        <button 
+                                                            class="pricingBtn" 
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#staticBackdrop"
+                                                            data-package-id="{{ $package->id }}"
+                                                            data-package-name="{{ $package->name }}">
+                                                            {{ __('get_started') }}
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -672,7 +738,7 @@
         </section>
         <!-- pricing ends here  -->
 
-        @if (isset($settings['custom_package_status']) && $settings['custom_package_status'])
+        {{-- @if (isset($settings['custom_package_status']) && $settings['custom_package_status'])
             <section class="customPack container commonMT">
                 <div class="wrapper">
                     <div class="row">
@@ -692,7 +758,7 @@
                     </div>
                 </div>
             </section>
-        @endif
+        @endif --}}
 
         @if (count($faqs))
             <section class="faqs commonMT" id="faq">
@@ -736,93 +802,101 @@
         @endif
         <!-- faqs ends here  -->
 
-        <section class="getInTouch commonMT" id="contact-us">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="sectionTitle">
-                            <span class="greenText">{{ __('lets_get_in_touch') }}</span>
-                            <span>{{ __('have_a_question_or_just_want_to_say_hi_Wed_love_to_hear_from_you') }}
-                            </span>
-
-                        </div>
-                        <div class="col-12">
-                            <div class="row wrapper">
-                                <div class="col-lg-6">
-                                    <form action="{{ url('contact') }}" method="post" role="form"
-                                        class="php-email-form mb-5 create-form-with-captcha">
-                                        @csrf
-                                        <div class="card">
-                                            <div>
-                                                <input type="text" required name="name" id="name"
-                                                    placeholder="{{ __('enter_your_name') }}">
-                                            </div>
-                                            <div>
-                                                <input type="email" required name="email" id="email"
-                                                    placeholder="{{ __('enter_your_email') }}">
-                                            </div>
-                                            <div>
-                                                <textarea name="message" required id="message" cols="30" rows="6"
-                                                    placeholder="{{ __('send_your_message') }}"></textarea>
-                                            </div>
-                                            @if (config('services.recaptcha.key') ?? '')
-                                                <div>
-                                                    <div class="g-recaptcha" data-sitekey={{config('services.recaptcha.key')}}>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            <div>
-                                                <input type="submit" class="commonBtn" value="{{ __('send') }}">
-                                            </div>
-                                            <div>
-                                                <img src="{{ asset('assets/landing_page_images/GetInTouchDots.png') }}"
-                                                    class="sideImg dots" alt="">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-lg-6 infoBox">
-                                    <div class="infoWrapper">
-                                        <div>
-                                            <span class="icon"><i class="fa-solid fa-phone-volume"></i></span>
-                                        </div>
-                                        <div>
-                                            <span>{{ __('phone') }}</span>
-                                            <span>{{ __('mobile') }} : {{ $settings['mobile'] ?? '' }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="infoWrapper">
-                                        <div>
-                                            <span class="icon"><i class="fa-solid fa-envelope-open-text"></i></span>
-                                        </div>
-                                        <div>
-                                            <span>{{ __('email') }}</span>
-                                            <span>{{ $settings['mail_send_from'] ?? 'example@gmail.com' }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="infoWrapper">
-                                        <div>
-                                            <span class="icon"><i class="fa-solid fa-location-dot"></i></span>
-                                        </div>
-                                        <div>
-                                            <span>{{ __('location') }}</span>
-                                            <span>{{ $settings['address'] ?? '' }}</span>
-                                        </div>
+       <section class="getInTouch commonMT" id="contact-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="sectionTitle">
+                    <span class="greenText">{{ __('Mari tetap terhubung') }}</span>
+                    <span>{{ __('Punya pertanyaan atau sekadar ingin menyapa? Kami senang mendengar kabar dari Anda.') }}
+                    </span>
+                </div>
+                <div class="col-12">
+                    <div class="row wrapper">
+                        <div class="col-lg-6">
+                            <form action="{{ url('contact') }}" method="post" role="form"
+                                class="php-email-form mb-5 create-form-with-captcha">
+                                @csrf
+                                <div class="card">
+                                    <div>
+                                        <input type="text" required name="name" id="name"
+                                            placeholder="{{ __('enter_your_name') }}">
                                     </div>
                                     <div>
-                                        <img src="{{ asset('assets/landing_page_images/lineCircle.png') }}"
-                                            class="lineCircle sideImg" alt="">
+                                        <input type="email" required name="email" id="email"
+                                            placeholder="{{ __('enter_your_email') }}">
+                                    </div>
+                                    <div>
+                                        <textarea name="message" required id="message" cols="30" rows="6"
+                                            placeholder="{{ __('send_your_message') }}"></textarea>
+                                    </div>
+                                    @if (config('services.recaptcha.key') ?? '')
+                                        <div>
+                                            <div class="g-recaptcha" data-sitekey={{config('services.recaptcha.key')}}>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <div>
+                                        <input type="submit" class="commonBtn" value="{{ __('send') }}">
+                                    </div>
+                                    <div>
+                                        <img src="{{ asset('assets/landing_page_images/GetInTouchDots.png') }}"
+                                            class="sideImg dots" alt="">
                                     </div>
                                 </div>
+                            </form>
+                        </div>
+                        
+                        <div class="col-lg-6 infoBox">
+                            <!-- TELEPON - Click to Call -->
+                            <a href="tel:+6285700609999" class="infoWrapper" style="text-decoration: none; color: inherit; cursor: pointer; transition: all 0.3s ease;">
+                                <div>
+                                    <span class="icon"><i class="fa-solid fa-phone-volume"></i></span>
+                                </div>
+                                <div>
+                                    <span>{{ __('Telepon') }}</span>
+                                    <span>{{ __('mobile') }} : 085700609999</span>
+                                </div>
+                            </a>
+
+                            <!-- EMAIL - Click to Send Email -->
+                            <a href="mailto:support@juliet.co.id" class="infoWrapper" style="text-decoration: none; color: inherit; cursor: pointer; transition: all 0.3s ease;">
+                                <div>
+                                    <span class="icon"><i class="fa-solid fa-envelope-open-text"></i></span>
+                                </div>
+                                <div>
+                                    <span>{{ __('Email') }}</span>
+                                    <span>support@juliet.co.id</span>
+                                </div>
+                            </a>
+
+                            <!-- LOKASI - Click to Open Google Maps -->
+                            <a href="https://maps.google.com/?q=Jl.+Sono+Kembang+No.4-6,+Embong+Kaliasin,+Kec.+Genteng,+Surabaya,+Jawa+Timur+60271" 
+                               target="_blank" 
+                               class="infoWrapper" 
+                               style="text-decoration: none; color: inherit; cursor: pointer; transition: all 0.3s ease;">
+                                <div>
+                                    <span class="icon"><i class="fa-solid fa-location-dot"></i></span>
+                                </div>
+                                <div>
+                                    <span>{{ __('Lokasi') }}</span>
+                                    <span>Jl. Sono Kembang No.4-6, Embong Kaliasin, Kec. Genteng, Surabaya, Jawa Timur 60271</span>
+                                </div>
+                            </a>
+
+                            <div>
+                                <img src="{{ asset('assets/landing_page_images/lineCircle.png') }}"
+                                    class="lineCircle sideImg" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
 
-        </section>
-
-        <section class="ourApp container commonMT">
+        {{-- <section class="ourApp container commonMT">
             <div class="row">
                 <div class="col-lg-6">
                     <img src="{{ $settings['download_our_app_image'] ?? asset('assets/landing_page_images/ourApp.png') }}"
@@ -830,9 +904,11 @@
                 </div>
                 <div class="col-lg-6 content">
                     <div class="text">
-                        <span class="title">{{ __('download_our_app_now') }}</span>
-                        <span>
-                            {{ $settings['download_our_app_description'] ?? '' }}
+                        <span class="title">{{ __('Download aplikasi kami sekarang') }}</span>
+                        <span> --}}
+                            {{-- {{ $settings['download_our_app_description'] ?? '' }} --}}
+                                {{-- Satu platform digital yang membantu sekolah mengelola administrasi dan pembelajaran secara terpusat, muda digunakan, dan sesuai kebutuhan operasional sehari-hari.
+
                         </span>
                     </div>
                     <div class="storeImgs">
@@ -847,7 +923,7 @@
     </div>
 
 
-@endsection
+@endsection --}}
 
 @section('script')
     <script async src="https://www.google.com/recaptcha/api.js"></script>
@@ -936,3 +1012,139 @@
         @endif
     </script>
 @endsection
+
+<script>
+// PACKAGE LOCK FUNCTIONALITY
+// ============================================
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("staticBackdrop");
+    const packageSelect = document.getElementById("package_id");
+
+    // Validasi element ada
+    if (!modal || !packageSelect) {
+        console.warn("Modal atau package select tidak ditemukan");
+        return;
+    }
+
+    // Event saat modal dibuka
+    modal.addEventListener("show.bs.modal", function (event) {
+        const button = event.relatedTarget;
+        if (!button) return;
+
+        const packageId = button.getAttribute("data-package-id");
+        const packageName = button.getAttribute("data-package-name");
+
+        if (packageId && packageName) {
+            // Lock package
+            lockPackage(packageId, packageName);
+        } else {
+            // Unlock package
+            unlockPackage();
+        }
+    });
+
+    // Event saat modal ditutup
+    modal.addEventListener("hidden.bs.modal", function () {
+        unlockPackage();
+    });
+
+    // Function lock package
+    function lockPackage(packageId, packageName) {
+        // Set value
+        packageSelect.value = packageId;
+        
+        // Disable dropdown
+        packageSelect.disabled = true;
+        packageSelect.style.backgroundColor = "#e9ecef";
+        packageSelect.style.cursor = "not-allowed";
+        packageSelect.style.opacity = "0.7";
+        
+        // Buat hidden input untuk submit
+        let hiddenInput = document.getElementById("package_id_hidden");
+        if (!hiddenInput) {
+            hiddenInput = document.createElement("input");
+            hiddenInput.type = "hidden";
+            hiddenInput.name = "package_id";
+            hiddenInput.id = "package_id_hidden";
+            packageSelect.parentElement.appendChild(hiddenInput);
+        }
+        hiddenInput.value = packageId;
+        
+        // Tampilkan badge
+        showBadge(packageName);
+    }
+
+    // Function unlock package
+    function unlockPackage() {
+        packageSelect.disabled = false;
+        packageSelect.style.backgroundColor = "";
+        packageSelect.style.cursor = "";
+        packageSelect.style.opacity = "";
+        packageSelect.value = "";
+        
+        // Hapus hidden input
+        const hiddenInput = document.getElementById("package_id_hidden");
+        if (hiddenInput) {
+            hiddenInput.remove();
+        }
+        
+        // Hapus badge
+        removeBadge();
+    }
+
+    // Function tampilkan badge
+    function showBadge(packageName) {
+        const wrapper = packageSelect.parentElement;
+        let badge = wrapper.querySelector('.package-locked-badge');
+        
+        // if (!badge) {
+        //     badge = document.createElement('div');
+        //     badge.className = 'package-locked-badge';
+        //     badge.style.cssText = `
+        //         margin-top: 10px;
+        //         padding: 12px 16px;
+        //         background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        //         border: 1px solid #28a745;
+        //         border-radius: 8px;
+        //         color: #155724;
+        //         font-size: 14px;
+        //         font-weight: 500;
+        //         display: flex;
+        //         align-items: center;
+        //         gap: 10px;
+        //         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        //     `;
+        //     wrapper.appendChild(badge);
+        // }
+        
+        // badge.innerHTML = `
+        //     <i class="fa-solid fa-lock" style="color: #28a745;"></i>
+        //     <div style="flex: 1;">
+        //         <div style="font-size: 12px; opacity: 0.8;">Package terpilih:</div>
+        //         <div style="font-weight: 600; color: #28a745;">${packageName}</div>
+        //     </div>
+        //     <i class="fa-solid fa-check-circle" style="color: #28a745;"></i>
+        // `;
+    }
+
+    // Function hapus badge
+    function removeBadge() {
+        const wrapper = packageSelect.parentElement;
+        const badge = wrapper.querySelector('.package-locked-badge');
+        if (badge) {
+            badge.remove();
+        }
+    }
+
+    // Prevent manual change saat disabled
+    packageSelect.addEventListener("mousedown", function(e) {
+        if (this.disabled) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // console.log("✅ Package Lock System ready");
+    
+});
+</script>

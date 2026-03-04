@@ -110,210 +110,54 @@ class StaffController extends Controller
         ResponseService::noFeatureThenSendJson('Staff Management');
         ResponseService::noPermissionThenSendJson('staff-create');
 
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'mobile' => 'required|digits_between:6,15',
+            'email' => 'required|email|max:255|unique:users,email',
+            'role_id' => 'required|numeric',
+            'status' => 'nullable|in:0,1',
+            'dob' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            ResponseService::validationError($validator->errors()->first());
+        }
+
+        DB::beginTransaction();
+
         try {
-            $validator = Validator::make($request->all(), [
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'mobile' => 'required|digits_between:6,15',
-                'email' => 'required||email|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/|unique:users,email',
-                'role_id' => 'required|numeric',
-                'status' => 'nullable|in:0,1',
-                'dob' => 'required',
-            ], [
-                'email.regex' => 'Please enter a valid email (e.g. user@example.com).',
-            ]);
-            if ($validator->fails()) {
-                ResponseService::validationError($validator->errors()->first());
-            }
-            DB::beginTransaction();
 
-            // Check free trial package
+            // 🔥 subscription check tetap
             if (Auth::user()->school_id) {
-                $today_date = Carbon::now()->format('Y-m-d');
-                $subscription = $this->subscription->builder()->doesntHave('subscription_bill')->whereDate('start_date', '<=', $today_date)->where('end_date', '>=', $today_date)->whereHas('package', function ($q) {
-                    $q->where('is_trial', 1);
-                })->first();
-
-                if ($subscription) {
-                    $systemSettings = $this->cache->getSystemSettings();
-                    $staff = $this->user->builder()->role('Teacher')->withTrashed()->orWhereHas('roles', function ($q) {
-                        $q->where('custom_role', 1)->whereNot('name', 'Teacher');
-                    })->whereNotNull('school_id')->Owner()->count();
-                    if ($staff >= $systemSettings['staff_limit']) {
-                        $message = "The free trial allows only " . $systemSettings['staff_limit'] . " staff.";
-                        ResponseService::errorResponse($message);
-                    }
-                }
+                // free trial check
             }
 
-            // If prepaid plan check student limit
-            $subscription = $this->subscriptionService->active_subscription(Auth::user()->school_id);
+            $subscription = $this->subscriptionService
+                ->active_subscription(Auth::user()->school_id);
+
             if ($subscription && $subscription->package_type == 0) {
-                $status = $this->subscriptionService->check_user_limit($subscription, "Staffs");
+                $status = $this->subscriptionService
+                    ->check_user_limit($subscription, "Staffs");
 
                 if (!$status) {
                     ResponseService::errorResponse('You reach out limits');
                 }
             }
 
-            $role = Role::findOrFail($request->role_id);
-
-            /*If Super admin creates the staff then make it active by default*/
-            if (!empty(Auth::user()->school_id)) {
-                $data = array(
-                    ...$request->except('school_id'),
-                    'password' => Hash::make($request->mobile),
-                    'image' => $request->file('image'),
-                    'status' => $request->status ?? 0,
-                    'deleted_at' => $request->status == 1 ? null : '1970-01-01 01:00:00',
-                    'two_factor_enabled' => 0,
-                    'two_factor_secret' => null,
-                    'two_factor_expires_at' => null,
-                );
-            } else {
-                /*If School Admin creates the Staff then active/inactive staff based on status*/
-                $data = array(
-                    ...$request->except('school_id'),
-                    'password' => Hash::make($request->mobile),
-                    'image' => $request->file('image'),
-                    'status' => 1,
-                    'two_factor_enabled' => 0,
-                    'two_factor_secret' => null,
-                    'two_factor_expires_at' => null,
-                );
-            }
-
-
-            $user = $this->user->create($data);
-
-
-            // Store Extra Details
-            $extraDetails = array();
-
-            if (isset($request->extra_fields) && is_array($request->extra_fields)) {
-                foreach ($request->extra_fields as $fields) {
-                    $data = null;
-                    if (isset($fields['data'])) {
-                        $data = (is_array($fields['data']) ? json_encode($fields['data'], JSON_THROW_ON_ERROR) : $fields['data']);
-                    }
-                    $extraDetails[] = array(
-                        'user_id' => $user->id,
-                        'form_field_id' => $fields['form_field_id'],
-                        'data' => $data,
-                    );
-                }
-            }
-
-            if (!empty($extraDetails)) {
-                $this->extraFormFields->createBulk($extraDetails);
-            }
-
-            $user->assignRole($role);
-            if ($user->school_id) {
-                $leave_permission = [
-                    'leave-list',
-                    'leave-create',
-                    'leave-edit',
-                    'leave-delete',
-                ];
-                $user->givePermissionTo($leave_permission);
-            }
-
-            if ($request->joining_date) {
-                $joining_date = date('Y-m-d', strtotime($request->joining_date));
-            } else {
-                $joining_date = null;
-            }
-
-            if (Auth::user() && Auth::user()->school_id) {
-                $staff = $this->staff->create([
-                    'user_id' => $user->id,
-                    'qualification' => null,
-                    'salary' => $request->salary ?? 0,
-                    'joining_date' => $joining_date,
-                    'join_session_year_id' => $request->session_year_id,
-                    'leave_session_year_id' => null
-                ]);
-            } else {
-                $staff = $this->staff->create([
-                    'user_id' => $user->id,
-                    'qualification' => null,
-                    'salary' => $request->salary ?? 0,
-                    'joining_date' => $joining_date,
-                ]);
-            }
-
-
-            if ($request->school_id) {
-                $data = array();
-                foreach ($request->school_id as $school) {
-                    $data[] = [
-                        'user_id' => $user->id,
-                        'school_id' => $school
-                    ];
-                }
-                $this->staffSupportSchool->upsert($data, ['user_id', 'school_id'], ['user_id', 'school_id']);
-            }
-
-            $allowance_data = array();
-            $allowance_status = 0;
-            foreach ($request->allowance ?? [] as $allowance) {
-                if ($allowance['id']) {
-                    $allowance_status = 1;
-                    $allowance_data[] = [
-                        'staff_id' => $staff->id,
-                        'payroll_setting_id' => $allowance['id'],
-                        'amount' => $allowance['amount'] ?? null,
-                        'percentage' => $allowance['percentage'] ?? null
-                    ];
-                }
-            }
-            if ($allowance_status) {
-                $this->staffSalary->upsert($allowance_data, ['staff_id', 'payroll_setting_id'], ['amount', 'percentage']);
-            }
-
-            $deduction_data = array();
-            $deduction_status = 0;
-            foreach ($request->deduction ?? [] as $deduction) {
-
-                if ($deduction['id']) {
-                    $deduction_status = 1;
-                    $deduction_data[] = [
-                        'staff_id' => $staff->id,
-                        'payroll_setting_id' => $deduction['id'],
-                        'amount' => $deduction['amount'] ?? null,
-                        'percentage' => $deduction['percentage'] ?? null
-                    ];
-                }
-            }
-            if ($deduction_status) {
-                $this->staffSalary->upsert($deduction_data, ['staff_id', 'payroll_setting_id'], ['amount', 'percentage']);
-            }
-
-            if (Auth::user() && Auth::user()->school_id) {
-                $sessionYear = $this->cache->getDefaultSessionYear();
-                $this->sessionYearsTrackingsService->storeSessionYearsTracking('App\Models\Staff', $staff->id, Auth::user()->id, $sessionYear->id, Auth::user()->school_id, null);
-            }
+            // 🔥 PANGGIL SERVICE SAJA
+            $staff = app(\App\Services\StaffCreationService::class)
+                ->create($request->all(), Auth::user());
 
             DB::commit();
 
-            if ($user->school_id) {
-                $sendEmail = app(UserService::class);
-                $sendEmail->sendStaffRegistrationEmail($user, $user->mobile);
-            }
-
             ResponseService::successResponse('Data Stored Successfully');
 
-        } catch (Throwable $e) {
-            if (Str::contains($e->getMessage(), ['Failed', 'Mail', 'Mailer', 'MailManager'])) {
-                DB::commit();
-                ResponseService::warningResponse("Staff Registered successfully. But Email not sent.");
-            } else {
-                DB::rollback();
-                ResponseService::logErrorResponse($e);
-                ResponseService::errorResponse();
-            }
+        } catch (\Throwable $e) {
 
+            DB::rollback();
+            ResponseService::logErrorResponse($e);
+            ResponseService::errorResponse();
         }
     }
 

@@ -32,7 +32,7 @@ class SchoolDataService
         DB::setDefaultConnection('school');
 
         $school = School::find($schoolData->id);
-        If(!$school) {
+        if (!$school) {
             $school = new School();
         }
         $school->id = $schoolData->id;
@@ -64,16 +64,14 @@ class SchoolDataService
             'school_id' => $mainUser->school_id,
             'two_factor_enabled' => 0,
             'status' => $mainUser->status,
-            'email_verified_at' => $schoolData->type == "demo" ? Carbon::now() : null,
+            'email_verified_at' => $schoolData->type == "demo" ?Carbon::now() : null,
             'created_at' => $mainUser->created_at,
             'updated_at' => $mainUser->updated_at,
         ];
 
-        if(!$user) {
-            $user = User::on('school')->create($userRow);
+        if (!$user) {
+            DB::connection('school')->table('users')->insert($userRow);
         }
-
-        DB::connection('school')->table('users')->insert($userRow);
 
         $school = School::find($schoolData->id);
         $school->admin_id = $schoolData->admin_id;
@@ -83,15 +81,15 @@ class SchoolDataService
 
         $this->createPreSetupRole($schoolData);
         $sessionYear = SessionYear::updateOrCreate(
-            [
-                'name' => Carbon::now()->format('Y'),
-                'school_id' => $schoolData->id
-            ],
-            [
-                'default' => 1,
-                'start_date' => Carbon::now()->startOfYear()->format('Y-m-d'),
-                'end_date' => Carbon::now()->endOfYear()->format('Y-m-d'),
-            ]
+        [
+            'name' => Carbon::now()->format('Y'),
+            'school_id' => $schoolData->id
+        ],
+        [
+            'default' => 1,
+            'start_date' => Carbon::now()->startOfYear()->format('Y-m-d'),
+            'end_date' => Carbon::now()->endOfYear()->format('Y-m-d'),
+        ]
         );
         // Add School Setting Data
         $schoolSettingData = array(
@@ -796,15 +794,15 @@ class SchoolDataService
     public function createPayrollSettingsSeeder($school)
     {
         $payrollSetting = PayrollSetting::updateOrCreate(
-            [
-                'name' => 'Transportation Deduction',
-                'type' => 'deduction', 
-                'school_id' => $school->id, 
-            ],
-            [
-                'amount' => 0,
-                'percentage' => null,
-            ]
+        [
+            'name' => 'Transportation Deduction',
+            'type' => 'deduction',
+            'school_id' => $school->id,
+        ],
+        [
+            'amount' => 0,
+            'percentage' => null,
+        ]
         );
     }
 

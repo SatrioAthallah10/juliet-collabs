@@ -133,7 +133,10 @@ class ParentApiController extends Controller
         } else {
             ResponseService::errorResponse('Invalid Login Credentials', null, config('constants.RESPONSE_CODE.INVALID_LOGIN'));
         }
-
+        \Log::info('LOGIN DB:', [
+            'connection' => DB::getDefaultConnection(),
+            'database' => DB::connection()->getDatabaseName()
+        ]);
         if (
             Auth::attempt([
                 'email' => $request->email,

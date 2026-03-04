@@ -11,13 +11,17 @@ class SchoolInquiry extends Model
     use HasFactory, DateFormatTrait;
 
     protected $fillable = [
-        'school_address',  
-        'school_phone', 
-        'school_name',        
-        'school_email',
-        'school_tagline',      
-        'date',   
-        'status'    
+    'school_address',  
+    'school_phone', 
+    'school_name',        
+    'school_email',
+    'school_tagline',      
+    'date',   
+    'status',    
+    'package_id',
+    'price',
+    'invoice_number',
+    'payment_status'
     ];
 
     public function extra_school_details()

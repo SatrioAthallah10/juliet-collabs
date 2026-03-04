@@ -1,0 +1,40 @@
+[2026-02-16 01:03:11] production.INFO: ================ LOGIN ATTEMPT START ================  
+[2026-02-16 01:03:11] production.INFO: Timestamp: 2026-02-16 01:03:11  
+[2026-02-16 01:03:11] production.INFO: IP Address: 162.158.106.80  
+[2026-02-16 01:03:11] production.INFO: User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36  
+[2026-02-16 01:03:11] production.INFO: Input Email/Mobile: superadmin@gmail.com  
+[2026-02-16 01:03:11] production.INFO: School Code: NULL  
+[2026-02-16 01:03:11] production.INFO: Login Field Detected: email  
+[2026-02-16 01:10:59] production.INFO: ================ LOGIN ATTEMPT START ================  
+[2026-02-16 01:10:59] production.INFO: Timestamp: 2026-02-16 01:10:59  
+[2026-02-16 01:10:59] production.INFO: IP Address: 162.158.106.80  
+[2026-02-16 01:10:59] production.INFO: User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36  
+[2026-02-16 01:10:59] production.INFO: Input Email/Mobile: superadmin@gmail.com  
+[2026-02-16 01:10:59] production.INFO: School Code: NULL  
+[2026-02-16 01:10:59] production.INFO: Login Field Detected: email  
+[2026-02-16 05:04:41] production.INFO: ================ LOGIN ATTEMPT START ================  
+[2026-02-16 05:04:41] production.INFO: Timestamp: 2026-02-16 05:04:41  
+[2026-02-16 05:04:41] production.INFO: IP Address: 162.158.170.169  
+[2026-02-16 05:04:41] production.INFO: User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0  
+[2026-02-16 05:04:41] production.INFO: Input Email/Mobile: superadmin@gmail.com  
+[2026-02-16 05:04:41] production.INFO: School Code: NULL  
+[2026-02-16 05:04:41] production.INFO: Login Field Detected: email  
+[2026-02-16 05:17:08] production.INFO: ================ REGISTRATION ATTEMPT START ================  
+[2026-02-16 05:17:08] production.INFO: ================REGISTRATION validator ok ================  
+[2026-02-16 05:17:08] production.INFO: ================ REGISTRATION SCHOOL BELUM ADA ================  
+[2026-02-16 05:17:08] production.INFO: ================ REGISTRATION SCHOOL_INWUIRY 1 ================  
+[2026-02-16 05:17:12] production.INFO: ================ REGISTRATION SUKSES ALL================  
+[2026-02-16 05:32:22] production.INFO: ================ REGISTRATION ATTEMPT START ================  
+[2026-02-16 05:32:22] production.INFO: ================REGISTRATION validator ok ================  
+[2026-02-16 05:32:22] production.INFO: ================ REGISTRATION SCHOOL BELUM ADA ================  
+[2026-02-16 05:32:22] production.INFO: ================ REGISTRATION SCHOOL_INWUIRY 1 ================  
+[2026-02-16 05:32:23] production.INFO: ================ REGISTRATION ATTEMPT START ================  
+[2026-02-16 05:32:23] production.INFO: ================REGISTRATION validator ok ================  
+[2026-02-16 05:32:25] production.INFO: ================ REGISTRATION SUKSES ALL================  
+[2026-02-16 05:37:54] production.INFO: ================ LOGIN ATTEMPT START ================  
+[2026-02-16 05:37:54] production.INFO: Timestamp: 2026-02-16 05:37:54  
+[2026-02-16 05:37:54] production.INFO: IP Address: 162.158.88.141  
+[2026-02-16 05:37:54] production.INFO: User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0  
+[2026-02-16 05:37:54] production.INFO: Input Email/Mobile: xcvxc@gmail.com  
+[2026-02-16 05:37:54] production.INFO: School Code: NULL  
+[2026-02-16 05:37:54] production.INFO: Login Field Detected: email  

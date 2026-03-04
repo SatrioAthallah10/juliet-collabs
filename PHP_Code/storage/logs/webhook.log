@@ -1,0 +1,1712 @@
+[2026-02-18 13:42:37] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] 📩 REQUEST MASUK KE ENDPOINT WEBHOOK DOKU  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] Timestamp: 2026-02-18 13:42:37  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] HTTP Method: POST  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] URL: http://127.0.0.1:8000/api/webhook/doku  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] IP Address: 127.0.0.1  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] User-Agent: PostmanRuntime/7.51.1  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] Content-Type: application/json  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] Content-Length: 1243  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] ─── HEADERS ───  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] Header [Client-Id]: BRN-0233-1771078067189  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] Header [Request-Id]: VIRTUAL_ACCOUNT_BCA2226260217171956265107169370361000140271  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] Header [Request-Timestamp]: 2026-02-17T10:19:56Z  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] Header [Signature]: HMACSHA256=9FDEIm0jxdN9LiiHEDGkkzEN0kcTItEizFgnyEQdKTM=  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] ─── RAW BODY ───  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] Raw Body Length: 1243 bytes  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] Raw Body: {
+  "service": {
+    "id": "VIRTUAL_ACCOUNT"
+  },
+  "acquirer": {
+    "id": "BCA"
+  },
+  "channel": {
+    "id": "VIRTUAL_ACCOUNT_BCA"
+  },
+  "order": {
+    "invoice_number": "JT-1771396753",
+    "amount": 500000
+  },
+  "virtual_account_info": {
+    "virtual_account_number": "1900800000230592"
+  },
+  "virtual_account_payment": {
+    "date": "20260218134128",
+    "systrace_number": "128309",
+    "reference_number": "95879",
+    "channel_code": "",
+    "request_id": "747343",
+    "identifier": [
+      {
+        "name": "REQUEST_ID",
+        "value": "747343"
+      },
+      {
+        "name": "REFERENCE",
+        "value": "95879"
+      },
+      {
+        "name": "CHANNEL_TYPE",
+        "value": "6014"
+      }
+    ]
+  },
+  "transaction": {
+    "status": "SUCCESS",
+    "date": "2026-02-18T06:41:28Z",
+    "original_request_id": "ab94d341-44db-4c4a-a3a9-d34c6d4c82ea"
+  },
+  "additional_info": {
+    "origin": {
+      "source": "direct",
+      "system": "mid-jokul-checkout-system",
+      "product": "CHECKOUT",
+      "apiFormat": "JOKUL"
+    },
+    "line_items": [
+      {
+        "name": "Subscription Package",
+        "price": "500000",
+        "quantity": 1
+      }
+    ]
+  }
+}  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] ─── PARSED BODY ───  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] Parsed Body: {
+    "service": {
+        "id": "VIRTUAL_ACCOUNT"
+    },
+    "acquirer": {
+        "id": "BCA"
+    },
+    "channel": {
+        "id": "VIRTUAL_ACCOUNT_BCA"
+    },
+    "order": {
+        "invoice_number": "JT-1771396753",
+        "amount": 500000
+    },
+    "virtual_account_info": {
+        "virtual_account_number": "1900800000230592"
+    },
+    "virtual_account_payment": {
+        "date": "20260218134128",
+        "systrace_number": "128309",
+        "reference_number": "95879",
+        "channel_code": null,
+        "request_id": "747343",
+        "identifier": [
+            {
+                "name": "REQUEST_ID",
+                "value": "747343"
+            },
+            {
+                "name": "REFERENCE",
+                "value": "95879"
+            },
+            {
+                "name": "CHANNEL_TYPE",
+                "value": "6014"
+            }
+        ]
+    },
+    "transaction": {
+        "status": "SUCCESS",
+        "date": "2026-02-18T06:41:28Z",
+        "original_request_id": "ab94d341-44db-4c4a-a3a9-d34c6d4c82ea"
+    },
+    "additional_info": {
+        "origin": {
+            "source": "direct",
+            "system": "mid-jokul-checkout-system",
+            "product": "CHECKOUT",
+            "apiFormat": "JOKUL"
+        },
+        "line_items": [
+            {
+                "name": "Subscription Package",
+                "price": "500000",
+                "quantity": 1
+            }
+        ]
+    }
+}  
+[2026-02-18 13:42:37] local.INFO: [WEBHOOK REQUEST] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 13:42:37] local.INFO: ================================================================================  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK] NOTIFIKASI DITERIMA  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK] Fungsi dipanggil: PaymentApiController::dokuWebhook()  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK] Timestamp: 2026-02-18 13:42:37  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK] Headers: {"signature":["HMACSHA256=9FDEIm0jxdN9LiiHEDGkkzEN0kcTItEizFgnyEQdKTM="],"request-timestamp":["2026-02-17T10:19:56Z"],"client-id":["BRN-0233-1771078067189"],"request-id":["VIRTUAL_ACCOUNT_BCA2226260217171956265107169370361000140271"],"x-signature-type":["2"],"content-type":["application/json"],"user-agent":["PostmanRuntime/7.51.1"],"accept":["*/*"],"cache-control":["no-cache"],"postman-token":["4b5d2eeb-eaa6-4fc3-bb83-6fb7248db063"],"host":["127.0.0.1:8000"],"accept-encoding":["gzip, deflate, br"],"connection":["keep-alive"],"content-length":["1243"]} 
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK] Body (raw payload): {"service":{"id":"VIRTUAL_ACCOUNT"},"acquirer":{"id":"BCA"},"channel":{"id":"VIRTUAL_ACCOUNT_BCA"},"order":{"invoice_number":"JT-1771396753","amount":500000},"virtual_account_info":{"virtual_account_number":"1900800000230592"},"virtual_account_payment":{"date":"20260218134128","systrace_number":"128309","reference_number":"95879","channel_code":null,"request_id":"747343","identifier":[{"name":"REQUEST_ID","value":"747343"},{"name":"REFERENCE","value":"95879"},{"name":"CHANNEL_TYPE","value":"6014"}]},"transaction":{"status":"SUCCESS","date":"2026-02-18T06:41:28Z","original_request_id":"ab94d341-44db-4c4a-a3a9-d34c6d4c82ea"},"additional_info":{"origin":{"source":"direct","system":"mid-jokul-checkout-system","product":"CHECKOUT","apiFormat":"JOKUL"},"line_items":[{"name":"Subscription Package","price":"500000","quantity":1}]}} 
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 1] Parsing data dari payload DOKU...  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 1] Data yang terparsing: {"invoice_number":"JT-1771396753","transaction_status":"SUCCESS","amount":500000} 
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 2] Verifikasi signature DI-BYPASS (Sesuai Request User)  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 3] Mengecek apakah status pembayaran sukses...  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 3] Status pembayaran SUKSES: SUCCESS  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 4] Memanggil SchoolInquiry::where("invoice_number", "JT-1771396753")->lockForUpdate()...  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 4] Inquiry DITEMUKAN: {"inquiry_id":46,"school_name":"popopopo","school_email":"piipi@gmail.com","current_payment_status":"pending"} 
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 5] Memanggil inquiry->update() — mengubah payment_status ke "success"...  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 5] Payment status TERUPDATE: {"inquiry_id":46,"new_payment_status":"success","payment_date":"2026-02-18 13:42:37"} 
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil School::where("support_email", "piipi@gmail.com") — cek apakah school sudah ada...  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 6] School BELUM ADA — memanggil School::create() untuk membuat school baru...  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 6] School BARU TERCIPTA: {"school_id":22,"name":"popopopo","support_email":"piipi@gmail.com"} 
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil school->update() — set code dan database_name...  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 6] School TERUPDATE: {"school_id":22,"code":"SCH00022","database_name":"eschool_saas_22_popopopo"} 
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil User::where("email", "piipi@gmail.com") — cek apakah admin sudah ada...  
+[2026-02-18 13:42:37] local.INFO: [DOKU WEBHOOK][STEP 7] Admin BELUM ADA — memanggil User::create() untuk membuat admin baru...  
+[2026-02-18 13:42:38] local.INFO: [DOKU WEBHOOK][STEP 7] Admin user TERCIPTA: {"user_id":23,"email":"piipi@gmail.com","school_id":22} 
+[2026-02-18 13:42:38] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil Role::updateOrCreate() — assign role "School Admin"...  
+[2026-02-18 13:42:38] local.INFO: [DOKU WEBHOOK][STEP 7] Role TERCIPTA/TERUPDATE: {"role_id":19,"role_name":"School Admin"} 
+[2026-02-18 13:42:38] local.INFO: [DOKU WEBHOOK][STEP 7] School admin_id diupdate ke: 23  
+[2026-02-18 13:42:38] local.INFO: [DOKU WEBHOOK][STEP 8] DB::commit() — semua data tersimpan ke database  
+[2026-02-18 13:42:38] local.INFO: [DOKU WEBHOOK][STEP 9] Memanggil SetupSchoolDatabase::dispatch(...)->afterResponse() — membuat database sekolah di background (setelah response)...  
+[2026-02-18 13:42:38] local.INFO: [DOKU WEBHOOK][STEP 9] Parameter dispatch: {"school_id":22,"package_id":1,"school_code":"SCH00022"} 
+[2026-02-18 13:42:38] local.INFO: [DOKU WEBHOOK] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan  
+[2026-02-18 13:42:38] local.INFO: [DOKU WEBHOOK] Hasil yang tercipta: {"school_id":22,"school_name":"popopopo","school_code":"SCH00022","database_name":"eschool_saas_22_popopopo","admin_email":"piipi@gmail.com","payment_status":"success","invoice_number":"JT-1771396753"} 
+[2026-02-18 13:42:38] local.INFO: ================================================================================  
+[2026-02-18 13:42:38] local.INFO: [WEBHOOK RESPONSE] ─── RESPONSE ───  
+[2026-02-18 13:42:38] local.INFO: [WEBHOOK RESPONSE] HTTP Status Code: 200  
+[2026-02-18 13:42:38] local.INFO: [WEBHOOK RESPONSE] Response Body: {"message":"OK"}  
+[2026-02-18 13:42:38] local.INFO: [WEBHOOK RESPONSE] Durasi Proses: 356.03 ms  
+[2026-02-18 13:42:38] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 13:55:39] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] 📩 REQUEST MASUK KE ENDPOINT WEBHOOK DOKU  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] Timestamp: 2026-02-18 13:55:39  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] HTTP Method: POST  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] URL: http://127.0.0.1:8000/api/webhook/doku  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] IP Address: 127.0.0.1  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] User-Agent: PostmanRuntime/7.51.1  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] Content-Type: application/json  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] Content-Length: 1243  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] ─── HEADERS ───  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] Header [Client-Id]: BRN-0233-1771078067189  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] Header [Request-Id]: VIRTUAL_ACCOUNT_BCA2226260217171956265107169370361000140271  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] Header [Request-Timestamp]: 2026-02-17T10:19:56Z  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] Header [Signature]: HMACSHA256=9FDEIm0jxdN9LiiHEDGkkzEN0kcTItEizFgnyEQdKTM=  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] ─── RAW BODY ───  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] Raw Body Length: 1243 bytes  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] Raw Body: {
+  "service": {
+    "id": "VIRTUAL_ACCOUNT"
+  },
+  "acquirer": {
+    "id": "BCA"
+  },
+  "channel": {
+    "id": "VIRTUAL_ACCOUNT_BCA"
+  },
+  "order": {
+    "invoice_number": "JT-1771397656",
+    "amount": 500000
+  },
+  "virtual_account_info": {
+    "virtual_account_number": "1900800000230592"
+  },
+  "virtual_account_payment": {
+    "date": "20260218134128",
+    "systrace_number": "128309",
+    "reference_number": "95879",
+    "channel_code": "",
+    "request_id": "747343",
+    "identifier": [
+      {
+        "name": "REQUEST_ID",
+        "value": "747343"
+      },
+      {
+        "name": "REFERENCE",
+        "value": "95879"
+      },
+      {
+        "name": "CHANNEL_TYPE",
+        "value": "6014"
+      }
+    ]
+  },
+  "transaction": {
+    "status": "SUCCESS",
+    "date": "2026-02-18T06:41:28Z",
+    "original_request_id": "ab94d341-44db-4c4a-a3a9-d34c6d4c82ea"
+  },
+  "additional_info": {
+    "origin": {
+      "source": "direct",
+      "system": "mid-jokul-checkout-system",
+      "product": "CHECKOUT",
+      "apiFormat": "JOKUL"
+    },
+    "line_items": [
+      {
+        "name": "Subscription Package",
+        "price": "500000",
+        "quantity": 1
+      }
+    ]
+  }
+}  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] ─── PARSED BODY ───  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] Parsed Body: {
+    "service": {
+        "id": "VIRTUAL_ACCOUNT"
+    },
+    "acquirer": {
+        "id": "BCA"
+    },
+    "channel": {
+        "id": "VIRTUAL_ACCOUNT_BCA"
+    },
+    "order": {
+        "invoice_number": "JT-1771397656",
+        "amount": 500000
+    },
+    "virtual_account_info": {
+        "virtual_account_number": "1900800000230592"
+    },
+    "virtual_account_payment": {
+        "date": "20260218134128",
+        "systrace_number": "128309",
+        "reference_number": "95879",
+        "channel_code": null,
+        "request_id": "747343",
+        "identifier": [
+            {
+                "name": "REQUEST_ID",
+                "value": "747343"
+            },
+            {
+                "name": "REFERENCE",
+                "value": "95879"
+            },
+            {
+                "name": "CHANNEL_TYPE",
+                "value": "6014"
+            }
+        ]
+    },
+    "transaction": {
+        "status": "SUCCESS",
+        "date": "2026-02-18T06:41:28Z",
+        "original_request_id": "ab94d341-44db-4c4a-a3a9-d34c6d4c82ea"
+    },
+    "additional_info": {
+        "origin": {
+            "source": "direct",
+            "system": "mid-jokul-checkout-system",
+            "product": "CHECKOUT",
+            "apiFormat": "JOKUL"
+        },
+        "line_items": [
+            {
+                "name": "Subscription Package",
+                "price": "500000",
+                "quantity": 1
+            }
+        ]
+    }
+}  
+[2026-02-18 13:55:39] local.INFO: [WEBHOOK REQUEST] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 13:55:39] local.INFO: ================================================================================  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK] NOTIFIKASI DITERIMA  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK] Fungsi dipanggil: PaymentApiController::dokuWebhook()  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK] Timestamp: 2026-02-18 13:55:39  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK] Headers: {"signature":["HMACSHA256=9FDEIm0jxdN9LiiHEDGkkzEN0kcTItEizFgnyEQdKTM="],"request-timestamp":["2026-02-17T10:19:56Z"],"client-id":["BRN-0233-1771078067189"],"request-id":["VIRTUAL_ACCOUNT_BCA2226260217171956265107169370361000140271"],"x-signature-type":["2"],"content-type":["application/json"],"user-agent":["PostmanRuntime/7.51.1"],"accept":["*/*"],"cache-control":["no-cache"],"postman-token":["907d9150-97c0-4e38-9d1a-a163cd7611eb"],"host":["127.0.0.1:8000"],"accept-encoding":["gzip, deflate, br"],"connection":["keep-alive"],"content-length":["1243"]} 
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK] Body (raw payload): {"service":{"id":"VIRTUAL_ACCOUNT"},"acquirer":{"id":"BCA"},"channel":{"id":"VIRTUAL_ACCOUNT_BCA"},"order":{"invoice_number":"JT-1771397656","amount":500000},"virtual_account_info":{"virtual_account_number":"1900800000230592"},"virtual_account_payment":{"date":"20260218134128","systrace_number":"128309","reference_number":"95879","channel_code":null,"request_id":"747343","identifier":[{"name":"REQUEST_ID","value":"747343"},{"name":"REFERENCE","value":"95879"},{"name":"CHANNEL_TYPE","value":"6014"}]},"transaction":{"status":"SUCCESS","date":"2026-02-18T06:41:28Z","original_request_id":"ab94d341-44db-4c4a-a3a9-d34c6d4c82ea"},"additional_info":{"origin":{"source":"direct","system":"mid-jokul-checkout-system","product":"CHECKOUT","apiFormat":"JOKUL"},"line_items":[{"name":"Subscription Package","price":"500000","quantity":1}]}} 
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 1] Parsing data dari payload DOKU...  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 1] Data yang terparsing: {"invoice_number":"JT-1771397656","transaction_status":"SUCCESS","amount":500000} 
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 2] Verifikasi signature DI-BYPASS (Sesuai Request User)  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 3] Mengecek apakah status pembayaran sukses...  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 3] Status pembayaran SUKSES: SUCCESS  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 4] Memanggil SchoolInquiry::where("invoice_number", "JT-1771397656")->lockForUpdate()...  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 4] Inquiry DITEMUKAN: {"inquiry_id":47,"school_name":"PAPA","school_email":"papa@email.com","current_payment_status":"pending"} 
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 5] Memanggil inquiry->update() — mengubah payment_status ke "success"...  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 5] Payment status TERUPDATE: {"inquiry_id":47,"new_payment_status":"success","payment_date":"2026-02-18 13:55:39"} 
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil School::where("support_email", "papa@email.com") — cek apakah school sudah ada...  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 6] School BELUM ADA — memanggil School::create() untuk membuat school baru...  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 6] School BARU TERCIPTA: {"school_id":23,"name":"PAPA","support_email":"papa@email.com"} 
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil school->update() — set code dan database_name...  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 6] School TERUPDATE: {"school_id":23,"code":"SCH00023","database_name":"eschool_saas_23_papa"} 
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil User::where("email", "papa@email.com") — cek apakah admin sudah ada...  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 7] Admin BELUM ADA — memanggil User::create() untuk membuat admin baru...  
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 7] Admin user TERCIPTA: {"user_id":24,"email":"papa@email.com","school_id":23} 
+[2026-02-18 13:55:39] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil Role::updateOrCreate() — assign role "School Admin"...  
+[2026-02-18 13:55:40] local.INFO: [DOKU WEBHOOK][STEP 7] Role TERCIPTA/TERUPDATE: {"role_id":20,"role_name":"School Admin"} 
+[2026-02-18 13:55:40] local.INFO: [DOKU WEBHOOK][STEP 7] School admin_id diupdate ke: 24  
+[2026-02-18 13:55:40] local.INFO: [DOKU WEBHOOK][STEP 8] DB::commit() — semua data tersimpan ke database  
+[2026-02-18 13:55:40] local.INFO: [DOKU WEBHOOK][STEP 9] Memanggil SetupSchoolDatabase::dispatch(...)->afterResponse() — membuat database sekolah di background (setelah response)...  
+[2026-02-18 13:55:40] local.INFO: [DOKU WEBHOOK][STEP 9] Parameter dispatch: {"school_id":23,"package_id":1,"school_code":"SCH00023"} 
+[2026-02-18 13:55:40] local.INFO: [DOKU WEBHOOK] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan  
+[2026-02-18 13:55:40] local.INFO: [DOKU WEBHOOK] Hasil yang tercipta: {"school_id":23,"school_name":"PAPA","school_code":"SCH00023","database_name":"eschool_saas_23_papa","admin_email":"papa@email.com","payment_status":"success","invoice_number":"JT-1771397656"} 
+[2026-02-18 13:55:40] local.INFO: ================================================================================  
+[2026-02-18 13:55:40] local.INFO: [WEBHOOK RESPONSE] ─── RESPONSE ───  
+[2026-02-18 13:55:40] local.INFO: [WEBHOOK RESPONSE] HTTP Status Code: 200  
+[2026-02-18 13:55:40] local.INFO: [WEBHOOK RESPONSE] Response Body: {"message":"OK"}  
+[2026-02-18 13:55:40] local.INFO: [WEBHOOK RESPONSE] Durasi Proses: 773.99 ms  
+[2026-02-18 13:55:40] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 13:58:18] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] 📩 REQUEST MASUK KE ENDPOINT WEBHOOK DOKU  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] Timestamp: 2026-02-18 13:58:18  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] HTTP Method: POST  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] URL: http://127.0.0.1:8000/api/webhook/doku  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] IP Address: 127.0.0.1  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] User-Agent: PostmanRuntime/7.51.1  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] Content-Type: application/json  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] Content-Length: 1243  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] ─── HEADERS ───  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] Header [Client-Id]: BRN-0233-1771078067189  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] Header [Request-Id]: VIRTUAL_ACCOUNT_BCA2226260217171956265107169370361000140271  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] Header [Request-Timestamp]: 2026-02-17T10:19:56Z  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] Header [Signature]: HMACSHA256=9FDEIm0jxdN9LiiHEDGkkzEN0kcTItEizFgnyEQdKTM=  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] ─── RAW BODY ───  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] Raw Body Length: 1243 bytes  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] Raw Body: {
+  "service": {
+    "id": "VIRTUAL_ACCOUNT"
+  },
+  "acquirer": {
+    "id": "BCA"
+  },
+  "channel": {
+    "id": "VIRTUAL_ACCOUNT_BCA"
+  },
+  "order": {
+    "invoice_number": "JT-1771397834",
+    "amount": 500000
+  },
+  "virtual_account_info": {
+    "virtual_account_number": "1900800000230596"
+  },
+  "virtual_account_payment": {
+    "date": "20260218135742",
+    "systrace_number": "128311",
+    "reference_number": "97748",
+    "channel_code": "",
+    "request_id": "820799",
+    "identifier": [
+      {
+        "name": "REQUEST_ID",
+        "value": "820799"
+      },
+      {
+        "name": "REFERENCE",
+        "value": "97748"
+      },
+      {
+        "name": "CHANNEL_TYPE",
+        "value": "6014"
+      }
+    ]
+  },
+  "transaction": {
+    "status": "SUCCESS",
+    "date": "2026-02-18T06:57:42Z",
+    "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+  },
+  "additional_info": {
+    "origin": {
+      "source": "direct",
+      "system": "mid-jokul-checkout-system",
+      "product": "CHECKOUT",
+      "apiFormat": "JOKUL"
+    },
+    "line_items": [
+      {
+        "name": "Subscription Package",
+        "price": "500000",
+        "quantity": 1
+      }
+    ]
+  }
+}  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] ─── PARSED BODY ───  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] Parsed Body: {
+    "service": {
+        "id": "VIRTUAL_ACCOUNT"
+    },
+    "acquirer": {
+        "id": "BCA"
+    },
+    "channel": {
+        "id": "VIRTUAL_ACCOUNT_BCA"
+    },
+    "order": {
+        "invoice_number": "JT-1771397834",
+        "amount": 500000
+    },
+    "virtual_account_info": {
+        "virtual_account_number": "1900800000230596"
+    },
+    "virtual_account_payment": {
+        "date": "20260218135742",
+        "systrace_number": "128311",
+        "reference_number": "97748",
+        "channel_code": null,
+        "request_id": "820799",
+        "identifier": [
+            {
+                "name": "REQUEST_ID",
+                "value": "820799"
+            },
+            {
+                "name": "REFERENCE",
+                "value": "97748"
+            },
+            {
+                "name": "CHANNEL_TYPE",
+                "value": "6014"
+            }
+        ]
+    },
+    "transaction": {
+        "status": "SUCCESS",
+        "date": "2026-02-18T06:57:42Z",
+        "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+    },
+    "additional_info": {
+        "origin": {
+            "source": "direct",
+            "system": "mid-jokul-checkout-system",
+            "product": "CHECKOUT",
+            "apiFormat": "JOKUL"
+        },
+        "line_items": [
+            {
+                "name": "Subscription Package",
+                "price": "500000",
+                "quantity": 1
+            }
+        ]
+    }
+}  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK REQUEST] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 13:58:18] local.INFO: ================================================================================  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK] NOTIFIKASI DITERIMA  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK] Fungsi dipanggil: PaymentApiController::dokuWebhook()  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK] Timestamp: 2026-02-18 13:58:18  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK] Headers: {"signature":["HMACSHA256=9FDEIm0jxdN9LiiHEDGkkzEN0kcTItEizFgnyEQdKTM="],"request-timestamp":["2026-02-17T10:19:56Z"],"client-id":["BRN-0233-1771078067189"],"request-id":["VIRTUAL_ACCOUNT_BCA2226260217171956265107169370361000140271"],"x-signature-type":["2"],"content-type":["application/json"],"user-agent":["PostmanRuntime/7.51.1"],"accept":["*/*"],"cache-control":["no-cache"],"postman-token":["6f6a0276-5838-41e4-8306-75a80d017c88"],"host":["127.0.0.1:8000"],"accept-encoding":["gzip, deflate, br"],"connection":["keep-alive"],"content-length":["1243"]} 
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK] Body (raw payload): {"service":{"id":"VIRTUAL_ACCOUNT"},"acquirer":{"id":"BCA"},"channel":{"id":"VIRTUAL_ACCOUNT_BCA"},"order":{"invoice_number":"JT-1771397834","amount":500000},"virtual_account_info":{"virtual_account_number":"1900800000230596"},"virtual_account_payment":{"date":"20260218135742","systrace_number":"128311","reference_number":"97748","channel_code":null,"request_id":"820799","identifier":[{"name":"REQUEST_ID","value":"820799"},{"name":"REFERENCE","value":"97748"},{"name":"CHANNEL_TYPE","value":"6014"}]},"transaction":{"status":"SUCCESS","date":"2026-02-18T06:57:42Z","original_request_id":"bdf0aedd-d630-4c31-be10-6334cfb3e1f9"},"additional_info":{"origin":{"source":"direct","system":"mid-jokul-checkout-system","product":"CHECKOUT","apiFormat":"JOKUL"},"line_items":[{"name":"Subscription Package","price":"500000","quantity":1}]}} 
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 1] Parsing data dari payload DOKU...  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 1] Data yang terparsing: {"invoice_number":"JT-1771397834","transaction_status":"SUCCESS","amount":500000} 
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 2] Verifikasi signature DI-BYPASS (Sesuai Request User)  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 3] Mengecek apakah status pembayaran sukses...  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 3] Status pembayaran SUKSES: SUCCESS  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 4] Memanggil SchoolInquiry::where("invoice_number", "JT-1771397834")->lockForUpdate()...  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 4] Inquiry DITEMUKAN: {"inquiry_id":48,"school_name":"AAAAAAAAAAA","school_email":"AAAA@EMAIL.COM","current_payment_status":"pending"} 
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 5] Memanggil inquiry->update() — mengubah payment_status ke "success"...  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 5] Payment status TERUPDATE: {"inquiry_id":48,"new_payment_status":"success","payment_date":"2026-02-18 13:58:18"} 
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil School::where("support_email", "AAAA@EMAIL.COM") — cek apakah school sudah ada...  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 6] School BELUM ADA — memanggil School::create() untuk membuat school baru...  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 6] School BARU TERCIPTA: {"school_id":24,"name":"AAAAAAAAAAA","support_email":"AAAA@EMAIL.COM"} 
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil school->update() — set code dan database_name...  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 6] School TERUPDATE: {"school_id":24,"code":"SCH00024","database_name":"eschool_saas_24_aaaaaaaaaaa"} 
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil User::where("email", "AAAA@EMAIL.COM") — cek apakah admin sudah ada...  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 7] Admin BELUM ADA — memanggil User::create() untuk membuat admin baru...  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 7] Admin user TERCIPTA: {"user_id":25,"email":"AAAA@EMAIL.COM","school_id":24} 
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil Role::updateOrCreate() — assign role "School Admin"...  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 7] Role TERCIPTA/TERUPDATE: {"role_id":21,"role_name":"School Admin"} 
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 7] School admin_id diupdate ke: 25  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 8] DB::commit() — semua data tersimpan ke database  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 9] Memanggil SetupSchoolDatabase::dispatch(...)->afterResponse() — membuat database sekolah di background (setelah response)...  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK][STEP 9] Parameter dispatch: {"school_id":24,"package_id":1,"school_code":"SCH00024"} 
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan  
+[2026-02-18 13:58:18] local.INFO: [DOKU WEBHOOK] Hasil yang tercipta: {"school_id":24,"school_name":"AAAAAAAAAAA","school_code":"SCH00024","database_name":"eschool_saas_24_aaaaaaaaaaa","admin_email":"AAAA@EMAIL.COM","payment_status":"success","invoice_number":"JT-1771397834"} 
+[2026-02-18 13:58:18] local.INFO: ================================================================================  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK RESPONSE] ─── RESPONSE ───  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK RESPONSE] HTTP Status Code: 200  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK RESPONSE] Response Body: {"message":"OK"}  
+[2026-02-18 13:58:18] local.INFO: [WEBHOOK RESPONSE] Durasi Proses: 309.1 ms  
+[2026-02-18 13:58:18] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 15:56:22] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] 📩 REQUEST MASUK KE ENDPOINT WEBHOOK DOKU  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] Timestamp: 2026-02-18 15:56:22  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] HTTP Method: POST  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] URL: http://127.0.0.1:8000/api/webhook/doku  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] IP Address: 127.0.0.1  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] User-Agent: PostmanRuntime/7.51.1  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] Content-Type: application/json  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] Content-Length: 1243  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] ─── HEADERS ───  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] ─── RAW BODY ───  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] Raw Body Length: 1243 bytes  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] Raw Body: {
+  "service": {
+    "id": "VIRTUAL_ACCOUNT"
+  },
+  "acquirer": {
+    "id": "BCA"
+  },
+  "channel": {
+    "id": "VIRTUAL_ACCOUNT_BCA"
+  },
+  "order": {
+    "invoice_number": "JT-1771404817",
+    "amount": 500000
+  },
+  "virtual_account_info": {
+    "virtual_account_number": "1900800000230596"
+  },
+  "virtual_account_payment": {
+    "date": "20260218135742",
+    "systrace_number": "128311",
+    "reference_number": "97748",
+    "channel_code": "",
+    "request_id": "820799",
+    "identifier": [
+      {
+        "name": "REQUEST_ID",
+        "value": "820799"
+      },
+      {
+        "name": "REFERENCE",
+        "value": "97748"
+      },
+      {
+        "name": "CHANNEL_TYPE",
+        "value": "6014"
+      }
+    ]
+  },
+  "transaction": {
+    "status": "SUCCESS",
+    "date": "2026-02-18T06:57:42Z",
+    "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+  },
+  "additional_info": {
+    "origin": {
+      "source": "direct",
+      "system": "mid-jokul-checkout-system",
+      "product": "CHECKOUT",
+      "apiFormat": "JOKUL"
+    },
+    "line_items": [
+      {
+        "name": "Subscription Package",
+        "price": "500000",
+        "quantity": 1
+      }
+    ]
+  }
+}  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] ─── PARSED BODY ───  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] Parsed Body: {
+    "service": {
+        "id": "VIRTUAL_ACCOUNT"
+    },
+    "acquirer": {
+        "id": "BCA"
+    },
+    "channel": {
+        "id": "VIRTUAL_ACCOUNT_BCA"
+    },
+    "order": {
+        "invoice_number": "JT-1771404817",
+        "amount": 500000
+    },
+    "virtual_account_info": {
+        "virtual_account_number": "1900800000230596"
+    },
+    "virtual_account_payment": {
+        "date": "20260218135742",
+        "systrace_number": "128311",
+        "reference_number": "97748",
+        "channel_code": null,
+        "request_id": "820799",
+        "identifier": [
+            {
+                "name": "REQUEST_ID",
+                "value": "820799"
+            },
+            {
+                "name": "REFERENCE",
+                "value": "97748"
+            },
+            {
+                "name": "CHANNEL_TYPE",
+                "value": "6014"
+            }
+        ]
+    },
+    "transaction": {
+        "status": "SUCCESS",
+        "date": "2026-02-18T06:57:42Z",
+        "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+    },
+    "additional_info": {
+        "origin": {
+            "source": "direct",
+            "system": "mid-jokul-checkout-system",
+            "product": "CHECKOUT",
+            "apiFormat": "JOKUL"
+        },
+        "line_items": [
+            {
+                "name": "Subscription Package",
+                "price": "500000",
+                "quantity": 1
+            }
+        ]
+    }
+}  
+[2026-02-18 15:56:22] local.INFO: [WEBHOOK REQUEST] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 15:56:22] local.INFO: ================================================================================  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK] NOTIFIKASI DITERIMA  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK] Fungsi dipanggil: PaymentApiController::dokuWebhook()  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK] Timestamp: 2026-02-18 15:56:22  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK] Headers: {"content-type":["application/json"],"user-agent":["PostmanRuntime/7.51.1"],"accept":["*/*"],"cache-control":["no-cache"],"postman-token":["b52e26c2-fa1b-4e07-b4c0-93b36d23b3a5"],"host":["127.0.0.1:8000"],"accept-encoding":["gzip, deflate, br"],"connection":["keep-alive"],"content-length":["1243"]} 
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK] Body (raw payload): {"service":{"id":"VIRTUAL_ACCOUNT"},"acquirer":{"id":"BCA"},"channel":{"id":"VIRTUAL_ACCOUNT_BCA"},"order":{"invoice_number":"JT-1771404817","amount":500000},"virtual_account_info":{"virtual_account_number":"1900800000230596"},"virtual_account_payment":{"date":"20260218135742","systrace_number":"128311","reference_number":"97748","channel_code":null,"request_id":"820799","identifier":[{"name":"REQUEST_ID","value":"820799"},{"name":"REFERENCE","value":"97748"},{"name":"CHANNEL_TYPE","value":"6014"}]},"transaction":{"status":"SUCCESS","date":"2026-02-18T06:57:42Z","original_request_id":"bdf0aedd-d630-4c31-be10-6334cfb3e1f9"},"additional_info":{"origin":{"source":"direct","system":"mid-jokul-checkout-system","product":"CHECKOUT","apiFormat":"JOKUL"},"line_items":[{"name":"Subscription Package","price":"500000","quantity":1}]}} 
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 1] Parsing data dari payload DOKU...  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 1] Data yang terparsing: {"invoice_number":"JT-1771404817","transaction_status":"SUCCESS","amount":500000} 
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 2] Verifikasi signature DI-BYPASS (Sesuai Request User)  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 3] Mengecek apakah status pembayaran sukses...  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 3] Status pembayaran SUKSES: SUCCESS  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 4] Memanggil SchoolInquiry::where("invoice_number", "JT-1771404817")->lockForUpdate()...  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 4] Inquiry DITEMUKAN: {"inquiry_id":50,"school_name":"CCCCCCCCCCCC","school_email":"CCCP@EMAIL.COM","current_payment_status":"pending"} 
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 5] Memanggil inquiry->update() — mengubah payment_status ke "success"...  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 5] Payment status TERUPDATE: {"inquiry_id":50,"new_payment_status":"success","payment_date":"2026-02-18 15:56:22"} 
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil School::where("support_email", "CCCP@EMAIL.COM") — cek apakah school sudah ada...  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 6] School BELUM ADA — memanggil School::create() untuk membuat school baru...  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 6] School BARU TERCIPTA: {"school_id":25,"name":"CCCCCCCCCCCC","support_email":"CCCP@EMAIL.COM"} 
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil school->update() — set code dan database_name...  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 6] School TERUPDATE: {"school_id":25,"code":"SCH00025","database_name":"eschool_saas_25_cccccccccccc"} 
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil User::where("email", "CCCP@EMAIL.COM") — cek apakah admin sudah ada...  
+[2026-02-18 15:56:22] local.INFO: [DOKU WEBHOOK][STEP 7] Admin BELUM ADA — memanggil User::create() untuk membuat admin baru...  
+[2026-02-18 15:56:23] local.INFO: [DOKU WEBHOOK][STEP 7] Admin user TERCIPTA: {"user_id":26,"email":"CCCP@EMAIL.COM","school_id":25} 
+[2026-02-18 15:56:23] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil Role::updateOrCreate() — assign role "School Admin"...  
+[2026-02-18 15:56:23] local.INFO: [DOKU WEBHOOK][STEP 7] Role TERCIPTA/TERUPDATE: {"role_id":22,"role_name":"School Admin"} 
+[2026-02-18 15:56:23] local.INFO: [DOKU WEBHOOK][STEP 7] School admin_id diupdate ke: 26  
+[2026-02-18 15:56:23] local.INFO: [DOKU WEBHOOK][STEP 8] DB::commit() — semua data tersimpan ke database  
+[2026-02-18 15:56:23] local.INFO: [DOKU WEBHOOK][STEP 9] Memanggil SetupSchoolDatabase::dispatch(...)->afterResponse() — membuat database sekolah di background (setelah response)...  
+[2026-02-18 15:56:23] local.INFO: [DOKU WEBHOOK][STEP 9] Parameter dispatch: {"school_id":25,"package_id":1,"school_code":"SCH00025"} 
+[2026-02-18 15:56:23] local.INFO: [DOKU WEBHOOK] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan  
+[2026-02-18 15:56:23] local.INFO: [DOKU WEBHOOK] Hasil yang tercipta: {"school_id":25,"school_name":"CCCCCCCCCCCC","school_code":"SCH00025","database_name":"eschool_saas_25_cccccccccccc","admin_email":"CCCP@EMAIL.COM","payment_status":"success","invoice_number":"JT-1771404817"} 
+[2026-02-18 15:56:23] local.INFO: ================================================================================  
+[2026-02-18 15:56:23] local.INFO: [WEBHOOK RESPONSE] ─── RESPONSE ───  
+[2026-02-18 15:56:23] local.INFO: [WEBHOOK RESPONSE] HTTP Status Code: 200  
+[2026-02-18 15:56:23] local.INFO: [WEBHOOK RESPONSE] Response Body: {"message":"OK"}  
+[2026-02-18 15:56:23] local.INFO: [WEBHOOK RESPONSE] Durasi Proses: 576.33 ms  
+[2026-02-18 15:56:23] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 16:05:18] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] 📩 REQUEST MASUK KE ENDPOINT WEBHOOK DOKU  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] Timestamp: 2026-02-18 16:05:18  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] HTTP Method: POST  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] URL: http://127.0.0.1:8000/api/webhook/doku  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] IP Address: 127.0.0.1  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] User-Agent: PostmanRuntime/7.51.1  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] Content-Type: application/json  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] Content-Length: 1243  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] ─── HEADERS ───  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] ─── RAW BODY ───  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] Raw Body Length: 1243 bytes  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] Raw Body: {
+  "service": {
+    "id": "VIRTUAL_ACCOUNT"
+  },
+  "acquirer": {
+    "id": "BCA"
+  },
+  "channel": {
+    "id": "VIRTUAL_ACCOUNT_BCA"
+  },
+  "order": {
+    "invoice_number": "JT-1771405486",
+    "amount": 500000
+  },
+  "virtual_account_info": {
+    "virtual_account_number": "1900800000230596"
+  },
+  "virtual_account_payment": {
+    "date": "20260218135742",
+    "systrace_number": "128311",
+    "reference_number": "97748",
+    "channel_code": "",
+    "request_id": "820799",
+    "identifier": [
+      {
+        "name": "REQUEST_ID",
+        "value": "820799"
+      },
+      {
+        "name": "REFERENCE",
+        "value": "97748"
+      },
+      {
+        "name": "CHANNEL_TYPE",
+        "value": "6014"
+      }
+    ]
+  },
+  "transaction": {
+    "status": "SUCCESS",
+    "date": "2026-02-18T06:57:42Z",
+    "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+  },
+  "additional_info": {
+    "origin": {
+      "source": "direct",
+      "system": "mid-jokul-checkout-system",
+      "product": "CHECKOUT",
+      "apiFormat": "JOKUL"
+    },
+    "line_items": [
+      {
+        "name": "Subscription Package",
+        "price": "500000",
+        "quantity": 1
+      }
+    ]
+  }
+}  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] ─── PARSED BODY ───  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] Parsed Body: {
+    "service": {
+        "id": "VIRTUAL_ACCOUNT"
+    },
+    "acquirer": {
+        "id": "BCA"
+    },
+    "channel": {
+        "id": "VIRTUAL_ACCOUNT_BCA"
+    },
+    "order": {
+        "invoice_number": "JT-1771405486",
+        "amount": 500000
+    },
+    "virtual_account_info": {
+        "virtual_account_number": "1900800000230596"
+    },
+    "virtual_account_payment": {
+        "date": "20260218135742",
+        "systrace_number": "128311",
+        "reference_number": "97748",
+        "channel_code": null,
+        "request_id": "820799",
+        "identifier": [
+            {
+                "name": "REQUEST_ID",
+                "value": "820799"
+            },
+            {
+                "name": "REFERENCE",
+                "value": "97748"
+            },
+            {
+                "name": "CHANNEL_TYPE",
+                "value": "6014"
+            }
+        ]
+    },
+    "transaction": {
+        "status": "SUCCESS",
+        "date": "2026-02-18T06:57:42Z",
+        "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+    },
+    "additional_info": {
+        "origin": {
+            "source": "direct",
+            "system": "mid-jokul-checkout-system",
+            "product": "CHECKOUT",
+            "apiFormat": "JOKUL"
+        },
+        "line_items": [
+            {
+                "name": "Subscription Package",
+                "price": "500000",
+                "quantity": 1
+            }
+        ]
+    }
+}  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK REQUEST] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 16:05:18] local.INFO: ================================================================================  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK] NOTIFIKASI DITERIMA  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK] Fungsi dipanggil: PaymentApiController::dokuWebhook()  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK] Timestamp: 2026-02-18 16:05:18  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK] Headers: {"content-type":["application/json"],"user-agent":["PostmanRuntime/7.51.1"],"accept":["*/*"],"cache-control":["no-cache"],"postman-token":["26c605c4-efd1-40a3-a7d0-022b8964cd52"],"host":["127.0.0.1:8000"],"accept-encoding":["gzip, deflate, br"],"connection":["keep-alive"],"content-length":["1243"]} 
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK] Body (raw payload): {"service":{"id":"VIRTUAL_ACCOUNT"},"acquirer":{"id":"BCA"},"channel":{"id":"VIRTUAL_ACCOUNT_BCA"},"order":{"invoice_number":"JT-1771405486","amount":500000},"virtual_account_info":{"virtual_account_number":"1900800000230596"},"virtual_account_payment":{"date":"20260218135742","systrace_number":"128311","reference_number":"97748","channel_code":null,"request_id":"820799","identifier":[{"name":"REQUEST_ID","value":"820799"},{"name":"REFERENCE","value":"97748"},{"name":"CHANNEL_TYPE","value":"6014"}]},"transaction":{"status":"SUCCESS","date":"2026-02-18T06:57:42Z","original_request_id":"bdf0aedd-d630-4c31-be10-6334cfb3e1f9"},"additional_info":{"origin":{"source":"direct","system":"mid-jokul-checkout-system","product":"CHECKOUT","apiFormat":"JOKUL"},"line_items":[{"name":"Subscription Package","price":"500000","quantity":1}]}} 
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 1] Parsing data dari payload DOKU...  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 1] Data yang terparsing: {"invoice_number":"JT-1771405486","transaction_status":"SUCCESS","amount":500000} 
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 2] Verifikasi signature DI-BYPASS (Sesuai Request User)  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 3] Mengecek apakah status pembayaran sukses...  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 3] Status pembayaran SUKSES: SUCCESS  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 4] Memanggil SchoolInquiry::where("invoice_number", "JT-1771405486")->lockForUpdate()...  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 4] Inquiry DITEMUKAN: {"inquiry_id":51,"school_name":"DDDDDDDDDD","school_email":"DDD@gmail.com","current_payment_status":"pending"} 
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 5] Memanggil inquiry->update() — mengubah payment_status ke "success"...  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 5] Payment status TERUPDATE: {"inquiry_id":51,"new_payment_status":"success","payment_date":"2026-02-18 16:05:18"} 
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil School::where("support_email", "DDD@gmail.com") — cek apakah school sudah ada...  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 6] School BELUM ADA — memanggil School::create() untuk membuat school baru...  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 6] School BARU TERCIPTA: {"school_id":26,"name":"DDDDDDDDDD","support_email":"DDD@gmail.com"} 
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil school->update() — set code dan database_name...  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 6] School TERUPDATE: {"school_id":26,"code":"SCH00026","database_name":"eschool_saas_26_dddddddddd"} 
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil User::where("email", "DDD@gmail.com") — cek apakah admin sudah ada...  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 7] Admin BELUM ADA — memanggil User::create() untuk membuat admin baru...  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 7] Admin user TERCIPTA: {"user_id":27,"email":"DDD@gmail.com","school_id":26} 
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil Role::updateOrCreate() — assign role "School Admin"...  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 7] Role TERCIPTA/TERUPDATE: {"role_id":23,"role_name":"School Admin"} 
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 7] School admin_id diupdate ke: 27  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 8] DB::commit() — semua data tersimpan ke database  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 9] Memanggil SetupSchoolDatabase::dispatch(...)->afterResponse() — membuat database sekolah di background (setelah response)...  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK][STEP 9] Parameter dispatch: {"school_id":26,"package_id":1,"school_code":"SCH00026"} 
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan  
+[2026-02-18 16:05:18] local.INFO: [DOKU WEBHOOK] Hasil yang tercipta: {"school_id":26,"school_name":"DDDDDDDDDD","school_code":"SCH00026","database_name":"eschool_saas_26_dddddddddd","admin_email":"DDD@gmail.com","payment_status":"success","invoice_number":"JT-1771405486"} 
+[2026-02-18 16:05:18] local.INFO: ================================================================================  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK RESPONSE] ─── RESPONSE ───  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK RESPONSE] HTTP Status Code: 200  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK RESPONSE] Response Body: {"message":"OK"}  
+[2026-02-18 16:05:18] local.INFO: [WEBHOOK RESPONSE] Durasi Proses: 382.74 ms  
+[2026-02-18 16:05:18] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 16:49:11] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] 📩 REQUEST MASUK KE ENDPOINT WEBHOOK DOKU  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] Timestamp: 2026-02-18 16:49:11  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] HTTP Method: POST  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] URL: http://127.0.0.1:8000/api/webhook/doku  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] IP Address: 127.0.0.1  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] User-Agent: PostmanRuntime/7.51.1  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] Content-Type: application/json  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] Content-Length: 1243  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] ─── HEADERS ───  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] ─── RAW BODY ───  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] Raw Body Length: 1243 bytes  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] Raw Body: {
+  "service": {
+    "id": "VIRTUAL_ACCOUNT"
+  },
+  "acquirer": {
+    "id": "BCA"
+  },
+  "channel": {
+    "id": "VIRTUAL_ACCOUNT_BCA"
+  },
+  "order": {
+    "invoice_number": "JT-1771408081",
+    "amount": 500000
+  },
+  "virtual_account_info": {
+    "virtual_account_number": "1900800000230596"
+  },
+  "virtual_account_payment": {
+    "date": "20260218135742",
+    "systrace_number": "128311",
+    "reference_number": "97748",
+    "channel_code": "",
+    "request_id": "820799",
+    "identifier": [
+      {
+        "name": "REQUEST_ID",
+        "value": "820799"
+      },
+      {
+        "name": "REFERENCE",
+        "value": "97748"
+      },
+      {
+        "name": "CHANNEL_TYPE",
+        "value": "6014"
+      }
+    ]
+  },
+  "transaction": {
+    "status": "SUCCESS",
+    "date": "2026-02-18T06:57:42Z",
+    "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+  },
+  "additional_info": {
+    "origin": {
+      "source": "direct",
+      "system": "mid-jokul-checkout-system",
+      "product": "CHECKOUT",
+      "apiFormat": "JOKUL"
+    },
+    "line_items": [
+      {
+        "name": "Subscription Package",
+        "price": "500000",
+        "quantity": 1
+      }
+    ]
+  }
+}  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] ─── PARSED BODY ───  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] Parsed Body: {
+    "service": {
+        "id": "VIRTUAL_ACCOUNT"
+    },
+    "acquirer": {
+        "id": "BCA"
+    },
+    "channel": {
+        "id": "VIRTUAL_ACCOUNT_BCA"
+    },
+    "order": {
+        "invoice_number": "JT-1771408081",
+        "amount": 500000
+    },
+    "virtual_account_info": {
+        "virtual_account_number": "1900800000230596"
+    },
+    "virtual_account_payment": {
+        "date": "20260218135742",
+        "systrace_number": "128311",
+        "reference_number": "97748",
+        "channel_code": null,
+        "request_id": "820799",
+        "identifier": [
+            {
+                "name": "REQUEST_ID",
+                "value": "820799"
+            },
+            {
+                "name": "REFERENCE",
+                "value": "97748"
+            },
+            {
+                "name": "CHANNEL_TYPE",
+                "value": "6014"
+            }
+        ]
+    },
+    "transaction": {
+        "status": "SUCCESS",
+        "date": "2026-02-18T06:57:42Z",
+        "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+    },
+    "additional_info": {
+        "origin": {
+            "source": "direct",
+            "system": "mid-jokul-checkout-system",
+            "product": "CHECKOUT",
+            "apiFormat": "JOKUL"
+        },
+        "line_items": [
+            {
+                "name": "Subscription Package",
+                "price": "500000",
+                "quantity": 1
+            }
+        ]
+    }
+}  
+[2026-02-18 16:49:11] local.INFO: [WEBHOOK REQUEST] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 16:49:11] local.INFO: ================================================================================  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK] NOTIFIKASI DITERIMA  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK] Fungsi dipanggil: PaymentApiController::dokuWebhook()  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK] Timestamp: 2026-02-18 16:49:11  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK] Headers: {"content-type":["application/json"],"user-agent":["PostmanRuntime/7.51.1"],"accept":["*/*"],"cache-control":["no-cache"],"postman-token":["aded942e-6a78-4b57-ab17-b1f413b1050f"],"host":["127.0.0.1:8000"],"accept-encoding":["gzip, deflate, br"],"connection":["keep-alive"],"content-length":["1243"]} 
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK] Body (raw payload): {"service":{"id":"VIRTUAL_ACCOUNT"},"acquirer":{"id":"BCA"},"channel":{"id":"VIRTUAL_ACCOUNT_BCA"},"order":{"invoice_number":"JT-1771408081","amount":500000},"virtual_account_info":{"virtual_account_number":"1900800000230596"},"virtual_account_payment":{"date":"20260218135742","systrace_number":"128311","reference_number":"97748","channel_code":null,"request_id":"820799","identifier":[{"name":"REQUEST_ID","value":"820799"},{"name":"REFERENCE","value":"97748"},{"name":"CHANNEL_TYPE","value":"6014"}]},"transaction":{"status":"SUCCESS","date":"2026-02-18T06:57:42Z","original_request_id":"bdf0aedd-d630-4c31-be10-6334cfb3e1f9"},"additional_info":{"origin":{"source":"direct","system":"mid-jokul-checkout-system","product":"CHECKOUT","apiFormat":"JOKUL"},"line_items":[{"name":"Subscription Package","price":"500000","quantity":1}]}} 
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 1] Parsing data dari payload DOKU...  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 1] Data yang terparsing: {"invoice_number":"JT-1771408081","transaction_status":"SUCCESS","amount":500000} 
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 2] Verifikasi signature DI-BYPASS (Sesuai Request User)  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 3] Mengecek apakah status pembayaran sukses...  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 3] Status pembayaran SUKSES: SUCCESS  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 4] Memanggil SchoolInquiry::where("invoice_number", "JT-1771408081")->lockForUpdate()...  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 4] Inquiry DITEMUKAN: {"inquiry_id":52,"school_name":"EEEEEEEEEEEEEE","school_email":"eee@gmail.com","current_payment_status":"pending"} 
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 5] Memanggil inquiry->update() — mengubah payment_status ke "success"...  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 5] Payment status TERUPDATE: {"inquiry_id":52,"new_payment_status":"success","payment_date":"2026-02-18 16:49:11"} 
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil School::where("support_email", "eee@gmail.com") — cek apakah school sudah ada...  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 6] School BELUM ADA — memanggil School::create() untuk membuat school baru...  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 6] School BARU TERCIPTA: {"school_id":27,"name":"EEEEEEEEEEEEEE","support_email":"eee@gmail.com"} 
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil school->update() — set code dan database_name...  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 6] School TERUPDATE: {"school_id":27,"code":"SCH00027","database_name":"eschool_saas_27_eeeeeeeeeeeeee"} 
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil User::where("email", "eee@gmail.com") — cek apakah admin sudah ada...  
+[2026-02-18 16:49:11] local.INFO: [DOKU WEBHOOK][STEP 7] Admin BELUM ADA — memanggil User::create() untuk membuat admin baru...  
+[2026-02-18 16:49:12] local.INFO: [DOKU WEBHOOK][STEP 7] Admin user TERCIPTA: {"user_id":28,"email":"eee@gmail.com","school_id":27} 
+[2026-02-18 16:49:12] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil Role::updateOrCreate() — assign role "School Admin"...  
+[2026-02-18 16:49:12] local.INFO: [DOKU WEBHOOK][STEP 7] Role TERCIPTA/TERUPDATE: {"role_id":24,"role_name":"School Admin"} 
+[2026-02-18 16:49:12] local.INFO: [DOKU WEBHOOK][STEP 7] School admin_id diupdate ke: 28  
+[2026-02-18 16:49:12] local.INFO: [DOKU WEBHOOK][STEP 8] DB::commit() — semua data tersimpan ke database  
+[2026-02-18 16:49:12] local.INFO: [DOKU WEBHOOK][STEP 9] Memanggil SetupSchoolDatabase::dispatch(...)->afterResponse() — membuat database sekolah di background (setelah response)...  
+[2026-02-18 16:49:12] local.INFO: [DOKU WEBHOOK][STEP 9] Parameter dispatch: {"school_id":27,"package_id":1,"school_code":"SCH00027"} 
+[2026-02-18 16:49:12] local.INFO: [DOKU WEBHOOK] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan  
+[2026-02-18 16:49:12] local.INFO: [DOKU WEBHOOK] Hasil yang tercipta: {"school_id":27,"school_name":"EEEEEEEEEEEEEE","school_code":"SCH00027","database_name":"eschool_saas_27_eeeeeeeeeeeeee","admin_email":"eee@gmail.com","payment_status":"success","invoice_number":"JT-1771408081"} 
+[2026-02-18 16:49:12] local.INFO: ================================================================================  
+[2026-02-18 16:49:12] local.INFO: [WEBHOOK RESPONSE] ─── RESPONSE ───  
+[2026-02-18 16:49:12] local.INFO: [WEBHOOK RESPONSE] HTTP Status Code: 200  
+[2026-02-18 16:49:12] local.INFO: [WEBHOOK RESPONSE] Response Body: {"message":"OK"}  
+[2026-02-18 16:49:12] local.INFO: [WEBHOOK RESPONSE] Durasi Proses: 570.71 ms  
+[2026-02-18 16:49:12] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 16:52:35] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] 📩 REQUEST MASUK KE ENDPOINT WEBHOOK DOKU  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] Timestamp: 2026-02-18 16:52:35  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] HTTP Method: POST  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] URL: http://127.0.0.1:8000/api/webhook/doku  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] IP Address: 127.0.0.1  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] User-Agent: PostmanRuntime/7.51.1  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] Content-Type: application/json  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] Content-Length: 1243  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] ─── HEADERS ───  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] ─── RAW BODY ───  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] Raw Body Length: 1243 bytes  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] Raw Body: {
+  "service": {
+    "id": "VIRTUAL_ACCOUNT"
+  },
+  "acquirer": {
+    "id": "BCA"
+  },
+  "channel": {
+    "id": "VIRTUAL_ACCOUNT_BCA"
+  },
+  "order": {
+    "invoice_number": "JT-1771408324",
+    "amount": 500000
+  },
+  "virtual_account_info": {
+    "virtual_account_number": "1900800000230596"
+  },
+  "virtual_account_payment": {
+    "date": "20260218135742",
+    "systrace_number": "128311",
+    "reference_number": "97748",
+    "channel_code": "",
+    "request_id": "820799",
+    "identifier": [
+      {
+        "name": "REQUEST_ID",
+        "value": "820799"
+      },
+      {
+        "name": "REFERENCE",
+        "value": "97748"
+      },
+      {
+        "name": "CHANNEL_TYPE",
+        "value": "6014"
+      }
+    ]
+  },
+  "transaction": {
+    "status": "SUCCESS",
+    "date": "2026-02-18T06:57:42Z",
+    "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+  },
+  "additional_info": {
+    "origin": {
+      "source": "direct",
+      "system": "mid-jokul-checkout-system",
+      "product": "CHECKOUT",
+      "apiFormat": "JOKUL"
+    },
+    "line_items": [
+      {
+        "name": "Subscription Package",
+        "price": "500000",
+        "quantity": 1
+      }
+    ]
+  }
+}  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] ─── PARSED BODY ───  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] Parsed Body: {
+    "service": {
+        "id": "VIRTUAL_ACCOUNT"
+    },
+    "acquirer": {
+        "id": "BCA"
+    },
+    "channel": {
+        "id": "VIRTUAL_ACCOUNT_BCA"
+    },
+    "order": {
+        "invoice_number": "JT-1771408324",
+        "amount": 500000
+    },
+    "virtual_account_info": {
+        "virtual_account_number": "1900800000230596"
+    },
+    "virtual_account_payment": {
+        "date": "20260218135742",
+        "systrace_number": "128311",
+        "reference_number": "97748",
+        "channel_code": null,
+        "request_id": "820799",
+        "identifier": [
+            {
+                "name": "REQUEST_ID",
+                "value": "820799"
+            },
+            {
+                "name": "REFERENCE",
+                "value": "97748"
+            },
+            {
+                "name": "CHANNEL_TYPE",
+                "value": "6014"
+            }
+        ]
+    },
+    "transaction": {
+        "status": "SUCCESS",
+        "date": "2026-02-18T06:57:42Z",
+        "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+    },
+    "additional_info": {
+        "origin": {
+            "source": "direct",
+            "system": "mid-jokul-checkout-system",
+            "product": "CHECKOUT",
+            "apiFormat": "JOKUL"
+        },
+        "line_items": [
+            {
+                "name": "Subscription Package",
+                "price": "500000",
+                "quantity": 1
+            }
+        ]
+    }
+}  
+[2026-02-18 16:52:35] local.INFO: [WEBHOOK REQUEST] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 16:52:35] local.INFO: ================================================================================  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK] NOTIFIKASI DITERIMA  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK] Fungsi dipanggil: PaymentApiController::dokuWebhook()  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK] Timestamp: 2026-02-18 16:52:35  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK] Headers: {"content-type":["application/json"],"user-agent":["PostmanRuntime/7.51.1"],"accept":["*/*"],"cache-control":["no-cache"],"postman-token":["18f01ff6-1298-4016-83b8-e32df853e5ee"],"host":["127.0.0.1:8000"],"accept-encoding":["gzip, deflate, br"],"connection":["keep-alive"],"content-length":["1243"]} 
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK] Body (raw payload): {"service":{"id":"VIRTUAL_ACCOUNT"},"acquirer":{"id":"BCA"},"channel":{"id":"VIRTUAL_ACCOUNT_BCA"},"order":{"invoice_number":"JT-1771408324","amount":500000},"virtual_account_info":{"virtual_account_number":"1900800000230596"},"virtual_account_payment":{"date":"20260218135742","systrace_number":"128311","reference_number":"97748","channel_code":null,"request_id":"820799","identifier":[{"name":"REQUEST_ID","value":"820799"},{"name":"REFERENCE","value":"97748"},{"name":"CHANNEL_TYPE","value":"6014"}]},"transaction":{"status":"SUCCESS","date":"2026-02-18T06:57:42Z","original_request_id":"bdf0aedd-d630-4c31-be10-6334cfb3e1f9"},"additional_info":{"origin":{"source":"direct","system":"mid-jokul-checkout-system","product":"CHECKOUT","apiFormat":"JOKUL"},"line_items":[{"name":"Subscription Package","price":"500000","quantity":1}]}} 
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 1] Parsing data dari payload DOKU...  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 1] Data yang terparsing: {"invoice_number":"JT-1771408324","transaction_status":"SUCCESS","amount":500000} 
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 2] Verifikasi signature DI-BYPASS (Sesuai Request User)  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 3] Mengecek apakah status pembayaran sukses...  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 3] Status pembayaran SUKSES: SUCCESS  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 4] Memanggil SchoolInquiry::where("invoice_number", "JT-1771408324")->lockForUpdate()...  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 4] Inquiry DITEMUKAN: {"inquiry_id":53,"school_name":"FFFFFFFFFF","school_email":"FFF@email.com","current_payment_status":"pending"} 
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 5] Memanggil inquiry->update() — mengubah payment_status ke "success"...  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 5] Payment status TERUPDATE: {"inquiry_id":53,"new_payment_status":"success","payment_date":"2026-02-18 16:52:35"} 
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil School::where("support_email", "FFF@email.com") — cek apakah school sudah ada...  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 6] School BELUM ADA — memanggil School::create() untuk membuat school baru...  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 6] School BARU TERCIPTA: {"school_id":28,"name":"FFFFFFFFFF","support_email":"FFF@email.com"} 
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil school->update() — set code dan database_name...  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 6] School TERUPDATE: {"school_id":28,"code":"SCH00028","database_name":"eschool_saas_28_ffffffffff"} 
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil User::where("email", "FFF@email.com") — cek apakah admin sudah ada...  
+[2026-02-18 16:52:35] local.INFO: [DOKU WEBHOOK][STEP 7] Admin BELUM ADA — memanggil User::create() untuk membuat admin baru...  
+[2026-02-18 16:52:36] local.INFO: [DOKU WEBHOOK][STEP 7] Admin user TERCIPTA: {"user_id":29,"email":"FFF@email.com","school_id":28} 
+[2026-02-18 16:52:36] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil Role::updateOrCreate() — assign role "School Admin"...  
+[2026-02-18 16:52:36] local.INFO: [DOKU WEBHOOK][STEP 7] Role TERCIPTA/TERUPDATE: {"role_id":25,"role_name":"School Admin"} 
+[2026-02-18 16:52:36] local.INFO: [DOKU WEBHOOK][STEP 7] School admin_id diupdate ke: 29  
+[2026-02-18 16:52:36] local.INFO: [DOKU WEBHOOK][STEP 8] DB::commit() — semua data tersimpan ke database  
+[2026-02-18 16:52:36] local.INFO: [DOKU WEBHOOK][STEP 9] Memanggil SetupSchoolDatabase::dispatch(...)->afterResponse() — membuat database sekolah di background (setelah response)...  
+[2026-02-18 16:52:36] local.INFO: [DOKU WEBHOOK][STEP 9] Parameter dispatch: {"school_id":28,"package_id":1,"school_code":"SCH00028"} 
+[2026-02-18 16:52:36] local.INFO: [DOKU WEBHOOK] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan  
+[2026-02-18 16:52:36] local.INFO: [DOKU WEBHOOK] Hasil yang tercipta: {"school_id":28,"school_name":"FFFFFFFFFF","school_code":"SCH00028","database_name":"eschool_saas_28_ffffffffff","admin_email":"FFF@email.com","payment_status":"success","invoice_number":"JT-1771408324"} 
+[2026-02-18 16:52:36] local.INFO: ================================================================================  
+[2026-02-18 16:52:36] local.INFO: [WEBHOOK RESPONSE] ─── RESPONSE ───  
+[2026-02-18 16:52:36] local.INFO: [WEBHOOK RESPONSE] HTTP Status Code: 200  
+[2026-02-18 16:52:36] local.INFO: [WEBHOOK RESPONSE] Response Body: {"message":"OK"}  
+[2026-02-18 16:52:36] local.INFO: [WEBHOOK RESPONSE] Durasi Proses: 587.67 ms  
+[2026-02-18 16:52:36] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 17:08:16] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] 📩 REQUEST MASUK KE ENDPOINT WEBHOOK DOKU  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] Timestamp: 2026-02-18 17:08:16  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] HTTP Method: POST  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] URL: http://127.0.0.1:8000/api/webhook/doku  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] IP Address: 127.0.0.1  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] User-Agent: PostmanRuntime/7.51.1  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] Content-Type: application/json  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] Content-Length: 1243  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] ─── HEADERS ───  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] ─── RAW BODY ───  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] Raw Body Length: 1243 bytes  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] Raw Body: {
+  "service": {
+    "id": "VIRTUAL_ACCOUNT"
+  },
+  "acquirer": {
+    "id": "BCA"
+  },
+  "channel": {
+    "id": "VIRTUAL_ACCOUNT_BCA"
+  },
+  "order": {
+    "invoice_number": "JT-1771409248",
+    "amount": 500000
+  },
+  "virtual_account_info": {
+    "virtual_account_number": "1900800000230596"
+  },
+  "virtual_account_payment": {
+    "date": "20260218135742",
+    "systrace_number": "128311",
+    "reference_number": "97748",
+    "channel_code": "",
+    "request_id": "820799",
+    "identifier": [
+      {
+        "name": "REQUEST_ID",
+        "value": "820799"
+      },
+      {
+        "name": "REFERENCE",
+        "value": "97748"
+      },
+      {
+        "name": "CHANNEL_TYPE",
+        "value": "6014"
+      }
+    ]
+  },
+  "transaction": {
+    "status": "SUCCESS",
+    "date": "2026-02-18T06:57:42Z",
+    "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+  },
+  "additional_info": {
+    "origin": {
+      "source": "direct",
+      "system": "mid-jokul-checkout-system",
+      "product": "CHECKOUT",
+      "apiFormat": "JOKUL"
+    },
+    "line_items": [
+      {
+        "name": "Subscription Package",
+        "price": "500000",
+        "quantity": 1
+      }
+    ]
+  }
+}  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] ─── PARSED BODY ───  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] Parsed Body: {
+    "service": {
+        "id": "VIRTUAL_ACCOUNT"
+    },
+    "acquirer": {
+        "id": "BCA"
+    },
+    "channel": {
+        "id": "VIRTUAL_ACCOUNT_BCA"
+    },
+    "order": {
+        "invoice_number": "JT-1771409248",
+        "amount": 500000
+    },
+    "virtual_account_info": {
+        "virtual_account_number": "1900800000230596"
+    },
+    "virtual_account_payment": {
+        "date": "20260218135742",
+        "systrace_number": "128311",
+        "reference_number": "97748",
+        "channel_code": null,
+        "request_id": "820799",
+        "identifier": [
+            {
+                "name": "REQUEST_ID",
+                "value": "820799"
+            },
+            {
+                "name": "REFERENCE",
+                "value": "97748"
+            },
+            {
+                "name": "CHANNEL_TYPE",
+                "value": "6014"
+            }
+        ]
+    },
+    "transaction": {
+        "status": "SUCCESS",
+        "date": "2026-02-18T06:57:42Z",
+        "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+    },
+    "additional_info": {
+        "origin": {
+            "source": "direct",
+            "system": "mid-jokul-checkout-system",
+            "product": "CHECKOUT",
+            "apiFormat": "JOKUL"
+        },
+        "line_items": [
+            {
+                "name": "Subscription Package",
+                "price": "500000",
+                "quantity": 1
+            }
+        ]
+    }
+}  
+[2026-02-18 17:08:16] local.INFO: [WEBHOOK REQUEST] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 17:08:16] local.INFO: ================================================================================  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK] NOTIFIKASI DITERIMA  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK] Fungsi dipanggil: PaymentApiController::dokuWebhook()  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK] Timestamp: 2026-02-18 17:08:16  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK] Headers: {"content-type":["application/json"],"user-agent":["PostmanRuntime/7.51.1"],"accept":["*/*"],"cache-control":["no-cache"],"postman-token":["b9528528-333f-41bd-a790-6cb3a4097bde"],"host":["127.0.0.1:8000"],"accept-encoding":["gzip, deflate, br"],"connection":["keep-alive"],"content-length":["1243"]} 
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK] Body (raw payload): {"service":{"id":"VIRTUAL_ACCOUNT"},"acquirer":{"id":"BCA"},"channel":{"id":"VIRTUAL_ACCOUNT_BCA"},"order":{"invoice_number":"JT-1771409248","amount":500000},"virtual_account_info":{"virtual_account_number":"1900800000230596"},"virtual_account_payment":{"date":"20260218135742","systrace_number":"128311","reference_number":"97748","channel_code":null,"request_id":"820799","identifier":[{"name":"REQUEST_ID","value":"820799"},{"name":"REFERENCE","value":"97748"},{"name":"CHANNEL_TYPE","value":"6014"}]},"transaction":{"status":"SUCCESS","date":"2026-02-18T06:57:42Z","original_request_id":"bdf0aedd-d630-4c31-be10-6334cfb3e1f9"},"additional_info":{"origin":{"source":"direct","system":"mid-jokul-checkout-system","product":"CHECKOUT","apiFormat":"JOKUL"},"line_items":[{"name":"Subscription Package","price":"500000","quantity":1}]}} 
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 1] Parsing data dari payload DOKU...  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 1] Data yang terparsing: {"invoice_number":"JT-1771409248","transaction_status":"SUCCESS","amount":500000} 
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 2] Verifikasi signature DI-BYPASS (Sesuai Request User)  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 3] Mengecek apakah status pembayaran sukses...  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 3] Status pembayaran SUKSES: SUCCESS  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 4] Memanggil SchoolInquiry::where("invoice_number", "JT-1771409248")->lockForUpdate()...  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 4] Inquiry DITEMUKAN: {"inquiry_id":54,"school_name":"GGGGGGGGG","school_email":"ggg@gmail.com","current_payment_status":"pending"} 
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 5] Memanggil inquiry->update() — mengubah payment_status ke "success"...  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 5] Payment status TERUPDATE: {"inquiry_id":54,"new_payment_status":"success","payment_date":"2026-02-18 17:08:16"} 
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil School::where("support_email", "ggg@gmail.com") — cek apakah school sudah ada...  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 6] School BELUM ADA — memanggil School::create() untuk membuat school baru...  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 6] School BARU TERCIPTA: {"school_id":29,"name":"GGGGGGGGG","support_email":"ggg@gmail.com"} 
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil school->update() — set code dan database_name...  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 6] School TERUPDATE: {"school_id":29,"code":"SCH00029","database_name":"eschool_saas_29_ggggggggg"} 
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil User::where("email", "ggg@gmail.com") — cek apakah admin sudah ada...  
+[2026-02-18 17:08:16] local.INFO: [DOKU WEBHOOK][STEP 7] Admin BELUM ADA — memanggil User::create() untuk membuat admin baru...  
+[2026-02-18 17:08:17] local.INFO: [DOKU WEBHOOK][STEP 7] Admin user TERCIPTA: {"user_id":30,"email":"ggg@gmail.com","school_id":29} 
+[2026-02-18 17:08:17] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil Role::updateOrCreate() — assign role "School Admin"...  
+[2026-02-18 17:08:17] local.INFO: [DOKU WEBHOOK][STEP 7] Role TERCIPTA/TERUPDATE: {"role_id":26,"role_name":"School Admin"} 
+[2026-02-18 17:08:17] local.INFO: [DOKU WEBHOOK][STEP 7] School admin_id diupdate ke: 30  
+[2026-02-18 17:08:17] local.INFO: [DOKU WEBHOOK][STEP 8] DB::commit() — semua data tersimpan ke database  
+[2026-02-18 17:08:17] local.INFO: [DOKU WEBHOOK][STEP 9] Memanggil SetupSchoolDatabase::dispatch(...)->afterResponse() — membuat database sekolah di background (setelah response)...  
+[2026-02-18 17:08:17] local.INFO: [DOKU WEBHOOK][STEP 9] Parameter dispatch: {"school_id":29,"package_id":1,"school_code":"SCH00029"} 
+[2026-02-18 17:08:17] local.INFO: [DOKU WEBHOOK] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan  
+[2026-02-18 17:08:17] local.INFO: [DOKU WEBHOOK] Hasil yang tercipta: {"school_id":29,"school_name":"GGGGGGGGG","school_code":"SCH00029","database_name":"eschool_saas_29_ggggggggg","admin_email":"ggg@gmail.com","payment_status":"success","invoice_number":"JT-1771409248"} 
+[2026-02-18 17:08:17] local.INFO: ================================================================================  
+[2026-02-18 17:08:17] local.INFO: [WEBHOOK RESPONSE] ─── RESPONSE ───  
+[2026-02-18 17:08:17] local.INFO: [WEBHOOK RESPONSE] HTTP Status Code: 200  
+[2026-02-18 17:08:17] local.INFO: [WEBHOOK RESPONSE] Response Body: {"message":"OK"}  
+[2026-02-18 17:08:17] local.INFO: [WEBHOOK RESPONSE] Durasi Proses: 168.76 ms  
+[2026-02-18 17:08:17] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 17:15:15] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] 📩 REQUEST MASUK KE ENDPOINT WEBHOOK DOKU  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] Timestamp: 2026-02-18 17:15:15  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] HTTP Method: POST  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] URL: http://127.0.0.1:8000/api/webhook/doku  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] IP Address: 127.0.0.1  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] User-Agent: PostmanRuntime/7.51.1  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] Content-Type: application/json  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] Content-Length: 1243  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] ─── HEADERS ───  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] ─── RAW BODY ───  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] Raw Body Length: 1243 bytes  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] Raw Body: {
+  "service": {
+    "id": "VIRTUAL_ACCOUNT"
+  },
+  "acquirer": {
+    "id": "BCA"
+  },
+  "channel": {
+    "id": "VIRTUAL_ACCOUNT_BCA"
+  },
+  "order": {
+    "invoice_number": "JT-1771409682",
+    "amount": 500000
+  },
+  "virtual_account_info": {
+    "virtual_account_number": "1900800000230596"
+  },
+  "virtual_account_payment": {
+    "date": "20260218135742",
+    "systrace_number": "128311",
+    "reference_number": "97748",
+    "channel_code": "",
+    "request_id": "820799",
+    "identifier": [
+      {
+        "name": "REQUEST_ID",
+        "value": "820799"
+      },
+      {
+        "name": "REFERENCE",
+        "value": "97748"
+      },
+      {
+        "name": "CHANNEL_TYPE",
+        "value": "6014"
+      }
+    ]
+  },
+  "transaction": {
+    "status": "SUCCESS",
+    "date": "2026-02-18T06:57:42Z",
+    "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+  },
+  "additional_info": {
+    "origin": {
+      "source": "direct",
+      "system": "mid-jokul-checkout-system",
+      "product": "CHECKOUT",
+      "apiFormat": "JOKUL"
+    },
+    "line_items": [
+      {
+        "name": "Subscription Package",
+        "price": "500000",
+        "quantity": 1
+      }
+    ]
+  }
+}  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] ─── PARSED BODY ───  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] Parsed Body: {
+    "service": {
+        "id": "VIRTUAL_ACCOUNT"
+    },
+    "acquirer": {
+        "id": "BCA"
+    },
+    "channel": {
+        "id": "VIRTUAL_ACCOUNT_BCA"
+    },
+    "order": {
+        "invoice_number": "JT-1771409682",
+        "amount": 500000
+    },
+    "virtual_account_info": {
+        "virtual_account_number": "1900800000230596"
+    },
+    "virtual_account_payment": {
+        "date": "20260218135742",
+        "systrace_number": "128311",
+        "reference_number": "97748",
+        "channel_code": null,
+        "request_id": "820799",
+        "identifier": [
+            {
+                "name": "REQUEST_ID",
+                "value": "820799"
+            },
+            {
+                "name": "REFERENCE",
+                "value": "97748"
+            },
+            {
+                "name": "CHANNEL_TYPE",
+                "value": "6014"
+            }
+        ]
+    },
+    "transaction": {
+        "status": "SUCCESS",
+        "date": "2026-02-18T06:57:42Z",
+        "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+    },
+    "additional_info": {
+        "origin": {
+            "source": "direct",
+            "system": "mid-jokul-checkout-system",
+            "product": "CHECKOUT",
+            "apiFormat": "JOKUL"
+        },
+        "line_items": [
+            {
+                "name": "Subscription Package",
+                "price": "500000",
+                "quantity": 1
+            }
+        ]
+    }
+}  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK REQUEST] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 17:15:15] local.INFO: ================================================================================  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK] NOTIFIKASI DITERIMA  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK] Fungsi dipanggil: PaymentApiController::dokuWebhook()  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK] Timestamp: 2026-02-18 17:15:15  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK] Headers: {"content-type":["application/json"],"user-agent":["PostmanRuntime/7.51.1"],"accept":["*/*"],"cache-control":["no-cache"],"postman-token":["52afba9a-7785-4b5e-ae28-44d6a69319c0"],"host":["127.0.0.1:8000"],"accept-encoding":["gzip, deflate, br"],"connection":["keep-alive"],"content-length":["1243"]} 
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK] Body (raw payload): {"service":{"id":"VIRTUAL_ACCOUNT"},"acquirer":{"id":"BCA"},"channel":{"id":"VIRTUAL_ACCOUNT_BCA"},"order":{"invoice_number":"JT-1771409682","amount":500000},"virtual_account_info":{"virtual_account_number":"1900800000230596"},"virtual_account_payment":{"date":"20260218135742","systrace_number":"128311","reference_number":"97748","channel_code":null,"request_id":"820799","identifier":[{"name":"REQUEST_ID","value":"820799"},{"name":"REFERENCE","value":"97748"},{"name":"CHANNEL_TYPE","value":"6014"}]},"transaction":{"status":"SUCCESS","date":"2026-02-18T06:57:42Z","original_request_id":"bdf0aedd-d630-4c31-be10-6334cfb3e1f9"},"additional_info":{"origin":{"source":"direct","system":"mid-jokul-checkout-system","product":"CHECKOUT","apiFormat":"JOKUL"},"line_items":[{"name":"Subscription Package","price":"500000","quantity":1}]}} 
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 1] Parsing data dari payload DOKU...  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 1] Data yang terparsing: {"invoice_number":"JT-1771409682","transaction_status":"SUCCESS","amount":500000} 
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 2] Verifikasi signature DI-BYPASS (Sesuai Request User)  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 3] Mengecek apakah status pembayaran sukses...  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 3] Status pembayaran SUKSES: SUCCESS  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 4] Memanggil SchoolInquiry::where("invoice_number", "JT-1771409682")->lockForUpdate()...  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 4] Inquiry DITEMUKAN: {"inquiry_id":55,"school_name":"hhhh","school_email":"hhh@email.com","current_payment_status":"pending"} 
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 5] Memanggil inquiry->update() — mengubah payment_status ke "success"...  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 5] Payment status TERUPDATE: {"inquiry_id":55,"new_payment_status":"success","payment_date":"2026-02-18 17:15:15"} 
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil School::where("support_email", "hhh@email.com") — cek apakah school sudah ada...  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 6] School BELUM ADA — memanggil School::create() untuk membuat school baru...  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 6] School BARU TERCIPTA: {"school_id":30,"name":"hhhh","support_email":"hhh@email.com"} 
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil school->update() — set code dan database_name...  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 6] School TERUPDATE: {"school_id":30,"code":"SCH00030","database_name":"eschool_saas_30_hhhh"} 
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil User::where("email", "hhh@email.com") — cek apakah admin sudah ada...  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 7] Admin BELUM ADA — memanggil User::create() untuk membuat admin baru...  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 7] Admin user TERCIPTA: {"user_id":31,"email":"hhh@email.com","school_id":30} 
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil Role::updateOrCreate() — assign role "School Admin"...  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 7] Role TERCIPTA/TERUPDATE: {"role_id":27,"role_name":"School Admin"} 
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 7] School admin_id diupdate ke: 31  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 8] DB::commit() — semua data tersimpan ke database  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 9] Memanggil SetupSchoolDatabase::dispatch(...)->afterResponse() — membuat database sekolah di background (setelah response)...  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK][STEP 9] Parameter dispatch: {"school_id":30,"package_id":1,"school_code":"SCH00030"} 
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan  
+[2026-02-18 17:15:15] local.INFO: [DOKU WEBHOOK] Hasil yang tercipta: {"school_id":30,"school_name":"hhhh","school_code":"SCH00030","database_name":"eschool_saas_30_hhhh","admin_email":"hhh@email.com","payment_status":"success","invoice_number":"JT-1771409682"} 
+[2026-02-18 17:15:15] local.INFO: ================================================================================  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK RESPONSE] ─── RESPONSE ───  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK RESPONSE] HTTP Status Code: 200  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK RESPONSE] Response Body: {"message":"OK"}  
+[2026-02-18 17:15:15] local.INFO: [WEBHOOK RESPONSE] Durasi Proses: 159.03 ms  
+[2026-02-18 17:15:15] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 17:23:16] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] 📩 REQUEST MASUK KE ENDPOINT WEBHOOK DOKU  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] Timestamp: 2026-02-18 17:23:16  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] HTTP Method: POST  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] URL: http://127.0.0.1:8000/api/webhook/doku  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] IP Address: 127.0.0.1  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] User-Agent: PostmanRuntime/7.51.1  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] Content-Type: application/json  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] Content-Length: 1243  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] ─── HEADERS ───  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] ─── RAW BODY ───  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] Raw Body Length: 1243 bytes  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] Raw Body: {
+  "service": {
+    "id": "VIRTUAL_ACCOUNT"
+  },
+  "acquirer": {
+    "id": "BCA"
+  },
+  "channel": {
+    "id": "VIRTUAL_ACCOUNT_BCA"
+  },
+  "order": {
+    "invoice_number": "JT-1771410171",
+    "amount": 500000
+  },
+  "virtual_account_info": {
+    "virtual_account_number": "1900800000230596"
+  },
+  "virtual_account_payment": {
+    "date": "20260218135742",
+    "systrace_number": "128311",
+    "reference_number": "97748",
+    "channel_code": "",
+    "request_id": "820799",
+    "identifier": [
+      {
+        "name": "REQUEST_ID",
+        "value": "820799"
+      },
+      {
+        "name": "REFERENCE",
+        "value": "97748"
+      },
+      {
+        "name": "CHANNEL_TYPE",
+        "value": "6014"
+      }
+    ]
+  },
+  "transaction": {
+    "status": "SUCCESS",
+    "date": "2026-02-18T06:57:42Z",
+    "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+  },
+  "additional_info": {
+    "origin": {
+      "source": "direct",
+      "system": "mid-jokul-checkout-system",
+      "product": "CHECKOUT",
+      "apiFormat": "JOKUL"
+    },
+    "line_items": [
+      {
+        "name": "Subscription Package",
+        "price": "500000",
+        "quantity": 1
+      }
+    ]
+  }
+}  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] ─── PARSED BODY ───  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] Parsed Body: {
+    "service": {
+        "id": "VIRTUAL_ACCOUNT"
+    },
+    "acquirer": {
+        "id": "BCA"
+    },
+    "channel": {
+        "id": "VIRTUAL_ACCOUNT_BCA"
+    },
+    "order": {
+        "invoice_number": "JT-1771410171",
+        "amount": 500000
+    },
+    "virtual_account_info": {
+        "virtual_account_number": "1900800000230596"
+    },
+    "virtual_account_payment": {
+        "date": "20260218135742",
+        "systrace_number": "128311",
+        "reference_number": "97748",
+        "channel_code": null,
+        "request_id": "820799",
+        "identifier": [
+            {
+                "name": "REQUEST_ID",
+                "value": "820799"
+            },
+            {
+                "name": "REFERENCE",
+                "value": "97748"
+            },
+            {
+                "name": "CHANNEL_TYPE",
+                "value": "6014"
+            }
+        ]
+    },
+    "transaction": {
+        "status": "SUCCESS",
+        "date": "2026-02-18T06:57:42Z",
+        "original_request_id": "bdf0aedd-d630-4c31-be10-6334cfb3e1f9"
+    },
+    "additional_info": {
+        "origin": {
+            "source": "direct",
+            "system": "mid-jokul-checkout-system",
+            "product": "CHECKOUT",
+            "apiFormat": "JOKUL"
+        },
+        "line_items": [
+            {
+                "name": "Subscription Package",
+                "price": "500000",
+                "quantity": 1
+            }
+        ]
+    }
+}  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK REQUEST] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+[2026-02-18 17:23:16] local.INFO: ================================================================================  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK] NOTIFIKASI DITERIMA  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK] Fungsi dipanggil: PaymentApiController::dokuWebhook()  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK] Timestamp: 2026-02-18 17:23:16  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK] Headers: {"content-type":["application/json"],"user-agent":["PostmanRuntime/7.51.1"],"accept":["*/*"],"cache-control":["no-cache"],"postman-token":["2993a626-4fd8-471f-84cb-fba17363039c"],"host":["127.0.0.1:8000"],"accept-encoding":["gzip, deflate, br"],"connection":["keep-alive"],"content-length":["1243"]} 
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK] Body (raw payload): {"service":{"id":"VIRTUAL_ACCOUNT"},"acquirer":{"id":"BCA"},"channel":{"id":"VIRTUAL_ACCOUNT_BCA"},"order":{"invoice_number":"JT-1771410171","amount":500000},"virtual_account_info":{"virtual_account_number":"1900800000230596"},"virtual_account_payment":{"date":"20260218135742","systrace_number":"128311","reference_number":"97748","channel_code":null,"request_id":"820799","identifier":[{"name":"REQUEST_ID","value":"820799"},{"name":"REFERENCE","value":"97748"},{"name":"CHANNEL_TYPE","value":"6014"}]},"transaction":{"status":"SUCCESS","date":"2026-02-18T06:57:42Z","original_request_id":"bdf0aedd-d630-4c31-be10-6334cfb3e1f9"},"additional_info":{"origin":{"source":"direct","system":"mid-jokul-checkout-system","product":"CHECKOUT","apiFormat":"JOKUL"},"line_items":[{"name":"Subscription Package","price":"500000","quantity":1}]}} 
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 1] Parsing data dari payload DOKU...  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 1] Data yang terparsing: {"invoice_number":"JT-1771410171","transaction_status":"SUCCESS","amount":500000} 
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 2] Verifikasi signature DI-BYPASS (Sesuai Request User)  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 3] Mengecek apakah status pembayaran sukses...  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 3] Status pembayaran SUKSES: SUCCESS  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 4] Memanggil SchoolInquiry::where("invoice_number", "JT-1771410171")->lockForUpdate()...  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 4] DB::beginTransaction() dipanggil  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 4] Inquiry DITEMUKAN: {"inquiry_id":56,"school_name":"IIIIII","school_email":"iii@email.com","current_payment_status":"pending"} 
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 5] Memanggil inquiry->update() — mengubah payment_status ke "success"...  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 5] Payment status TERUPDATE: {"inquiry_id":56,"new_payment_status":"success","payment_date":"2026-02-18 17:23:16"} 
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil School::where("support_email", "iii@email.com") — cek apakah school sudah ada...  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 6] School BELUM ADA — memanggil School::create() untuk membuat school baru...  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 6] School BARU TERCIPTA: {"school_id":31,"name":"IIIIII","support_email":"iii@email.com"} 
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 6] Memanggil school->update() — set code dan database_name...  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 6] School TERUPDATE: {"school_id":31,"code":"SCH00031","database_name":"eschool_saas_31_iiiiii"} 
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil User::where("email", "iii@email.com") — cek apakah admin sudah ada...  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 7] Admin BELUM ADA — memanggil User::create() untuk membuat admin baru...  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 7] Admin user TERCIPTA: {"user_id":32,"email":"iii@email.com","school_id":31} 
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 7] Memanggil Role::updateOrCreate() — assign role "School Admin"...  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 7] Role TERCIPTA/TERUPDATE: {"role_id":28,"role_name":"School Admin"} 
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 7] School admin_id diupdate ke: 32  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 8] DB::commit() — semua data tersimpan ke database  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 9] Memanggil SetupSchoolDatabase::dispatch(...)->afterResponse() — membuat database sekolah di background (setelah response)...  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK][STEP 9] Parameter dispatch: {"school_id":31,"package_id":1,"school_code":"SCH00031"} 
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK] ✅ PROSES SELESAI — Sekolah berhasil diaktifkan  
+[2026-02-18 17:23:16] local.INFO: [DOKU WEBHOOK] Hasil yang tercipta: {"school_id":31,"school_name":"IIIIII","school_code":"SCH00031","database_name":"eschool_saas_31_iiiiii","admin_email":"iii@email.com","payment_status":"success","invoice_number":"JT-1771410171"} 
+[2026-02-18 17:23:16] local.INFO: ================================================================================  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK RESPONSE] ─── RESPONSE ───  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK RESPONSE] HTTP Status Code: 200  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK RESPONSE] Response Body: {"message":"OK"}  
+[2026-02-18 17:23:16] local.INFO: [WEBHOOK RESPONSE] Durasi Proses: 363.74 ms  
+[2026-02-18 17:23:16] local.INFO: ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  

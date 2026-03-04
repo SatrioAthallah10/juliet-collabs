@@ -133,6 +133,10 @@ a {
     transition: background-color 0.3s;
     margin-right: 1rem;
 }
+
+.commonBtn .a {
+    color: white;
+}
 .button-potision {
     display: flex;
     justify-content: flex-end;
@@ -1613,10 +1617,12 @@ footer .copyright {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
 }
 
 
 /* login form css */
+
 
 .formModal .modal-content {
     background: url('./Images/form-bg.svg');
