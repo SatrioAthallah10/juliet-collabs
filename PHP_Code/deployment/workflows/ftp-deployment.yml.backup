@@ -1,0 +1,211 @@
+name: Publish Website to VPS (aaPanel)
+on:
+  push:
+    branches:
+      - main
+      - development
+jobs:
+  Deploy-Production:
+    name: Deploy to Production (VPS)
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v2.1.0
+      with:
+        fetch-depth: 2 
+
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: 📦 Install Dependencies & Build Assets
+      run: |
+        npm install
+        npm run prod
+
+    - name: 📋 Pre-Deployment Environment Logging
+      run: |
+        echo "=== Deployment Triggered ==="
+        echo "Event: ${{ github.event_name }}"
+        echo "Branch/Ref: ${{ github.ref }}"
+        echo "Commit SHA: ${{ github.sha }}"
+        echo "Actor: ${{ github.actor }}"
+        echo "Workspace: ${{ github.workspace }}"
+        echo ""
+        echo "=== System Info ==="
+        php -v
+        composer -V
+        node -v
+        npm -v
+        echo ""
+        echo "=== Directory Structure before upload ==="
+        ls -la
+        ls -la public/
+
+    - name: 🔍 Network Diagnostic (Connection Test)
+      run: |
+        echo "Testing connection to '${{ secrets.FTP_SERVER }}'..."
+        echo "Checking Port 22 (SFTP/SSH)..."
+        nc -zv -w 10 ${{ secrets.FTP_SERVER }} 22 || echo "PORT 22 IS BLOCKED/CLOSED"
+        echo "=== End Diagnostic ==="
+
+    - name: 🚀 SFTP-Deploy-Action (SFTP)
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        port: 22
+        local_path: './'
+        remote_path: ${{ secrets.DEPLOY_PATH_PROD }}
+        sftp_only: true
+        rsyncArgs: >
+          --exclude=.phpunit.cache
+          --exclude=node_modules
+          --exclude=public/hot
+          --exclude=public/storage
+          --exclude=storage/*.key
+          --exclude=vendor
+          --exclude=.env
+          --exclude=.env.*
+          --exclude=.phpunit.result.cache
+          --exclude=docker-compose.override.yml
+          --exclude=Homestead.json
+          --exclude=Homestead.yaml
+          --exclude=npm-debug.log
+          --exclude=yarn-error.log
+          --exclude=.fleet
+          --exclude=.idea
+          --exclude=.vscode
+
+    - name: ✅ Post-Deployment Logging
+      if: always()
+      run: |
+        echo "=== Deployment Job Status ==="
+        echo "Result: ${{ job.status }}"
+
+  Deploy-Development:
+    name: Deploy to Development (VPS)
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/development'
+    steps:
+    - uses: actions/checkout@v2.1.0
+      with:
+        fetch-depth: 2 
+
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: 📦 Install Dependencies & Build Assets
+      run: |
+        npm install
+        npm run prod
+
+    - name: 📋 Pre-Deployment Environment Logging
+      run: |
+        echo "=== Deployment Triggered ==="
+        echo "Event: ${{ github.event_name }}"
+        echo "Branch/Ref: ${{ github.ref }}"
+        echo "Commit SHA: ${{ github.sha }}"
+        echo "Actor: ${{ github.actor }}"
+        echo "Workspace: ${{ github.workspace }}"
+        echo ""
+        echo "=== System Info ==="
+        php -v
+        composer -V
+        node -v
+        npm -v
+        echo ""
+        echo "=== Directory Structure before upload ==="
+        ls -la
+        ls -la public/
+
+    - name: 🔍 Network Diagnostic (Connection Test)
+      run: |
+        echo "Testing connection to '${{ secrets.FTP_SERVER }}'..."
+        echo "Checking Port 22 (SFTP/SSH)..."
+        nc -zv -w 10 ${{ secrets.FTP_SERVER }} 22 || echo "PORT 22 IS BLOCKED/CLOSED"
+        echo "=== End Diagnostic ==="
+
+    - name: 🚀 SFTP-Deploy-Action (SFTP)
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        port: 22
+        local_path: './'
+        remote_path: ${{ secrets.DEPLOY_PATH_DEV }}
+        sftp_only: true
+        rsyncArgs: >
+          --exclude=.phpunit.cache
+          --exclude=node_modules
+          --exclude=public/hot
+          --exclude=public/storage
+          --exclude=storage/*.key
+          --exclude=vendor
+          --exclude=.env
+          --exclude=.env.*
+          --exclude=.phpunit.result.cache
+          --exclude=docker-compose.override.yml
+          --exclude=Homestead.json
+          --exclude=Homestead.yaml
+          --exclude=npm-debug.log
+          --exclude=yarn-error.log
+          --exclude=.fleet
+          --exclude=.idea
+          --exclude=.vscode
+
+    - name: ✅ Post-Deployment Logging
+      if: always()
+      run: |
+        echo "=== Deployment Job Status ==="
+        echo "Result: ${{ job.status }}"
+
+    # - name: Setup SSH Key
+    #   run: |
+    #     mkdir -p ~/.ssh
+    #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+    #     chmod 600 ~/.ssh/id_rsa
+    #     ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+    # # Laravel commands for main (production)
+    # - name: SSH Commands - Production
+    #   if: github.ref == 'refs/heads/main'
+    #   run: |
+    #     ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << EOF
+    #       cd ${{ secrets.DEPLOY_PATH_PROD }}
+    #       php artisan down || true
+    #       composer install --no-interaction --prefer-dist --optimize-autoloader
+    #       composer dump-autoload --optimize
+    #       php artisan migrate --force
+    #       php artisan config:clear
+    #       php artisan cache:clear
+    #       php artisan optimize:clear
+    #       php artisan config:cache
+    #       php artisan route:cache
+    #       php artisan view:cache
+    #       php artisan up
+    #     EOF
+
+    # # Laravel commands for development
+    # - name: SSH Commands - Development
+    #   if: github.ref == 'refs/heads/development'
+    #   run: |
+    #     ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << EOF
+    #       cd ${{ secrets.DEPLOY_PATH_DEV }}
+    #       php artisan down || true
+    #       composer install --no-interaction --prefer-dist --optimize-autoloader
+    #       composer dump-autoload --optimize
+    #       php artisan migrate --force
+    #       php artisan config:clear
+    #       php artisan cache:clear
+    #       php artisan optimize:clear
+    #       php artisan config:cache
+    #       php artisan route:cache
+    #       php artisan view:cache
+    #       php artisan up
+    #     EOF

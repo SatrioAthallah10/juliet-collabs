@@ -63,7 +63,8 @@ class LoginController extends Controller
     }
 
 
-    public function login(Request $request)    {
+    public function login(Request $request)
+    {
         Log::channel('login')->info('================================================================================');
         Log::channel('login')->info('[LOGIN] PROSES DIMULAI');
         Log::channel('login')->info('[LOGIN] Fungsi dipanggil: LoginController::login()');
@@ -101,7 +102,7 @@ class LoginController extends Controller
             Log::channel('login')->info('[LOGIN][STEP 4] Memanggil School::on("mysql")->where("code", "' . $request->code . '") — mencari sekolah di database utama...');
             $school = School::on('mysql')
                 ->where('code', $request->code)
-                ->where('installed', 1)
+                ->where('status', 1)
                 ->first();
 
             if (!$school) {
@@ -126,10 +127,13 @@ class LoginController extends Controller
 
             Log::channel('login')->info('[LOGIN][STEP 5] Database aktif sekarang: ' . DB::connection()->getDatabaseName());
 
-            // Ambil user dari DB sekolah
-            Log::channel('login')->info('[LOGIN][STEP 6] Memanggil User::on("school")->where("' . $loginField . '", "' . $request->email . '") — mencari user di database sekolah...');
+            // Ambil user dari DB sekolah — cari di KEDUA kolom email dan mobile
+            Log::channel('login')->info('[LOGIN][STEP 6] Memanggil User::on("school")->where("email", "' . $request->email . '")->orWhere("mobile", "' . $request->email . '") — mencari user di database sekolah...');
             $user = \App\Models\User::on('school')
-                ->where($loginField, $request->email)
+                ->where(function ($query) use ($request) {
+                $query->where('email', $request->email)
+                    ->orWhere('mobile', $request->email);
+            })
                 ->first();
 
             if (!$user) {
@@ -168,6 +172,12 @@ class LoginController extends Controller
             Log::channel('login')->info('[LOGIN] ✅ LOGIN BERHASIL (BYPASS PASSWORD)');
             Log::channel('login')->info('[LOGIN] Redirect ke: /dashboard');
             Log::channel('login')->info('================================================================================');
+
+            // Pastikan session tersimpan sebelum redirect
+            session()->save();
+
+            // Reset default connection ke mysql agar session middleware tidak bingung
+            DB::setDefaultConnection('mysql');
 
             return redirect('/dashboard');
         }
@@ -208,7 +218,8 @@ class LoginController extends Controller
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.'
-        ]);    }
+        ]);
+    }
 
 
 

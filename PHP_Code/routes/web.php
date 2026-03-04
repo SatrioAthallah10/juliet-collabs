@@ -40,9 +40,9 @@ use App\Http\Controllers\OnlineExamQuestionController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\PayrollSettingController;
-use App\Http\Controllers\PickupPointController;
+// [TRANSPORTATION_MODULE_DISABLED] use App\Http\Controllers\PickupPointController;
 use App\Http\Controllers\PromoteStudentController;
-use App\Http\Controllers\RouteController;
+// [TRANSPORTATION_MODULE_DISABLED] use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SchoolSettingsController;
@@ -63,22 +63,23 @@ use App\Http\Controllers\SystemSettingsController;
 use App\Http\Controllers\SystemUpdateController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TimetableController;
-use App\Http\Controllers\TransportationFeeController;
+// [TRANSPORTATION_MODULE_DISABLED] use App\Http\Controllers\TransportationFeeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\WebSettingsController;
 use App\Http\Controllers\WizardSettingsController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\ContactInquiryController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\AssignElectiveSubjectController;
 use App\Http\Controllers\DiaryCategoryController;
 use App\Http\Controllers\DiaryController;
-use App\Http\Controllers\VehicleController;
-use App\Http\Controllers\DriverHelperController;
-use App\Http\Controllers\RouteVehicleController;
-use App\Http\Controllers\TransportationRequestController;
-use App\Http\Controllers\TransportationExpenseController;
+// [TRANSPORTATION_MODULE_DISABLED] use App\Http\Controllers\VehicleController;
+// [TRANSPORTATION_MODULE_DISABLED] use App\Http\Controllers\DriverHelperController;
+// [TRANSPORTATION_MODULE_DISABLED] use App\Http\Controllers\RouteVehicleController;
+// [TRANSPORTATION_MODULE_DISABLED] use App\Http\Controllers\TransportationRequestController;
+// [TRANSPORTATION_MODULE_DISABLED] use App\Http\Controllers\TransportationExpenseController;
 use App\Models\User;
 use App\Services\CachingService;
 use Illuminate\Support\Facades\Artisan;
@@ -96,19 +97,37 @@ Auth::routes(['verify' => true]);
 // global login
 Route::get('/login', [AuthController::class , 'login'])->name('login');
 Route::post('/login', [LoginController::class , 'login']);
+Route::post('schools/registration', [SchoolController::class , 'registration']);
+Route::get('schools/register', function () {
+    $packages = \App\Models\Package::where('status', 1)->orderBy('rank', 'ASC')->get();
+    $settings = app(\App\Services\CachingService::class)->getSystemSettings();
+    return view('schools.register', compact('packages', 'settings'));
+});
+
+Route::get('register', function () {
+    $packages = \App\Models\Package::where('status', 1)->orderBy('rank', 'ASC')->get();
+    $settings = app(\App\Services\CachingService::class)->getSystemSettings();
+    $extraFields = app(\App\Services\CachingService::class)->getSchoolExtraFields();
+    return view('registration_form', compact('packages', 'settings', 'extraFields'));
+})->name('register');
 Route::get('/', [Controller::class , 'index'])->name('index')->middleware(['CheckForMaintenanceMode', '2fa']);
 
 // 2fa code verification
 Route::get('/2fa', [AuthController::class , 'twoFactorAuthentication'])->name('auth.2fa');
 Route::post('/2fa-code', [AuthController::class , 'twoFactorAuthenticationCode'])->name('auth.2fa.code');
 
-Route::post('schools/registration', [SchoolController::class , 'registration']);
-Route::post('contact', [Controller::class , 'contact']);
+Route::post('contact', [Controller::class , 'contact'])->name('contact');
+
+// Chatbot complaint submission (public, rate-limited)
+Route::post('chatbot/complaint', [ComplaintController::class , 'store'])
+    ->middleware('throttle:5,1')
+    ->name('chatbot.complaint.store');
 Route::get('subscription/cron-job', [Controller::class , 'cron_job']);
 Route::get('set-language/{lang}', [LanguageController::class , 'set_language']);
 
 Route::get('payment/verify/{id}', [\App\Http\Controllers\Api\PaymentApiController::class , 'verify'])->name('payment.verify');
 Route::post('payment/process', [\App\Http\Controllers\Api\PaymentApiController::class , 'process'])->name('payment.process');
+Route::get('payment/check-status/{id}', [\App\Http\Controllers\Api\PaymentApiController::class , 'checkPaymentStatus'])->name('payment.check-status');
 
 Route::post('password/reset', [ResetPasswordController::class , 'reset'])->name('password.update');
 
@@ -125,7 +144,7 @@ Route::group(['prefix' => 'school'], static function () {
     Route::get('videos/{id}', [Controller::class , 'video_file']);
     Route::get('terms-conditions', [Controller::class , 'terms_conditions']);
     Route::get('privacy-policy', [Controller::class , 'privacy_policy']);
-    Route::get('refund-cancellation-policy', [Controller::class , 'refund_cancellation']);
+    // [SETTINGS_FEATURE_DISABLED] Route::get('refund-cancellation-policy', [Controller::class , 'refund_cancellation']);
     Route::get('online-admission', [Controller::class , 'admission'])->name('online-admission.index');
     Route::post('online-admission', [Controller::class , 'registerStudent'])->name('online-admission.store');
 });
@@ -244,6 +263,11 @@ Route::group(['middleware' => ['Role', 'checkSchoolStatus', 'status', 'SwitchDat
                     Route::get('transactions', [SubscriptionController::class , 'transactions_log']);
                     Route::get('transactions/list', [SubscriptionController::class , 'subscription_transaction_list']);
 
+                    // DOKU Payment Receipts
+                    Route::get('doku-receipts', [SubscriptionController::class , 'doku_receipts']);
+                    Route::get('doku-receipts/list', [SubscriptionController::class , 'doku_receipt_list']);
+                    Route::get('doku-receipts/pdf/{id}', [SubscriptionController::class , 'doku_receipt_pdf']);
+
                     Route::get('bill-payment/{id}', [SubscriptionController::class , 'bill_payment']);
                     Route::put('bill-payment/store{id?}', [SubscriptionController::class , 'bill_payment_store'])->name('subscriptions-bill-payment.update');
 
@@ -310,16 +334,16 @@ Route::group(['middleware' => ['Role', 'checkSchoolStatus', 'status', 'SwitchDat
                     Route::get('payment', [SystemSettingsController::class , 'paymentIndex'])->name('system-settings.payment.index');
                     Route::post('payment', [SystemSettingsController::class , 'paymentUpdate'])->name('system-settings.payment.update');
 
-                    Route::get('third-party-apis', [SystemSettingsController::class , 'thirdPartyApiIndex'])->name('system-settings.third-party');
-                    Route::post('third-party-apis', [SystemSettingsController::class , 'thirdPartyApiUpdate'])->name('system-settings.third-party.update');
-
+                    // [SETTINGS_FEATURE_DISABLED] Route::get('third-party-apis', [SystemSettingsController::class , 'thirdPartyApiIndex'])->name('system-settings.third-party');
+                    // [SETTINGS_FEATURE_DISABLED] Route::post('third-party-apis', [SystemSettingsController::class , 'thirdPartyApiUpdate'])->name('system-settings.third-party.update');
+        
                     Route::get('subscription-settings', [SystemSettingsController::class , 'subscription_settings'])->name('system-settings.subscription-settings');
                     Route::post('subscription-settings', [SystemSettingsController::class , 'subscription_settings_update'])->name('system-settings.subscription-settings-store');
 
                     Route::get('school-terms-conditions', [SystemSettingsController::class , 'school_terms_condition'])->name('system-settings.school-terms-condition');
 
-                    Route::get('refund-cancellation', [SystemSettingsController::class , 'refund_cancellation'])->name('system-settings.refund-cancellation');
-
+                    // [SETTINGS_FEATURE_DISABLED] Route::get('refund-cancellation', [SystemSettingsController::class , 'refund_cancellation'])->name('system-settings.refund-cancellation');
+        
                     Route::get('teacher-privacy-policy', [SystemSettingsController::class , 'teacherPrivacyPolicy'])->name('system-settings.teacher-privacy-policy');
                     Route::get('teacher-terms-condition', [SystemSettingsController::class , 'teacherTermsConditions'])->name('system-settings.teacher-terms-condition');
 
@@ -344,6 +368,17 @@ Route::group(['middleware' => ['Role', 'checkSchoolStatus', 'status', 'SwitchDat
 
                 Route::resource('guidances', GuidanceController::class);
 
+                /*** Complaints (Chatbot) ***/
+                Route::group(['prefix' => 'complaints'], static function () {
+                    Route::get('/', [ComplaintController::class , 'index'])->name('complaints.index');
+                    Route::get('/list', [ComplaintController::class , 'show'])->name('complaints.show');
+                    Route::put('/update-status/{id}', [ComplaintController::class , 'updateStatus'])->name('complaints.update-status');
+                    Route::delete('/trash/{id}', [ComplaintController::class , 'trash'])->name('complaints.trash');
+                    Route::put('/restore/{id}', [ComplaintController::class , 'restore'])->name('complaints.restore');
+                    Route::delete('/destroy/{id}', [ComplaintController::class , 'destroy'])->name('complaints.destroy');
+                }
+                );
+
                 // End super admin routes
                 // =================================================================
         
@@ -363,7 +398,7 @@ Route::group(['middleware' => ['Role', 'checkSchoolStatus', 'status', 'SwitchDat
                 );
 
                 /*** Role & Staff management ***/
-                Route::get('staff/support', [StaffController::class , 'support']);
+                // [SUPPORT_MODULE_DISABLED] Route::get('staff/support', [StaffController::class , 'support']);
                 Route::get("/roles-list", [RoleController::class , 'list'])->name('roles.list');
                 Route::resource('roles', RoleController::class);
 
@@ -388,20 +423,18 @@ Route::group(['middleware' => ['Role', 'checkSchoolStatus', 'status', 'SwitchDat
                 Route::delete("staff/{id}/deleted", [StaffController::class , 'trash'])->name('staff.trash');
                 Route::post("staff/change-status-bulk", [StaffController::class , 'changeStatusBulk']);
 
-                Route::group(['prefix' => 'driver-helper'], static function () {
-                    Route::get('download-dummy-file', [DriverHelperController::class , 'downloadSampleFile'])->name('driver-helper.bulk-data-sample');
-                    Route::get("create-bulk-upload", [DriverHelperController::class , 'bulkUploadIndex'])->name('driver-helper.create-bulk-upload');
-                    Route::post("store-bulk-upload", [DriverHelperController::class , 'storeBulkUpload'])->name('driver-helper.store-bulk-upload');
-
-
-                }
-                );
-                // driver helper
-                Route::resource('driver-helper', DriverHelperController::class);
-                Route::put("driver-helper/{id}/change-status", [DriverHelperController::class , 'restore'])->name('driver-helper.restore');
-                Route::delete("driver-helper/{id}/deleted", [DriverHelperController::class , 'trash'])->name('driver-helper.trash');
-                Route::post("driver-helper/change-status-bulk", [DriverHelperController::class , 'changeStatusBulk']);
-
+                // [TRANSPORTATION_MODULE_DISABLED] driver-helper routes
+                // Route::group(['prefix' => 'driver-helper'], static function () {
+                //     Route::get('download-dummy-file', [DriverHelperController::class , 'downloadSampleFile'])->name('driver-helper.bulk-data-sample');
+                //     Route::get("create-bulk-upload", [DriverHelperController::class , 'bulkUploadIndex'])->name('driver-helper.create-bulk-upload');
+                //     Route::post("store-bulk-upload", [DriverHelperController::class , 'storeBulkUpload'])->name('driver-helper.store-bulk-upload');
+                // });
+                // Route::resource('driver-helper', DriverHelperController::class);
+                // Route::put("driver-helper/{id}/change-status", [DriverHelperController::class , 'restore'])->name('driver-helper.restore');
+                // Route::delete("driver-helper/{id}/deleted", [DriverHelperController::class , 'trash'])->name('driver-helper.trash');
+                // Route::post("driver-helper/change-status-bulk", [DriverHelperController::class , 'changeStatusBulk']);
+                // [END TRANSPORTATION_MODULE_DISABLED]
+        
 
 
                 /*** Medium ***/
@@ -458,17 +491,16 @@ Route::group(['middleware' => ['Role', 'checkSchoolStatus', 'status', 'SwitchDat
                 Route::resource('class-section', ClassSectionController::class);
 
                 /*** Elective Subject ***/
-                Route::group(['prefix' => 'elective-subject'], static function () {
-                    Route::get('/', [AssignElectiveSubjectController::class , 'index'])->name('assign.elective.subject.index');
-                    Route::get('/assign-elective-subject/show', [AssignElectiveSubjectController::class , 'show'])->name('assign.elective.subject.show');
-                    Route::post('/assign-elective-subject/store', [AssignElectiveSubjectController::class , 'store'])->name('assign.elective.subject.store');
-                    Route::delete('/assign-elective-subject/{id}', [AssignElectiveSubjectController::class , 'destroy'])->name('assign.elective.subject.destroy');
-                    Route::post('/assign-elective-subject/remove-subject', [AssignElectiveSubjectController::class , 'removeSubject'])->name('assign.elective.subject.remove-subject');
-                    Route::get('/assign-elective-subject/update/{id}', [AssignElectiveSubjectController::class , 'update'])->name('assign.elective.subject.update');
-                // Route::get('/', [AssignElectiveSubjectController::class, 'index'])->name('assign.elective.subject.index');
-                // Route::post('/', [AssignElectiveSubjectController::class, 'store'])->name('assign.elective.subject.store');
-                }
-                );
+                /* Route::group(['prefix' => 'elective-subject'], static function () {
+         Route::get('/', [AssignElectiveSubjectController::class , 'index'])->name('assign.elective.subject.index');
+         Route::get('/assign-elective-subject/show', [AssignElectiveSubjectController::class , 'show'])->name('assign.elective.subject.show');
+         Route::post('/assign-elective-subject/store', [AssignElectiveSubjectController::class , 'store'])->name('assign.elective.subject.store');
+         Route::delete('/assign-elective-subject/{id}', [AssignElectiveSubjectController::class , 'destroy'])->name('assign.elective.subject.destroy');
+         Route::post('/assign-elective-subject/remove-subject', [AssignElectiveSubjectController::class , 'removeSubject'])->name('assign.elective.subject.remove-subject');
+         Route::get('/assign-elective-subject/update/{id}', [AssignElectiveSubjectController::class , 'update'])->name('assign.elective.subject.update');
+         // Route::get('/', [AssignElectiveSubjectController::class, 'index'])->name('assign.elective.subject.index');
+         // Route::post('/', [AssignElectiveSubjectController::class, 'store'])->name('assign.elective.subject.store');
+         }); */
 
                 /*** Teachers ***/
                 Route::group(['prefix' => 'teachers'], static function () {
@@ -789,10 +821,10 @@ Route::group(['middleware' => ['Role', 'checkSchoolStatus', 'status', 'SwitchDat
                     Route::put('email-template', [SchoolSettingsController::class , 'emailTemplateUpdate'])->name('school-settings.email-template.update');
 
 
-                    Route::get('refund-cancellation', [SchoolSettingsController::class , 'refund_cancellation'])->name('school-settings.refund-cancellation');
-
-                    Route::get('third-party-apis', [SchoolSettingsController::class , 'thirdPartyApiIndex'])->name('school-settings.third-party');
-                    Route::post('third-party-apis', [SchoolSettingsController::class , 'thirdPartyApiUpdate'])->name('school-settings.third-party.update');
+                // [SETTINGS_FEATURE_DISABLED] Route::get('refund-cancellation', [SchoolSettingsController::class , 'refund_cancellation'])->name('school-settings.refund-cancellation');
+        
+                // [SETTINGS_FEATURE_DISABLED] Route::get('third-party-apis', [SchoolSettingsController::class , 'thirdPartyApiIndex'])->name('school-settings.third-party');
+                // [SETTINGS_FEATURE_DISABLED] Route::post('third-party-apis', [SchoolSettingsController::class , 'thirdPartyApiUpdate'])->name('school-settings.third-party.update');
                 }
                 );
                 Route::resource('school-settings', SchoolSettingsController::class);
@@ -870,13 +902,13 @@ Route::group(['middleware' => ['Role', 'checkSchoolStatus', 'status', 'SwitchDat
                 Route::resource('stream', StreamController::class);
 
 
-                Route::group(['prefix' => 'shift'], static function () {
-                    Route::put('restore/{id}', [ShiftController::class , 'restore'])->name('shift.restore');
-                    Route::delete('trash/{id}', [ShiftController::class , 'trash'])->name('shift.trash');
-                }
-                );
-                Route::resource('shift', ShiftController::class);
-
+                // Route::group(['prefix' => 'shift'], static function () {
+                //     Route::put('restore/{id}', [ShiftController::class , 'restore'])->name('shift.restore');
+                //     Route::delete('trash/{id}', [ShiftController::class , 'trash'])->name('shift.trash');
+                // }
+                // );
+                // Route::resource('shift', ShiftController::class);
+        
                 Route::resource('faqs', FaqController::class);
 
                 Route::get('users/status', [UserController::class , 'status']);
@@ -1002,13 +1034,13 @@ Route::group(['middleware' => ['Role', 'checkSchoolStatus', 'status', 'SwitchDat
             }
             );
 
-            // Vehicle Routes
-            Route::get('vehicles/show', [VehicleController::class , 'show'])->name('vehicles.show');
-            Route::delete("vehicles/{id}/deleted", [VehicleController::class , 'destroy'])->name('vehicles.destroy');
-            Route::put("vehicles/{id}/restore", [VehicleController::class , 'restore'])->name('vehicles.restore');
-            Route::delete("vehicles/{id}/trash", [VehicleController::class , 'trash'])->name('vehicles.trash');
-            Route::resource('vehicles', VehicleController::class);
-
+            // [TRANSPORTATION_MODULE_DISABLED] Vehicle Routes
+            // Route::get('vehicles/show', [VehicleController::class , 'show'])->name('vehicles.show');
+            // Route::delete("vehicles/{id}/deleted", [VehicleController::class , 'destroy'])->name('vehicles.destroy');
+            // Route::put("vehicles/{id}/restore", [VehicleController::class , 'restore'])->name('vehicles.restore');
+            // Route::delete("vehicles/{id}/trash", [VehicleController::class , 'trash'])->name('vehicles.trash');
+            // Route::resource('vehicles', VehicleController::class);
+        
 
             // Student Diary Routes:::
         
@@ -1023,43 +1055,44 @@ Route::group(['middleware' => ['Role', 'checkSchoolStatus', 'status', 'SwitchDat
             Route::delete('diary/{diaryId}/remove-student/{id}', [DiaryController::class , 'removeStudent']);
 
 
-            // Transportation Module Routes
-            Route::resource('pickup-points', PickupPointController::class);
-            Route::get('change-order/{id}', [RouteController::class , 'changeOrderIndex'])->name('routes.change-order');
-            Route::put('routes/{id}/update-pickup-order', [RouteController::class , 'updatePickupOrder'])->name('routes.update-pickup-order');
-            Route::delete('delete-pickup-points/{id}', [RouteController::class , 'deletePickupPoint'])->name('pickup-points.delete');
-            Route::resource('routes', RouteController::class);
+        // [TRANSPORTATION_MODULE_DISABLED] Transportation Module Routes
+        // Route::resource('pickup-points', PickupPointController::class);
+        // Route::get('change-order/{id}', [RouteController::class , 'changeOrderIndex'])->name('routes.change-order');
+        // Route::put('routes/{id}/update-pickup-order', [RouteController::class , 'updatePickupOrder'])->name('routes.update-pickup-order');
+        // Route::delete('delete-pickup-points/{id}', [RouteController::class , 'deletePickupPoint'])->name('pickup-points.delete');
+        // Route::resource('routes', RouteController::class);
+        
 
+        // Route::get('transporatation-fees/{id}', [TransportationFeeController::class , 'edit'])->name('transportation-fees.edit');
+        // Route::post('transportation-fees/update', [TransportationFeeController::class , 'update'])->name('transportation-fees.update');
+        // Route::delete('delete-transportation-fees/{id}', [TransportationFeeController::class , 'destroy'])->name('transportation-fees.destroy');
+        
+        // Route::get("route-vehicle/routeVehicle-reports/{id}", [RouteVehicleController::class , 'routeVehicleReports'])->name('route-vehicle.routeVehicle-reports');
+        // Route::post('route-vehicle/user/attendance-report', [RouteVehicleController::class , 'getUserTransportationAttendanceReport'])->name('route-vehicle.user.attendance.report');
+        // Route::get('route-vehicle/trip-details', [RouteVehicleController::class , 'tripDetailsReport'])->name('route-vehicle.trip-details');
+        // Route::get('route-vehicle/trip-reports', [RouteVehicleController::class , 'getTripReports'])->name('route-vehicle.trip-reports');
+        // Route::resource('route-vehicle', RouteVehicleController::class);
+        // Route::put("route-vehicle/{id}/restore", [RouteVehicleController::class , 'restore'])->name('route-vehicle.restore');
+        // Route::delete("route-vehicle/{id}/trash", [RouteVehicleController::class , 'trash'])->name('route-vehicle.trash');
+        
+        // Route::prefix('transportation-requests')->name('transportation-requests.')->group(function () {
+        // Route::get('cancel/{id}', [TransportationRequestController::class , 'cancelTransportationService'])->name('cancel');
+        // Route::get('fee-receipt/{id}', [TransportationRequestController::class , 'feeReceipt'])->name('fee-receipt');
+        // Route::get('offline-entry', [TransportationRequestController::class , 'offlineEntry'])->name('offline-entry');
+        // Route::post('offline-entry/store', [TransportationRequestController::class , 'offlineEntryStore'])->name('offline-entry.store');
+        // Route::get('get-vehicle-routes/{pickup_point_id}', [TransportationRequestController::class , 'getVehicleRoutes'])->name('get-vehicle-routes');
+        // Route::get('get-students/{id}', [TransportationRequestController::class , 'getStudents'])->name('get-students');
+        // Route::get('get-teachers', [TransportationRequestController::class , 'getTeachers'])->name('get-teachers');
+        // Route::get('get-staff', [TransportationRequestController::class , 'getStaff'])->name('get-staff');
+        // Route::post('change-status-bulk', [TransportationRequestController::class , 'changeStatusBulk'])->name('change-status-bulk');
+        // Route::resource('/', TransportationRequestController::class)->parameters(['' => 'transportation_request']);
+        // }
+        // );
+        
 
-            Route::get('transporatation-fees/{id}', [TransportationFeeController::class , 'edit'])->name('transportation-fees.edit');
-            Route::post('transportation-fees/update', [TransportationFeeController::class , 'update'])->name('transportation-fees.update');
-            Route::delete('delete-transportation-fees/{id}', [TransportationFeeController::class , 'destroy'])->name('transportation-fees.destroy');
-
-            Route::get("route-vehicle/routeVehicle-reports/{id}", [RouteVehicleController::class , 'routeVehicleReports'])->name('route-vehicle.routeVehicle-reports');
-            Route::post('route-vehicle/user/attendance-report', [RouteVehicleController::class , 'getUserTransportationAttendanceReport'])->name('route-vehicle.user.attendance.report');
-            Route::get('route-vehicle/trip-details', [RouteVehicleController::class , 'tripDetailsReport'])->name('route-vehicle.trip-details');
-            Route::get('route-vehicle/trip-reports', [RouteVehicleController::class , 'getTripReports'])->name('route-vehicle.trip-reports');
-            Route::resource('route-vehicle', RouteVehicleController::class);
-            Route::put("route-vehicle/{id}/restore", [RouteVehicleController::class , 'restore'])->name('route-vehicle.restore');
-            Route::delete("route-vehicle/{id}/trash", [RouteVehicleController::class , 'trash'])->name('route-vehicle.trash');
-
-            Route::prefix('transportation-requests')->name('transportation-requests.')->group(function () {
-            Route::get('cancel/{id}', [TransportationRequestController::class , 'cancelTransportationService'])->name('cancel');
-            Route::get('fee-receipt/{id}', [TransportationRequestController::class , 'feeReceipt'])->name('fee-receipt');
-            Route::get('offline-entry', [TransportationRequestController::class , 'offlineEntry'])->name('offline-entry');
-            Route::post('offline-entry/store', [TransportationRequestController::class , 'offlineEntryStore'])->name('offline-entry.store');
-            Route::get('get-vehicle-routes/{pickup_point_id}', [TransportationRequestController::class , 'getVehicleRoutes'])->name('get-vehicle-routes');
-            Route::get('get-students/{id}', [TransportationRequestController::class , 'getStudents'])->name('get-students');
-            Route::get('get-teachers', [TransportationRequestController::class , 'getTeachers'])->name('get-teachers');
-            Route::get('get-staff', [TransportationRequestController::class , 'getStaff'])->name('get-staff');
-            Route::post('change-status-bulk', [TransportationRequestController::class , 'changeStatusBulk'])->name('change-status-bulk');
-            Route::resource('/', TransportationRequestController::class)->parameters(['' => 'transportation_request']);
-        }
-        );
-
-
-        Route::resource('transportation-expense', TransportationExpenseController::class);
-    });
+        // Route::resource('transportation-expense', TransportationExpenseController::class);
+        // [END TRANSPORTATION_MODULE_DISABLED]
+        });
 
 // webhooks
 Route::post('webhook/razorpay', [WebhookController::class , 'razorpay']);
@@ -1119,11 +1152,11 @@ Route::get('page/teacher-terms-conditions', static function () {
     echo htmlspecialchars_decode($cache->getSystemSettings('teacher_terms_condition'));
 })->name('public.teacher-terms-conditions');
 
-// Super Admin Refund Cancellation
-Route::get('page/refund-cancellation', static function () {
-    $cache = app(CachingService::class);
-    echo htmlspecialchars_decode($cache->getSystemSettings('refund_cancellation'));
-})->name('public.refund-cancellation');
+// [SETTINGS_FEATURE_DISABLED] Super Admin Refund Cancellation
+// Route::get('page/refund-cancellation', static function () {
+//     $cache = app(CachingService::class);
+//     echo htmlspecialchars_decode($cache->getSystemSettings('refund_cancellation'));
+// })->name('public.refund-cancellation');
 
 // Super Admin School Terms & Conditions
 Route::get('page/school-terms-conditions', static function () {
@@ -1134,7 +1167,7 @@ Route::get('page/school-terms-conditions', static function () {
 // School terms & conditions
 Route::get('school-settings/{id}/terms-condition', [SchoolSettingsController::class , 'public_terms_condition'])->name('school-settings.get-terms-condition');
 Route::get('school-settings/{id}/privacy-policy', [SchoolSettingsController::class , 'public_privacy_policy'])->name('school-settings.get-privacy-policy');
-Route::get('school-settings/{id}/refund-cancellation', [SchoolSettingsController::class , 'public_refund_cancellation'])->name('school-settings.get-refund-cancellation');
+// [SETTINGS_FEATURE_DISABLED] Route::get('school-settings/{id}/refund-cancellation', [SchoolSettingsController::class , 'public_refund_cancellation'])->name('school-settings.get-refund-cancellation');
 Route::get('school-settings/{id}/contact-us', [SchoolSettingsController::class , 'public_contact_us'])->name('school-settings.get-contact-us');
 Route::get('school-settings/{id}/about-us', [SchoolSettingsController::class , 'public_about_us'])->name('school-settings.get-about-us');
 // End school terms & conditions
@@ -1292,3 +1325,13 @@ Route::match (['get', 'post'], '/registration/cancel/{id}', function ($id) {
 
     return redirect('/')->with('success', 'Registrasi berhasil dibatalkan. Semua data telah dihapus.');
 })->name('registration.cancel');
+
+Route::get('kebijakan-privasi', function () {
+    return view('privacy_police');
+})->name('kebijakan-privasi');
+Route::get('syarat-layanan', function () {
+    return view('terms_conditions');
+})->name('syarat-layanan');
+Route::get('about-us', function () {
+    return view('about-us');
+})->name('about-us');

@@ -134,6 +134,8 @@ use App\Repositories\CertificateTemplate\CertificateTemplateInterface;
 use App\Repositories\CertificateTemplate\CertificateTemplateRepository;
 use App\Repositories\Chat\ChatInterface;
 use App\Repositories\Chat\ChatRepository;
+use App\Repositories\Complaint\ComplaintInterface;
+use App\Repositories\Complaint\ComplaintRepository;
 use App\Repositories\ContactInquiry\ContactInquiryInterface;
 use App\Repositories\ContactInquiry\ContactInquiryRepository;
 use App\Repositories\ClassGroup\ClassGroupInterface;
@@ -208,115 +210,118 @@ use App\Repositories\Transportation\PickupPointRepositoryInterface;
 use App\Repositories\Transportation\PickupPointRepository;
 use Notification;
 
-class RepositoryServiceProvider extends ServiceProvider {
+class RepositoryServiceProvider extends ServiceProvider
+{
     /**
      * Register services.
      *
      * @return void
      */
-    public function register() {
-        $this->app->bind(SchoolInterface::class, SchoolRepository::class);
-        $this->app->bind(UserInterface::class, UserRepository::class);
-        $this->app->bind(MediumInterface::class, MediumRepository::class);
-        $this->app->bind(SubjectInterface::class, SubjectRepository::class);
-        $this->app->bind(StaffInterface::class, StaffRepository::class);
-        $this->app->bind(ClassSchoolInterface::class, ClassSchoolRepository::class);
-        $this->app->bind(ClassSectionInterface::class, ClassSectionRepository::class);
-        $this->app->bind(SectionInterface::class, SectionRepository::class);
-        $this->app->bind(FormFieldsInterface::class, FormFieldsRepository::class);
-        $this->app->bind(ClassSubjectInterface::class, ClassSubjectRepository::class);
-        $this->app->bind(ElectiveSubjectGroupInterface::class, ElectiveSubjectGroupRepository::class);
-        $this->app->bind(StudentInterface::class, StudentRepository::class);
-        $this->app->bind(ExtraFormFieldsInterface::class, ExtraFormFieldsRepository::class);
-        $this->app->bind(SubjectInterface::class, SubjectRepository::class);
-        $this->app->bind(SubjectTeacherInterface::class, SubjectTeacherRepository::class);
-        $this->app->bind(TimetableInterface::class, TimetableRepository::class);
-        $this->app->bind(LessonsInterface::class, LessonsRepository::class);
-        $this->app->bind(FilesInterface::class, FilesRepository::class);
-        $this->app->bind(TopicsInterface::class, TopicsRepository::class);
-        $this->app->bind(HolidayInterface::class, HolidayRepository::class);
-        $this->app->bind(SlidersInterface::class, SlidersRepository::class);
-        $this->app->bind(AnnouncementInterface::class, AnnouncementRepository::class);
-        $this->app->bind(StudentSubjectInterface::class, StudentSubjectRepository::class);
-        $this->app->bind(SessionYearInterface::class, SessionYearRepository::class);
-        $this->app->bind(SessionYearsTrackingsInterface::class, SessionYearsTrackingsRepository::class);
-        $this->app->bind(ExamInterface::class, ExamRepository::class);
-        $this->app->bind(ExamTimetableInterface::class, ExamTimetableRepository::class);
-        $this->app->bind(GradesInterface::class, GradesRepository::class);
-        $this->app->bind(ExamMarksInterface::class, ExamMarksRepository::class);
-        $this->app->bind(ExamResultInterface::class, ExamResultRepository::class);
-        $this->app->bind(SystemSettingInterface::class, SystemSettingRepository::class);
-        $this->app->bind(SchoolSettingInterface::class, SchoolSettingRepository::class);
-        $this->app->bind(LanguageInterface::class, LanguageRepository::class);
-        $this->app->bind(AttendanceInterface::class, AttendanceRepository::class);
-        $this->app->bind(StaffAttendanceInterface::class, StaffAttendanceRepository::class);
-        $this->app->bind(AssignmentInterface::class, AssignmentRepository::class);
-        $this->app->bind(AssignmentSubmissionInterface::class, AssignmentSubmissionRepository::class);
-        $this->app->bind(OnlineExamInterface::class, OnlineExamRepository::class);
-        $this->app->bind(ClassTeachersInterface::class, ClassTeachersRepository::class);
-        $this->app->bind(PromoteStudentInterface::class, PromoteStudentRepository::class);
-        $this->app->bind(PackageInterface::class, PackageRepository::class);
-        $this->app->bind(OnlineExamQuestionInterface::class, OnlineExamQuestionRepository::class);
-        $this->app->bind(OnlineExamQuestionOptionInterface::class, OnlineExamQuestionOptionRepository::class);
-        $this->app->bind(OnlineExamQuestionChoiceInterface::class, OnlineExamQuestionChoiceRepository::class);
-        $this->app->bind(OnlineExamStudentAnswerInterface::class, OnlineExamStudentAnswerRepository::class);
-        $this->app->bind(StudentOnlineExamStatusInterface::class, StudentOnlineExamStatusRepository::class);
-        $this->app->bind(FeesTypeInterface::class, FeesTypeRepository::class);
-        $this->app->bind(FeesClassTypeInterface::class, FeesClassTypeRepository::class);
-        $this->app->bind(FeesInstallmentInterface::class, FeesInstallmentRepository::class);
-        $this->app->bind(SemesterInterface::class, SemesterRepository::class);
-        $this->app->bind(AnnouncementClassInterface::class, AnnouncementClassRepository::class);
-        $this->app->bind(FeatureInterface::class, FeatureRepository::class);
-        $this->app->bind(FeesInterface::class, FeesRepository::class);
-        $this->app->bind(PackageFeatureInterface::class, PackageFeatureRepository::class);
-        $this->app->bind(SubscriptionInterface::class, SubscriptionRepository::class);
-        $this->app->bind(AddonInterface::class, AddonRepository::class);
-        $this->app->bind(AddonSubscriptionInterface::class, AddonSubscriptionRepository::class);
-        $this->app->bind(FeesPaidInterface::class, FeesPaidRepository::class);
-        $this->app->bind(CompulsoryFeeInterface::class, CompulsoryFeeRepository::class);
-        $this->app->bind(OptionalFeeInterface::class, OptionalFeeRepository::class);
-        $this->app->bind(StreamInterface::class, StreamRepository::class);
-        $this->app->bind(ShiftInterface::class, ShiftRepository::class);
-        $this->app->bind(SubscriptionBillInterface::class, SubscriptionBillRepository::class);
-        $this->app->bind(PaymentTransactionInterface::class, PaymentTransactionRepository::class);
-        $this->app->bind(ExpenseInterface::class, ExpenseRepository::class);
-        $this->app->bind(ExpenseCategoryInterface::class, ExpenseCategoryRepository::class);
-        $this->app->bind(PaymentConfigurationInterface::class, PaymentConfigurationRepository::class);
-        $this->app->bind(LeaveInterface::class, LeaveRepository::class);
-        $this->app->bind(StaffSupportSchoolInterface::class, StaffSupportSchoolRepository::class);
-        $this->app->bind(FaqsInterface::class, FaqsRepository::class);
-        $this->app->bind(SubscriptionFeatureInterface::class, SubscriptionFeatureRepository::class);
-        $this->app->bind(LeaveDetailInterface::class, LeaveDetailRepository::class);
-        $this->app->bind(LeaveMasterInterface::class, LeaveMasterRepository::class);
-        $this->app->bind(UserStatusForNextCycleInterface::class, UserStatusForNextCycleRepository::class);
-        $this->app->bind(GuidanceInterface::class, GuidanceRepository::class);
-        $this->app->bind(SubscriptionBillPaymentInterface::class, SubscriptionBillPaymentRepository::class);
-        $this->app->bind(GalleryInterface::class, GalleryRepository::class);
-        $this->app->bind(NotificationInterface::class, NotificationRepository::class);
-        $this->app->bind(FeatureSectionInterface::class, FeatureSectionRepository::class);
-        $this->app->bind(FeatureSectionListInterface::class, FeatureSectionListRepository::class);
-        $this->app->bind(CertificateTemplateInterface::class, CertificateTemplateRepository::class);
-        $this->app->bind(ClassGroupInterface::class, ClassGroupRepository::class);
-        $this->app->bind(PayrollSettingInterface::class, PayrollSettingRepository::class);
-        $this->app->bind(StaffSalaryInterface::class, StaffSalaryRepository::class);
-        $this->app->bind(StaffPayrollInterface::class, StaffPayrollRepository::class);
-        $this->app->bind(ChatInterface::class, ChatRepository::class);
-        $this->app->bind(MessageInterface::class, MessageRepository::class);
-        $this->app->bind(AttachmentInterface::class, AttachmentRepository::class);
-        $this->app->bind(DatabaseBackupInterface::class, DatabaseBackupRepository::class);
-        $this->app->bind(SchoolInquiryInterface::class, SchoolInquiryRepository::class);
-        $this->app->bind(ExtraSchoolDataInterface::class, ExtraSchoolDataRepository::class);
-        $this->app->bind(LessonsCommonInterface::class, LessonsCommonRepository::class);
-        $this->app->bind(TopicCommonInterface::class, TopicCommonRepository::class);
-        $this->app->bind(AssignmentCommonInterface::class, AssignmentCommonRepository::class);
-        $this->app->bind(OnlineExamCommonInterface::class, OnlineExamCommonRepository::class);
-        $this->app->bind(ContactInquiryInterface::class, ContactInquiryRepository::class);
-        $this->app->bind(DiaryCategoryInterface::class, DiaryCategoryRepository::class);
-        $this->app->bind(DiaryInterface::class, DiaryRepository::class);
-        $this->app->bind(DiaryStudentInterface::class, DiaryStudentRepository::class); 
-        $this->app->bind(VehicleRepositoryInterface::class, VehicleRepository::class);
-        $this->app->bind(PickupPointRepositoryInterface::class, PickupPointRepository::class);
-        $this->app->bind(RouteVehicleRepositoryInterface::class, RouteVehicleRepository::class);
+    public function register()
+    {
+        $this->app->bind(SchoolInterface::class , SchoolRepository::class);
+        $this->app->bind(UserInterface::class , UserRepository::class);
+        $this->app->bind(MediumInterface::class , MediumRepository::class);
+        $this->app->bind(SubjectInterface::class , SubjectRepository::class);
+        $this->app->bind(StaffInterface::class , StaffRepository::class);
+        $this->app->bind(ClassSchoolInterface::class , ClassSchoolRepository::class);
+        $this->app->bind(ClassSectionInterface::class , ClassSectionRepository::class);
+        $this->app->bind(SectionInterface::class , SectionRepository::class);
+        $this->app->bind(FormFieldsInterface::class , FormFieldsRepository::class);
+        $this->app->bind(ClassSubjectInterface::class , ClassSubjectRepository::class);
+        $this->app->bind(ElectiveSubjectGroupInterface::class , ElectiveSubjectGroupRepository::class);
+        $this->app->bind(StudentInterface::class , StudentRepository::class);
+        $this->app->bind(ExtraFormFieldsInterface::class , ExtraFormFieldsRepository::class);
+        $this->app->bind(SubjectInterface::class , SubjectRepository::class);
+        $this->app->bind(SubjectTeacherInterface::class , SubjectTeacherRepository::class);
+        $this->app->bind(TimetableInterface::class , TimetableRepository::class);
+        $this->app->bind(LessonsInterface::class , LessonsRepository::class);
+        $this->app->bind(FilesInterface::class , FilesRepository::class);
+        $this->app->bind(TopicsInterface::class , TopicsRepository::class);
+        $this->app->bind(HolidayInterface::class , HolidayRepository::class);
+        $this->app->bind(SlidersInterface::class , SlidersRepository::class);
+        $this->app->bind(AnnouncementInterface::class , AnnouncementRepository::class);
+        $this->app->bind(StudentSubjectInterface::class , StudentSubjectRepository::class);
+        $this->app->bind(SessionYearInterface::class , SessionYearRepository::class);
+        $this->app->bind(SessionYearsTrackingsInterface::class , SessionYearsTrackingsRepository::class);
+        $this->app->bind(ExamInterface::class , ExamRepository::class);
+        $this->app->bind(ExamTimetableInterface::class , ExamTimetableRepository::class);
+        $this->app->bind(GradesInterface::class , GradesRepository::class);
+        $this->app->bind(ExamMarksInterface::class , ExamMarksRepository::class);
+        $this->app->bind(ExamResultInterface::class , ExamResultRepository::class);
+        $this->app->bind(SystemSettingInterface::class , SystemSettingRepository::class);
+        $this->app->bind(SchoolSettingInterface::class , SchoolSettingRepository::class);
+        $this->app->bind(LanguageInterface::class , LanguageRepository::class);
+        $this->app->bind(AttendanceInterface::class , AttendanceRepository::class);
+        $this->app->bind(StaffAttendanceInterface::class , StaffAttendanceRepository::class);
+        $this->app->bind(AssignmentInterface::class , AssignmentRepository::class);
+        $this->app->bind(AssignmentSubmissionInterface::class , AssignmentSubmissionRepository::class);
+        $this->app->bind(OnlineExamInterface::class , OnlineExamRepository::class);
+        $this->app->bind(ClassTeachersInterface::class , ClassTeachersRepository::class);
+        $this->app->bind(PromoteStudentInterface::class , PromoteStudentRepository::class);
+        $this->app->bind(PackageInterface::class , PackageRepository::class);
+        $this->app->bind(OnlineExamQuestionInterface::class , OnlineExamQuestionRepository::class);
+        $this->app->bind(OnlineExamQuestionOptionInterface::class , OnlineExamQuestionOptionRepository::class);
+        $this->app->bind(OnlineExamQuestionChoiceInterface::class , OnlineExamQuestionChoiceRepository::class);
+        $this->app->bind(OnlineExamStudentAnswerInterface::class , OnlineExamStudentAnswerRepository::class);
+        $this->app->bind(StudentOnlineExamStatusInterface::class , StudentOnlineExamStatusRepository::class);
+        $this->app->bind(FeesTypeInterface::class , FeesTypeRepository::class);
+        $this->app->bind(FeesClassTypeInterface::class , FeesClassTypeRepository::class);
+        $this->app->bind(FeesInstallmentInterface::class , FeesInstallmentRepository::class);
+        $this->app->bind(SemesterInterface::class , SemesterRepository::class);
+        $this->app->bind(AnnouncementClassInterface::class , AnnouncementClassRepository::class);
+        $this->app->bind(FeatureInterface::class , FeatureRepository::class);
+        $this->app->bind(FeesInterface::class , FeesRepository::class);
+        $this->app->bind(PackageFeatureInterface::class , PackageFeatureRepository::class);
+        $this->app->bind(SubscriptionInterface::class , SubscriptionRepository::class);
+        $this->app->bind(AddonInterface::class , AddonRepository::class);
+        $this->app->bind(AddonSubscriptionInterface::class , AddonSubscriptionRepository::class);
+        $this->app->bind(FeesPaidInterface::class , FeesPaidRepository::class);
+        $this->app->bind(CompulsoryFeeInterface::class , CompulsoryFeeRepository::class);
+        $this->app->bind(OptionalFeeInterface::class , OptionalFeeRepository::class);
+        $this->app->bind(StreamInterface::class , StreamRepository::class);
+        $this->app->bind(ShiftInterface::class , ShiftRepository::class);
+        $this->app->bind(SubscriptionBillInterface::class , SubscriptionBillRepository::class);
+        $this->app->bind(PaymentTransactionInterface::class , PaymentTransactionRepository::class);
+        $this->app->bind(ExpenseInterface::class , ExpenseRepository::class);
+        $this->app->bind(ExpenseCategoryInterface::class , ExpenseCategoryRepository::class);
+        $this->app->bind(PaymentConfigurationInterface::class , PaymentConfigurationRepository::class);
+        $this->app->bind(LeaveInterface::class , LeaveRepository::class);
+        $this->app->bind(StaffSupportSchoolInterface::class , StaffSupportSchoolRepository::class);
+        $this->app->bind(FaqsInterface::class , FaqsRepository::class);
+        $this->app->bind(SubscriptionFeatureInterface::class , SubscriptionFeatureRepository::class);
+        $this->app->bind(LeaveDetailInterface::class , LeaveDetailRepository::class);
+        $this->app->bind(LeaveMasterInterface::class , LeaveMasterRepository::class);
+        $this->app->bind(UserStatusForNextCycleInterface::class , UserStatusForNextCycleRepository::class);
+        $this->app->bind(GuidanceInterface::class , GuidanceRepository::class);
+        $this->app->bind(SubscriptionBillPaymentInterface::class , SubscriptionBillPaymentRepository::class);
+        $this->app->bind(GalleryInterface::class , GalleryRepository::class);
+        $this->app->bind(NotificationInterface::class , NotificationRepository::class);
+        $this->app->bind(FeatureSectionInterface::class , FeatureSectionRepository::class);
+        $this->app->bind(FeatureSectionListInterface::class , FeatureSectionListRepository::class);
+        $this->app->bind(CertificateTemplateInterface::class , CertificateTemplateRepository::class);
+        $this->app->bind(ClassGroupInterface::class , ClassGroupRepository::class);
+        $this->app->bind(PayrollSettingInterface::class , PayrollSettingRepository::class);
+        $this->app->bind(StaffSalaryInterface::class , StaffSalaryRepository::class);
+        $this->app->bind(StaffPayrollInterface::class , StaffPayrollRepository::class);
+        $this->app->bind(ChatInterface::class , ChatRepository::class);
+        $this->app->bind(MessageInterface::class , MessageRepository::class);
+        $this->app->bind(AttachmentInterface::class , AttachmentRepository::class);
+        $this->app->bind(DatabaseBackupInterface::class , DatabaseBackupRepository::class);
+        $this->app->bind(SchoolInquiryInterface::class , SchoolInquiryRepository::class);
+        $this->app->bind(ExtraSchoolDataInterface::class , ExtraSchoolDataRepository::class);
+        $this->app->bind(LessonsCommonInterface::class , LessonsCommonRepository::class);
+        $this->app->bind(TopicCommonInterface::class , TopicCommonRepository::class);
+        $this->app->bind(AssignmentCommonInterface::class , AssignmentCommonRepository::class);
+        $this->app->bind(OnlineExamCommonInterface::class , OnlineExamCommonRepository::class);
+        $this->app->bind(ContactInquiryInterface::class , ContactInquiryRepository::class);
+        $this->app->bind(ComplaintInterface::class , ComplaintRepository::class);
+        $this->app->bind(DiaryCategoryInterface::class , DiaryCategoryRepository::class);
+        $this->app->bind(DiaryInterface::class , DiaryRepository::class);
+        $this->app->bind(DiaryStudentInterface::class , DiaryStudentRepository::class);
+        $this->app->bind(VehicleRepositoryInterface::class , VehicleRepository::class);
+        $this->app->bind(PickupPointRepositoryInterface::class , PickupPointRepository::class);
+        $this->app->bind(RouteVehicleRepositoryInterface::class , RouteVehicleRepository::class);
     }
 
     /**
@@ -324,7 +329,8 @@ class RepositoryServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-    public function boot() {
-        //
+    public function boot()
+    {
+    //
     }
 }

@@ -21,24 +21,23 @@ class CheckTwoFactorAuthenticated
     {
 
         // if(Auth::user() && Auth::user()->hasRole('School Admin') && Auth::user()->hasRole('Super Admin') ) {
-        if(Auth::user()) {
-            
-            $user = DB::table('users')->where('id',Auth::user()->id)->first();
+        if (Auth::user()) {
+
+            $user = DB::table('users')->where('id', Auth::user()->id)->first();
             $currentTime = now()->format('Y-m-d H:i:s');
 
-            if ($currentTime >= $user->two_factor_expires_at && $user->two_factor_enabled == 1) {
-                DB::table('users')->where('email',$user->email)->update(['two_factor_secret' => null,'two_factor_expires_at' => null]);
+            if ($user->two_factor_enabled == 1 && $user->two_factor_expires_at !== null && $currentTime >= $user->two_factor_expires_at) {
+                DB::table('users')->where('email', $user->email)->update(['two_factor_secret' => null, 'two_factor_expires_at' => null]);
                 Auth::logout();
                 $request->session()->flush();
                 $request->session()->regenerate();
                 session()->forget('school_database_name');
                 Session::forget('school_database_name');
                 return redirect('/login');
-               
+
             }
-        } 
+        }
 
         return $next($request);
     }
 }
-

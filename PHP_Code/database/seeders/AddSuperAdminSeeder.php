@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
 
 class AddSuperAdminSeeder extends Seeder
 {
@@ -20,15 +20,15 @@ class AddSuperAdminSeeder extends Seeder
     public function run()
     {
         //Add Super Admin User
-        $super_admin_role = Role::where('name', 'Super Admin')->first();
+        $super_admin_role = Role::withoutGlobalScope('school')->updateOrCreate(['name' => 'Super Admin'], ['custom_role' => 0, 'editable' => 0]);
         $user = User::updateOrCreate(['id' => 1], [
             'first_name' => 'super',
-            'last_name'  => 'admin',
-            'email'      => 'superadmin@gmail.com',
-            'password'   => Hash::make('superadmin'),
-            'gender'     => 'male',
-            'image'      => 'logo.svg',
-            'mobile'     => "",
+            'last_name' => 'admin',
+            'email' => 'superadmin@gmail.com',
+            'password' => Hash::make('superadmin'),
+            'gender' => 'male',
+            'image' => 'logo.svg',
+            'mobile' => "",
             'email_verified_at' => Carbon::now(),
             'two_factor_enabled' => 0,
         ]);
@@ -240,27 +240,27 @@ class AddSuperAdminSeeder extends Seeder
             [
                 'name' => 'school_reject_template',
                 'data' => '&lt;p&gt;Dear {school_name},&lt;/p&gt;' .
-                    '&lt;p&gt;Thank you for submitting your school&#039;s application to join our organization. We value the effort you put into the process and your interest in partnering with us.&lt;/p&gt;' .
-                    '&lt;p&gt;After careful review, we regret to inform you that your application has not been approved at this time.&lt;/p&gt;' .
-                    '&lt;p&gt;We encourage you to review the application criteria outlined on our platform and reapply in the future if circumstances allow. Our team is here to support you, so please don&apos;t hesitate to reach out to us at {support_email} for further clarification or guidance.&lt;/p&gt;' .
-                    '&lt;p&gt;We sincerely appreciate your understanding and look forward to the opportunity to collaborate in the future.&lt;/p&gt;' .
-                    '&lt;p&gt;Warm regards,&lt;/p&gt;' .
-                    '&lt;p&gt;{super_admin_name}&lt;/p&gt;' .
-                    '&lt;p&gt;{support_email}&lt;/p&gt;' .
-                    '&lt;p&gt;{contact}&amp;nbsp;&lt;/p&gt;',
+                '&lt;p&gt;Thank you for submitting your school&#039;s application to join our organization. We value the effort you put into the process and your interest in partnering with us.&lt;/p&gt;' .
+                '&lt;p&gt;After careful review, we regret to inform you that your application has not been approved at this time.&lt;/p&gt;' .
+                '&lt;p&gt;We encourage you to review the application criteria outlined on our platform and reapply in the future if circumstances allow. Our team is here to support you, so please don&apos;t hesitate to reach out to us at {support_email} for further clarification or guidance.&lt;/p&gt;' .
+                '&lt;p&gt;We sincerely appreciate your understanding and look forward to the opportunity to collaborate in the future.&lt;/p&gt;' .
+                '&lt;p&gt;Warm regards,&lt;/p&gt;' .
+                '&lt;p&gt;{super_admin_name}&lt;/p&gt;' .
+                '&lt;p&gt;{support_email}&lt;/p&gt;' .
+                '&lt;p&gt;{contact}&amp;nbsp;&lt;/p&gt;',
                 'type' => 'text'
             ],
             [
                 'name' => 'school_inquiry_template',
                 'data' => '&lt;p&gt;Dear Super Admin,&lt;/p&gt;' .
-                    '&lt;p&gt;We hope this message finds you well.&lt;/p&gt;' .
-                    '&lt;p&gt;You have received a new school inquiry through the website. Please find the details below:&lt;/p&gt;' .
-                    '&lt;hr&gt;' .
-                    '&lt;p&gt;&lt;strong&gt;School Name:&lt;/strong&gt; {school_name}&lt;br&gt;&lt;strong&gt;Contact Person:&lt;/strong&gt; {contact}&lt;br&gt;&lt;strong&gt;Email Address:&lt;/strong&gt; {school_email}&lt;br&gt;&lt;strong&gt;Address:&lt;/strong&gt; {address}&lt;/p&gt;' .
-                    '&lt;hr&gt;' .
-                    '&lt;p&gt;Please reach out to the school representative at your earliest convenience to follow up on their inquiry and provide any required assistance or information.&lt;/p&gt;' .
-                    '&lt;p&gt;If you need further support, feel free to contact the admin team.&lt;/p&gt;' .
-                    '&lt;p&gt;Warm regards,&lt;br&gt;{system_name}&lt;/p&gt;',
+                '&lt;p&gt;We hope this message finds you well.&lt;/p&gt;' .
+                '&lt;p&gt;You have received a new school inquiry through the website. Please find the details below:&lt;/p&gt;' .
+                '&lt;hr&gt;' .
+                '&lt;p&gt;&lt;strong&gt;School Name:&lt;/strong&gt; {school_name}&lt;br&gt;&lt;strong&gt;Contact Person:&lt;/strong&gt; {contact}&lt;br&gt;&lt;strong&gt;Email Address:&lt;/strong&gt; {school_email}&lt;br&gt;&lt;strong&gt;Address:&lt;/strong&gt; {address}&lt;/p&gt;' .
+                '&lt;hr&gt;' .
+                '&lt;p&gt;Please reach out to the school representative at your earliest convenience to follow up on their inquiry and provide any required assistance or information.&lt;/p&gt;' .
+                '&lt;p&gt;If you need further support, feel free to contact the admin team.&lt;/p&gt;' .
+                '&lt;p&gt;Warm regards,&lt;br&gt;{system_name}&lt;/p&gt;',
                 'type' => 'text'
             ]
 

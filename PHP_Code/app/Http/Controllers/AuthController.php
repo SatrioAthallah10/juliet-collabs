@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\FormField\FormFieldsInterface;
+use App\Repositories\Package\PackageInterface;
 use App\Repositories\SystemSetting\SystemSettingInterface;
 use App\Repositories\User\UserInterface;
 use App\Services\CachingService;
@@ -23,14 +24,16 @@ class AuthController extends Controller
     private CachingService $cache;
     private SystemSettingInterface $systemSettings;
     private FormFieldsInterface $formFields;
+    private PackageInterface $package;
 
-    public function __construct(UserInterface $user, CachingService $cachingService, SystemSettingInterface $systemSettings, FormFieldsInterface $formFields)
+    public function __construct(UserInterface $user, CachingService $cachingService, SystemSettingInterface $systemSettings, FormFieldsInterface $formFields, PackageInterface $package)
     {
         // $this->middleware('auth');
         $this->user = $user;
         $this->cache = $cachingService;
         $this->systemSettings = $systemSettings;
         $this->formFields = $formFields;
+        $this->package = $package;
     }
 
     public function login()
@@ -41,7 +44,9 @@ class AuthController extends Controller
         $systemSettings = $this->cache->getSystemSettings();
         $extraFields = $this->formFields->defaultModel()->orderBy('rank')->get();
         // $schoolSettings = $this->cache->getSchoolSettings();
-        return view('auth.login', compact('systemSettings', 'extraFields'));
+        $packages = $this->package->builder()->where('status', 1)->orderBy('rank', 'ASC')->get();
+
+        return view('auth.login', compact('systemSettings', 'extraFields', 'packages'));
     }
 
 
@@ -73,12 +78,14 @@ class AuthController extends Controller
                     'error' => false,
                     'message' => trans('Data Updated Successfully')
                 );
-            } else {
+            }
+            else {
                 ResponseService::errorResponse('In valid old password');
             }
 
 
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, "HomeController --> Change Password Method");
             ResponseService::errorResponse();
         }
@@ -150,7 +157,8 @@ class AuthController extends Controller
                 $userData['two_factor_secret'] = null;
                 $userData['two_factor_expires_at'] = null;
                 $userData['two_factor_enabled'] = 1;
-            } else {
+            }
+            else {
                 $userData['two_factor_secret'] = null;
                 $userData['two_factor_expires_at'] = null;
                 $userData['two_factor_enabled'] = 0;
@@ -176,7 +184,8 @@ class AuthController extends Controller
 
 
             ResponseService::successResponse('Data Stored Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, "Home Controller -> updateProfile Method");
             ResponseService::errorResponse();
         }
@@ -187,12 +196,14 @@ class AuthController extends Controller
         if (Auth::user()) {
             if (Auth::user()->two_factor_enabled == 1 && Auth::user()->two_factor_expires_at) {
                 return redirect()->route('dashboard');
-            } else {
+            }
+            else {
                 $systemSettings = $this->cache->getSystemSettings();
                 Auth::logout();
                 return view('auth.2fa', compact('systemSettings'));
             }
-        } else {
+        }
+        else {
             $systemSettings = $this->cache->getSystemSettings();
             return view('auth.2fa', compact('systemSettings'));
         }
@@ -227,7 +238,8 @@ class AuthController extends Controller
             Auth::loginUsingId($userId);
             Session::forget('2fa_user_id');
             return redirect()->intended('/dashboard');
-        } else {
+        }
+        else {
             if ($failedAttempts >= $maxFailedAttempts) {
                 // Last failed attempt, clear session data
                 $this->clearTwoFactorData($user);

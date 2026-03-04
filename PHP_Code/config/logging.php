@@ -144,6 +144,18 @@ return [
             'path' => storage_path('logs/setup_school_db.log'),
             'level' => 'debug',
         ],
+
+        'logo_updates' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/logo_updates.log'),
+            'level' => 'info',
+        ],
+
+        'whatsapp' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/whatsapp.log'),
+            'level' => 'debug',
+        ],
     ],
 
 ];

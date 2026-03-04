@@ -555,6 +555,18 @@
         @endcanany
 
         {{-- ============================================ --}}
+        {{-- COMPLAINTS (Chatbot) --}}
+        {{-- ============================================ --}}
+        @if (Auth::user() && !Auth::user()->school_id)
+            <li class="nav-item">
+                <a href="{{ route('complaints.index') }}" class="nav-link">
+                    <i class="fa fa-comments menu-icon"></i>
+                    <span class="menu-title">{{ __('Complaints') }}</span>
+                </a>
+            </li>
+        @endif
+
+        {{-- ============================================ --}}
         {{-- ACADEMIC MANAGEMENT GROUP --}}
         {{-- ============================================ --}}
         @php
@@ -605,7 +617,7 @@
                 <a class="nav-link" data-toggle="collapse" href="#academic-management-group" aria-expanded="false"
                     aria-controls="academic-management-group">
                     <i class="fa fa-university menu-icon"></i>
-                    <span class="menu-title">{{ __('Academic Management') }}</span>
+                    <span class="menu-title">{{ __('Manajemen Akademik') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="academic-management-group">
@@ -650,11 +662,11 @@
                                                 </a></li>
                                         @endcan
 
-                                        @can('shift-list')
+                                        {{-- @can('shift-list')
                                             <li class="nav-item"><a class="nav-link" href="{{ route('shift.index') }}">
                                                     {{ __('Shift') }}
                                                 </a></li>
-                                        @endcan
+                                        @endcan --}}
 
                                         @can('class-list')
                                             <li class="nav-item"><a href="{{ route('class.index') }}" class="nav-link">
@@ -739,10 +751,10 @@
                                                     class="nav-link">{{ __('upload_profile_images') }}</a></li>
                                         @endcan
 
-                                        @can('assign-elective-subject-list')
+                                        {{-- @can('assign-elective-subject-list')
                                             <li class="nav-item"><a href="{{ route('assign.elective.subject.index') }}"
                                                     class="nav-link">{{ __('Assign Elective Subject') }} </a></li>
-                                        @endcan
+                                        @endcan --}}
 
                                         @canany('promote-student-create', 'transfer-student-create')
                                             <li class="nav-item"><a href="{{ route('promote-student.index') }}"
@@ -857,7 +869,7 @@
                 <a class="nav-link" data-toggle="collapse" href="#academic-calendar-group" aria-expanded="false"
                     aria-controls="academic-calendar-group">
                     <i class="fa fa-calendar menu-icon"></i>
-                    <span class="menu-title">{{ __('Academic Calendar') }}</span>
+                    <span class="menu-title">{{ __('Kalender Akademik') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="academic-calendar-group">
@@ -999,7 +1011,7 @@
                 <a class="nav-link" data-toggle="collapse" href="#exam-performance-group" aria-expanded="false"
                     aria-controls="exam-performance-group">
                     <i class="fa fa-clipboard menu-icon"></i>
-                    <span class="menu-title">{{ __('Exam & Performance') }}</span>
+                    <span class="menu-title">{{ __('Performa dan Ujian') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="exam-performance-group">
@@ -1197,7 +1209,7 @@
                 <a class="nav-link" data-toggle="collapse" href="#communication-media-group" aria-expanded="false"
                     aria-controls="communication-media-group">
                     <i class="fa fa-comments menu-icon"></i>
-                    <span class="menu-title">{{ __('Communication & Media') }}</span>
+                    <span class="menu-title">{{ __('Media Komunikasi') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="communication-media-group">
@@ -1319,7 +1331,7 @@
                 <a class="nav-link" data-toggle="collapse" href="#personnel-management-group" aria-expanded="false"
                     aria-controls="personnel-management-group">
                     <i class="fa fa-briefcase menu-icon"></i>
-                    <span class="menu-title">{{ __('Personnel Management') }}</span>
+                    <span class="menu-title">{{ __('Manajemen Personil') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="personnel-management-group">
@@ -1542,7 +1554,7 @@
                 <a class="nav-link" data-toggle="collapse" href="#institutional-finance-group" aria-expanded="false"
                     aria-controls="institutional-finance-group">
                     <i class="fa fa-bank menu-icon"></i>
-                    <span class="menu-title">{{ __('Institutional Finance') }}</span>
+                    <span class="menu-title">{{ __('Keuangan Sekolah') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="institutional-finance-group">
@@ -1676,9 +1688,10 @@
         @endif
 
         {{-- ============================================ --}}
-        {{-- TRANSPORTATION MODULE GROUP --}}
+        {{-- [TRANSPORTATION_MODULE_DISABLED] --}}
+        {{-- TRANSPORTATION MODULE GROUP - DISABLED --}}
         {{-- ============================================ --}}
-
+        {{--
         @canany(['route-list', 'pickup-points-list', 'vehicles-list', 'RouteVehicle-list', 'driver-helper-list',
             'transportationRequests-list', 'transportationexpense-list'])
             <li class="nav-item">
@@ -1690,8 +1703,6 @@
                 </a>
                 <div class="collapse" id="transportation-menu">
                     <ul class="nav flex-column sub-menu">
-
-
                         @can('vehicles-list')
                             <li class="nav-item">
                                 <a href="{{ route('vehicles.index') }}" class="nav-link" data-access="@hasFeatureAccess('Transportation Module')">
@@ -1757,6 +1768,8 @@
                 </div>
             </li>
         @endrole
+        --}}
+        {{-- [END TRANSPORTATION_MODULE_DISABLED] --}}
 
 
         {{-- ============================================ --}}
@@ -2053,7 +2066,7 @@
         {{-- Certificate & ID Card GROUP --}}
         {{-- ============================================ --}}
 
-        @role('School Admin')
+        @hasanyrole(['School Admin', 'Super Admin'])
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#subscription-menu" aria-expanded="false"
                     aria-controls="subscription-menu">
@@ -2082,11 +2095,17 @@
                                 <span class="menu-title">{{ __('addons') }}</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('subscriptions/doku-receipts') }}">
+                                <i class="fa fa-file-text-o menu-icon"></i>
+                                <span class="menu-title">{{ __('Doku Receipts') }}</span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
             </li>
-        @endrole
+        @endhasanyrole
 
         {{-- Email Schools (Super Admin) --}}
         @canany(['custom-school-email'])
@@ -2140,7 +2159,7 @@
                 <a class="nav-link" data-toggle="collapse" href="#settings-group" aria-expanded="false"
                     aria-controls="settings-group">
                     <i class="fa fa-cog menu-icon"></i>
-                    <span class="menu-title">{{ __('Settings') }}</span>
+                    <span class="menu-title">{{ __('Pengaturan') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="settings-group">
@@ -2273,19 +2292,19 @@
                                             </li>
                                         @endrole
 
-                                        @can('school-setting-manage')
+                                        {{-- @can('school-setting-manage')
                                             <li class="nav-item">
                                                 <a class="nav-link" data-access="@hasFeatureAccess('Website Management')"
                                                     href="{{ route('school-settings.third-party') }}">{{ __('Third-Party APIs') }}</a>
                                             </li>
-                                        @endcan
+                                        @endcan --}}
 
-                                        @can('system-setting-manage')
+                                        {{-- @can('system-setting-manage')
                                             <li class="nav-item">
                                                 <a class="nav-link"
                                                     href="{{ route('system-settings.third-party') }}">{{ __('Third-Party APIs') }}</a>
                                             </li>
-                                        @endcan
+                                        @endcan --}}
 
                                         @can('contact-us')
                                             <li class="nav-item">
@@ -2312,10 +2331,10 @@
                                                     href="{{ route('school-settings.terms-condition') }}">{{ __('terms_condition') }}</a>
                                             </li>
 
-                                            <li class="nav-item">
+                                            {{-- <li class="nav-item">
                                                 <a class="nav-link"
                                                     href="{{ route('school-settings.refund-cancellation') }}">{{ __('refund_cancellation') }}</a>
-                                            </li>
+                                            </li> --}}
 
                                             <li class="nav-item">
                                                 <a class="nav-link"
@@ -2451,8 +2470,10 @@
             </li>
         @endcanany
 
+        {{-- [SUPPORT_MODULE_DISABLED] --}}
+        {{-- Support Module - DISABLED --}}
+        {{--
         @role('School Admin')
-            {{-- Support --}}
             <li class="nav-item">
                 <a href="{{ url('staff/support') }}" class="nav-link">
                     <i class="fa fa-question menu-icon"></i>
@@ -2460,6 +2481,8 @@
                 </a>
             </li>
         @endrole
+        --}}
+        {{-- [END SUPPORT_MODULE_DISABLED] --}}
     </ul>
 </nav>
 

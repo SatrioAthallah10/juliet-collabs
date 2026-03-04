@@ -71,7 +71,7 @@
                 </span>
                 <div class="col-md-12 mt-2">
                     <img id="favicon-preview" height="32px" width="32px"
-                         src='{{ !empty($settings['favicon']) ? url($settings['favicon']) : asset('assets/no_image_available.jpg') }}' 
+                         src='{{ !empty($settings['favicon']) ? Storage::url($settings['favicon']) : asset('assets/no_image_available.jpg') }}' 
                          alt="Favicon" class="">
                 </div>
             </div>
@@ -86,7 +86,7 @@
                 </span>
                 <div class="col-md-12 mt-2">
                     <img id="horizontal-logo-preview" height="50px" width="250px"
-                         src='{{ !empty($settings['horizontal_logo']) ? url($settings['horizontal_logo']) : asset('assets/no_image_available.jpg') }}' 
+                         src='{{ !empty($settings['horizontal_logo']) ? Storage::url($settings['horizontal_logo']) : asset('assets/no_image_available.jpg') }}' 
                          alt="Horizontal Logo" class="">
                 </div>
             </div>
@@ -101,7 +101,7 @@
                 </span>
                 <div class="col-md-12 mt-2">
                     <img id="vertical-logo-preview" height="100px" width="100px"
-                         src='{{ !empty($settings['vertical_logo']) ? url($settings['vertical_logo']) : asset('assets/no_image_available.jpg') }}' 
+                         src='{{ !empty($settings['vertical_logo']) ? Storage::url($settings['vertical_logo']) : asset('assets/no_image_available.jpg') }}' 
                          alt="Vertical Logo" class="">
                 </div>
             </div>
@@ -116,7 +116,7 @@
                     <button class="file-upload-browse btn btn-theme" type="button">{{ __('upload') }}</button>
                 </span>
                 <div class="col-md-12 mt-2">
-                    <img height="100px" width="100px" src='{{ !empty($settings['login_page_logo']) ? url($settings['login_page_logo']) : asset('assets/no_image_available.jpg') }}' alt="Login Page Logo" class="">
+                    <img height="100px" width="100px" src='{{ !empty($settings['login_page_logo']) ? Storage::url($settings['login_page_logo']) : asset('assets/no_image_available.jpg') }}' alt="Login Page Logo" class="">
                 </div>
             </div>
         </div>
@@ -189,12 +189,12 @@
             <div class="d-flex">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        {!! Form::radio('school_inquiry', '1', false, ['class' => 'default' , ($settings['school_inquiry'] == 1) ? "checked" : "" ]) !!}{{ __('enable') }}
+                        {!! Form::radio('school_inquiry', '1', false, ['class' => 'default' , (($settings['school_inquiry'] ?? null) == 1) ? "checked" : "" ]) !!}{{ __('enable') }}
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        {!! Form::radio('school_inquiry', '0', false, ['class' => 'custom', ($settings['school_inquiry'] ==  0) ? "checked" : "" ]) !!}{{ __('disable') }}
+                        {!! Form::radio('school_inquiry', '0', false, ['class' => 'custom', (($settings['school_inquiry'] ?? null) ==  0) ? "checked" : "" ]) !!}{{ __('disable') }}
                     </label>
                 </div>
             </div>

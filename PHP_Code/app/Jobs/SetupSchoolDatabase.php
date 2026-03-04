@@ -46,6 +46,7 @@ final class SetupSchoolDatabase implements ShouldQueue
     ): void {
 
         $jobStartedAt = microtime(true);
+        $settings = $cache->getSystemSettings();
 
         $this->logStep("JOB STARTED", [
             'tries' => $this->tries,
@@ -107,13 +108,27 @@ final class SetupSchoolDatabase implements ShouldQueue
                     'package_id' => $this->packageId
                 ]);
 
-                $subscriptionService->createSubscription(
+                if ($school->user) {
+                    \Illuminate\Support\Facades\Auth::login($school->user);
+                }
+
+                $subscription = $subscriptionService->createSubscription(
                     $this->packageId,
                     $school->id,
                     null,
                     1
                 );
-
+\Illuminate\Support\Facades\Auth::logout();
+                // Give ALL features to the newly registered school to unlock everything
+                $allFeatures = \App\Models\Feature::activeFeatures()->get();
+                $subscriptionFeatures = [];
+                foreach ($allFeatures as $feature) {
+                    $subscriptionFeatures[] = [
+                        'subscription_id' => $subscription->id,
+                        'feature_id'      => $feature->id
+                    ];
+                }
+                \App\Models\SubscriptionFeature::upsert($subscriptionFeatures, ['subscription_id', 'feature_id'], ['subscription_id', 'feature_id']);
                 $cache->removeSchoolCache(
                     config('constants.CACHE.SCHOOL.SETTINGS'),
                     $school->id
@@ -124,7 +139,7 @@ final class SetupSchoolDatabase implements ShouldQueue
 
             if ($this->schoolCodePrefix) {
 
-                $settings = $cache->getSystemSettings();
+                
 
                 if (($settings['school_prefix'] ?? '') !== $this->schoolCodePrefix) {
 
@@ -143,6 +158,8 @@ final class SetupSchoolDatabase implements ShouldQueue
                     $cache->removeSystemCache(
                         config('constants.CACHE.SYSTEM.SETTINGS')
                     );
+
+                    $settings = $cache->getSystemSettings();
                 }
             }
 
@@ -154,8 +171,17 @@ final class SetupSchoolDatabase implements ShouldQueue
             $this->switchToSchoolDatabase($school->database_name);
 
             /* ===================== EMAIL ===================== */
+            
+            $this->logStep("Setting school status to ACTIVE in TENANT DATABASE");
 
-            $settings = $cache->getSystemSettings();
+            $school->update([
+                'status' => 1,
+                'installed' => 1
+            ]);
+
+            $this->logStep("School marked as INSTALLED and ACTIVE", [
+                'school_id' => $school->id
+            ]);
 
             $emailBody = $this->replacePlaceholders(
                 $school,
@@ -241,17 +267,6 @@ final class SetupSchoolDatabase implements ShouldQueue
 
             $this->logStep("Database successfully created and verified");
         }
-
-        $this->logStep("Setting school status to ACTIVE immediately");
-
-        $school->update([
-            'status' => 1,
-            'installed' => 1
-        ]);
-
-        $this->logStep("School marked as INSTALLED and ACTIVE", [
-            'school_id' => $school->id
-        ]);
     }
 
     /* ========================================================= */
@@ -279,7 +294,7 @@ final class SetupSchoolDatabase implements ShouldQueue
 
     private function sendWelcomeEmail(
         string $to,
-        array $settings,
+        $settings,
         string $emailBody
     ): void {
 
@@ -342,7 +357,7 @@ final class SetupSchoolDatabase implements ShouldQueue
             '{school_admin_name}' => $user->full_name ?? '',
             '{code}' => $schoolCode ?? '',
             '{email}' => $user->email ?? '',
-            '{password}' => $user->mobile ?? '', // Assuming mobile is used as initial password?
+            '{password}' => '(Password yang Anda buat saat pendaftaran)',
             '{school_name}' => $school->name ?? '',
             '{super_admin_name}' => $settings['super_admin_name'] ?? 'Super Admin',
             '{support_email}' => $settings['mail_username'] ?? '',

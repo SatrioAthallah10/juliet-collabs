@@ -28,12 +28,12 @@
                                 </div>
 
                                 <div class="form-group col-sm-12 col-md-12 col-lg-6 col-xl-3">
-                                    <label for="class_section">{{ __('class_section') }} <span class="text-danger">*</span></label>
-                                    <select name="class_section_id" id="class_section" class="form-control select2">
-                                        <option value="">{{ __('select') . ' ' . __('Class') . ' ' . __('section') }}</option>
-                                        @if(count($class_sections))
-                                            @foreach ($class_sections as $class_section)
-                                                <option value="{{ $class_section->id }}">{{$class_section->full_name}}</option>
+                                    <label for="class_id">{{ __('class') }} <span class="text-danger">*</span></label>
+                                    <select name="class_id" id="class_id" class="form-control select2">
+                                        <option value="">{{ __('select') . ' ' . __('Class') }}</option>
+                                        @if(count($classes))
+                                            @foreach ($classes as $class)
+                                                <option value="{{ $class->id }}">{{$class->full_name}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -58,26 +58,7 @@
                                 </div>
 
 
-                                @if(!empty($features) )
-                                    <div class="form-group col-sm-12 col-md-12 col-lg-6 col-xl-4">
-                                        <label>{{ __('Status') }} <span class="text-danger">*</span></label><br>
-                                        <div class="d-flex">
-                                            <div class="form-check form-check-inline">
-                                                <label class="form-check-label">
-                                                    {!! Form::radio('status', 1) !!}
-                                                    {{ __('Active') }}
-                                                </label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <label class="form-check-label">
-                                                    {!! Form::radio('status', 0,true) !!}
-                                                    {{ __('Inactive') }}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <span class="text-danger small">{{ __('Note').':-'.__('Activating this will consider in your current subscription cycle') }}</span>
-                                    </div>
-                                @endif
+
                             </div>
                             <hr>
                             <div class="row mt-5">

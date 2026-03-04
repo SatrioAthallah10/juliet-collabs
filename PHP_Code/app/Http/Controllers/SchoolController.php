@@ -159,7 +159,7 @@ class SchoolController extends Controller
 
         $validator = Validator::make($request->all(), [
             'school_name' => 'required',
-            'school_support_email' => 'required|email|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/|unique:schools,support_email',
+            'school_support_email' => 'required|email|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/|unique:schools,support_email|unique:users,email',
             'school_support_phone' => 'required|numeric|digits_between:6,15',
             'school_tagline' => 'required',
             'school_address' => 'required',
@@ -214,7 +214,7 @@ class SchoolController extends Controller
                 'code' => $school_code,
                 'type' => "custom",
                 'domain_type' => $request->domain_type,
-                'installed' => 0,
+                'installed' => 1,
                 'status' => 1
             );
             // Call store function of Schools Repository
@@ -292,7 +292,7 @@ class SchoolController extends Controller
             $schoolData = $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name]);
 
             // Set initial status as pending
-            $schoolData = $this->schoolsRepository->update($schoolData->id, ['status' => 0]);
+            $schoolData = $this->schoolsRepository->update($schoolData->id, ['status' => 1]);
 
             DB::commit();
 
@@ -660,7 +660,7 @@ class SchoolController extends Controller
     {
         ResponseService::noPermissionThenSendJson('schools-delete');
         try {
-            $school = $this->schoolsRepository->update($id, ['status' => 0]);
+            $school = $this->schoolsRepository->update($id, ['status' => 1]);
             User::withTrashed()->where('id', $school->admin_id)->delete();
             $this->schoolsRepository->deleteById($id);
             ResponseService::successResponse('Data Deleted Successfully');
@@ -857,7 +857,7 @@ class SchoolController extends Controller
         try {
             DB::beginTransaction();
             $school = $this->schoolsRepository->findById($id);
-            $status = ['status' => $school->status == 0 ? 1 : 0];
+            $status = ['status' => 1];
             $this->schoolsRepository->update($id, $status);
             DB::commit();
             DB::setDefaultConnection('school');
@@ -926,6 +926,7 @@ class SchoolController extends Controller
             'school_name' => 'required',
             'school_email' => 'required|email|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             'school_phone' => 'required|numeric|digits_between:6,15',
+            'school_password' => 'required|min:8',
             'school_tagline' => 'required',
             'school_address' => 'required',
             'package_id' => 'required|exists:packages,id'
@@ -975,6 +976,11 @@ class SchoolController extends Controller
             'inquiry_exists' => $schoolInquiry ? 'YA (ID: ' . $schoolInquiry->id . ', status: ' . $schoolInquiry->payment_status . ')' : 'TIDAK',
         ]);
 
+        if ($school || $user || $schoolInquiry) {
+            Log::channel('registration')->warning('[REGISTRASI][STEP 3] Email sudah terdaftar: ' . $request->school_email);
+            ResponseService::errorResponse('This email has already been registered. Please use a different email.');
+        }
+
         try {
             $settings = $this->cache->getSystemSettings();
 
@@ -1003,6 +1009,7 @@ class SchoolController extends Controller
                     'school_name' => $request->school_name,
                     'school_email' => $request->school_email,
                     'school_phone' => $request->school_phone,
+                    'school_password' => Hash::make($request->school_password),
                     'school_tagline' => $request->school_tagline,
                     'school_address' => $request->school_address,
                     'package_id' => $request->package_id,
@@ -1010,7 +1017,7 @@ class SchoolController extends Controller
                     'invoice_number' => $invoiceNumber,
                     'payment_status' => 'pending',
                     'date' => Carbon::now()->format('Y-m-d'),
-                    'status' => 0,
+                    'status' => 1,
                 );
 
                 // Buat/update SchoolInquiry
@@ -1130,7 +1137,7 @@ class SchoolController extends Controller
                     'logo' => 'no_image_available.jpg',
                     'status' => 1,
                     'code' => $school_code,
-                    'installed' => 0
+                    'installed' => 1
                 );
 
                 // Buat School
@@ -1149,7 +1156,7 @@ class SchoolController extends Controller
                     'last_name' => 'Admin',
                     'mobile' => $request->school_phone,
                     'email' => $request->school_email,
-                    'password' => Hash::make($request->school_phone),
+                    'password' => Hash::make($request->school_password),
                     'school_id' => $schoolData->id,
                     'image' => 'dummy_logo.jpg'
                 );
@@ -1208,7 +1215,7 @@ class SchoolController extends Controller
                 $database_name = 'eschool_saas_' . $schoolData->id . '_' . strtolower(strtok($school_name, " "));
 
                 Log::channel('registration')->info('[REGISTRASI][STEP 9] Memanggil schoolsRepository::update() — set admin_id dan database_name...');
-                $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 0]);
+                $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 1]);
 
                 Log::channel('registration')->info('[REGISTRASI][STEP 9] School terupdate:', [
                     'school_id' => $schoolData->id,
@@ -1229,7 +1236,8 @@ class SchoolController extends Controller
                 SetupSchoolDatabase::dispatchSync(
                     $schoolData->id,
                     $request->trial_package,
-                    null
+                    null,
+                    $request->school_password
                 );
 
                 Log::channel('registration')->info('[REGISTRASI] ✅ PROSES SELESAI (MODE DIRECT)');
@@ -1368,6 +1376,7 @@ class SchoolController extends Controller
                 'type' => 'demo',
                 'domain_type' => 'default',
                 'status' => 1,
+                'installed' => 1,
             );
             // Call store function of Schools Repository
             $schoolData = $this->schoolsRepository->create($school_data);
@@ -1392,7 +1401,7 @@ class SchoolController extends Controller
             $database_name = 'eschool_saas_' . $schoolData->id . '_' . strtolower(strtok($school_name, " "));
 
             // Update Admin id to School Data and set status as pending
-            $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 0]);
+            $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 1]);
 
             DB::commit();
 
@@ -1559,6 +1568,7 @@ class SchoolController extends Controller
                     'code' => $school_code,
                     'type' => "custom",
                     'domain_type' => "default",
+                    'installed' => 1,
                 );
                 // Call store function of Schools Repository
                 $schoolData = $this->schoolsRepository->create($school_data);
@@ -1573,7 +1583,7 @@ class SchoolController extends Controller
                     'last_name' => 'Admin',
                     'mobile' => $request->school_support_phone,
                     'email' => $request->school_support_email,
-                    'password' => Hash::make($request->school_support_phone),
+                    'password' => $inquiry->school_password ?? Hash::make($request->school_support_phone),
                     'school_id' => $schoolData->id,
                 );
 
@@ -1582,7 +1592,7 @@ class SchoolController extends Controller
                 $user = $this->userRepository->create($admin_data);
 
                 // Update Admin id to School Data and set status as pending
-                $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 0]);
+                $this->schoolsRepository->update($schoolData->id, ['admin_id' => $user->id, 'database_name' => $database_name, 'status' => 1]);
 
 
                 $extraFields = $request->extra_fields;
@@ -1620,7 +1630,8 @@ class SchoolController extends Controller
                 SetupSchoolDatabase::dispatchSync(
                     $schoolData->id,
                     $inquiry->package_id,
-                    $request->school_code_prefix
+                    $request->school_code_prefix,
+                    null // Password was already hashed at inquiry time
                 );
 
                 $this->schoolInquiry->builder()->where('id', $request->edit_id)->delete();

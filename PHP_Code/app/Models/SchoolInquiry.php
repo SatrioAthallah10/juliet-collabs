@@ -11,22 +11,23 @@ class SchoolInquiry extends Model
     use HasFactory, DateFormatTrait;
 
     protected $fillable = [
-    'school_address',  
-    'school_phone', 
-    'school_name',        
-    'school_email',
-    'school_tagline',      
-    'date',   
-    'status',    
-    'package_id',
-    'price',
-    'invoice_number',
-    'payment_status'
+        'school_address',
+        'school_phone',
+        'school_password',
+        'school_name',
+        'school_email',
+        'school_tagline',
+        'date',
+        'status',
+        'package_id',
+        'price',
+        'invoice_number',
+        'payment_status'
     ];
 
     public function extra_school_details()
     {
-        return $this->hasMany(ExtraSchoolData::class, 'school_inquiry_id', 'id'); 
+        return $this->hasMany(ExtraSchoolData::class , 'school_inquiry_id', 'id');
     }
 
     public function getCreatedAtAttribute()
@@ -37,5 +38,6 @@ class SchoolInquiry extends Model
     {
         return $this->formatDateValue($this->getRawOriginal('updated_at'));
     }
-    
+
+
 }

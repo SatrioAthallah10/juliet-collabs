@@ -8,9 +8,18 @@ use App\Models\StaffSupportSchool;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Services\CachingService;
+
 
 class StaffCreationService
 {
+    private CachingService $cache;
+
+    public function __construct(CachingService $cache)
+    {
+        $this->cache = $cache;
+    }
+
     public function create(array $data)
     {
         DB::beginTransaction();
@@ -25,12 +34,12 @@ class StaffCreationService
 
             $user = User::create([
                 'first_name' => $data['first_name'],
-                'last_name'  => $data['last_name'],
-                'email'      => $data['email'],
-                'mobile'     => $data['mobile'],
-                'password'   => Hash::make($data['mobile']),
-                'school_id'  => $schoolId,
-                'status'     => 1,
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'mobile' => $data['mobile'],
+                'password' => Hash::make($data['mobile']),
+                'school_id' => $schoolId,
+                'status' => 1,
                 'two_factor_enabled' => 0,
                 'two_factor_secret' => null,
                 'two_factor_expires_at' => null,
@@ -52,14 +61,18 @@ class StaffCreationService
                 ? date('Y-m-d', strtotime($data['joining_date']))
                 : null;
 
+            $sessionYear = $this->cache->getDefaultSessionYear();
+
             $staff = Staff::create([
                 'user_id' => $user->id,
                 'salary' => $data['salary'] ?? 0,
                 'joining_date' => $joining_date,
+                'session_year_id' => $sessionYear->id,
+                'join_session_year_id' => $sessionYear->id,
             ]);
 
-            // StaffSupportSchool
-            if ($schoolId) {
+            // StaffSupportSchool - Only add if created from central dashboard (Super Admin)
+            if (empty(Auth::user()->school_id) && $schoolId) {
                 StaffSupportSchool::updateOrCreate([
                     'user_id' => $user->id,
                     'school_id' => $schoolId
@@ -70,7 +83,8 @@ class StaffCreationService
 
             return $staff;
 
-        } catch (\Throwable $e) {
+        }
+        catch (\Throwable $e) {
             DB::rollBack();
             throw $e;
         }

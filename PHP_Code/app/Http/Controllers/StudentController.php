@@ -68,7 +68,8 @@ class StudentController extends Controller
 
         if (Auth::user()->school_id) {
             $extraFields = $this->formFields->defaultModel()->where('user_type', 1)->orderBy('rank')->get();
-        } else {
+        }
+        else {
             $extraFields = $this->formFields->defaultModel()->orderBy('rank')->get();
         }
 
@@ -80,20 +81,21 @@ class StudentController extends Controller
     public function create()
     {
         ResponseService::noPermissionThenRedirect('student-create');
-        $class_sections = $this->classSection->all(['*'], ['class', 'class.stream', 'section', 'medium', 'class.shift']);
+        $classes = $this->classSchool->all(['*'], ['medium', 'stream', 'shift']);
         $sessionYear = $this->cache->getDefaultSessionYear();
         $get_student = $this->student->builder()->latest('id')->withTrashed()->pluck('id')->first();
         $admission_no = $sessionYear->name . '0' . Auth::user()->school_id . '0' . ($get_student + 1);
 
         if (Auth::user()->school_id) {
             $extraFields = $this->formFields->defaultModel()->where('user_type', 1)->orderBy('rank')->get();
-        } else {
+        }
+        else {
             $extraFields = $this->formFields->defaultModel()->orderBy('rank')->get();
         }
 
         $sessionYears = $this->sessionYear->all();
         $features = FeaturesService::getFeatures();
-        return view('students.create', compact('class_sections', 'admission_no', 'extraFields', 'sessionYears', 'features'));
+        return view('students.create', compact('classes', 'admission_no', 'extraFields', 'sessionYears', 'features'));
     }
 
     public function store(Request $request)
@@ -105,7 +107,7 @@ class StudentController extends Controller
             'mobile' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|digits_between:6,15',
             'image' => 'nullable|mimes:jpeg,png,jpg,svg|image|max:2048',
             'dob' => 'required',
-            'class_section_id' => 'required|numeric',
+            'class_id' => 'required|numeric',
             /*NOTE : Unique constraint is used because it's not school specific*/
             'admission_no' => 'required|unique:users,email',
             'admission_date' => 'required',
@@ -116,7 +118,6 @@ class StudentController extends Controller
             'guardian_mobile' => 'required|numeric|digits_between:6,15',
             'guardian_gender' => 'required|in:male,female',
             'guardian_image' => 'nullable|mimes:jpg,jpeg,png|max:4096',
-            'status' => 'nullable|in:0,1',
         ], [
             'guardian_email.regex' => 'Please enter a valid guardian email (e.g. user@example.com).',
         ]);
@@ -138,7 +139,8 @@ class StudentController extends Controller
                     $message = "The free trial allows only " . $systemSettings['student_limit'] . " students.";
                     ResponseService::errorResponse($message);
                 }
-            } else {
+            }
+            else {
                 // Regular package? Check Postpaid or Prepaid
                 $subscription = $this->subscriptionService->active_subscription(Auth::user()->school_id);
                 // If prepaid plan check student limit
@@ -162,23 +164,33 @@ class StudentController extends Controller
             $sessionYear = $this->sessionYear->findById($request->session_year_id);
             $guardian = $userService->createOrUpdateParent($request->guardian_first_name, $request->guardian_last_name, $request->guardian_email, $request->guardian_mobile, $request->guardian_gender, $request->guardian_image);
             $is_send_notification = true;
-            $userService->createStudentUser($request->first_name, $request->last_name, $request->admission_no, $request->mobile, $request->dob, $request->gender, $request->image, $request->class_section_id, $request->admission_date, $request->current_address, $request->permanent_address, $sessionYear->id, $guardian->id, $request->extra_fields ?? [], $request->status ?? 0, $is_send_notification);
+
+            $user = $userService->createStudentUser($request->first_name, $request->last_name, $request->admission_no, $request->mobile, $request->dob, $request->gender, $request->image, null, $request->admission_date, $request->current_address, $request->permanent_address, $sessionYear->id, $guardian->id, $request->extra_fields ?? [], 0, $is_send_notification);
+
+            $this->student->builder()->where('user_id', $user->id)->update([
+                'class_id' => $request->class_id,
+                'class_section_id' => null,
+                'application_type' => 'online',
+                'application_status' => 0
+            ]);
 
             DB::commit();
             ResponseService::successResponse('Data Stored Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             // IF Exception is TypeError and message contains Mail keywords then email is not sent successfully
             if (
-                $e instanceof TypeError && Str::contains($e->getMessage(), [
-                    'Failed',
-                    'Mail',
-                    'Mailer',
-                    'MailManager'
-                ])
+            $e instanceof TypeError && Str::contains($e->getMessage(), [
+            'Failed',
+            'Mail',
+            'Mailer',
+            'MailManager'
+            ])
             ) {
                 DB::commit();
                 ResponseService::warningResponse("Student Registered successfully. But Email not sent.");
-            } else {
+            }
+            else {
                 DB::rollBack();
                 ResponseService::logErrorResponse($e, "Student Controller -> Store method");
                 ResponseService::errorResponse();
@@ -213,7 +225,8 @@ class StudentController extends Controller
             $userService->updateStudentUser($id, $request->first_name, $request->last_name, $request->mobile, $request->dob, $request->gender, $request->image, $sessionYear->id, $request->extra_fields ?? [], $guardian->id, $request->current_address, $request->permanent_address, $request->reset_password, $request->class_section_id);
             DB::commit();
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, "Student Controller -> Update method");
             ResponseService::errorResponse();
@@ -228,7 +241,7 @@ class StudentController extends Controller
         $sort = request('sort', 'id');
         $order = request('order', 'ASC');
         $search = request('search');
-        
+
         if (Auth::user()->hasRole('Teacher')) {
             $request->validate([
                 'class_id' => 'required'
@@ -240,49 +253,56 @@ class StudentController extends Controller
         // Handle show_deactive parameter (can be 0, 1, "0", "1", or null)
         $showDeactive = $request->show_deactive;
         $showInactive = ($showDeactive == 1 || $showDeactive === '1' || $showDeactive === true);
-        
+
         $sql = $this->student->builder()->where(function ($query) {
             $query->where('application_type', 'offline')
                 ->orWhere(function ($q) {
-                    $q->where('application_type', 'online')
-                        ->where('application_status', 1); // Only online applications with status 1
-                });
+                $q->where('application_type', 'online')
+                    ->where('application_status', 1); // Only online applications with status 1
+            }
+            );
         })
             ->with('user.extra_student_details.form_field', 'guardian', 'class_section.class.stream', 'class_section.section', 'class_section.class.shift', 'class_section.medium')
             ->where(function ($query) use ($search) {
-                $query->when($search, function ($query) use ($search) {
+            $query->when($search, function ($query) use ($search) {
                     $query->where(function ($query) use ($search) {
-                        $query->where('user_id', 'LIKE', "%$search%")
-                            ->orWhere('class_section_id', 'LIKE', "%$search%")
-                            ->orWhere('admission_no', 'LIKE', "%$search%")
-                            ->orWhere('roll_number', 'LIKE', "%$search%")
-                            ->orWhere('admission_date', 'LIKE', date('Y-m-d', strtotime("%$search%")))
-                            ->orWhereHas('user', function ($q) use ($search) {
-                                $q->where('first_name', 'LIKE', "%$search%")
-                                    ->orwhere('last_name', 'LIKE', "%$search%")
-                                    ->orwhere('email', 'LIKE', "%$search%")
-                                    ->orwhere('dob', 'LIKE', "%$search%")
-                                    ->orWhereRaw("concat(first_name,' ',last_name) LIKE '%" . $search . "%'");
-                            })->orWhereHas('guardian', function ($q) use ($search) {
-                                $q->where('first_name', 'LIKE', "%$search%")
-                                    ->orwhere('last_name', 'LIKE', "%$search%")
-                                    ->orwhere('email', 'LIKE', "%$search%")
-                                    ->orwhere('dob', 'LIKE', "%$search%")
-                                    ->orWhereRaw("concat(first_name,' ',last_name) LIKE '%" . $search . "%'");
-                            });
-                    });
-                });
-                //class filter data
-            })->when(request('class_id') != null, function ($query) {
-                $classId = request('class_id');
-                $query->where(function ($query) use ($classId) {
+                            $query->where('user_id', 'LIKE', "%$search%")
+                                ->orWhere('class_section_id', 'LIKE', "%$search%")
+                                ->orWhere('admission_no', 'LIKE', "%$search%")
+                                ->orWhere('roll_number', 'LIKE', "%$search%")
+                                ->orWhere('admission_date', 'LIKE', date('Y-m-d', strtotime("%$search%")))
+                                ->orWhereHas('user', function ($q) use ($search) {
+                        $q->where('first_name', 'LIKE', "%$search%")
+                            ->orwhere('last_name', 'LIKE', "%$search%")
+                            ->orwhere('email', 'LIKE', "%$search%")
+                            ->orwhere('dob', 'LIKE', "%$search%")
+                            ->orWhereRaw("concat(first_name,' ',last_name) LIKE '%" . $search . "%'");
+                    }
+                    )->orWhereHas('guardian', function ($q) use ($search) {
+                                    $q->where('first_name', 'LIKE', "%$search%")
+                                        ->orwhere('last_name', 'LIKE', "%$search%")
+                                        ->orwhere('email', 'LIKE', "%$search%")
+                                        ->orwhere('dob', 'LIKE', "%$search%")
+                                        ->orWhereRaw("concat(first_name,' ',last_name) LIKE '%" . $search . "%'");
+                                }
+                                );
+                            }
+                            );
+                        }
+                        );
+                    //class filter data
+                    })->when(request('class_id') != null, function ($query) {
+            $classId = request('class_id');
+            $query->where(function ($query) use ($classId) {
                     $query->where('class_section_id', $classId);
-                });
+                }
+                );
             })->when(request('session_year_id') != null, function ($query) {
-                $sessionYearID = request('session_year_id');
-                $query->where(function ($query) use ($sessionYearID) {
+            $sessionYearID = request('session_year_id');
+            $query->where(function ($query) use ($sessionYearID) {
                     $query->where('session_year_id', $sessionYearID);
-                });
+                }
+                );
             });
 
         // Filter by student status (active/inactive)
@@ -291,7 +311,8 @@ class StudentController extends Controller
             $sql = $sql->whereHas('user', function ($query) {
                 $query->where('status', 0);
             });
-        } else {
+        }
+        else {
             // Show active students (status = 1)
             $sql = $sql->whereHas('user', function ($query) {
                 $query->where('status', 1);
@@ -307,7 +328,8 @@ class StudentController extends Controller
         $total = $sql->count();
         if (!empty($request->class_id)) {
             $sql = $sql->orderBy('roll_number', 'ASC');
-        } else {
+        }
+        else {
             $sql = $sql->orderBy($sort, $order);
         }
         if ($offset >= $total && $total > 0) {
@@ -330,7 +352,8 @@ class StudentController extends Controller
                     $operate .= BootstrapTableService::editButton(route('students.update', $row->user->id, ['data-id' => $row->id]));
                     $operate .= BootstrapTableService::button('fa fa-exclamation-triangle', route('student.change-status', $row->user_id), ['btn-gradient-info', 'deactivate-student'], ['title' => __('inactive')]);
                 }
-            } else {
+            }
+            else {
                 $operate .= BootstrapTableService::button('fa fa-check', route('student.change-status', $row->user_id), ['btn-gradient-success', 'activate-student'], ['title' => __('active')]);
             }
 
@@ -356,12 +379,15 @@ class StudentController extends Controller
                 $data = '';
                 if ($field->form_field->type == 'checkbox') {
                     $data = json_decode($field->data);
-                } else if ($field->form_field->type == 'file') {
+                }
+                else if ($field->form_field->type == 'file') {
                     $data = '<a href="' . Storage::url($field->data) . '" target="_blank">DOC</a>';
-                } else if ($field->form_field->type == 'dropdown') {
+                }
+                else if ($field->form_field->type == 'dropdown') {
                     $data = $field->form_field->default_values;
                     $data = $field->data ?? '';
-                } else {
+                }
+                else {
                     $data = $field->data;
                 }
                 $tempRow[$field->form_field->name] = $data;
@@ -381,7 +407,8 @@ class StudentController extends Controller
         try {
             $this->user->deleteById($user_id);
             ResponseService::successResponse('Data Deleted Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, "Student Controller -> Delete method");
             ResponseService::errorResponse();
@@ -410,7 +437,8 @@ class StudentController extends Controller
             $this->user->builder()->where('id', $userId)->withTrashed()->update(['status' => $user->status == 0 ? 1 : 0, 'deleted_at' => $user->status == 1 ? now() : null]);
             DB::commit();
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, 'Student Controller ---> Change Status');
             ResponseService::errorResponse();
@@ -441,7 +469,8 @@ class StudentController extends Controller
             }
             DB::commit();
             ResponseService::successResponse("Status Updated Successfully");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -473,7 +502,8 @@ class StudentController extends Controller
 
             DB::commit();
             ResponseService::successResponse("Data Deleted Permanently");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, "Student Controller ->Trash Method", 'cannot_delete_because_data_is_associated_with_other_data');
             ResponseService::errorResponse();
@@ -501,29 +531,33 @@ class StudentController extends Controller
         }
         try {
             Excel::import(new StudentsImport($request->class_section_id, $request->session_year_id, $request->is_send_notification), $request->file);
-            
+
             if ($request->is_send_notification) {
                 $message = 'Data Stored Successfully. Email notifications have been queued and will be sent to parents shortly.';
-            } else {
+            }
+            else {
                 $message = 'Data Stored Successfully.';
             }
-            
+
             ResponseService::successResponse($message);
-        } catch (ValidationException $e) {
+        }
+        catch (ValidationException $e) {
             if (
-                $e instanceof TypeError && Str::contains($e->getMessage(), [
-                    'Failed',
-                    'Mail',
-                    'Mailer',
-                    'MailManager'
-                ])
+            $e instanceof TypeError && Str::contains($e->getMessage(), [
+            'Failed',
+            'Mail',
+            'Mailer',
+            'MailManager'
+            ])
             ) {
                 DB::commit();
                 ResponseService::warningResponse("Student Registered successfully. But Email not sent.");
-            } else {
+            }
+            else {
                 ResponseService::errorResponse($e->getMessage());
             }
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, "Student Controller -> Store Bulk method");
             ResponseService::errorResponse();
         }
@@ -589,7 +623,8 @@ class StudentController extends Controller
             DB::commit();
 
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, "Student Controller -> Reset Password method");
             ResponseService::errorResponse();
@@ -609,8 +644,8 @@ class StudentController extends Controller
         ResponseService::noPermissionThenRedirect('student-list');
         $validator = Validator::make(
             $request->all(),
-            ['roll_number_data.*.roll_number' => 'required',],
-            ['roll_number_data.*.roll_number.required' => trans('please_fill_all_roll_numbers_data')]
+        ['roll_number_data.*.roll_number' => 'required', ],
+        ['roll_number_data.*.roll_number.required' => trans('please_fill_all_roll_numbers_data')]
         );
         if ($validator->fails()) {
             ResponseService::validationError($validator->errors()->first());
@@ -637,7 +672,8 @@ class StudentController extends Controller
             }
             DB::commit();
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, "Student Controller -> updateStudentRollNumber");
             ResponseService::errorResponse();
@@ -662,18 +698,20 @@ class StudentController extends Controller
                         ->orwhere('email', 'LIKE', "%$search%")
                         ->orwhere('dob', 'LIKE', "%$search%")
                         ->orWhereHas('student', function ($q) use ($search) {
-                            $q->where('id', 'LIKE', "%$search%")
-                                ->orWhere('user_id', 'LIKE', "%$search%")
-                                ->orWhere('class_section_id', 'LIKE', "%$search%")
-                                ->orWhere('admission_no', 'LIKE', "%$search%")
-                                ->orWhere('admission_date', 'LIKE', date('Y-m-d', strtotime("%$search%")))
-                                ->orWhereHas('user', function ($q) use ($search) {
-                                    $q->where('first_name', 'LIKE', "%$search%")
-                                        ->orwhere('last_name', 'LIKE', "%$search%")
-                                        ->orwhere('email', 'LIKE', "%$search%")
-                                        ->orwhere('dob', 'LIKE', "%$search%");
-                                });
-                        });
+                        $q->where('id', 'LIKE', "%$search%")
+                            ->orWhere('user_id', 'LIKE', "%$search%")
+                            ->orWhere('class_section_id', 'LIKE', "%$search%")
+                            ->orWhere('admission_no', 'LIKE', "%$search%")
+                            ->orWhere('admission_date', 'LIKE', date('Y-m-d', strtotime("%$search%")))
+                            ->orWhereHas('user', function ($q) use ($search) {
+                            $q->where('first_name', 'LIKE', "%$search%")
+                                ->orwhere('last_name', 'LIKE', "%$search%")
+                                ->orwhere('email', 'LIKE', "%$search%")
+                                ->orwhere('dob', 'LIKE', "%$search%");
+                        }
+                        );
+                    }
+                    );
                 });
             }
             if ($request->sort_by == 'first_name') {
@@ -715,7 +753,8 @@ class StudentController extends Controller
 
             $bulkData['rows'] = $rows;
             return response()->json($bulkData);
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, "Student Controller -> listStudentRollNumber");
             ResponseService::errorResponse();
         }
@@ -725,7 +764,8 @@ class StudentController extends Controller
     {
         try {
             return Excel::download(new StudentDataExport(), 'Student_import.xlsx');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, 'Student Controller ---> Download Sample File');
             ResponseService::errorResponse();
         }
@@ -750,23 +790,27 @@ class StudentController extends Controller
         if (!empty($request->class_id)) {
             $sql = $this->student->builder()->with('user', 'guardian', 'class_section.class', 'class_section.class.shift', 'class_section.section', 'class_section.medium')
                 ->where(function ($query) use ($search) {
-                    $query->when($search, function ($query) use ($search) {
+                $query->when($search, function ($query) use ($search) {
                         $query->where(function ($query) use ($search) {
-                            $query->where('user_id', 'LIKE', "%$search%")
-                                ->orWhere('roll_number', 'LIKE', "%$search%")
-                                ->orWhereHas('user', function ($q) use ($search) {
-                                    $q->where('first_name', 'LIKE', "%$search%")
-                                        ->orwhere('last_name', 'LIKE', "%$search%")
-                                        ->orwhere('email', 'LIKE', "%$search%")
-                                        ->orwhere('dob', 'LIKE', "%$search%");
-                                });
-                        });
-                    });
-                })->when(request('class_id') != null, function ($query) {
-                    $classId = request('class_id');
-                    $query->where(function ($query) use ($classId) {
+                                $query->where('user_id', 'LIKE', "%$search%")
+                                    ->orWhere('roll_number', 'LIKE', "%$search%")
+                                    ->orWhereHas('user', function ($q) use ($search) {
+                            $q->where('first_name', 'LIKE', "%$search%")
+                                ->orwhere('last_name', 'LIKE', "%$search%")
+                                ->orwhere('email', 'LIKE', "%$search%")
+                                ->orwhere('dob', 'LIKE', "%$search%");
+                        }
+                        );
+                    }
+                    );
+                }
+                );
+            })->when(request('class_id') != null, function ($query) {
+                $classId = request('class_id');
+                $query->where(function ($query) use ($classId) {
                         $query->where('class_section_id', $classId);
-                    });
+                    }
+                    );
                 });
 
             $sql = $sql->whereHas('user', function ($query) {
@@ -819,7 +863,8 @@ class StudentController extends Controller
             // $this->user->upsert($data,['id'],['image']);
             ResponseService::successResponse('Profile Updated Successfully');
 
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             ResponseService::logErrorResponse($th);
             ResponseService::errorResponse();
         }
@@ -872,12 +917,13 @@ class StudentController extends Controller
             $students = $this->user->builder()->select('id', 'first_name', 'last_name', 'image', 'school_id', 'gender', 'dob')->with('student:id,user_id,class_section_id,school_id,guardian_id,roll_number', 'student.class_section.class', 'student.class_section.class.shift', 'student.class_section.section', 'student.class_section.medium', 'student.class_section.class.stream', 'student.guardian:id,mobile,first_name,last_name')->whereHas('student', function ($q) use ($user_ids) {
                 $q->whereIn('id', $user_ids);
             })->with([
-                        'extra_student_details' => function ($q) {
-                            $q->whereHas('form_field', function ($query) {
-                                $query->where('display_on_id', 1)->whereNull('deleted_at');
-                            })->with('form_field');
-                        }
-                    ])->get();
+                'extra_student_details' => function ($q) {
+                $q->whereHas('form_field', function ($query) {
+                        $query->where('display_on_id', 1)->whereNull('deleted_at');
+                    }
+                    )->with('form_field');
+                }
+            ])->get();
 
 
             $settings['page_height'] = ($settings['page_height'] * 3.7795275591) . 'px';
@@ -888,7 +934,8 @@ class StudentController extends Controller
 
             return $pdf->stream();
             return view('students.id_card_pdf');
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             ResponseService::logErrorResponse($th);
             ResponseService::errorResponse();
         }
@@ -899,7 +946,8 @@ class StudentController extends Controller
         try {
             if (Auth::user()) {
                 $schoolSettings = $this->cache->getSchoolSettings();
-            } else {
+            }
+            else {
                 $fullDomain = $_SERVER['HTTP_HOST'] ?? '';
                 $parts = explode('.', $fullDomain);
                 $subdomain = $parts[0];
@@ -921,7 +969,8 @@ class StudentController extends Controller
 
             $pdf = PDF::loadView('students.admission_form', compact('schoolSettings'));
             return $pdf->stream();
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
 
         }
 
@@ -952,38 +1001,44 @@ class StudentController extends Controller
 
         $sql = $this->student->builder()->where('application_type', 'online')->where('application_status', 0)->with('user.extra_student_details.form_field', 'guardian', 'class.medium', 'class.stream', 'class.shift')
             ->where(function ($query) use ($search) {
-                $query->when($search, function ($query) use ($search) {
+            $query->when($search, function ($query) use ($search) {
                     $query->where(function ($query) use ($search) {
-                        $query->where('user_id', 'LIKE', "%$search%")
-                            ->orWhere('class_section_id', 'LIKE', "%$search%")
-                            ->orWhere('admission_no', 'LIKE', "%$search%")
-                            ->orWhere('roll_number', 'LIKE', "%$search%")
-                            ->orWhere('admission_date', 'LIKE', date('Y-m-d', strtotime("%$search%")))
-                            ->orWhereHas('user', function ($q) use ($search) {
-                                $q->where('first_name', 'LIKE', "%$search%")
-                                    ->orwhere('last_name', 'LIKE', "%$search%")
-                                    ->orwhere('email', 'LIKE', "%$search%")
-                                    ->orwhere('dob', 'LIKE', "%$search%")
-                                    ->orWhereRaw("concat(first_name,' ',last_name) LIKE '%" . $search . "%'");
-                            })->orWhereHas('guardian', function ($q) use ($search) {
-                                $q->where('first_name', 'LIKE', "%$search%")
-                                    ->orwhere('last_name', 'LIKE', "%$search%")
-                                    ->orwhere('email', 'LIKE', "%$search%")
-                                    ->orwhere('dob', 'LIKE', "%$search%")
-                                    ->orWhereRaw("concat(first_name,' ',last_name) LIKE '%" . $search . "%'");
-                            });
-                    });
-                })
-                    ->whereHas('user', function ($q) {
-                        $q->where('status', 0);
-                    });
-                //class filter data
-            })
+                            $query->where('user_id', 'LIKE', "%$search%")
+                                ->orWhere('class_section_id', 'LIKE', "%$search%")
+                                ->orWhere('admission_no', 'LIKE', "%$search%")
+                                ->orWhere('roll_number', 'LIKE', "%$search%")
+                                ->orWhere('admission_date', 'LIKE', date('Y-m-d', strtotime("%$search%")))
+                                ->orWhereHas('user', function ($q) use ($search) {
+                        $q->where('first_name', 'LIKE', "%$search%")
+                            ->orwhere('last_name', 'LIKE', "%$search%")
+                            ->orwhere('email', 'LIKE', "%$search%")
+                            ->orwhere('dob', 'LIKE', "%$search%")
+                            ->orWhereRaw("concat(first_name,' ',last_name) LIKE '%" . $search . "%'");
+                    }
+                    )->orWhereHas('guardian', function ($q) use ($search) {
+                                    $q->where('first_name', 'LIKE', "%$search%")
+                                        ->orwhere('last_name', 'LIKE', "%$search%")
+                                        ->orwhere('email', 'LIKE', "%$search%")
+                                        ->orwhere('dob', 'LIKE', "%$search%")
+                                        ->orWhereRaw("concat(first_name,' ',last_name) LIKE '%" . $search . "%'");
+                                }
+                                );
+                            }
+                            );
+                        }
+                        )
+                            ->whereHas('user', function ($q) {
+                $q->where('status', 0);
+            }
+            );
+        //class filter data
+        })
             ->when(request('class_id') != null, function ($query) {
-                $classId = request('class_id');
-                $query->where(function ($query) use ($classId) {
+            $classId = request('class_id');
+            $query->where(function ($query) use ($classId) {
                     $query->where('class_id', $classId);
-                });
+                }
+                );
             });
 
         if ($request->exam_id && $request->exam_id != 'data-not-found') {
@@ -995,7 +1050,8 @@ class StudentController extends Controller
         $total = $sql->count();
         if (!empty($request->class_id)) {
             $sql = $sql->orderBy('roll_number', 'ASC');
-        } else {
+        }
+        else {
             $sql = $sql->orderBy($sort, $order);
         }
         if ($offset >= $total && $total > 0) {
@@ -1036,12 +1092,15 @@ class StudentController extends Controller
                 $data = '';
                 if ($field->form_field->type == 'checkbox') {
                     $data = json_decode($field->data);
-                } else if ($field->form_field->type == 'file') {
+                }
+                else if ($field->form_field->type == 'file') {
                     $data = '<a href="' . Storage::url($field->data) . '" target="_blank">DOC</a>';
-                } else if ($field->form_field->type == 'dropdown') {
+                }
+                else if ($field->form_field->type == 'dropdown') {
                     $data = $field->form_field->default_values;
                     $data = $field->data ?? '';
-                } else {
+                }
+                else {
                     $data = $field->data;
                 }
                 $tempRow[$field->form_field->name] = $data;
@@ -1082,10 +1141,12 @@ class StudentController extends Controller
                 }
                 if ($request->application_status == 1) {
                     $this->student->builder()->where('user_id', $userId)->withTrashed()->update(['application_status' => 1, 'class_section_id' => $request->class_section_id]);
+                    $this->user->builder()->where('id', $userId)->withTrashed()->update(['status' => 1, 'deleted_at' => null]);
                     $password = str_replace('-', '', date('d-m-Y', strtotime($user->dob)));
                     $guardian = $this->user->guardian()->where('id', $student->guardian_id)->firstOrFail();
                     $userService->sendRegistrationEmail($guardian, $user, $student->admission_no, $password);
-                } else {
+                }
+                else {
                     $this->student->builder()->where('user_id', $userId)->withTrashed()->update(['application_status' => 0, 'class_section_id' => $request->class_section_id]);
                     $guardian = $this->user->guardian()->where('id', $student->guardian_id)->firstOrFail();
                     $class = $this->classSchool->builder()->where('id', $student->class_id)->with('medium', 'stream')->first();
@@ -1097,7 +1158,8 @@ class StudentController extends Controller
             }
             DB::commit();
             ResponseService::successResponse("Status Updated Successfully");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -1133,10 +1195,12 @@ class StudentController extends Controller
             }
             if ($request->application_status == 1) {
                 $this->student->builder()->where('user_id', $request->edit_user_id)->withTrashed()->update(['application_status' => 1, 'class_section_id' => $request->class_section_id]);
+                $this->user->builder()->where('id', $request->edit_user_id)->withTrashed()->update(['status' => 1, 'deleted_at' => null]);
                 $password = str_replace('-', '', date('d-m-Y', strtotime($user->dob)));
                 $guardian = $this->user->guardian()->where('id', $student->guardian_id)->firstOrFail();
                 $userService->sendRegistrationEmail($guardian, $user, $student->admission_no, $password);
-            } else {
+            }
+            else {
                 $this->student->builder()->where('user_id', $request->edit_user_id)->withTrashed()->update(['application_status' => 0]);
                 $guardian = $this->user->guardian()->where('id', $student->guardian_id)->firstOrFail();
                 $userService->sendApplicationRejectEmail($user, $student, $guardian);
@@ -1147,7 +1211,8 @@ class StudentController extends Controller
 
             DB::commit();
             ResponseService::successResponse("Status Updated Successfully");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e);
             ResponseService::errorResponse();
         }
@@ -1158,7 +1223,8 @@ class StudentController extends Controller
         try {
             $class_sections = $this->classSection->builder()->where('class_id', $class_id)->with('class', 'class.stream', 'class.shift', 'section', 'medium')->get();
             ResponseService::successResponse('Data Fetched Successfully', $class_sections);
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
 
             ResponseService::logErrorResponse($e, "Student Controller -> getclassSectionByClass method");
             ResponseService::errorResponse();

@@ -1,0 +1,12 @@
+Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'laravel.classes' doesn't exist (Connection: mysql, SQL: select * from `classes` where `school_id` = 2 and `classes`.`deleted_at` is null limit 1)
+#0 C:\Users\satri\Downloads\eSchool-Saas-V1.8.2\PHP_Code\vendor\laravel\framework\src\Illuminate\Database\Connection.php(783): Illuminate\Database\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#1 C:\Users\satri\Downloads\eSchool-Saas-V1.8.2\PHP_Code\vendor\laravel\framework\src\Illuminate\Database\Connection.php(414): Illuminate\Database\Connection->run('select * from `...', Array, Object(Closure))
+#2 C:\Users\satri\Downloads\eSchool-Saas-V1.8.2\PHP_Code\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(2913): Illuminate\Database\Connection->select('select * from `...', Array, true)
+#3 C:\Users\satri\Downloads\eSchool-Saas-V1.8.2\PHP_Code\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(2902): Illuminate\Database\Query\Builder->runSelect()
+#4 C:\Users\satri\Downloads\eSchool-Saas-V1.8.2\PHP_Code\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(3456): Illuminate\Database\Query\Builder->Illuminate\Database\Query\{closure}()
+#5 C:\Users\satri\Downloads\eSchool-Saas-V1.8.2\PHP_Code\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(2901): Illuminate\Database\Query\Builder->onceWithColumns(Array, Object(Closure))
+#6 C:\Users\satri\Downloads\eSchool-Saas-V1.8.2\PHP_Code\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(739): Illuminate\Database\Query\Builder->get(Array)
+#7 C:\Users\satri\Downloads\eSchool-Saas-V1.8.2\PHP_Code\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(723): Illuminate\Database\Eloquent\Builder->getModels(Array)
+#8 C:\Users\satri\Downloads\eSchool-Saas-V1.8.2\PHP_Code\vendor\laravel\framework\src\Illuminate\Database\Concerns\BuildsQueries.php(333): Illuminate\Database\Eloquent\Builder->get(Array)
+#9 C:\Users\satri\Downloads\eSchool-Saas-V1.8.2\PHP_Code\test_registration.php(27): Illuminate\Database\Eloquent\Builder->first()
+#10 {main}

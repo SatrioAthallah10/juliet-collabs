@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\School;
 
-return new class extends Migration
+return new class extends Migration 
 {
     /**
      * Run the migrations.
@@ -20,7 +20,7 @@ return new class extends Migration
                 $table->timestamps();
                 $table->softDeletes();
             });
-    
+
             Schema::create('diaries', static function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('diary_category_id')->constrained()->cascadeOnDelete();
@@ -32,7 +32,7 @@ return new class extends Migration
                 $table->timestamps();
                 $table->softDeletes();
             });
-    
+
             Schema::create('diary_students', static function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('diary_id')->constrained()->cascadeOnDelete();
@@ -40,7 +40,7 @@ return new class extends Migration
                 $table->foreignId('class_section_id')->constrained()->cascadeOnDelete();
                 $table->timestamps();
                 $table->softDeletes();
-            });    
+            });
 
             Schema::table('online_exam_questions', function (Blueprint $table) {
                 $table->enum('difficulty', ['easy', 'medium', 'hard'])->default('easy')->after('note');
@@ -63,17 +63,17 @@ return new class extends Migration
 
             Schema::table('schools', function (Blueprint $table) {
                 if (!Schema::hasColumn('schools', 'installed')) {
-                    $table->tinyInteger('installed')->default(0)->comment('0: Not installed, 1: Installed')->after('status');
+                    $table->tinyInteger('installed')->default(1)->comment('0: Not installed, 1: Installed')->after('status');
                 }
             });
-    
+
             School::whereNotNull('id')->update(['installed' => 1]);
 
             Schema::dropIfExists('topic_commons');
 
             Schema::dropIfExists('contact_inquiry');
 
-        
+
             Schema::create('contact_inquiry', function (Blueprint $table) {
                 $table->id();
                 $table->string('name')->nullable();
@@ -84,8 +84,9 @@ return new class extends Migration
                 $table->softDeletes();
             });
 
-        } catch (\Throwable $th) {
-            
+        }
+        catch (\Throwable $th) {
+
         }
     }
 

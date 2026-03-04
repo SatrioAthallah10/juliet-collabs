@@ -86,6 +86,15 @@ class SchoolSettingsController extends Controller
 
     public function store(Request $request)
     {
+        Log::channel('logo_updates')->info('--- School Settings Update Request Started ---', [
+            'user_id' => Auth::user()->id ?? 'N/A',
+            'school_id' => Auth::user()->school_id ?? 'N/A',
+            'request_parameters' => $request->except(['_token']),
+            'has_files' => $request->allFiles() ? array_keys($request->allFiles()) : 'None',
+            'php_raw_files' => $_FILES,
+            'php_raw_post' => $_POST,
+            'content_type' => $request->header('Content-Type')
+        ]);
         ResponseService::noPermissionThenRedirect('school-setting-manage');
         $settings = [
             'school_name' => 'required|max:255',
@@ -109,6 +118,10 @@ class SchoolSettingsController extends Controller
         ];
         $validator = Validator::make($request->all(), $settings);
         if ($validator->fails()) {
+            Log::channel('logo_updates')->error('School Settings Validation Failed', [
+                'errors' => $validator->errors()->toArray(),
+                'user_id' => Auth::user()->id ?? 'N/A'
+            ]);
             ResponseService::validationError($validator->errors()->first());
         }
         $domain = trim($request->input('domain'));
@@ -117,7 +130,8 @@ class SchoolSettingsController extends Controller
         if ($isCustom) {
             // Must include a dot + valid domain structure
             $pattern = '/^(?!-)([A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,63}$/';
-        } else {
+        }
+        else {
             // Default prefix — no dots, just alphanumeric/hyphen
             $pattern = '/^(?!-)[A-Za-z0-9-]{1,63}(?<!-)$/';
         }
@@ -152,6 +166,11 @@ class SchoolSettingsController extends Controller
             foreach ($settings as $key => $rule) {
                 if ($key == 'horizontal_logo' || $key == 'vertical_logo' || $key == 'favicon') {
                     if ($request->hasFile($key)) {
+                        Log::channel('logo_updates')->info('Processing file: ' . $key, [
+                            'original_name' => $request->file($key)->getClientOriginalName(),
+                            'mime_type' => $request->file($key)->getMimeType(),
+                            'size' => $request->file($key)->getSize()
+                        ]);
                         // TODO : Remove the old files from server
                         $data[] = [
                             "name" => $key,
@@ -159,7 +178,8 @@ class SchoolSettingsController extends Controller
                             "type" => "file"
                         ];
                     }
-                } else {
+                }
+                else {
                     $data[] = [
                         "name" => $key,
                         "data" => $request->$key,
@@ -168,6 +188,21 @@ class SchoolSettingsController extends Controller
                 }
             }
             $this->schoolSettings->upsert($data, ["name"], ["data"]);
+
+            Log::channel('logo_updates')->info('Settings upserted (database updated successfully)');
+
+            // Log the updates for logos
+            foreach ($data as $item) {
+                if (isset($item['type']) && $item['type'] === 'file' && in_array($item['name'], ['horizontal_logo', 'vertical_logo', 'favicon'])) {
+                    \Illuminate\Support\Facades\Log::channel('logo_updates')->info('Custom Logo Updated (School)', [
+                        'type' => $item['name'],
+                        'school_id' => Auth::user()->school_id ?? 'N/A',
+                        'user_id' => Auth::user()->id ?? 'N/A',
+                        'user_email' => Auth::user()->email ?? 'N/A',
+                        'ip_address' => $request->ip()
+                    ]);
+                }
+            }
 
             DB::setDefaultConnection('mysql');
             Session::forget('school_database_name');
@@ -186,6 +221,7 @@ class SchoolSettingsController extends Controller
                 'fees_remainder_duration' => $request->fees_remainder_duration
             ];
             if ($request->hasFile('vertical_logo') && Auth::user()->school_id) {
+                Log::channel('logo_updates')->info('Updating master school table "logo" field with vertical_logo');
                 $school = $this->school->findById(Auth::user()->school_id);
                 if (Storage::disk('public')->exists($school->getRawOriginal('logo'))) {
                     Storage::disk('public')->delete($school->getRawOriginal('logo'));
@@ -211,12 +247,12 @@ class SchoolSettingsController extends Controller
                 //Get Class Section's Data With Student Sorted By There Names
                 $classSections = $this->classSection->builder()
                     ->with([
-                        'students' => function ($query) use ($sort, $order) {
-                            $query->join('users', 'students.user_id', '=', 'users.id')
-                                ->select('students.*', 'users.first_name', 'users.last_name')
-                                ->orderBy('users.' . $sort, $order);
-                        }
-                    ])
+                    'students' => function ($query) use ($sort, $order) {
+                    $query->join('users', 'students.user_id', '=', 'users.id')
+                        ->select('students.*', 'users.first_name', 'users.last_name')
+                        ->orderBy('users.' . $sort, $order);
+                }
+                ])
                     ->get();
 
                 // Loop towards Class Section Data And make Array To get Student's id and Count Roll Number
@@ -227,7 +263,7 @@ class SchoolSettingsController extends Controller
                             $studentArray[] = array(
                                 'id' => $student->id,
                                 'class_section_id' => $student->class_section_id,
-                                'roll_number' => (int) $key + 1
+                                'roll_number' => (int)$key + 1
                             );
                         }
                     }
@@ -239,7 +275,14 @@ class SchoolSettingsController extends Controller
             }
             DB::commit();
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
+            Log::channel('logo_updates')->critical('Exception in School Settings Store', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString()
+            ]);
             DB::rollBack();
             ResponseService::logErrorResponse($e, "SchoolSettings Controller -> Store method");
             ResponseService::errorResponse();
@@ -263,7 +306,8 @@ class SchoolSettingsController extends Controller
             DB::commit();
             $this->cache->removeSchoolCache(config('constants.CACHE.SCHOOL.SETTINGS'));
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             DB::rollBack();
             ResponseService::logErrorResponse($e, "SchoolSettings Controller -> storeOnlineExamTermsCondition method");
             ResponseService::errorResponse();
@@ -302,7 +346,8 @@ class SchoolSettingsController extends Controller
 
                 'signature' => 'nullable|image|max:2048',
             ];
-        } else {
+        }
+        else {
             // Staff
             $settings = [
                 'staff_header_color' => 'required',
@@ -356,7 +401,8 @@ class SchoolSettingsController extends Controller
                             "type" => "file"
                         ];
                     }
-                } else if ($key == 'student_id_card_fields') {
+                }
+                else if ($key == 'student_id_card_fields') {
                     $key_value = implode(",", $request->student_id_card_fields ?? []);
                     $data[] = [
                         "name" => $key,
@@ -364,7 +410,8 @@ class SchoolSettingsController extends Controller
                         "type" => "string"
                     ];
 
-                } else if ($key == 'staff_id_card_fields') {
+                }
+                else if ($key == 'staff_id_card_fields') {
                     $key_value = implode(",", $request->staff_id_card_fields ?? []);
                     $data[] = [
                         "name" => $key,
@@ -372,7 +419,8 @@ class SchoolSettingsController extends Controller
                         "type" => "string"
                     ];
 
-                } else {
+                }
+                else {
                     if ($request->$key) {
                         $data[] = [
                             "name" => $key,
@@ -397,7 +445,8 @@ class SchoolSettingsController extends Controller
 
             DB::commit();
             ResponseService::successResponse('Data Updated Successfully');
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             ResponseService::logErrorResponse($th);
             ResponseService::errorResponse();
         }
@@ -416,13 +465,15 @@ class SchoolSettingsController extends Controller
                     Storage::disk('public')->delete(end($data));
                 }
                 $this->schoolSettings->builder()->where('name', 'background_image')->delete();
-            } else if ($type == 'staff_background') {
+            }
+            else if ($type == 'staff_background') {
                 $data = explode("storage/", $settings['staff_background_image'] ?? '');
                 if (Storage::disk('public')->exists(end($data))) {
                     Storage::disk('public')->delete(end($data));
                 }
                 $this->schoolSettings->builder()->where('name', 'staff_background_image')->delete();
-            } else if ($type == 'signature') {
+            }
+            else if ($type == 'signature') {
                 $data = explode("storage/", $settings['signature'] ?? '');
                 if (Storage::disk('public')->exists(end($data))) {
                     Storage::disk('public')->delete(end($data));
@@ -432,7 +483,8 @@ class SchoolSettingsController extends Controller
             DB::commit();
             $this->cache->removeSchoolCache(config('constants.CACHE.SCHOOL.SETTINGS'));
             ResponseService::successResponse('Data Deleted Successfully');
-        } catch (\Throwable $th) {
+        }
+        catch (\Throwable $th) {
             ResponseService::logErrorResponse($th);
             ResponseService::errorResponse();
         }
@@ -485,7 +537,8 @@ class SchoolSettingsController extends Controller
             $this->schoolSettings->upsert($OtherSettingsData, ["name"], ["data"]);
             $this->cache->removeSchoolCache(config('constants.CACHE.SCHOOL.SETTINGS'));
             ResponseService::successResponse("Data Stored Successfully");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, "School Settings Controller -> otherSystemSettings method");
             ResponseService::errorResponse();
         }
@@ -532,7 +585,8 @@ class SchoolSettingsController extends Controller
             $this->schoolSettings->upsert($OtherSettingsData, ["name"], ["data"]);
             $this->cache->removeSchoolCache(config('constants.CACHE.SCHOOL.SETTINGS'));
             ResponseService::successResponse("Data Stored Successfully");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, "School Settings Controller -> otherSystemSettings method");
             ResponseService::errorResponse();
         }
@@ -608,7 +662,8 @@ class SchoolSettingsController extends Controller
             $this->cache->removeSchoolCache(config('constants.CACHE.SCHOOL.SETTINGS'));
 
             ResponseService::successResponse("Data Stored Successfully");
-        } catch (Throwable $e) {
+        }
+        catch (Throwable $e) {
             ResponseService::logErrorResponse($e, "System Settings Controller -> Third Party Api method");
             ResponseService::errorResponse();
         }

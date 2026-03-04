@@ -42,7 +42,8 @@ class SchoolDataService
         $school->support_email = $schoolData->support_email;
         $school->tagline = $schoolData->tagline;
         $school->logo = $schoolData->logo;
-        $school->status = $schoolData->type == "demo" ? 1 : $schoolData->status;
+        $school->status = 1;
+        $school->installed = 1;
         $school->domain = $schoolData->domain;
         $school->database_name = $schoolData->database_name;
         $school->code = $schoolData->code;

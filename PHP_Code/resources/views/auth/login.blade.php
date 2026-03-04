@@ -170,13 +170,11 @@
                                         class="btn btn-block btn-theme btn-lg font-weight-medium auth-form-btn rounded-lg" />
                                 </div>
                                 <div class="my-2 d-flex justify-content-end align-items-center">
-                                    <a class="text-blue" href="#" data-bs-toggle="modal" data-bs-dismiss="offcanvas"
-                                        data-bs-target="#staticBackdrop">
+                                    <a class="text-blue" href="{{ route('register') }}">
                                         {{ __('New user Sign up to manage your school activities seamlessly') }}
                                     </a>
                                 </div>
                             </form>
-                            @include('registration_form')
                             @if (env('DEMO_MODE'))
 
                                 <div class="row mt-3">

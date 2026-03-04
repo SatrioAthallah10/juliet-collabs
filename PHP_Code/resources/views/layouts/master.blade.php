@@ -25,6 +25,7 @@
     </title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('layouts.include')
+    <link rel="stylesheet" href="{{ asset('/assets/css/chatbot.css') }}">
     @yield('css')
 </head>
 
@@ -59,6 +60,7 @@
             .replace(/Y/g, "yyyy");
     </script>
     @include('layouts.footer_js')
+    <script src="{{ asset('/assets/js/chatbot.js') }}"></script>
     @yield('js')
     @yield('script')
 </body>

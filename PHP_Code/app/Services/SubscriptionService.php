@@ -143,6 +143,13 @@ class SubscriptionService
 
             // If prepaid plan generate bill first
             if ($package->type == 0) {
+                // Ensure we are on the main mysql connection for payment/billing operations.
+                // PaymentTransaction uses dynamic connection (session/config default) which may
+                // point to a school DB during SetupSchoolDatabase job, while SubscriptionBill
+                // hardcodes 'mysql'. This mismatch causes FK constraint violations.
+                $previousConnection = config('database.default');
+                DB::setDefaultConnection('mysql');
+
                 $subscription_bill[] = [
                     'subscription_id' => $subscription->id,
                     'amount'          => $package->charges,
@@ -164,8 +171,13 @@ class SubscriptionService
                     $subscription_bill[0]['payment_transaction_id'] = $paymentTransaction->id;
                 }
                 // $subscription_bill = $this->subscriptionBill->create($subscription_bill);
-                SubscriptionBill::upsert($subscription_bill, ['subscription_id', 'school_id'], ['amount', 'total_student', 'total_staff', 'due_date']);
+                SubscriptionBill::upsert($subscription_bill, ['subscription_id', 'school_id'], ['amount', 'total_student', 'total_staff', 'due_date', 'payment_transaction_id']);
                 // return $subscription_bill = $this->subscriptionBill->upsert($subscription_bill,['subscription_id','school_id'],['amount','total_student','total_staff','due_date']);
+
+                // Restore previous connection if it was different
+                if ($previousConnection !== 'mysql') {
+                    DB::setDefaultConnection($previousConnection);
+                }
             }
         }
 
